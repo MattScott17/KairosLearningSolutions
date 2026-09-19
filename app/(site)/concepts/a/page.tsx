@@ -80,7 +80,7 @@ export default function ConceptAPage() {
             <div className="relative aspect-[4/3] overflow-hidden rounded-4xl shadow-soft">
               <Image
                 src="/images/photo-3.jpg"
-                alt="A Kairos educator working with students"
+                alt="Two Kairos students working on a craft project together"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"

@@ -16,8 +16,8 @@ export default function ConceptBPage() {
       {/* Hero — full-bleed photo, short emotional headline */}
       <section className="relative flex min-h-[80vh] items-end overflow-hidden pt-24">
         <Image
-          src="/images/photo-1.jpg"
-          alt="Students learning at Kairos Learning Solutions"
+          src="/images/photo-5.jpg"
+          alt="Kairos students enjoying an outdoor picnic together"
           fill
           priority
           sizes="100vw"
@@ -72,6 +72,18 @@ export default function ConceptBPage() {
             </span>
             <p className="mt-5 text-lg text-cream/85">{conceptB.problem.internal}</p>
             <p className="mt-4 text-lg font-semibold text-cream">{conceptB.problem.philosophical}</p>
+            <div className="mt-8 flex gap-8 border-t border-cream/15 pt-6">
+              <div>
+                <p className="font-display text-2xl font-semibold text-cream">
+                  Since {site.foundedYear}
+                </p>
+                <p className="mt-0.5 text-xs text-cream/60">Serving Salinas families</p>
+              </div>
+              <div>
+                <p className="font-display text-2xl font-semibold text-cream">13+</p>
+                <p className="mt-0.5 text-xs text-cream/60">Educators &amp; tutors</p>
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>

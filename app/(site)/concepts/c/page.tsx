@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
@@ -39,8 +40,38 @@ export default function ConceptCPage() {
         </div>
       </Section>
 
-      {/* Path-finder grid — the core mechanic of this concept */}
+      {/* Proof — the right fit, in practice */}
       <Section>
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <Reveal>
+            <div className="relative aspect-[4/5] overflow-hidden rounded-4xl shadow-soft">
+              <Image
+                src="/images/photo-4.jpg"
+                alt="A Kairos student presenting a hands-on project she built"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <span className="eyebrow">
+              <span className="h-px w-6 bg-gold-500" aria-hidden />
+              What the right fit looks like
+            </span>
+            <p className="mt-4 text-2xl font-semibold text-forest-900">
+              When a student gets the level of support that actually fits them, it shows.
+            </p>
+            <p className="prose-kairos mt-4">
+              That's the whole point of finding the right path first — the program should fit
+              the student, not the other way around.
+            </p>
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* Path-finder grid — the core mechanic of this concept */}
+      <Section className="bg-sand/50">
         <SectionHeading
           center
           eyebrow="Find your path"
