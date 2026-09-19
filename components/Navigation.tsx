@@ -105,11 +105,11 @@ export function Navigation() {
         </ul>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <a href={site.phoneHref} className="btn-ghost text-sm">
+          <a href={site.phoneHref} className="btn-ghost shrink-0 whitespace-nowrap text-sm">
             <Phone className="h-4 w-4" />
             {site.phone}
           </a>
-          <Link href="/apex" className="btn-primary">
+          <Link href="/apex" className="btn-primary shrink-0 whitespace-nowrap">
             Enroll in APEX
           </Link>
         </div>
