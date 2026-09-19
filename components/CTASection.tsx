@@ -20,14 +20,7 @@ export function CTASection({
     <section className="py-16 sm:py-20">
       <div className="container-page">
         <Reveal className="relative overflow-hidden rounded-4xl bg-forest-800 px-6 py-14 text-center text-cream shadow-soft sm:px-12 sm:py-16">
-          <div
-            className="pointer-events-none absolute inset-0 opacity-25"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at 20% 0%, rgba(174,213,129,0.6), transparent 45%), radial-gradient(circle at 90% 100%, rgba(224,162,60,0.5), transparent 45%)",
-            }}
-            aria-hidden
-          />
+          <div className="absolute inset-x-0 top-0 h-1 bg-gold-500" aria-hidden />
           <div className="relative mx-auto max-w-2xl">
             <h2 className="text-3xl font-semibold text-cream sm:text-4xl">{title}</h2>
             <p className="mt-4 text-lg text-cream/80">{intro}</p>

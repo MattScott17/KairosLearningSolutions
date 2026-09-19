@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Check, Phone, TrendingDown, Frown, Compass } from "lucide-react";
+import { Check, Phone } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/CTASection";
@@ -15,14 +15,6 @@ export default function ConceptAPage() {
     <>
       {/* Hero — the problem, named plainly, one CTA */}
       <section className="relative overflow-hidden pt-24 sm:pt-28">
-        <div
-          className="pointer-events-none absolute inset-0 -z-10"
-          style={{
-            background:
-              "radial-gradient(1200px 600px at 80% -10%, rgba(124,179,66,0.16), transparent 60%), radial-gradient(900px 500px at -10% 10%, rgba(224,162,60,0.10), transparent 55%)",
-          }}
-          aria-hidden
-        />
         <div className="container-page text-center">
           <Reveal>
             <h1 className="mx-auto max-w-3xl text-4xl font-semibold leading-[1.1] sm:text-5xl lg:text-6xl">
@@ -50,20 +42,15 @@ export default function ConceptAPage() {
           title="You're not imagining it — and you're not alone"
         />
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {[
-            { text: conceptA.problem.external, Icon: TrendingDown },
-            { text: conceptA.problem.internal, Icon: Frown },
-            { text: conceptA.problem.philosophical, Icon: Compass },
-          ].map(({ text, Icon }, i) => (
-            <Reveal key={text} delay={i * 0.08}>
-              <div className="h-full rounded-3xl border border-forest-100 bg-cream p-7 text-center shadow-card">
-                <span className="mx-auto inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-forest-50 text-forest-600">
-                  <Icon className="h-5 w-5" />
-                </span>
-                <p className="prose-kairos mt-4 text-sm">{text}</p>
-              </div>
-            </Reveal>
-          ))}
+          {[conceptA.problem.external, conceptA.problem.internal, conceptA.problem.philosophical].map(
+            (text, i) => (
+              <Reveal key={text} delay={i * 0.08}>
+                <div className="h-full rounded-3xl border border-forest-100 bg-cream p-7 text-center shadow-card">
+                  <p className="prose-kairos text-sm">{text}</p>
+                </div>
+              </Reveal>
+            )
+          )}
         </div>
       </Section>
 

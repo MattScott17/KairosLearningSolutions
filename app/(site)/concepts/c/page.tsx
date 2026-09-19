@@ -15,14 +15,6 @@ export default function ConceptCPage() {
     <>
       {/* Hero — the decision framing, not a story beat */}
       <section className="relative overflow-hidden pt-24 sm:pt-28">
-        <div
-          className="pointer-events-none absolute inset-0 -z-10"
-          style={{
-            background:
-              "radial-gradient(1200px 600px at 80% -10%, rgba(124,179,66,0.16), transparent 60%), radial-gradient(900px 500px at -10% 10%, rgba(224,162,60,0.10), transparent 55%)",
-          }}
-          aria-hidden
-        />
         <div className="container-page text-center">
           <Reveal>
             <h1 className="mx-auto max-w-3xl text-4xl font-semibold leading-[1.1] sm:text-5xl">

@@ -71,7 +71,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
       {/* Details */}
       <Section container="narrow">
         <span className="eyebrow">
-          <span className="h-px w-6 bg-forest-400" aria-hidden />
+          <span className="h-px w-6 bg-gold-500" aria-hidden />
           How it works
         </span>
         <h2 className="mt-3 text-3xl font-semibold">What to expect</h2>
@@ -100,25 +100,19 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
         <div className="container-page">
           <h2 className="text-2xl font-semibold">Explore other services</h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-2">
-            {others.map((other) => {
-              const Icon = other.icon;
-              return (
-                <Link
-                  key={other.slug}
-                  href={`/services/${other.slug}`}
-                  className="group flex items-center gap-4 rounded-3xl bg-cream p-6 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-soft"
-                >
-                  <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-forest-50 text-forest-700 transition-colors group-hover:bg-forest-800 group-hover:text-cream">
-                    <Icon className="h-6 w-6" />
-                  </span>
-                  <div>
-                    <p className="font-semibold text-forest-800">{other.title}</p>
-                    <p className="text-sm text-ink/60">{other.short}</p>
-                  </div>
-                  <ArrowRight className="ml-auto h-5 w-5 text-forest-400 transition-transform group-hover:translate-x-1" />
-                </Link>
-              );
-            })}
+            {others.map((other) => (
+              <Link
+                key={other.slug}
+                href={`/services/${other.slug}`}
+                className="group flex items-center gap-4 rounded-3xl bg-cream p-6 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-soft"
+              >
+                <div>
+                  <p className="font-semibold text-forest-800">{other.title}</p>
+                  <p className="text-sm text-ink/60">{other.short}</p>
+                </div>
+                <ArrowRight className="ml-auto h-5 w-5 text-forest-400 transition-transform group-hover:translate-x-1" />
+              </Link>
+            ))}
           </div>
         </div>
       </section>

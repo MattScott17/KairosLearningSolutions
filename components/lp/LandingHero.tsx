@@ -6,14 +6,6 @@ import type { LandingCopy } from "@/lib/landing-content";
 export function LandingHero({ copy }: { copy: LandingCopy }) {
   return (
     <section className="relative overflow-hidden pt-16 sm:pt-20">
-      <div
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(1200px 600px at 80% -10%, rgba(124,179,66,0.16), transparent 60%), radial-gradient(900px 500px at -10% 10%, rgba(224,162,60,0.10), transparent 55%)",
-        }}
-        aria-hidden
-      />
       <div className="container-page text-center">
         <Reveal>
           <span className="inline-flex items-center gap-2 rounded-full border border-forest-200 bg-forest-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-forest-700">

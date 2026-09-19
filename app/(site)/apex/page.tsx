@@ -93,13 +93,9 @@ export default function ApexPage() {
           <SectionHeading center eyebrow="Why families choose APEX" title="Built around each student" />
           <div className="mt-12 grid gap-6 sm:grid-cols-2">
             {apex.pillars.map((pillar, i) => {
-              const Icon = pillar.icon;
               return (
                 <Reveal key={pillar.title} delay={i * 0.08}>
                   <div className="flex h-full gap-5 rounded-3xl bg-cream p-7 shadow-card">
-                    <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-forest-800 text-cream">
-                      <Icon className="h-6 w-6" />
-                    </span>
                     <div>
                       <h3 className="text-lg font-semibold">{pillar.title}</h3>
                       <p className="prose-kairos mt-2 text-sm">{pillar.body}</p>

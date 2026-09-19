@@ -55,14 +55,6 @@ export default function HomePage() {
 
       {/* APEX feature band */}
       <section className="relative overflow-hidden bg-forest-800 text-cream">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-20"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 10% 20%, rgba(174,213,129,0.6), transparent 40%), radial-gradient(circle at 90% 90%, rgba(224,162,60,0.5), transparent 40%)",
-          }}
-          aria-hidden
-        />
         <div className="container-page relative grid items-center gap-12 py-16 sm:py-24 lg:grid-cols-2">
           <Reveal>
             <div className="relative aspect-[4/3] overflow-hidden rounded-4xl shadow-soft">
@@ -113,20 +105,14 @@ export default function HomePage() {
           intro="Our entire model is built around the individual needs of your child — not a one-size-fits-all classroom."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {values.map((value, i) => {
-            const Icon = value.icon;
-            return (
-              <Reveal key={value.title} delay={i * 0.08}>
-                <div className="h-full rounded-3xl border border-forest-100 bg-cream p-8 text-center shadow-card">
-                  <span className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-forest-50 text-forest-700">
-                    <Icon className="h-7 w-7" />
-                  </span>
-                  <h3 className="mt-5 text-xl font-semibold">{value.title}</h3>
-                  <p className="prose-kairos mt-3 text-sm">{value.body}</p>
-                </div>
-              </Reveal>
-            );
-          })}
+          {values.map((value, i) => (
+            <Reveal key={value.title} delay={i * 0.08}>
+              <div className="h-full rounded-3xl border border-forest-100 bg-cream p-8 text-center shadow-card">
+                <h3 className="text-xl font-semibold">{value.title}</h3>
+                <p className="prose-kairos mt-3 text-sm">{value.body}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </Section>
 
@@ -138,21 +124,29 @@ export default function HomePage() {
             eyebrow="From our families"
             title="A community that shows up for kids"
           />
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {testimonials.slice(0, 3).map((t, i) => (
-              <Reveal key={t.author} delay={i * 0.08}>
-                <figure className="flex h-full flex-col rounded-3xl bg-cream p-7 shadow-card">
-                  <Quote className="h-8 w-8 text-forest-300" />
-                  <blockquote className="mt-4 flex-1 text-lg leading-relaxed text-ink/85">
+          <div className="mt-12 grid gap-10 lg:grid-cols-5 lg:items-start">
+            <Reveal className="lg:col-span-3">
+              <Quote className="h-10 w-10 text-forest-300" />
+              <blockquote className="mt-4 font-display text-2xl leading-snug text-forest-900 sm:text-3xl">
+                “{testimonials[0].quote}”
+              </blockquote>
+              <p className="mt-5 text-sm font-semibold text-forest-800">
+                {testimonials[0].author}{" "}
+                <span className="font-normal text-ink/60">· {testimonials[0].role}</span>
+              </p>
+            </Reveal>
+            <div className="space-y-6 lg:col-span-2 lg:border-l lg:border-forest-200 lg:pl-8">
+              {testimonials.slice(1, 3).map((t, i) => (
+                <Reveal key={t.author} delay={i * 0.08 + 0.1}>
+                  <blockquote className="text-base leading-relaxed text-ink/80">
                     “{t.quote}”
                   </blockquote>
-                  <figcaption className="mt-6 border-t border-forest-100 pt-4 text-sm">
-                    <span className="font-semibold text-forest-800">{t.author}</span>
-                    <span className="block text-ink/60">{t.role}</span>
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
+                  <p className="mt-2 text-sm font-semibold text-forest-800">
+                    {t.author} <span className="font-normal text-ink/60">· {t.role}</span>
+                  </p>
+                </Reveal>
+              ))}
+            </div>
           </div>
           <div className="mt-10 text-center">
             <Link href="/testimonials" className="btn-outline">
