@@ -33,6 +33,10 @@ export default function ConceptCPage() {
           title="Too many options, not enough clarity"
           intro={conceptC.problem.external}
         />
+        <div className="mx-auto mt-10 max-w-2xl space-y-4 border-l-2 border-gold-500/40 pl-6 text-left">
+          <p className="prose-kairos">{conceptC.problem.internal}</p>
+          <p className="font-display text-lg text-forest-800">{conceptC.problem.philosophical}</p>
+        </div>
       </Section>
 
       {/* Path-finder grid — the core mechanic of this concept */}
