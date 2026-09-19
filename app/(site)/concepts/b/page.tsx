@@ -5,6 +5,7 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/CTASection";
 import { testimonials, values } from "@/lib/content";
+import { site } from "@/lib/site";
 import { conceptB } from "@/lib/storybrand";
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
@@ -23,12 +24,15 @@ export default function ConceptBPage() {
           className="object-cover"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-forest-950/85 via-forest-950/30 to-transparent"
+          className="absolute inset-0 bg-gradient-to-t from-forest-950/90 via-forest-950/50 to-forest-950/10"
           aria-hidden
         />
         <div className="container-page relative pb-16 text-cream sm:pb-24">
           <Reveal>
-            <h1 className="max-w-2xl text-4xl font-semibold leading-[1.1] sm:text-5xl">
+            <span className="inline-flex items-center gap-2 rounded-full border border-cream/30 bg-cream/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-cream backdrop-blur-sm">
+              Serving Salinas since {site.foundedYear}
+            </span>
+            <h1 className="mt-5 max-w-2xl text-4xl font-semibold leading-[1.1] text-cream sm:text-5xl">
               {conceptB.heroHeadline}
             </h1>
             <p className="mt-5 max-w-xl text-lg text-cream/85">{conceptB.heroSub}</p>

@@ -1,4 +1,4 @@
-import { Quote } from "lucide-react";
+import { Check, Quote } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { stats, testimonials } from "@/lib/content";
 import type { LandingCopy } from "@/lib/landing-content";
@@ -27,7 +27,8 @@ export function ProofStrip({ copy }: { copy: LandingCopy }) {
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {copy.proofPoints.map((point, i) => (
             <Reveal key={point} delay={i * 0.08}>
-              <div className="h-full rounded-3xl bg-cream p-6 text-sm text-ink/80 shadow-card">
+              <div className="flex h-full items-start gap-3 rounded-3xl bg-cream p-6 text-sm text-ink/80 shadow-card">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-forest-500" />
                 {point}
               </div>
             </Reveal>

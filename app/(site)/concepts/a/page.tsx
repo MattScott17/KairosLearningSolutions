@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Check, Phone } from "lucide-react";
+import { Check, Phone, TrendingDown, Frown, Compass } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/CTASection";
@@ -43,22 +43,27 @@ export default function ConceptAPage() {
       </section>
 
       {/* Problem — external / internal / philosophical, StoryBrand-style */}
-      <Section>
+      <Section className="bg-sand/50">
         <SectionHeading
           center
           eyebrow="If this sounds familiar"
           title="You're not imagining it — and you're not alone"
         />
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {[conceptA.problem.external, conceptA.problem.internal, conceptA.problem.philosophical].map(
-            (text, i) => (
-              <Reveal key={text} delay={i * 0.08}>
-                <div className="h-full rounded-3xl border border-forest-100 bg-cream p-7 text-center shadow-card">
-                  <p className="prose-kairos text-sm">{text}</p>
-                </div>
-              </Reveal>
-            )
-          )}
+          {[
+            { text: conceptA.problem.external, Icon: TrendingDown },
+            { text: conceptA.problem.internal, Icon: Frown },
+            { text: conceptA.problem.philosophical, Icon: Compass },
+          ].map(({ text, Icon }, i) => (
+            <Reveal key={text} delay={i * 0.08}>
+              <div className="h-full rounded-3xl border border-forest-100 bg-cream p-7 text-center shadow-card">
+                <span className="mx-auto inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-forest-50 text-forest-600">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <p className="prose-kairos mt-4 text-sm">{text}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </Section>
 
@@ -66,7 +71,7 @@ export default function ConceptAPage() {
       <section className="bg-forest-800 py-16 text-cream sm:py-20">
         <div className="container-page text-center">
           <Reveal>
-            <h2 className="text-3xl font-semibold sm:text-4xl">
+            <h2 className="text-3xl font-semibold text-cream sm:text-4xl">
               We've been the guide for Salinas families since {site.foundedYear}
             </h2>
             <p className="prose-kairos mx-auto mt-4 max-w-2xl text-cream/85">
@@ -100,7 +105,7 @@ export default function ConceptAPage() {
       </Section>
 
       {/* Services, kept brief — not the focus of this concept */}
-      <Section>
+      <Section className="bg-sand/50">
         <SectionHeading
           center
           eyebrow="What we offer"

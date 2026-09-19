@@ -34,7 +34,7 @@ export default function ConceptCPage() {
       </section>
 
       {/* Problem — framed as a decision problem */}
-      <Section>
+      <Section className="bg-sand/50">
         <SectionHeading
           center
           eyebrow="The challenge"
@@ -65,7 +65,7 @@ export default function ConceptCPage() {
               <span className="inline-flex items-center gap-2 rounded-full bg-forest-700 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-forest-100">
                 Full-time alternative
               </span>
-              <h3 className="mt-4 text-2xl font-semibold">APEX — {apex.gradeRange}</h3>
+              <h3 className="mt-4 text-2xl font-semibold text-cream">APEX — {apex.gradeRange}</h3>
               <p className="mt-2 max-w-xl text-cream/80">{apex.intro}</p>
             </div>
             <Link href="/apex" className="btn-accent shrink-0">
@@ -77,7 +77,7 @@ export default function ConceptCPage() {
       </Section>
 
       {/* Plan — confirm the fit before committing */}
-      <Section>
+      <Section className="bg-sand/50">
         <SectionHeading center eyebrow="Once you've found your path" title="Confirm the fit" />
         <div className="mx-auto mt-12 grid max-w-3xl gap-6 sm:grid-cols-3">
           {conceptC.plan.map((step, i) => (
