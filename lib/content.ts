@@ -201,6 +201,10 @@ export type Testimonial = {
   quote: string;
   author: string;
   role: string;
+  // A concrete, named before/after result (e.g. "raised her math grade from a
+  // D to a B in one semester"). Left undefined until real ones are collected —
+  // never fabricated.
+  result?: string;
 };
 
 export const testimonials: Testimonial[] = [
