@@ -106,20 +106,14 @@ export default function FallClassesPage() {
         <div className="container-page">
           <SectionHeading center eyebrow="Areas of study" title="A little bit of everything" />
           <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {subjects.map((s, i) => {
-              const Icon = s.icon;
-              return (
-                <Reveal key={s.title} delay={i * 0.08}>
-                  <div className="h-full rounded-3xl bg-cream p-8 text-center shadow-card">
-                    <span className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-forest-50 text-forest-700">
-                      <Icon className="h-7 w-7" />
-                    </span>
-                    <h3 className="mt-5 text-xl font-semibold">{s.title}</h3>
-                    <p className="prose-kairos mt-3 text-sm">{s.body}</p>
-                  </div>
-                </Reveal>
-              );
-            })}
+            {subjects.map((s, i) => (
+              <Reveal key={s.title} delay={i * 0.08}>
+                <div className="h-full rounded-3xl bg-cream p-8 text-center shadow-card">
+                  <h3 className="text-xl font-semibold">{s.title}</h3>
+                  <p className="prose-kairos mt-3 text-sm">{s.body}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
           <div className="mt-10 text-center">
             <Link href="/summer" className="btn-ghost">

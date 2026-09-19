@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Check, Phone, TrendingDown, Frown, Compass } from "lucide-react";
+import { Check, Phone } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/CTASection";
@@ -50,20 +50,15 @@ export default function ConceptAPage() {
           title="You're not imagining it — and you're not alone"
         />
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {[
-            { text: conceptA.problem.external, Icon: TrendingDown },
-            { text: conceptA.problem.internal, Icon: Frown },
-            { text: conceptA.problem.philosophical, Icon: Compass },
-          ].map(({ text, Icon }, i) => (
-            <Reveal key={text} delay={i * 0.08}>
-              <div className="h-full rounded-3xl border border-forest-100 bg-cream p-7 text-center shadow-card">
-                <span className="mx-auto inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-forest-50 text-forest-600">
-                  <Icon className="h-5 w-5" />
-                </span>
-                <p className="prose-kairos mt-4 text-sm">{text}</p>
-              </div>
-            </Reveal>
-          ))}
+          {[conceptA.problem.external, conceptA.problem.internal, conceptA.problem.philosophical].map(
+            (text, i) => (
+              <Reveal key={text} delay={i * 0.08}>
+                <div className="h-full rounded-3xl border border-forest-100 bg-cream p-7 text-center shadow-card">
+                  <p className="prose-kairos text-sm">{text}</p>
+                </div>
+              </Reveal>
+            )
+          )}
         </div>
       </Section>
 

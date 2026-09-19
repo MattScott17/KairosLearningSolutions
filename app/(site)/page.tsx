@@ -113,20 +113,14 @@ export default function HomePage() {
           intro="Our entire model is built around the individual needs of your child — not a one-size-fits-all classroom."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {values.map((value, i) => {
-            const Icon = value.icon;
-            return (
-              <Reveal key={value.title} delay={i * 0.08}>
-                <div className="h-full rounded-3xl border border-forest-100 bg-cream p-8 text-center shadow-card">
-                  <span className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-forest-50 text-forest-700">
-                    <Icon className="h-7 w-7" />
-                  </span>
-                  <h3 className="mt-5 text-xl font-semibold">{value.title}</h3>
-                  <p className="prose-kairos mt-3 text-sm">{value.body}</p>
-                </div>
-              </Reveal>
-            );
-          })}
+          {values.map((value, i) => (
+            <Reveal key={value.title} delay={i * 0.08}>
+              <div className="h-full rounded-3xl border border-forest-100 bg-cream p-8 text-center shadow-card">
+                <h3 className="text-xl font-semibold">{value.title}</h3>
+                <p className="prose-kairos mt-3 text-sm">{value.body}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </Section>
 

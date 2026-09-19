@@ -52,20 +52,14 @@ export default function SummerPage() {
           title="Learning that doesn't feel like summer school"
         />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {highlights.map((h, i) => {
-            const Icon = h.icon;
-            return (
-              <Reveal key={h.title} delay={i * 0.07}>
-                <div className="h-full rounded-3xl border border-forest-100 bg-cream p-7 shadow-card">
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-forest-50 text-forest-700">
-                    <Icon className="h-6 w-6" />
-                  </span>
-                  <h3 className="mt-5 text-lg font-semibold">{h.title}</h3>
-                  <p className="prose-kairos mt-2 text-sm">{h.body}</p>
-                </div>
-              </Reveal>
-            );
-          })}
+          {highlights.map((h, i) => (
+            <Reveal key={h.title} delay={i * 0.07}>
+              <div className="h-full rounded-3xl border border-forest-100 bg-cream p-7 shadow-card">
+                <h3 className="text-lg font-semibold">{h.title}</h3>
+                <p className="prose-kairos mt-2 text-sm">{h.body}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </Section>
 

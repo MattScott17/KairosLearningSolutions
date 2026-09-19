@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Clock } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContactForm } from "@/components/ContactForm";
 import { site } from "@/lib/site";
@@ -33,9 +33,6 @@ export default function ContactPage() {
                 href={site.phoneHref}
                 className="flex items-center gap-4 rounded-2xl border border-forest-100 bg-cream p-5 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-soft"
               >
-                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-forest-800 text-cream">
-                  <Phone className="h-6 w-6" />
-                </span>
                 <span>
                   <span className="block text-xs font-semibold uppercase tracking-wide text-forest-600">
                     Call us
@@ -48,9 +45,6 @@ export default function ContactPage() {
                 href={site.emailHref}
                 className="flex items-center gap-4 rounded-2xl border border-forest-100 bg-cream p-5 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-soft"
               >
-                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-forest-800 text-cream">
-                  <Mail className="h-6 w-6" />
-                </span>
                 <span className="min-w-0">
                   <span className="block text-xs font-semibold uppercase tracking-wide text-forest-600">
                     Email us
@@ -67,9 +61,6 @@ export default function ContactPage() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 rounded-2xl border border-forest-100 bg-cream p-5 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-soft"
               >
-                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-forest-800 text-cream">
-                  <MapPin className="h-6 w-6" />
-                </span>
                 <span>
                   <span className="block text-xs font-semibold uppercase tracking-wide text-forest-600">
                     Visit us
