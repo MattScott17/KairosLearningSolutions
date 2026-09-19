@@ -1,18 +1,8 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
 import { contactSchema } from "@/lib/contact-schema";
-import { site } from "@/lib/site";
+import { escapeHtml, getResendConfig } from "@/lib/email";
 
 export const runtime = "nodejs";
-
-function escapeHtml(input: string) {
-  return input
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -37,13 +27,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL || site.email;
-  const from = process.env.CONTACT_FROM_EMAIL || "Kairos Website <onboarding@resend.dev>";
+  const { apiKey, to, from, resend } = getResendConfig();
 
   // If email isn't configured yet, don't hard-fail the visitor: log and return a
   // clear, actionable status so the form still "works" with the call/email fallback.
-  if (!apiKey) {
+  if (!apiKey || !resend) {
     console.warn("[contact] RESEND_API_KEY is not set — submission not emailed.", {
       name,
       email,
@@ -59,8 +47,6 @@ export async function POST(request: Request) {
       { status: 503 }
     );
   }
-
-  const resend = new Resend(apiKey);
 
   const html = `
     <div style="font-family: system-ui, sans-serif; color: #26241d;">
