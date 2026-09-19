@@ -1,62 +1,17 @@
 "use client";
 
-import { useState } from "react";
 import { CheckCircle2, Loader2, Send } from "lucide-react";
 import { contactSchema, interestOptions } from "@/lib/contact-schema";
 import { site } from "@/lib/site";
-
-type Status = "idle" | "submitting" | "success" | "error";
+import { useFormSubmit } from "@/lib/useFormSubmit";
 
 export function ContactForm() {
-  const [status, setStatus] = useState<Status>("idle");
-  const [errorMsg, setErrorMsg] = useState<string>("");
-  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const { status, errorMsg, fieldErrors, submit } = useFormSubmit(contactSchema, "/api/contact");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setFieldErrors({});
-    setErrorMsg("");
-
     const formData = new FormData(e.currentTarget);
-    const raw = Object.fromEntries(formData.entries());
-
-    const parsed = contactSchema.safeParse(raw);
-    if (!parsed.success) {
-      const flat = parsed.error.flatten().fieldErrors;
-      const next: Record<string, string> = {};
-      for (const [key, val] of Object.entries(flat)) {
-        if (val && val[0]) next[key] = val[0];
-      }
-      setFieldErrors(next);
-      setStatus("error");
-      setErrorMsg("Please fix the highlighted fields.");
-      return;
-    }
-
-    setStatus("submitting");
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(parsed.data),
-      });
-      const data = await res.json().catch(() => ({}));
-
-      if (res.ok && data.ok) {
-        setStatus("success");
-        return;
-      }
-      setStatus("error");
-      setErrorMsg(
-        data.error ||
-          "We couldn't send your message. Please call or email us and we'll respond quickly."
-      );
-    } catch {
-      setStatus("error");
-      setErrorMsg(
-        "We couldn't reach the server. Please call or email us and we'll respond quickly."
-      );
-    }
+    await submit(Object.fromEntries(formData.entries()));
   }
 
   if (status === "success") {

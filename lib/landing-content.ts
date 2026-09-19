@@ -9,7 +9,6 @@ export type LandingCopy = {
   subhead: string;
   painPoints: string[];
   proofPoints: string[];
-  planSteps: string[];
   ctaLabel: string;
 };
 
@@ -29,11 +28,6 @@ export const apexLanding: LandingCopy = {
     "Small-group, community-driven environment where every student is known by name.",
     "A free consultation call before you commit to anything.",
   ],
-  planSteps: [
-    "Book a free call to see if APEX is the right fit.",
-    "Meet the team and see the space in Salinas.",
-    "Enroll your student in a program built around them.",
-  ],
   ctaLabel: "Book a free APEX call",
 };
 
@@ -52,11 +46,6 @@ export const tutoringLanding: LandingCopy = {
     "In-person sessions at our Salinas center or online — whatever fits your family.",
     "Every subject, every level: early literacy, math, writing, world languages, test prep, AP.",
     "Matched to a tutor based on subject, learning style, and personality.",
-  ],
-  planSteps: [
-    "Book a free consultation call.",
-    "We match your student with the right tutor.",
-    "Start seeing progress, session by session.",
   ],
   ctaLabel: "Book a free consultation",
 };

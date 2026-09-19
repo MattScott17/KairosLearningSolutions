@@ -1,66 +1,27 @@
 "use client";
 
-import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { CheckCircle2, Loader2, PhoneCall } from "lucide-react";
 import { landingSchema } from "@/lib/landing-schema";
 import { site } from "@/lib/site";
+import { useFormSubmit } from "@/lib/useFormSubmit";
 import type { LandingCopy } from "@/lib/landing-content";
-
-type Status = "idle" | "submitting" | "success" | "error";
 
 export function CallbackForm({ copy }: { copy: LandingCopy }) {
   const pathname = usePathname();
-  const [status, setStatus] = useState<Status>("idle");
-  const [errorMsg, setErrorMsg] = useState<string>("");
-  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const { status, errorMsg, fieldErrors, submit } = useFormSubmit(
+    landingSchema,
+    "/api/lp-callback"
+  );
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setFieldErrors({});
-    setErrorMsg("");
-
     const formData = new FormData(e.currentTarget);
-    const raw = {
+    await submit({
       ...Object.fromEntries(formData.entries()),
       program: copy.program,
       page: pathname,
-    };
-
-    const parsed = landingSchema.safeParse(raw);
-    if (!parsed.success) {
-      const flat = parsed.error.flatten().fieldErrors;
-      const next: Record<string, string> = {};
-      for (const [key, val] of Object.entries(flat)) {
-        if (val && val[0]) next[key] = val[0];
-      }
-      setFieldErrors(next);
-      setStatus("error");
-      setErrorMsg("Please fix the highlighted fields.");
-      return;
-    }
-
-    setStatus("submitting");
-    try {
-      const res = await fetch("/api/lp-callback", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(parsed.data),
-      });
-      const data = await res.json().catch(() => ({}));
-
-      if (res.ok && data.ok) {
-        setStatus("success");
-        return;
-      }
-      setStatus("error");
-      setErrorMsg(
-        data.error || "We couldn't send your request. Please call us and we'll respond quickly."
-      );
-    } catch {
-      setStatus("error");
-      setErrorMsg("We couldn't reach the server. Please call us and we'll respond quickly.");
-    }
+    });
   }
 
   if (status === "success") {
