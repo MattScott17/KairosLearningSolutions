@@ -71,7 +71,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
       {/* Details */}
       <Section container="narrow">
         <span className="eyebrow">
-          <span className="h-px w-6 bg-forest-400" aria-hidden />
+          <span className="h-px w-6 bg-gold-500" aria-hidden />
           How it works
         </span>
         <h2 className="mt-3 text-3xl font-semibold">What to expect</h2>

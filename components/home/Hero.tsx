@@ -22,15 +22,6 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden pt-24 sm:pt-28">
-      {/* soft brand backdrop */}
-      <div
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(1200px 600px at 80% -10%, rgba(124,179,66,0.16), transparent 60%), radial-gradient(900px 500px at -10% 10%, rgba(224,162,60,0.10), transparent 55%)",
-        }}
-        aria-hidden
-      />
       <div className="container-page grid items-center gap-12 py-12 lg:grid-cols-2 lg:py-20">
         <motion.div variants={container} initial="hidden" animate="show">
           <motion.span

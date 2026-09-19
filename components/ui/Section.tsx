@@ -40,7 +40,7 @@ export function SectionHeading({
     <div className={`${center ? "mx-auto max-w-2xl text-center" : "max-w-2xl"} ${className}`}>
       {eyebrow && (
         <span className="eyebrow">
-          <span className="h-px w-6 bg-forest-400" aria-hidden />
+          <span className="h-px w-6 bg-gold-500" aria-hidden />
           {eyebrow}
         </span>
       )}
