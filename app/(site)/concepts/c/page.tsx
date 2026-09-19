@@ -56,18 +56,32 @@ export default function ConceptCPage() {
 
         {/* APEX called out separately as the "full-time" end of the spectrum */}
         <Reveal delay={0.24}>
-          <div className="mt-6 flex flex-col items-start justify-between gap-6 rounded-3xl bg-forest-800 p-8 text-cream shadow-soft sm:flex-row sm:items-center">
+          <div className="mt-6 grid gap-8 rounded-3xl bg-forest-800 p-8 text-cream shadow-soft lg:grid-cols-[1.4fr_1fr] lg:items-center">
             <div>
               <span className="inline-flex items-center gap-2 rounded-full bg-forest-700 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-forest-100">
                 Full-time alternative
               </span>
               <h3 className="mt-4 text-2xl font-semibold text-cream">APEX — {apex.gradeRange}</h3>
               <p className="mt-2 max-w-xl text-cream/80">{apex.intro}</p>
+              <Link href="/apex" className="btn-accent mt-6 inline-flex">
+                Explore APEX
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
-            <Link href="/apex" className="btn-accent shrink-0">
-              Explore APEX
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+            <div className="grid grid-cols-3 gap-4 border-t border-cream/15 pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+              <div>
+                <p className="font-display text-xl font-semibold text-cream">{apex.gradeRange}</p>
+                <p className="mt-1 text-xs uppercase tracking-wide text-cream/60">Grades</p>
+              </div>
+              <div>
+                <p className="font-display text-xl font-semibold text-cream">{apex.tuition.monthly}</p>
+                <p className="mt-1 text-xs uppercase tracking-wide text-cream/60">Tuition</p>
+              </div>
+              <div>
+                <p className="font-display text-xl font-semibold text-cream">Full-time</p>
+                <p className="mt-1 text-xs uppercase tracking-wide text-cream/60">Format</p>
+              </div>
+            </div>
           </div>
         </Reveal>
       </Section>
@@ -89,12 +103,13 @@ export default function ConceptCPage() {
         </div>
       </Section>
 
-      <Section>
-        <div className="mx-auto max-w-2xl rounded-3xl border border-forest-100 bg-cream p-8 text-center shadow-card">
-          <Check className="mx-auto h-8 w-8 text-forest-500" />
-          <p className="prose-kairos mt-4 text-lg">{conceptC.successVision}</p>
-        </div>
-      </Section>
+      {/* Success vision — connective tissue leading into the final CTA */}
+      <div className="container-page pt-16 sm:pt-20">
+        <p className="mx-auto flex max-w-2xl items-start gap-2 text-center text-lg font-medium text-forest-800">
+          <Check className="mt-1 h-5 w-5 shrink-0 text-forest-500" />
+          {conceptC.successVision}
+        </p>
+      </div>
 
       <CTASection
         title="Not sure which path fits?"
