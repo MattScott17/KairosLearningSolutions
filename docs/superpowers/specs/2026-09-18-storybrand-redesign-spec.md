@@ -114,10 +114,10 @@ Can extend:
 - **Watch out:** `app/sitemap.ts`, `app/robots.ts`, and `app/api/**` stay at the top level (route groups only apply to page routes, not these special files) — do not move them.
 
 ### Step 3: Bare layout for ad landing pages
-- **Files:** Create `app/(bare)/layout.tsx`, `components/lp/StickyCallBar.tsx`.
-- **Modify details:** `app/(bare)/layout.tsx` renders just `<Logo />` linked to `/` removed (ad landing pages shouldn't offer an exit link — link the logo to nothing, or don't make it a link at all) plus `{children}`, plus `<StickyCallBar />` (a slim bottom-fixed bar on mobile with a `tel:` button, using `site.phoneHref`).
-- **Reuse:** `components/Logo.tsx`, `lib/site.ts`.
-- **Watch out:** This layout must NOT import `Navigation` or `Footer` — that's the entire point of the bare group.
+- **Files:** Create `app/(bare)/layout.tsx`, `components/lp/StickyCallBar.tsx`. Modify `components/Logo.tsx`.
+- **Modify details:** `components/Logo.tsx` gains a `linkToHome?: boolean` prop, default `true` (preserves current behavior everywhere else unmodified). When `false`, it renders the same `<Image>` wrapped in a plain `<span aria-label={...}>` instead of `<Link href="/">` — ad landing pages shouldn't offer an exit link back to the main site. `app/(bare)/layout.tsx` renders `<Logo linkToHome={false} />`, a skip-to-content link (`<a href="#main">`, same markup as the one in `app/(site)/layout.tsx`) and `<main id="main">{children}</main>` — matching the accessibility baseline every other page on the site already has — plus `<StickyCallBar />` (a slim bottom-fixed bar on mobile with a `tel:` button, using `site.phoneHref`).
+- **Reuse:** `components/Logo.tsx` (extended, not forked), `lib/site.ts`.
+- **Watch out:** This layout must NOT import `Navigation` or `Footer` — that's the entire point of the bare group. Do not drop the skip-link/`<main id="main">` landmark just because there's no nav — every existing page has both today, and losing them on the bare pages would be an accessibility regression.
 
 ### Step 4: StoryBrand + landing copy content
 - **Files:** Create `lib/storybrand.ts`, `lib/landing-content.ts`.
@@ -167,6 +167,8 @@ Can extend:
 
 - [ ] Every existing route (`/`, `/about`, `/apex`, `/contact`, `/fall-classes`, `/services`, `/services/[slug]`, `/summer`, `/testimonials`) still builds and resolves to the same path after the `(site)` route-group move — verified in `npm run build` output.
 - [ ] `Navigation` and `Footer` are imported and rendered in exactly one place (`app/(site)/layout.tsx`) — `app/layout.tsx` and `app/(bare)/layout.tsx` do not import either.
+- [ ] `app/(bare)/layout.tsx` includes a skip-to-content link and a `<main id="main">` landmark, matching `app/(site)/layout.tsx` — no page on the site (bare or site-chrome) regresses the existing accessibility baseline.
+- [ ] `components/Logo.tsx`'s default behavior (`linkToHome` omitted or `true`) is unchanged on every existing page — `grep -rn "<Logo" app/\(site\)` shows no explicit `linkToHome` prop needed there.
 - [ ] `escapeHtml` and the Resend client/env-resolution logic exist in exactly one place (`lib/email.ts`) — `grep -rn "function escapeHtml" app/ lib/` returns exactly one definition, imported by both `app/api/contact/route.ts` and `app/api/lp-callback/route.ts`.
 - [ ] No new helper, component, or content array duplicates something already in the Reuse Inventory — `Section`, `SectionHeading`, `Reveal`, `CTASection`, `ServiceCard`, `Logo`, and the `services`/`apex`/`testimonials`/`stats` arrays are imported, not recreated, anywhere in the new concept/landing pages.
 - [ ] The bare and site-chrome landing page pair for each program (`/lp/apex` vs `/lp/apex-site`, `/lp/tutoring` vs `/lp/tutoring-site`) render identical `LandingHero`/`ProofStrip`/`CallbackForm` content — no copy-pasted JSX that duplicates content between the pair; only the surrounding layout (nav/footer present or absent) differs.
@@ -177,6 +179,17 @@ Can extend:
 - [ ] No testimonial in `lib/content.ts` is modified or has a fabricated `result` value — the field exists on the type but is `undefined` on every current entry; `git diff` on the testimonials array shows only the type addition, no data changes.
 - [ ] All new pages/components use only `forest-*`, `cream`, `sand`, `ink`, `gold-*` Tailwind tokens — no raw hex color literals introduced (`grep -rn "#[0-9a-fA-F]\{3,6\}" app/\(bare\) app/\(site\)/concepts app/\(site\)/lp components/lp` returns nothing).
 - [ ] `npm run typecheck && npm run lint && npm run build` all pass.
+
+---
+
+## Changed Based on Challenger Findings
+
+- **Logo needs a `linkToHome` prop.** The challenger found that `components/Logo.tsx` hardcodes `<Link href="/">` with no way to disable it, but Step 3 required rendering the logo without a home link on bare landing pages. Fixed: Step 3 now includes modifying `Logo.tsx` to accept an optional `linkToHome` prop (default `true`), and a new Quality Criterion confirms every existing usage is unaffected.
+- **Bare layout was missing the skip-link/`<main>` landmark.** The challenger found the plan would regress the accessibility baseline every page currently has (skip-to-content link + `<main id="main">`) on the two bare landing pages. Fixed: Step 3 now explicitly includes both in `app/(bare)/layout.tsx`, plus a new Quality Criterion.
+
+### Minor Notes from Challenger
+
+- None beyond the accessibility finding above, which was folded into the fix rather than left as a separate minor note since it was cheap to address.
 
 ---
 
