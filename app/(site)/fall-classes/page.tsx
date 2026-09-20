@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BookOpen, CalendarDays, ExternalLink, Sparkles } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
@@ -101,6 +102,20 @@ export default function FallClassesPage() {
           </Reveal>
         </div>
       </Section>
+
+      <div className="container-page pb-16">
+        <Reveal>
+          <div className="relative aspect-[21/9] overflow-hidden rounded-4xl shadow-soft">
+            <Image
+              src="/images/photo-3.jpg"
+              alt="Kairos students working on an enrichment class project"
+              fill
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
+        </Reveal>
+      </div>
 
       <section className="bg-sand/60 py-16">
         <div className="container-page">
