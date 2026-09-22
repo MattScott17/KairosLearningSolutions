@@ -65,8 +65,8 @@ export default function ApexPage() {
           <Reveal>
             <div className="relative aspect-[4/3] overflow-hidden rounded-4xl shadow-soft">
               <Image
-                src="/images/photo-1.jpg"
-                alt="Students in the APEX learning program"
+                src="/images/photo-4.jpg"
+                alt="A Kairos student presenting a hands-on project she built"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"

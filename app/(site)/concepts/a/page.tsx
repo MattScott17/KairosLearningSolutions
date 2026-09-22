@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Check, Phone } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/CTASection";
 import { ServiceCard } from "@/components/ServiceCard";
 import { site } from "@/lib/site";
-import { services } from "@/lib/content";
+import { services, stats } from "@/lib/content";
 import { conceptA } from "@/lib/storybrand";
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
@@ -34,6 +35,24 @@ export default function ConceptAPage() {
         </div>
       </section>
 
+      {/* Trust bar — credibility, high up, before anything else is asked */}
+      <section className="border-y border-forest-100 bg-cream/60">
+        <div className="container-page grid grid-cols-2 gap-6 py-10 md:grid-cols-4">
+          {stats.map((stat) => {
+            const Icon = stat.icon;
+            return (
+              <div key={stat.label} className="flex flex-col items-center text-center">
+                <Icon className="h-6 w-6 text-forest-500" />
+                <p className="mt-2 font-display text-2xl font-semibold text-forest-800">
+                  {stat.value}
+                </p>
+                <p className="mt-0.5 text-xs text-ink/60">{stat.label}</p>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
       {/* Problem — external / internal / philosophical, StoryBrand-style */}
       <Section className="bg-sand/50">
         <SectionHeading
@@ -54,17 +73,35 @@ export default function ConceptAPage() {
         </div>
       </Section>
 
-      {/* Guide — Kairos as the guide, brief credibility */}
+      {/* Guide — Kairos as the guide, brief credibility, real photo */}
       <section className="bg-forest-800 py-16 text-cream sm:py-20">
-        <div className="container-page text-center">
+        <div className="container-page grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal>
-            <h2 className="text-3xl font-semibold text-cream sm:text-4xl">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-4xl shadow-soft">
+              <Image
+                src="/images/photo-3.jpg"
+                alt="Two Kairos students working on a craft project together"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <span className="inline-flex items-center gap-2 rounded-full bg-forest-700 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-forest-100">
+              Why Kairos
+            </span>
+            <h2 className="mt-5 text-3xl font-semibold text-cream sm:text-4xl">
               We've been the guide for Salinas families since {site.foundedYear}
             </h2>
-            <p className="prose-kairos mx-auto mt-4 max-w-2xl text-cream/85">
+            <p className="mt-4 text-lg text-cream/85">
               Kairos exists for exactly this moment — a team of experienced educators whose only
-              job is to meet your student where they are and help them go further.
+              job is to meet your student where they are and help them go further. We've walked
+              this exact road with hundreds of Salinas families already.
             </p>
+            <a href="#plan" className="btn-accent mt-7 inline-flex">
+              See how it works
+            </a>
           </Reveal>
         </div>
       </section>
@@ -107,13 +144,13 @@ export default function ConceptAPage() {
         </div>
       </Section>
 
-      {/* Success vision */}
-      <Section>
-        <div className="mx-auto max-w-2xl rounded-3xl border border-forest-100 bg-cream p-8 text-center shadow-card">
-          <Check className="mx-auto h-8 w-8 text-forest-500" />
-          <p className="prose-kairos mt-4 text-lg">{conceptA.successVision}</p>
-        </div>
-      </Section>
+      {/* Success vision — connective tissue leading into the final CTA, not an orphaned card */}
+      <div className="container-page pt-16 text-center sm:pt-20">
+        <Check className="mx-auto h-6 w-6 text-forest-500" />
+        <p className="mx-auto mt-3 max-w-2xl text-lg font-medium text-forest-800">
+          {conceptA.successVision}
+        </p>
+      </div>
 
       <CTASection
         title="Book a free call today"

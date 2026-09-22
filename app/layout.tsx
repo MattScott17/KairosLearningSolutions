@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: `${site.name} | Tutoring & Homeschool Support in Salinas, CA`,
     description: site.description,
-    images: [{ url: "/images/photo-1.jpg", width: 1600, height: 1067, alt: site.name }],
+    images: [{ url: "/images/photo-2.jpg", width: 1800, height: 1350, alt: site.name }],
   },
   twitter: {
     card: "summary_large_image",

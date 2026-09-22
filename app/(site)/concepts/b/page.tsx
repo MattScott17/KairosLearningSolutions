@@ -16,8 +16,8 @@ export default function ConceptBPage() {
       {/* Hero — full-bleed photo, short emotional headline */}
       <section className="relative flex min-h-[80vh] items-end overflow-hidden pt-24">
         <Image
-          src="/images/photo-1.jpg"
-          alt="Students learning at Kairos Learning Solutions"
+          src="/images/photo-5.jpg"
+          alt="Kairos students enjoying an outdoor picnic together"
           fill
           priority
           sizes="100vw"
@@ -44,7 +44,7 @@ export default function ConceptBPage() {
       </section>
 
       {/* The problem, told gently */}
-      <Section id="story">
+      <Section id="story" container="narrow">
         <SectionHeading
           eyebrow="Before Kairos"
           title="Every family that walks in has a story like this"
@@ -72,6 +72,18 @@ export default function ConceptBPage() {
             </span>
             <p className="mt-5 text-lg text-cream/85">{conceptB.problem.internal}</p>
             <p className="mt-4 text-lg font-semibold text-cream">{conceptB.problem.philosophical}</p>
+            <div className="mt-8 flex gap-8 border-t border-cream/15 pt-6">
+              <div>
+                <p className="font-display text-2xl font-semibold text-cream">
+                  Since {site.foundedYear}
+                </p>
+                <p className="mt-0.5 text-xs text-cream/60">Serving Salinas families</p>
+              </div>
+              <div>
+                <p className="font-display text-2xl font-semibold text-cream">13+</p>
+                <p className="mt-0.5 text-xs text-cream/60">Educators &amp; tutors</p>
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -91,19 +103,25 @@ export default function ConceptBPage() {
         </div>
       </Section>
 
-      {/* The plan, told as part of the story rather than a numbered list */}
-      <Section>
-        <SectionHeading eyebrow="What happens next" title="A simple next step" />
-        <div className="prose-kairos mt-8 max-w-2xl space-y-4 text-lg">
-          {conceptB.plan.map((step) => (
-            <p key={step}>{step}</p>
-          ))}
+      {/* The plan, told as a gentle timeline, flowing straight into the
+          testimonial that pays it off — one continuous sand block instead
+          of two sections with a visible seam between them */}
+      <section className="bg-sand/50 py-16 sm:py-24">
+        <div className="container-narrow">
+          <SectionHeading eyebrow="What happens next" title="A simple next step" />
+          <div className="mt-10 space-y-8 border-l-2 border-forest-200 pl-8">
+            {conceptB.plan.map((step, i) => (
+              <Reveal key={step} delay={i * 0.08} className="relative">
+                <span className="absolute -left-12 flex h-8 w-8 items-center justify-center rounded-full bg-forest-800 font-display text-sm font-semibold text-cream">
+                  {i + 1}
+                </span>
+                <p className="prose-kairos text-lg">{step}</p>
+              </Reveal>
+            ))}
+          </div>
         </div>
-      </Section>
 
-      {/* Testimonial as the emotional payoff */}
-      <section className="bg-sand/60 py-16 sm:py-24">
-        <div className="container-page mx-auto max-w-2xl text-center">
+        <div className="container-page mx-auto mt-20 max-w-2xl text-center">
           <Reveal>
             <Quote className="mx-auto h-9 w-9 text-forest-300" />
             <blockquote className="mt-4 text-2xl leading-relaxed text-ink/85">

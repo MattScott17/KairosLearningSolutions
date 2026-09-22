@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Palette, Sun, Tent, Users } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
@@ -44,6 +45,20 @@ export default function SummerPage() {
         title="A summer of curiosity"
         intro="Summer is the perfect time to explore, stay sharp, and have fun learning. Our summer programs blend light academics with hands-on enrichment so kids come back to school confident and curious."
       />
+
+      <Reveal>
+        <div className="container-page pt-16 sm:pt-20">
+          <div className="relative aspect-[21/9] overflow-hidden rounded-4xl shadow-soft">
+            <Image
+              src="/images/photo-5.jpg"
+              alt="Kairos students enjoying an outdoor summer activity"
+              fill
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
+        </div>
+      </Reveal>
 
       <Section>
         <SectionHeading

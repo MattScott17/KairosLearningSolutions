@@ -135,7 +135,7 @@ export default function HomePage() {
                 <span className="font-normal text-ink/60">· {testimonials[0].role}</span>
               </p>
             </Reveal>
-            <div className="space-y-6 lg:col-span-2 lg:border-l lg:border-forest-200 lg:pl-8">
+            <div className="space-y-6 border-t border-forest-200 pt-6 lg:col-span-2 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
               {testimonials.slice(1, 3).map((t, i) => (
                 <Reveal key={t.author} delay={i * 0.08 + 0.1}>
                   <blockquote className="text-base leading-relaxed text-ink/80">
