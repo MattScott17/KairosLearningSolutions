@@ -135,9 +135,9 @@ export default function ConceptCPage() {
       </Section>
 
       {/* Success vision — connective tissue leading into the final CTA */}
-      <div className="container-page pt-16 sm:pt-20">
-        <p className="mx-auto flex max-w-2xl items-start gap-2 text-center text-lg font-medium text-forest-800">
-          <Check className="mt-1 h-5 w-5 shrink-0 text-forest-500" />
+      <div className="container-page pt-16 text-center sm:pt-20">
+        <Check className="mx-auto h-6 w-6 text-forest-500" />
+        <p className="mx-auto mt-3 max-w-2xl text-lg font-medium text-forest-800">
           {conceptC.successVision}
         </p>
       </div>

@@ -145,13 +145,11 @@ export default function ConceptAPage() {
       </Section>
 
       {/* Success vision — connective tissue leading into the final CTA, not an orphaned card */}
-      <div className="container-page pt-16 sm:pt-20">
-        <div className="mx-auto flex max-w-2xl items-start gap-3 text-center">
-          <p className="mx-auto flex items-start gap-2 text-lg font-medium text-forest-800">
-            <Check className="mt-1 h-5 w-5 shrink-0 text-forest-500" />
-            {conceptA.successVision}
-          </p>
-        </div>
+      <div className="container-page pt-16 text-center sm:pt-20">
+        <Check className="mx-auto h-6 w-6 text-forest-500" />
+        <p className="mx-auto mt-3 max-w-2xl text-lg font-medium text-forest-800">
+          {conceptA.successVision}
+        </p>
       </div>
 
       <CTASection
