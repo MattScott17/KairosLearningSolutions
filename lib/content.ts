@@ -39,6 +39,7 @@ export const services: Service[] = [
       "Every subject, every level: early literacy, math, writing, world languages, test prep, and AP coursework.",
       "We match each student with a tutor based on subject, learning style, and personality.",
       "$70–$120 per hour, depending on subject and tutor — set during your consultation with Jackie.",
+      "Prefer a standing weekly session? A 1 session/week monthly plan is $360/month.",
     ],
     highlights: [
       { label: "Format", value: "In-person & online" },
@@ -91,6 +92,23 @@ export const services: Service[] = [
   },
 ];
 
+// Homeschool Support membership pricing — hours per month x Level A-D.
+export const homeschoolPricing = {
+  hoursPerMonth: [24, 32, 48, 64, 80, 100],
+  levels: {
+    A: [528, 690, 999, 1280, 1599, 1899],
+    B: [816, 1050, 1399, 1728, 1999, 2550],
+    C: [1320, 1760, 2400, 2990, 3680, 4500],
+    D: [1968, 2560, 3800, 4990, 6160, 7600],
+  },
+};
+
+export const registrationFees = [
+  { label: "New Homeschool Support / APEX student", value: "$150 / year" },
+  { label: "Returning Homeschool Support / APEX student", value: "$75 / year" },
+  { label: "Tutor / enrichment registration", value: "$75 / semester" },
+];
+
 export type EnrichmentNote = {
   title: string;
   body: string;
@@ -126,12 +144,29 @@ export const apex = {
   tagline: "A full-time learning program, reimagined",
   intro:
     "APEX is a full-time alternative to traditional school — a small-group program where your child is seen, supported, and challenged. We combine personalized academics, real life skills, and hands-on learning so students grow in both ability and confidence.",
-  gradeRange: "Grades 3 – 8",
+  gradeRange: "Grades 3 – 9",
   tuition: {
     monthly: "$1,800 / month",
     annual: "$18,000 / year",
     term: "10-month program",
   },
+  tiers: [
+    {
+      name: "APEX (full program)",
+      price: "$1,800 / month",
+      description: "The complete program — academics plus workshops.",
+    },
+    {
+      name: "APEX Academics only",
+      price: "$1,450 / month",
+      description: "Just the personalized, mastery-based academic block.",
+    },
+    {
+      name: "APEX Workshops only",
+      price: "$650 / month",
+      description: "Just the hands-on projects and life-skills workshops.",
+    },
+  ],
   model:
     "APEX uses the 2 Hour Learning model — the same approach used at Alpha Schools — where students master core academics in focused, personalized sessions, then spend the rest of the day building real-world skills.",
   pillars: [
@@ -368,3 +403,33 @@ export const summerPrograms: SummerProgram[] = [
     contactPhone: "(831) 288-8221",
   },
 ];
+
+export const kairosKinder = {
+  name: "Kairos Kinder",
+  tagline: "A joyful, half-day program for TK through 2nd grade",
+  ageRange: "TK – 2nd grade",
+  intro:
+    "Kairos Kinder is a half-day program for our youngest students — grouped not by age or grade, but by skill, so every child works right where they are. Small groups, hands-on learning, and a joyful start to the school day.",
+  groups: [
+    {
+      name: "Explorers",
+      body: "For students just starting to build foundational skills — lots of hands-on, playful discovery.",
+    },
+    {
+      name: "Navigators",
+      body: "For students building confidence and independence with core skills.",
+    },
+    {
+      name: "Discoverers",
+      body: "For students ready to stretch further and take on more challenge.",
+    },
+  ],
+  schedule: [
+    { label: "Core program", value: "Tuesday – Thursday, 9:00 AM – 12:00 PM" },
+    { label: "Monday enrichment (optional)", value: "Additional day, extra cost" },
+  ],
+  pricing: [
+    { label: "Core program", value: "$600 / month" },
+    { label: "Monday enrichment (optional)", value: "$250 / month" },
+  ],
+};

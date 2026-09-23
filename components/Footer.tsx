@@ -65,6 +65,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/kairos-kinder" className="transition-colors hover:text-cream">
+                  Kairos Kinder
+                </Link>
+              </li>
+              <li>
                 <Link href="/services/private-tutoring" className="transition-colors hover:text-cream">
                   Private Tutoring
                 </Link>

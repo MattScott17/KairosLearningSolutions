@@ -56,6 +56,11 @@ export const mainNav: NavItem[] = [
     href: "/services",
     children: [
       {
+        label: "Kairos Kinder",
+        href: "/kairos-kinder",
+        description: "Half-day program, TK – 2nd grade",
+      },
+      {
         label: "Private Tutoring",
         href: "/services/private-tutoring",
         description: "One-on-one help, all ages and subjects",

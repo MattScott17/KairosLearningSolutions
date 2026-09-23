@@ -5,13 +5,13 @@ import { ArrowRight, Check, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
-import { apex } from "@/lib/content";
+import { apex, registrationFees } from "@/lib/content";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "APEX — Full-Time Learning Program",
   description:
-    "APEX is a full-time alternative to traditional school for grades 3–8 in Salinas. Personalized, mastery-based academics using the 2 Hour Learning model, plus life skills and mentorship.",
+    "APEX is a full-time alternative to traditional school for grades 3–9 in Salinas. Personalized, mastery-based academics using the 2 Hour Learning model, plus life skills and mentorship.",
 };
 
 export default function ApexPage() {
@@ -158,6 +158,52 @@ export default function ApexPage() {
               ))}
             </ul>
           </Reveal>
+        </div>
+      </Section>
+
+      {/* Pricing tiers */}
+      <Section className="bg-sand/50">
+        <SectionHeading
+          center
+          eyebrow="Ways to enroll"
+          title="Choose academics, workshops, or both"
+        />
+        <div className="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-3">
+          {apex.tiers.map((tier, i) => (
+            <Reveal key={tier.name} delay={i * 0.08}>
+              <div
+                className={`h-full rounded-3xl p-7 text-center shadow-card ${
+                  i === 0 ? "bg-forest-800 text-cream" : "bg-cream"
+                }`}
+              >
+                <h3 className={`text-lg font-semibold ${i === 0 ? "text-cream" : ""}`}>
+                  {tier.name}
+                </h3>
+                <p
+                  className={`mt-2 font-display text-2xl font-semibold ${
+                    i === 0 ? "text-cream" : "text-forest-800"
+                  }`}
+                >
+                  {tier.price}
+                </p>
+                <p className={`prose-kairos mt-3 text-sm ${i === 0 ? "text-cream/80" : ""}`}>
+                  {tier.description}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        <div className="mx-auto mt-6 max-w-4xl rounded-2xl border border-forest-100 bg-cream/60 p-5">
+          <h3 className="text-sm font-semibold text-forest-800">Registration fees</h3>
+          <dl className="mt-3 space-y-2">
+            {registrationFees.map((fee) => (
+              <div key={fee.label} className="flex justify-between gap-4 text-sm">
+                <dt className="text-ink/60">{fee.label}</dt>
+                <dd className="text-right font-medium text-forest-800">{fee.value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </Section>
 

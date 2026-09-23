@@ -6,7 +6,7 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { ServiceCard } from "@/components/ServiceCard";
 import { CTASection } from "@/components/CTASection";
-import { services, enrichment } from "@/lib/content";
+import { services, enrichment, kairosKinder } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -32,9 +32,22 @@ export default function ServicesPage() {
           ))}
         </div>
 
-        {/* Enrichment + APEX callouts */}
-        <div className="mt-6 grid gap-6 md:grid-cols-2">
+        {/* Kairos Kinder + Enrichment + APEX callouts */}
+        <div className="mt-6 grid gap-6 md:grid-cols-3">
           <Reveal>
+            <div className="flex h-full flex-col rounded-3xl border border-forest-100 bg-sand/50 p-8 shadow-card">
+              <h3 className="text-xl font-semibold">{kairosKinder.name}</h3>
+              <p className="prose-kairos mt-3 flex-1 text-sm">{kairosKinder.tagline}.</p>
+              <Link
+                href="/kairos-kinder"
+                className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-forest-800"
+              >
+                Explore Kairos Kinder
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </Reveal>
+          <Reveal delay={0.08}>
             <div className="flex h-full flex-col rounded-3xl border border-forest-100 bg-sand/50 p-8 shadow-card">
               <h3 className="text-xl font-semibold">{enrichment.title}</h3>
               <p className="prose-kairos mt-3 flex-1 text-sm">{enrichment.body}</p>
@@ -44,12 +57,12 @@ export default function ServicesPage() {
               </Link>
             </div>
           </Reveal>
-          <Reveal delay={0.1}>
+          <Reveal delay={0.16}>
             <div className="flex h-full flex-col rounded-3xl bg-forest-800 p-8 text-cream shadow-card">
               <h3 className="text-xl font-semibold text-cream">APEX Full-Time Program</h3>
               <p className="mt-3 flex-1 text-sm text-cream/80">
                 Looking for more than support? APEX is our full-time alternative to traditional
-                school for grades 3–8 — personalized, mastery-based, and built to grow confident,
+                school for grades 3–9 — personalized, mastery-based, and built to grow confident,
                 independent learners.
               </p>
               <Link href="/apex" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-gold-400">
