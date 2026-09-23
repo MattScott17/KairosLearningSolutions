@@ -56,7 +56,8 @@ export const services: Service[] = [
       "Let us take the stress out of after-school homework. Choose how many days a week your student needs, drop them off after school, and pick them up when the work is done — reviewed and complete.",
     details: [
       "Open Monday through Thursday, 2:30–5:15 PM.",
-      "Monthly plans: 1 day/week $180, 2 days/week $250, 3 days/week $320, 4 days/week $360 — a second child in the same plan is discounted.",
+      "Monthly plans: 1 day/week $180, 2 days/week $250, 3 days/week $320, 4 days/week $360.",
+      "Second child on the same plan: $140, $180, $220, or $260 for the same day counts.",
       "No plan yet? Drop in for $20/hour or $50/day.",
       "Supportive educators keep students focused and on task, and homework gets checked before your student heads home.",
     ],
