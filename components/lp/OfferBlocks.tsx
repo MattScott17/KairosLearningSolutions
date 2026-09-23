@@ -16,13 +16,15 @@ export function Headline({ hero, className = "" }: { hero: VariantHero; classNam
   const { headline, highlight } = hero;
   const at = highlight ? headline.indexOf(highlight) : -1;
   return (
-    <h1 className={`text-[2.15rem] font-semibold leading-[1.08] sm:text-5xl ${className}`}>
+    <h1 className={`text-[2.15rem] font-semibold leading-[1.15] sm:text-5xl ${className}`}>
       {at < 0 ? (
         headline
       ) : (
         <>
           {headline.slice(0, at)}
-          <mark className="box-decoration-clone rounded-md bg-gold-500 px-1.5 text-ink">
+          {/* Gold band drawn shorter than the line box so it never touches the
+              lines above/below, even when the highlight wraps. */}
+          <mark className="box-decoration-clone bg-transparent bg-[linear-gradient(theme(colors.gold.500),theme(colors.gold.500))] bg-[length:100%_0.9em] bg-[position:0_58%] bg-no-repeat px-1.5 text-ink">
             {highlight}
           </mark>
           {headline.slice(at + highlight!.length)}
