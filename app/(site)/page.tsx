@@ -6,7 +6,7 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { ServiceCard } from "@/components/ServiceCard";
 import { CTASection } from "@/components/CTASection";
-import { services, values, stats, testimonials, apex } from "@/lib/content";
+import { services, values, stats, testimonials, apex, earlyLearners } from "@/lib/content";
 
 export default function HomePage() {
   return (
@@ -51,6 +51,35 @@ export default function HomePage() {
             </Reveal>
           ))}
         </div>
+
+        {/* Early Learners callout */}
+        <Reveal delay={0.24}>
+          <div className="mt-6 flex flex-col items-center gap-8 rounded-4xl border border-forest-100 bg-sand/50 p-8 shadow-card sm:flex-row sm:p-10">
+            <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-3xl shadow-soft sm:w-64">
+              <Image
+                src="/images/photo-3.jpg"
+                alt="Young students working together in a small skill-based group"
+                fill
+                sizes="(max-width: 640px) 100vw, 256px"
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <span className="inline-flex items-center gap-2 rounded-full bg-forest-100 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-forest-700">
+                {earlyLearners.ageRange}
+              </span>
+              <h3 className="mt-4 text-2xl font-semibold">{earlyLearners.name}</h3>
+              <p className="prose-kairos mt-2 text-sm">{earlyLearners.tagline}.</p>
+              <Link
+                href="/early-learners"
+                className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-forest-800"
+              >
+                Explore Early Learners
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </Reveal>
       </Section>
 
       {/* APEX feature band */}
