@@ -20,7 +20,20 @@ export async function POST(request: Request) {
     );
   }
 
-  const { name, email, phone, interest, message, company } = parsed.data;
+  const {
+    name,
+    email,
+    phone,
+    interest,
+    studentFirstName,
+    studentLastName,
+    studentSchool,
+    studentGrade,
+    availability,
+    updatesOptIn,
+    message,
+    company,
+  } = parsed.data;
 
   // Honeypot tripped — pretend success so bots don't learn anything.
   if (company) {
@@ -48,6 +61,8 @@ export async function POST(request: Request) {
     );
   }
 
+  const studentName = [studentFirstName, studentLastName].filter(Boolean).join(" ");
+
   const html = `
     <div style="font-family: system-ui, sans-serif; color: #26241d;">
       <h2 style="color:#3d5310;">New inquiry from the Kairos website</h2>
@@ -55,8 +70,19 @@ export async function POST(request: Request) {
       <p><strong>Email:</strong> ${escapeHtml(email)}</p>
       ${phone ? `<p><strong>Phone:</strong> ${escapeHtml(phone)}</p>` : ""}
       ${interest ? `<p><strong>Interested in:</strong> ${escapeHtml(interest)}</p>` : ""}
+      ${studentName ? `<p><strong>Student:</strong> ${escapeHtml(studentName)}</p>` : ""}
+      ${studentSchool ? `<p><strong>School:</strong> ${escapeHtml(studentSchool)}</p>` : ""}
+      ${studentGrade ? `<p><strong>Grade:</strong> ${escapeHtml(studentGrade)}</p>` : ""}
+      ${
+        availability && availability.length > 0
+          ? `<p><strong>Available:</strong> ${escapeHtml(availability.join(", "))}</p>`
+          : ""
+      }
       <p><strong>Message:</strong></p>
       <p style="white-space:pre-wrap;">${escapeHtml(message)}</p>
+      <p style="margin-top:16px; color:#6b7280; font-size:13px;">
+        ${updatesOptIn ? "✓ Opted in to updates about new classes and openings." : "Did not opt in to updates."}
+      </p>
     </div>
   `;
 

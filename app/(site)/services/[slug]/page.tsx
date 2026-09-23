@@ -6,7 +6,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/CTASection";
-import { services } from "@/lib/content";
+import { homeschoolPricing, registrationFees, services } from "@/lib/content";
 import { site } from "@/lib/site";
 
 type Params = { slug: string };
@@ -85,6 +85,53 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
             </Reveal>
           ))}
         </ul>
+
+        {slug === "homeschool-support" && (
+          <div className="mt-10 overflow-x-auto rounded-3xl border border-forest-100 bg-cream shadow-card">
+            <table className="w-full min-w-[480px] text-sm">
+              <thead>
+                <tr className="border-b border-forest-100 text-left">
+                  <th className="p-4 font-semibold text-forest-800">Hours / month</th>
+                  {(Object.keys(homeschoolPricing.levels) as (keyof typeof homeschoolPricing.levels)[]).map(
+                    (level) => (
+                      <th key={level} className="p-4 font-semibold text-forest-800">
+                        Level {level}
+                      </th>
+                    )
+                  )}
+                </tr>
+              </thead>
+              <tbody>
+                {homeschoolPricing.hoursPerMonth.map((hours, i) => (
+                  <tr key={hours} className={i % 2 === 1 ? "bg-sand/30" : ""}>
+                    <td className="p-4 text-ink/70">{hours} hrs</td>
+                    {(
+                      Object.keys(homeschoolPricing.levels) as (keyof typeof homeschoolPricing.levels)[]
+                    ).map((level) => (
+                      <td key={level} className="p-4 font-medium text-forest-800">
+                        ${homeschoolPricing.levels[level][i].toLocaleString()}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {(slug === "homeschool-support" || slug === "private-tutoring") && (
+          <div className="mt-6 rounded-2xl border border-forest-100 bg-sand/30 p-5">
+            <h3 className="text-sm font-semibold text-forest-800">Registration fees</h3>
+            <dl className="mt-3 space-y-2">
+              {registrationFees.map((fee) => (
+                <div key={fee.label} className="flex justify-between gap-4 text-sm">
+                  <dt className="text-ink/60">{fee.label}</dt>
+                  <dd className="text-right font-medium text-forest-800">{fee.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        )}
 
         <Link
           href="/services"

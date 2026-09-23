@@ -26,7 +26,7 @@ export default function FallClassesPage() {
       <PageHero
         eyebrow="2026 – 2027 School Year"
         title="Classes & Enrichment"
-        intro="Kairos hosts a variety of academic and enrichment courses throughout the year — a chance for students to hone a skill or feed their curiosity. Spaces fill quickly."
+        intro={`Kairos hosts a variety of academic and enrichment courses from ${site.fallClassesDateRange} — a chance for students to hone a skill or feed their curiosity. Spaces fill quickly.`}
       />
 
       <Section>
@@ -47,9 +47,15 @@ export default function FallClassesPage() {
                 View the course catalog
                 <ExternalLink className="h-4 w-4" />
               </a>
-              <Link href="/contact" className="btn-outline">
-                Ask about a class
-              </Link>
+              <a
+                href={site.fallRegistrationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline"
+              >
+                Register for a class
+                <ExternalLink className="h-4 w-4" />
+              </a>
             </div>
             <p className="mt-6 text-sm text-ink/60">
               Prefer to talk it through? Call{" "}
@@ -59,6 +65,15 @@ export default function FallClassesPage() {
               or email{" "}
               <a href={site.emailHref} className="link-underline">
                 {site.email}
+              </a>
+              . You can also download the{" "}
+              <a
+                href={site.schoolCalendarUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-underline"
+              >
+                2026–2027 school calendar
               </a>
               .
             </p>
@@ -71,8 +86,8 @@ export default function FallClassesPage() {
                 <div>
                   <dt className="font-semibold text-forest-800">How do I register?</dt>
                   <dd className="prose-kairos mt-1 text-sm">
-                    Book your spot online through the catalog, or call us and we'll get your student
-                    enrolled.
+                    Browse the catalog to find your class, then fill out the registration form —
+                    or call us and we'll get your student enrolled.
                   </dd>
                 </div>
                 <div>

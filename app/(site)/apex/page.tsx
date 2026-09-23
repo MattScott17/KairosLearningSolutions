@@ -5,7 +5,7 @@ import { ArrowRight, Check, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
-import { apex } from "@/lib/content";
+import { apex, registrationFees } from "@/lib/content";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -83,9 +83,38 @@ export default function ApexPage() {
               The result: students master more in less time, then invest the rest of the day in
               projects, life skills, and the kind of hands-on learning that builds real confidence.
             </p>
+            <p className="prose-kairos mt-4 rounded-2xl bg-forest-50 p-4 text-sm text-forest-800">
+              {apex.outcomesNote}
+            </p>
           </Reveal>
         </div>
       </Section>
+
+      {/* Traditional school vs. APEX */}
+      <section className="bg-forest-800 py-16 text-cream sm:py-20">
+        <div className="container-page">
+          <SectionHeading
+            center
+            eyebrow="The difference"
+            title={<span className="text-cream">Traditional school vs. APEX</span>}
+          />
+          <div className="mx-auto mt-12 max-w-2xl overflow-hidden rounded-3xl border border-cream/15">
+            <div className="grid grid-cols-2 bg-forest-900/40 text-xs font-semibold uppercase tracking-wider text-cream/70">
+              <div className="px-5 py-3">Traditional school</div>
+              <div className="px-5 py-3">APEX</div>
+            </div>
+            {apex.comparison.map((row, i) => (
+              <div
+                key={row.traditional}
+                className={`grid grid-cols-2 ${i % 2 === 0 ? "bg-cream/5" : ""}`}
+              >
+                <div className="px-5 py-4 text-sm text-cream/70">{row.traditional}</div>
+                <div className="px-5 py-4 text-sm font-medium text-cream">{row.apex}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Pillars */}
       <section className="bg-sand/60 py-16 sm:py-24">
@@ -129,6 +158,52 @@ export default function ApexPage() {
               ))}
             </ul>
           </Reveal>
+        </div>
+      </Section>
+
+      {/* Pricing tiers */}
+      <Section className="bg-sand/50">
+        <SectionHeading
+          center
+          eyebrow="Ways to enroll"
+          title="Choose academics, workshops, or both"
+        />
+        <div className="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-3">
+          {apex.tiers.map((tier, i) => (
+            <Reveal key={tier.name} delay={i * 0.08}>
+              <div
+                className={`h-full rounded-3xl p-7 text-center shadow-card ${
+                  i === 0 ? "bg-forest-800 text-cream" : "bg-cream"
+                }`}
+              >
+                <h3 className={`text-lg font-semibold ${i === 0 ? "text-cream" : ""}`}>
+                  {tier.name}
+                </h3>
+                <p
+                  className={`mt-2 font-display text-2xl font-semibold ${
+                    i === 0 ? "text-cream" : "text-forest-800"
+                  }`}
+                >
+                  {tier.price}
+                </p>
+                <p className={`prose-kairos mt-3 text-sm ${i === 0 ? "text-cream/80" : ""}`}>
+                  {tier.description}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        <div className="mx-auto mt-6 max-w-4xl rounded-2xl border border-forest-100 bg-cream/60 p-5">
+          <h3 className="text-sm font-semibold text-forest-800">Registration fees</h3>
+          <dl className="mt-3 space-y-2">
+            {registrationFees.map((fee) => (
+              <div key={fee.label} className="flex justify-between gap-4 text-sm">
+                <dt className="text-ink/60">{fee.label}</dt>
+                <dd className="text-right font-medium text-forest-800">{fee.value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </Section>
 

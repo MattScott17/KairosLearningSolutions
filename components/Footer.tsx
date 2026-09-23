@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { Instagram, Mail, MapPin, Phone } from "lucide-react";
+import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
 import { mainNav, site } from "@/lib/site";
 
 export function Footer() {
-  const year = 2026;
+  const year = new Date().getFullYear();
 
   return (
     <footer className="bg-forest-900 text-cream/80">
@@ -19,15 +19,26 @@ export function Footer() {
               Personalized tutoring, homeschool support, and full-time learning in Salinas —
               raising future world changers since {site.foundedYear}.
             </p>
-            <a
-              href={site.social.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-5 inline-flex h-10 w-10 items-center justify-center rounded-full bg-forest-800 text-cream transition-colors hover:bg-forest-700"
-              aria-label="Kairos on Instagram"
-            >
-              <Instagram className="h-5 w-5" />
-            </a>
+            <div className="mt-5 flex items-center gap-3">
+              <a
+                href={site.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-forest-800 text-cream transition-colors hover:bg-forest-700"
+                aria-label="Kairos on Instagram"
+              >
+                <Instagram className="h-5 w-5" />
+              </a>
+              <a
+                href={site.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-forest-800 text-cream transition-colors hover:bg-forest-700"
+                aria-label="Kairos on Facebook"
+              >
+                <Facebook className="h-5 w-5" />
+              </a>
+            </div>
           </div>
 
           {/* Explore */}
@@ -51,6 +62,11 @@ export function Footer() {
               <li>
                 <Link href="/apex" className="transition-colors hover:text-cream">
                   APEX Full-Time Program
+                </Link>
+              </li>
+              <li>
+                <Link href="/early-learners" className="transition-colors hover:text-cream">
+                  Early Learners
                 </Link>
               </li>
               <li>

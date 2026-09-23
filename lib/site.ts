@@ -8,8 +8,8 @@ export const site = {
     "Personalized tutoring, homeschool support, and full-time learning in Salinas, CA. Since 2020, Kairos has helped students of every age fall in love with learning.",
   url: "https://www.kairoslearningsolutions.com",
   foundedYear: 2020,
-  phone: "(831) 214-1810",
-  phoneHref: "tel:+18312141810",
+  phone: "(831) 500-2520",
+  phoneHref: "tel:+18315002520",
   email: "jackie@kairoslearningsolutions.com",
   emailHref: "mailto:jackie@kairoslearningsolutions.com",
   address: {
@@ -30,9 +30,16 @@ export const site = {
   ],
   social: {
     instagram: "https://instagram.com/kairoslearningsolutions",
+    facebook: "https://facebook.com/KairosLearningSolutions",
   },
   // External Google Doc catalog for the current school-year classes.
-  fallCatalogUrl: "https://www.kairoslearningsolutions.com/fall-26-classes",
+  fallCatalogUrl:
+    "https://docs.google.com/document/d/1jqaFeqlDoqSls0R64jbl9jZCzxNmYm6_-wjmyh9NbRg/edit?usp=sharing",
+  fallRegistrationUrl:
+    "https://docs.google.com/forms/d/e/1FAIpQLSe4JbmI3AB3jjjCsNns9YKmtvjzEwnGiw_nP6ikyrSzIihexA/viewform?usp=header",
+  schoolCalendarUrl:
+    "https://www.kairoslearningsolutions.com/_files/ugd/89a30a_c52f3d3ff26c4edb9169ed59a9097dc8.pdf",
+  fallClassesDateRange: "August 5 – December 18, 2026",
 } as const;
 
 export type NavItem = {
@@ -48,6 +55,11 @@ export const mainNav: NavItem[] = [
     label: "Services",
     href: "/services",
     children: [
+      {
+        label: "Early Learners",
+        href: "/early-learners",
+        description: "Half-day program, TK – 2nd grade",
+      },
       {
         label: "Private Tutoring",
         href: "/services/private-tutoring",

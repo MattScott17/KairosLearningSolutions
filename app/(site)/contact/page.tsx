@@ -7,7 +7,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Kairos Learning Solutions in Salinas, CA. Call (831) 214-1810, email us, or send a message and we'll respond within one business day.",
+    "Get in touch with Kairos Learning Solutions in Salinas, CA. Call (831) 500-2520, email us, or send a message and we'll respond within one business day.",
 };
 
 export default function ContactPage() {

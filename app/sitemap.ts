@@ -6,6 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
     "/apex",
+    "/early-learners",
     "/about",
     "/services",
     "/fall-classes",
@@ -21,6 +22,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${site.url}${route}`,
     lastModified,
     changeFrequency: route === "" ? "weekly" : "monthly",
-    priority: route === "" ? 1 : route === "/apex" ? 0.9 : 0.7,
+    priority: route === "" ? 1 : route === "/apex" || route === "/early-learners" ? 0.9 : 0.7,
   }));
 }
