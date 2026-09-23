@@ -34,9 +34,11 @@ test("landing variants never scroll sideways on a phone", async ({ page }) => {
   }
 });
 
-test("landing preview index links every variant", async ({ page }) => {
-  await page.goto("/lp");
-  for (const path of variants) {
+test("/landingpages directory links every landing page", async ({ page }) => {
+  await page.goto("/landingpages");
+  await expect(page.locator("h1")).toContainText(/landing pages/i);
+  const originals = ["/lp/tutoring", "/lp/tutoring-site", "/lp/apex", "/lp/apex-site"];
+  for (const path of [...variants, ...originals]) {
     await expect(page.locator(`a[href="${path}"]`)).toBeVisible();
   }
 });
@@ -45,3 +47,21 @@ test("unknown landing variant 404s", async ({ page }) => {
   const res = await page.goto("/lp/apex/z");
   expect(res?.status()).toBe(404);
 });
+
+// The primary CTA (a callback button or the form itself) must be on the first
+// screen at both phone and desktop sizes.
+for (const viewport of [
+  { name: "phone", width: 390, height: 844 },
+  { name: "desktop", width: 1440, height: 900 },
+]) {
+  test(`landing variants show a CTA above the fold on ${viewport.name}`, async ({ page }) => {
+    await page.setViewportSize(viewport);
+    for (const path of variants) {
+      await page.goto(path);
+      const cta = page.locator('a[href="#callback"], form#callback').first();
+      const box = await cta.boundingBox();
+      expect(box, `CTA on ${path}`).not.toBeNull();
+      expect(box!.y, `CTA top on ${path} (${viewport.name})`).toBeLessThan(viewport.height);
+    }
+  });
+}

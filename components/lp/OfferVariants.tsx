@@ -31,16 +31,26 @@ import {
 // form in front of the thumb immediately.
 
 const band = "py-14 sm:py-20";
+// Single column on phones; text + media side by side on desktop.
+const heroGrid = "container-narrow lg:grid lg:max-w-6xl lg:grid-cols-2 lg:items-center lg:gap-14";
 
-function HeroPhoto({ offer, className = "" }: { offer: ProgramOffer; className?: string }) {
+function HeroPhoto({
+  offer,
+  priority = false,
+  className = "",
+}: {
+  offer: ProgramOffer;
+  priority?: boolean;
+  className?: string;
+}) {
   return (
     <div className={`relative aspect-[4/3] overflow-hidden rounded-3xl shadow-soft ${className}`}>
       <Image
         src={offer.photo.src}
         alt={offer.photo.alt}
         fill
-        priority
-        sizes="(max-width: 768px) 100vw, 720px"
+        priority={priority}
+        sizes="(max-width: 1024px) 100vw, 560px"
         className="object-cover"
       />
     </div>
@@ -72,17 +82,19 @@ export function OfferVariant({ offer }: { offer: ProgramOffer }) {
   return (
     <>
       <section className="bg-forest-950 pb-14 pt-10 text-cream sm:pb-20 sm:pt-16">
-        <div className="container-narrow">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold-400">
-            {hero.eyebrow}
-          </p>
-          <Headline hero={hero} className="mt-4 text-cream" />
-          <p className="mt-5 text-lg leading-relaxed text-cream/85">{hero.subhead}</p>
-          <CtaPair offer={offer} dark className="mt-7" />
-          <div className="mt-9">
-            <CheckList items={offer.quickBullets} dark />
+        <div className={heroGrid}>
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold-400">
+              {hero.eyebrow}
+            </p>
+            <Headline hero={hero} className="mt-4 text-cream" />
+            <p className="mt-5 text-lg leading-relaxed text-cream/85">{hero.subhead}</p>
+            <CtaPair offer={offer} dark className="mt-7" />
+            <div className="mt-9">
+              <CheckList items={offer.quickBullets} dark />
+            </div>
           </div>
-          <HeroPhoto offer={offer} className="mt-9" />
+          <HeroPhoto offer={offer} priority className="mt-9 lg:mt-0" />
         </div>
       </section>
 
@@ -106,7 +118,7 @@ export function OfferVariant({ offer }: { offer: ProgramOffer }) {
       </section>
 
       <section className={band}>
-        <div className="container-narrow">
+        <div className="container-page">
           <Proof offer={offer} />
         </div>
       </section>
@@ -135,13 +147,16 @@ export function ProblemFixVariant({ offer }: { offer: ProgramOffer }) {
   return (
     <>
       <section className="pb-14 pt-8 sm:pb-20 sm:pt-14">
-        <div className="container-narrow">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-forest-600">
-            {hero.eyebrow}
-          </p>
-          <Headline hero={hero} className="mt-4" />
-          <p className="mt-5 text-lg leading-relaxed text-ink/80">{hero.subhead}</p>
-          <CtaPair offer={offer} className="mt-8" />
+        <div className={heroGrid}>
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-forest-600">
+              {hero.eyebrow}
+            </p>
+            <Headline hero={hero} className="mt-4" />
+            <p className="mt-5 text-lg leading-relaxed text-ink/80">{hero.subhead}</p>
+            <CtaPair offer={offer} className="mt-8" />
+          </div>
+          <HeroPhoto offer={offer} priority className="hidden lg:block" />
         </div>
       </section>
 
@@ -175,21 +190,23 @@ export function ProblemFixVariant({ offer }: { offer: ProgramOffer }) {
       </section>
 
       <section className={`bg-forest-900 text-cream ${band}`}>
-        <div className="container-narrow">
-          <HeroPhoto offer={offer} className="mb-8" />
-          <SectionTitle
-            eyebrow="Why Kairos"
-            title={`Helping Salinas families since ${site.foundedYear}`}
-            dark
-          />
-          <div className="mt-6">
-            <CheckList items={offer.form.proofPoints} dark />
+        <div className={heroGrid}>
+          <HeroPhoto offer={offer} className="mb-8 lg:mb-0" />
+          <div>
+            <SectionTitle
+              eyebrow="Why Kairos"
+              title={`Helping Salinas families since ${site.foundedYear}`}
+              dark
+            />
+            <div className="mt-6">
+              <CheckList items={offer.form.proofPoints} dark />
+            </div>
           </div>
         </div>
       </section>
 
       <section className={band}>
-        <div className="container-narrow">
+        <div className="container-page">
           <Proof offer={offer} />
           <div className="mt-8">
             <RiskReversal offer={offer} />
@@ -221,23 +238,25 @@ export function ShortVariant({ offer }: { offer: ProgramOffer }) {
   return (
     <>
       <section className="bg-forest-950 pb-12 pt-8 text-cream sm:pb-16 sm:pt-12">
-        <div className="container-narrow">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold-400">
-            {hero.eyebrow}
-          </p>
-          <Headline hero={hero} className="mt-3 text-cream" />
-          <div className="mt-5">
-            <CheckList items={offer.quickBullets} dark />
+        <div className={heroGrid}>
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold-400">
+              {hero.eyebrow}
+            </p>
+            <Headline hero={hero} className="mt-3 text-cream" />
+            <div className="mt-5">
+              <CheckList items={offer.quickBullets} dark />
+            </div>
+            <p className="mt-6 text-sm text-cream/75">{hero.subhead}</p>
           </div>
-          <p className="mt-6 text-sm text-cream/75">{hero.subhead}</p>
-          <div className="mt-4">
+          <div className="mt-4 lg:mt-0">
             <CallbackForm copy={offer.form} />
           </div>
         </div>
       </section>
 
       <section className={band}>
-        <div className="container-narrow">
+        <div className="container-page">
           <Proof offer={offer} />
         </div>
       </section>

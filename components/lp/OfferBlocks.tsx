@@ -10,7 +10,7 @@ import type { ProgramOffer, VariantHero } from "@/lib/landing-variants";
 // target: single column, large type, full-width thumb-sized buttons that go
 // sm:w-auto on larger screens.
 
-const bigBtn = "h-14 w-full text-base sm:w-auto sm:px-8";
+const bigBtn = "h-14 w-full whitespace-nowrap text-base sm:w-auto sm:px-8";
 
 export function Headline({ hero, className = "" }: { hero: VariantHero; className?: string }) {
   const { headline, highlight } = hero;
@@ -43,7 +43,7 @@ export function CtaPair({
 }) {
   return (
     <div className={className}>
-      <div className="flex flex-col gap-3 sm:flex-row">
+      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <a href="#callback" className={`${dark ? "btn-accent" : "btn-primary"} ${bigBtn}`}>
           {offer.form.ctaLabel}
           <ArrowDown className="h-4 w-4" />
