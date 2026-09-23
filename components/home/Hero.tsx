@@ -102,7 +102,7 @@ export function Hero() {
           </div>
           <div className="absolute -right-3 top-8 hidden rounded-2xl bg-forest-800 px-4 py-3 text-cream shadow-soft sm:block">
             <p className="text-xs uppercase tracking-wide text-forest-200">Now enrolling</p>
-            <p className="font-display text-lg font-semibold">APEX · Grades 3–9</p>
+            <p className="font-display text-lg font-semibold">APEX · Grades 3–8</p>
           </div>
         </motion.div>
       </div>

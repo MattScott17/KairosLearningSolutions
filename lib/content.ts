@@ -126,7 +126,7 @@ export const apex = {
   tagline: "A full-time learning program, reimagined",
   intro:
     "APEX is a full-time alternative to traditional school — a small-group program where your child is seen, supported, and challenged. We combine personalized academics, real life skills, and hands-on learning so students grow in both ability and confidence.",
-  gradeRange: "Grades 3 – 9",
+  gradeRange: "Grades 3 – 8",
   tuition: {
     monthly: "$1,800 / month",
     annual: "$18,000 / year",

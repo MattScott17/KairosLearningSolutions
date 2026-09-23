@@ -11,7 +11,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "APEX — Full-Time Learning Program",
   description:
-    "APEX is a full-time alternative to traditional school for grades 3–9 in Salinas. Personalized, mastery-based academics using the 2 Hour Learning model, plus life skills and mentorship.",
+    "APEX is a full-time alternative to traditional school for grades 3–8 in Salinas. Personalized, mastery-based academics using the 2 Hour Learning model, plus life skills and mentorship.",
 };
 
 export default function ApexPage() {

@@ -49,7 +49,7 @@ export default function ServicesPage() {
               <h3 className="text-xl font-semibold text-cream">APEX Full-Time Program</h3>
               <p className="mt-3 flex-1 text-sm text-cream/80">
                 Looking for more than support? APEX is our full-time alternative to traditional
-                school for grades 3–9 — personalized, mastery-based, and built to grow confident,
+                school for grades 3–8 — personalized, mastery-based, and built to grow confident,
                 independent learners.
               </p>
               <Link href="/apex" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-gold-400">

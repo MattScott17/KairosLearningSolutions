@@ -8,8 +8,8 @@ export const site = {
     "Personalized tutoring, homeschool support, and full-time learning in Salinas, CA. Since 2020, Kairos has helped students of every age fall in love with learning.",
   url: "https://www.kairoslearningsolutions.com",
   foundedYear: 2020,
-  phone: "(831) 214-1810",
-  phoneHref: "tel:+18312141810",
+  phone: "(831) 500-2520",
+  phoneHref: "tel:+18315002520",
   email: "jackie@kairoslearningsolutions.com",
   emailHref: "mailto:jackie@kairoslearningsolutions.com",
   address: {

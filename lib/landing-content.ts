@@ -14,7 +14,7 @@ export type LandingCopy = {
 
 export const apexLanding: LandingCopy = {
   program: "APEX",
-  eyebrow: "Now enrolling — Grades 3–9",
+  eyebrow: "Now enrolling — Grades 3–8",
   headline: "A full-time alternative to traditional school, built around your child.",
   subhead:
     "APEX is a small-group, mastery-based program in Salinas — students master core academics in focused, personalized sessions, then spend the rest of the day building real-world skills and confidence.",
