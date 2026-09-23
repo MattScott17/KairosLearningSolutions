@@ -24,7 +24,7 @@ export function Headline({ hero, className = "" }: { hero: VariantHero; classNam
           {headline.slice(0, at)}
           {/* Gold band drawn shorter than the line box so it never touches the
               lines above/below, even when the highlight wraps. */}
-          <mark className="box-decoration-clone bg-transparent bg-[linear-gradient(theme(colors.gold.500),theme(colors.gold.500))] bg-[length:100%_0.9em] bg-[position:0_58%] bg-no-repeat px-1.5 text-ink">
+          <mark className="box-decoration-clone bg-transparent bg-[linear-gradient(theme(colors.gold.500),theme(colors.gold.500))] bg-[length:100%_1em] bg-[position:0_60%] bg-no-repeat px-1.5 text-ink">
             {highlight}
           </mark>
           {headline.slice(at + highlight!.length)}
