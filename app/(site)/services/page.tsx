@@ -6,7 +6,7 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { ServiceCard } from "@/components/ServiceCard";
 import { CTASection } from "@/components/CTASection";
-import { services, enrichment, kairosKinder } from "@/lib/content";
+import { services, enrichment, earlyLearners } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -32,17 +32,17 @@ export default function ServicesPage() {
           ))}
         </div>
 
-        {/* Kairos Kinder + Enrichment + APEX callouts */}
+        {/* Early Learners + Enrichment + APEX callouts */}
         <div className="mt-6 grid gap-6 md:grid-cols-3">
           <Reveal>
             <div className="flex h-full flex-col rounded-3xl border border-forest-100 bg-sand/50 p-8 shadow-card">
-              <h3 className="text-xl font-semibold">{kairosKinder.name}</h3>
-              <p className="prose-kairos mt-3 flex-1 text-sm">{kairosKinder.tagline}.</p>
+              <h3 className="text-xl font-semibold">{earlyLearners.name}</h3>
+              <p className="prose-kairos mt-3 flex-1 text-sm">{earlyLearners.tagline}.</p>
               <Link
-                href="/kairos-kinder"
+                href="/early-learners"
                 className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-forest-800"
               >
-                Explore Kairos Kinder
+                Explore Early Learners
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

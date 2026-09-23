@@ -404,24 +404,24 @@ export const summerPrograms: SummerProgram[] = [
   },
 ];
 
-export const kairosKinder = {
-  name: "Kairos Kinder",
-  tagline: "A joyful, half-day program for TK through 2nd grade",
+export const earlyLearners = {
+  name: "Early Learners",
+  tagline: "Grouped by skill, not by grade — so every student can go further, or go at their own pace",
   ageRange: "TK – 2nd grade",
   intro:
-    "Kairos Kinder is a half-day program for our youngest students — grouped not by age or grade, but by skill, so every child works right where they are. Small groups, hands-on learning, and a joyful start to the school day.",
+    "For our youngest students, we group by skill instead of age or grade. A child who's ready to stretch further can — and a child who needs more time gets it, without ever feeling behind. Small groups, hands-on learning, and a half-day program built around how each student actually learns.",
   groups: [
     {
       name: "Explorers",
-      body: "For students just starting to build foundational skills — lots of hands-on, playful discovery.",
+      body: "For students just starting to build foundational skills — lots of hands-on, playful discovery, at a pace that feels right for them.",
     },
     {
       name: "Navigators",
-      body: "For students building confidence and independence with core skills.",
+      body: "For students building confidence and independence with core skills, moving forward as they master each one.",
     },
     {
       name: "Discoverers",
-      body: "For students ready to stretch further and take on more challenge.",
+      body: "For students ready to stretch further — more challenge, more independence, as fast as they're ready to go.",
     },
   ],
   schedule: [

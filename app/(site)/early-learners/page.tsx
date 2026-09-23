@@ -6,19 +6,19 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/CTASection";
-import { kairosKinder, registrationFees } from "@/lib/content";
+import { earlyLearners, registrationFees } from "@/lib/content";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Kairos Kinder",
+  title: "Early Learners",
   description:
-    "Kairos Kinder is a half-day program for TK through 2nd grade in Salinas, CA — small skill-based groups, hands-on learning, Tuesday through Thursday mornings.",
+    "For TK through 2nd grade in Salinas, CA — grouped by skill instead of age or grade, so every student can stretch further or learn at their own pace. Small groups, Tuesday through Thursday mornings.",
 };
 
-export default function KairosKinderPage() {
+export default function EarlyLearnersPage() {
   return (
     <>
-      <PageHero eyebrow={kairosKinder.ageRange} title={kairosKinder.name} intro={kairosKinder.intro}>
+      <PageHero eyebrow={earlyLearners.ageRange} title={earlyLearners.name} intro={earlyLearners.intro}>
         <div className="flex flex-col gap-3 sm:flex-row">
           <Link href="/contact" className="btn-accent">
             Book a tour &amp; conversation
@@ -40,13 +40,13 @@ export default function KairosKinderPage() {
           <div className="py-8 text-center sm:px-6">
             <p className="text-xs font-semibold uppercase tracking-wider text-forest-600">Ages</p>
             <p className="mt-2 font-display text-2xl font-semibold text-forest-800">
-              {kairosKinder.ageRange}
+              {earlyLearners.ageRange}
             </p>
           </div>
           <div className="py-8 text-center sm:px-6">
             <p className="text-xs font-semibold uppercase tracking-wider text-forest-600">Core price</p>
             <p className="mt-2 font-display text-2xl font-semibold text-forest-800">
-              {kairosKinder.pricing[0].value}
+              {earlyLearners.pricing[0].value}
             </p>
           </div>
           <div className="py-8 text-center sm:px-6">
@@ -64,7 +64,7 @@ export default function KairosKinderPage() {
             <div className="relative aspect-[4/3] overflow-hidden rounded-4xl shadow-soft">
               <Image
                 src="/images/photo-3.jpg"
-                alt="Young Kairos Kinder students working together"
+                alt="Young students working together in a small skill-based group"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
@@ -81,7 +81,7 @@ export default function KairosKinderPage() {
         </div>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-3">
-          {kairosKinder.groups.map((group, i) => (
+          {earlyLearners.groups.map((group, i) => (
             <Reveal key={group.name} delay={i * 0.08}>
               <div className="h-full rounded-3xl border border-forest-100 bg-cream p-7 text-center shadow-card">
                 <h3 className="text-lg font-semibold">{group.name}</h3>
@@ -102,7 +102,7 @@ export default function KairosKinderPage() {
                 Schedule
               </h3>
               <dl className="mt-4 space-y-3">
-                {kairosKinder.schedule.map((s) => (
+                {earlyLearners.schedule.map((s) => (
                   <div key={s.label}>
                     <dt className="text-xs text-ink/60">{s.label}</dt>
                     <dd className="text-sm font-medium text-forest-800">{s.value}</dd>
@@ -115,7 +115,7 @@ export default function KairosKinderPage() {
                 Pricing
               </h3>
               <dl className="mt-4 space-y-3">
-                {kairosKinder.pricing.map((p) => (
+                {earlyLearners.pricing.map((p) => (
                   <div key={p.label}>
                     <dt className="text-xs text-ink/60">{p.label}</dt>
                     <dd className="text-sm font-medium text-forest-800">{p.value}</dd>
@@ -140,7 +140,7 @@ export default function KairosKinderPage() {
       </section>
 
       <CTASection
-        title="Curious if Kairos Kinder is right for your student?"
+        title="Curious if Early Learners is right for your student?"
         intro="Book a tour, meet the team, and see the space — then decide together whether it's the right fit."
         primaryLabel="Book a tour"
         primaryHref="/contact"

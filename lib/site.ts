@@ -56,8 +56,8 @@ export const mainNav: NavItem[] = [
     href: "/services",
     children: [
       {
-        label: "Kairos Kinder",
-        href: "/kairos-kinder",
+        label: "Early Learners",
+        href: "/early-learners",
         description: "Half-day program, TK – 2nd grade",
       },
       {
