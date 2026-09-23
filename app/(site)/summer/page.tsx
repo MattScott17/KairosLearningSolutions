@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Palette, Sun, Tent, Users } from "lucide-react";
+import { ArrowRight, Mail, Palette, Phone, Sun, Tent, Users } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/CTASection";
-import { site } from "@/lib/site";
+import { summerPrograms } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Summer Programs",
@@ -78,32 +78,68 @@ export default function SummerPage() {
         </div>
       </Section>
 
-      <section className="bg-sand/60 py-16">
+      <section className="bg-sand/60 py-16 sm:py-24">
         <div className="container-page">
-          <div className="rounded-4xl bg-cream p-8 shadow-card sm:p-12">
-            <div className="grid items-center gap-8 lg:grid-cols-2">
-              <div>
-                <SectionHeading
-                  eyebrow="2026 programs"
-                  title="Summer schedules open in spring"
-                  intro="Specific camps, dates, and pricing for Summer 2026 are announced each spring and fill quickly. Want to be first to know? Reach out and we'll add you to the list."
-                />
-              </div>
-              <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
-                <Link href="/contact" className="btn-primary">
-                  Join the summer list
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <a
-                  href={site.social.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-outline"
-                >
-                  Follow for updates
-                </a>
-              </div>
-            </div>
+          <SectionHeading center eyebrow="Summer 2026" title="This summer's programs" />
+          <div className="mt-12 grid gap-8 lg:grid-cols-2">
+            {summerPrograms.map((program, i) => (
+              <Reveal key={program.slug} delay={i * 0.08}>
+                <div className="flex h-full flex-col rounded-3xl bg-cream p-8 shadow-card">
+                  <h3 className="text-2xl font-semibold">{program.title}</h3>
+                  <p className="mt-1 text-sm font-medium text-forest-600">{program.dates}</p>
+                  <p className="prose-kairos mt-3 text-sm">{program.description}</p>
+
+                  <dl className="mt-5 space-y-1.5 border-t border-forest-100 pt-4">
+                    {program.schedule.map((s) => (
+                      <div key={s.label} className="flex justify-between gap-4 text-sm">
+                        <dt className="text-ink/60">{s.label}</dt>
+                        <dd className="text-right font-medium text-forest-800">{s.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+
+                  <dl className="mt-4 space-y-1.5 border-t border-forest-100 pt-4">
+                    {program.pricing.map((p) => (
+                      <div key={p.label} className="flex justify-between gap-4 text-sm">
+                        <dt className="text-ink/60">{p.label}</dt>
+                        <dd className="text-right font-medium text-forest-800">{p.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+
+                  {program.hostedBy && (
+                    <p className="mt-4 text-xs text-ink/50">
+                      Hosted by {program.hostedBy}
+                      {program.contactEmail && (
+                        <>
+                          {" · "}
+                          <a href={`mailto:${program.contactEmail}`} className="link-underline">
+                            <Mail className="inline h-3 w-3" /> {program.contactEmail}
+                          </a>
+                        </>
+                      )}
+                      {program.contactPhone && (
+                        <>
+                          {" · "}
+                          <a
+                            href={`tel:${program.contactPhone.replace(/[^\d+]/g, "")}`}
+                            className="link-underline"
+                          >
+                            <Phone className="inline h-3 w-3" /> {program.contactPhone}
+                          </a>
+                        </>
+                      )}
+                    </p>
+                  )}
+                  {program.note && <p className="mt-4 text-xs text-ink/50">{program.note}</p>}
+
+                  <Link href="/contact" className="btn-primary mt-6 self-start">
+                    Reserve a spot
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>

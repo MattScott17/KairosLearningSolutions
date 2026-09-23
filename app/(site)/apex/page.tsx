@@ -83,9 +83,38 @@ export default function ApexPage() {
               The result: students master more in less time, then invest the rest of the day in
               projects, life skills, and the kind of hands-on learning that builds real confidence.
             </p>
+            <p className="prose-kairos mt-4 rounded-2xl bg-forest-50 p-4 text-sm text-forest-800">
+              {apex.outcomesNote}
+            </p>
           </Reveal>
         </div>
       </Section>
+
+      {/* Traditional school vs. APEX */}
+      <section className="bg-forest-800 py-16 text-cream sm:py-20">
+        <div className="container-page">
+          <SectionHeading
+            center
+            eyebrow="The difference"
+            title={<span className="text-cream">Traditional school vs. APEX</span>}
+          />
+          <div className="mx-auto mt-12 max-w-2xl overflow-hidden rounded-3xl border border-cream/15">
+            <div className="grid grid-cols-2 bg-forest-900/40 text-xs font-semibold uppercase tracking-wider text-cream/70">
+              <div className="px-5 py-3">Traditional school</div>
+              <div className="px-5 py-3">APEX</div>
+            </div>
+            {apex.comparison.map((row, i) => (
+              <div
+                key={row.traditional}
+                className={`grid grid-cols-2 ${i % 2 === 0 ? "bg-cream/5" : ""}`}
+              >
+                <div className="px-5 py-4 text-sm text-cream/70">{row.traditional}</div>
+                <div className="px-5 py-4 text-sm font-medium text-cream">{row.apex}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Pillars */}
       <section className="bg-sand/60 py-16 sm:py-24">

@@ -38,12 +38,12 @@ export const services: Service[] = [
       "In-person sessions at our Salinas center or online — whatever fits your family.",
       "Every subject, every level: early literacy, math, writing, world languages, test prep, and AP coursework.",
       "We match each student with a tutor based on subject, learning style, and personality.",
-      "Flexible scheduling with progress you can actually see.",
+      "$70–$120 per hour, depending on subject and tutor — set during your consultation with Jackie.",
     ],
     highlights: [
       { label: "Format", value: "In-person & online" },
       { label: "Ages", value: "All ages" },
-      { label: "Getting started", value: "Free consultation" },
+      { label: "Pricing", value: "$70–$120 / hour" },
     ],
     cta: "Book a consultation",
   },
@@ -56,14 +56,14 @@ export const services: Service[] = [
       "Let us take the stress out of after-school homework. Choose how many days a week your student needs, drop them off after school, and pick them up when the work is done — reviewed and complete.",
     details: [
       "Open Monday through Thursday, 2:30–5:15 PM.",
-      "Choose the number of days per week that fit your student's needs.",
-      "Supportive educators keep students focused and on task.",
-      "Homework gets checked before your student heads home.",
+      "Monthly plans: 1 day/week $180, 2 days/week $250, 3 days/week $320, 4 days/week $360 — a second child in the same plan is discounted.",
+      "No plan yet? Drop in for $20/hour or $50/day.",
+      "Supportive educators keep students focused and on task, and homework gets checked before your student heads home.",
     ],
     highlights: [
       { label: "Days", value: "Mon – Thu" },
       { label: "Time", value: "2:30 – 5:15 PM" },
-      { label: "Flexibility", value: "Pick your days" },
+      { label: "Pricing", value: "From $180 / mo" },
     ],
     cta: "Reserve a spot",
   },
@@ -75,14 +75,15 @@ export const services: Service[] = [
     summary:
       "Every homeschooling journey is unique. Whether you want full curriculum planning and teaching or simply a flexible workspace for independent study, our tiered packages meet you where you are.",
     details: [
-      "Support levels A–D with flexible hourly packages at a range of price points.",
-      "Full curriculum planning, teaching, and assessment — or à la carte help where you need it.",
-      "A calm, resource-rich space for independent study and group learning.",
-      "Guidance from credentialed educators who know California homeschool paths.",
+      "Level A — a safe, supportive space with socialization and occasional instruction or tutoring.",
+      "Level B — full assessment, planning, and instruction at Kairos, plus time and space to complete work.",
+      "Level C — everything in Level B, plus private tutoring, for a highly individualized plan.",
+      "Level D — every Kairos benefit, for families who want a fully custom program built around their student.",
+      "Month-to-month memberships, low student-to-teacher ratios, and flexible hourly packages — no long-term commitment required.",
     ],
     highlights: [
       { label: "Structure", value: "Levels A – D" },
-      { label: "Packages", value: "Flexible hours" },
+      { label: "Commitment", value: "Month-to-month" },
       { label: "Support", value: "As much as you need" },
     ],
     cta: "Find your package",
@@ -162,6 +163,14 @@ export const apex = {
     "Life-skills and hands-on, project-based learning",
     "Mentorship that develops confidence and independence",
   ],
+  outcomesNote:
+    "Mid-year academic data shows APEX students outperforming national growth norms, with achievement gains from fall to winter across a wide range of learners.",
+  comparison: [
+    { traditional: "One pace for everyone", apex: "Personalized pace and progress" },
+    { traditional: "Limited flexibility", apex: "Flexible, responsive structure" },
+    { traditional: "Passive learning", apex: "Active, engaging learning" },
+    { traditional: "Hard to feel known", apex: "Strong relationships and support" },
+  ],
 };
 
 export type TeamMember = {
@@ -184,17 +193,61 @@ export const leadership: TeamMember[] = [
 ];
 
 export const team: TeamMember[] = [
-  { name: "Michelle Ball", role: "Teacher" },
-  { name: "Lisa Bleicher", role: "Teacher" },
-  { name: "Lori Grainger", role: "Teacher" },
-  { name: "Brady Berg", role: "Tutor" },
-  { name: "Ethan Berg", role: "Tutor" },
-  { name: "Colin McCardell", role: "Tutor" },
-  { name: "Saara Kriplani", role: "Tutor" },
-  { name: "Trisha Hill", role: "Subject Specialist" },
-  { name: "Daryl Lyon", role: "Subject Specialist" },
-  { name: "Laura Palmer", role: "Subject Specialist" },
-  { name: "Mendy Amaral", role: "Operations" },
+  {
+    name: "Michelle Ball",
+    role: "Teacher",
+    bio: "Multiple Subject Credential with a Child Development emphasis from CSU Chico, and 17 years of classroom experience.",
+  },
+  {
+    name: "Lisa Bleicher",
+    role: "Teacher",
+    bio: "38 years of kindergarten teaching experience before recently retiring — now bringing that same warmth to Kairos.",
+  },
+  {
+    name: "Lori Grainger",
+    role: "Teacher",
+    bio: "27 years of teaching experience, primarily in 2nd grade, before retiring from the classroom.",
+  },
+  {
+    name: "Brady Berg",
+    role: "Tutor",
+    bio: "B.S. in Biomedical Engineering and Mathematics from Cal Poly SLO, currently pursuing a Ph.D. in Mathematical, Computational Systems Biology at UC Irvine.",
+  },
+  {
+    name: "Ethan Berg",
+    role: "Online Tutor",
+    bio: "A recent college graduate tutoring elementary through high school math and science.",
+  },
+  {
+    name: "Colin McCardell",
+    role: "Tutor",
+    bio: "Math major at CSU Monterey Bay, tutoring through Calculus 3 with a focus on applied mathematics.",
+  },
+  {
+    name: "Saara Kriplani",
+    role: "Online Tutor",
+    bio: "B.S. in Bioengineering: Bioinformatics from UC San Diego, teaching math from preschool through calculus.",
+  },
+  {
+    name: "Trisha Hill",
+    role: "Subject Specialist",
+    bio: "15 years of teaching experience, full-time at New Republic Elementary in Salinas — nominated for Monterey County Teacher of the Year in 2022.",
+  },
+  {
+    name: "Daryl Lyon",
+    role: "Subject Specialist",
+    bio: "BA in English Education from Southern Oregon University and 24 years teaching grades 11–12, with an emphasis on writing and critical thinking.",
+  },
+  {
+    name: "Laura Palmer",
+    role: "Subject Specialist",
+    bio: "Certified Bilingual Teacher with a BA in Spanish and 28 years of experience, including Dual Immersion and bilingual fine arts instruction.",
+  },
+  {
+    name: "Mendy Amaral",
+    role: "Operations",
+    bio: "A lifelong Salinas resident and 20+ year community volunteer who keeps everything at Kairos running.",
+  },
 ];
 
 export type Testimonial = {
@@ -225,12 +278,12 @@ export const testimonials: Testimonial[] = [
     role: "High School Parent",
   },
   {
-    quote: "My child has enthusiasm and excitement to go to school and learn.",
+    quote: "Kairos has been our saving grace this past year!",
     author: "A.R.",
     role: "Elementary Parent",
   },
   {
-    quote: "Kairos is the place I look forward to every day! It is now one of my happy places!",
+    quote: "Kairos is the place I look forward to everyday!",
     author: "E.F.",
     role: "High School Sophomore",
   },
@@ -261,4 +314,56 @@ export const stats = [
   { icon: Users, value: "13+", label: "Educators & tutors" },
   { icon: Lightbulb, value: "All ages", label: "Early reading to AP" },
   { icon: GraduationCap, value: "30+ yrs", label: "Lead teacher experience" },
+];
+
+export type SummerProgram = {
+  slug: string;
+  title: string;
+  dates: string;
+  description: string;
+  schedule: { label: string; value: string }[];
+  pricing: { label: string; value: string }[];
+  note?: string;
+  hostedBy?: string;
+  contactEmail?: string;
+  contactPhone?: string;
+};
+
+export const summerPrograms: SummerProgram[] = [
+  {
+    slug: "back-to-school-boot-camp",
+    title: "Back-to-School Boot Camp",
+    dates: "July 20 – 23 & July 27 – 30, 2026",
+    description:
+      "Focused sessions in reading, math, and language arts — plus enrichment activities — designed to beat the summer slide and start the school year strong.",
+    schedule: [
+      { label: "Morning session", value: "9:30 AM – 12:00 PM" },
+      { label: "Afternoon session", value: "1:00 – 3:30 PM" },
+    ],
+    pricing: [
+      { label: "1 session (one week, 4 sessions)", value: "$185" },
+      { label: "Full day, one week (8 sessions)", value: "$340" },
+      { label: "1 session, both weeks (8 sessions)", value: "$350" },
+      { label: "Full day, both weeks (16 sessions)", value: "$650" },
+      { label: "Individual sessions", value: "$50 each" },
+    ],
+    note: "Spots are limited — reach out to reserve a spot.",
+  },
+  {
+    slug: "love-note-music-camp",
+    title: "Love Note Music Camp",
+    dates: "June 22 – 25 & June 29 – July 2, 2026",
+    description:
+      "A hosted music camp with experienced instructor Jenny Cogswell — violin, ukulele, guitar, and voice. All skill levels welcome, and instruments are available to borrow.",
+    schedule: [
+      { label: "Violin — Jun 22–25", value: "9:00 AM – 12:00 PM" },
+      { label: "Ukulele — Jun 22–25", value: "1:00 – 4:00 PM" },
+      { label: "Guitar — Jun 29–Jul 2", value: "9:00 AM – 12:00 PM" },
+      { label: "Voice — Jun 29–Jul 2", value: "1:00 – 4:00 PM" },
+    ],
+    pricing: [{ label: "Earlybird (register by May 31)", value: "$240" }],
+    hostedBy: "Love Note Music Studio",
+    contactEmail: "lovenotemusicstudio@gmail.com",
+    contactPhone: "(831) 288-8221",
+  },
 ];

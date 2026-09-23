@@ -123,16 +123,17 @@ export default function AboutPage() {
               </span>
             }
           />
-          <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          <div className="mt-12 grid gap-4 sm:grid-cols-2">
             {team.map((member, i) => (
               <Reveal key={member.name} delay={(i % 4) * 0.06}>
-                <div className="flex h-full items-center gap-3 rounded-2xl bg-forest-800/70 p-4">
+                <div className="flex h-full gap-4 rounded-2xl bg-forest-800/70 p-5">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-forest-700 text-sm font-semibold text-cream">
                     {initials(member.name)}
                   </div>
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-cream">{member.name}</p>
-                    <p className="truncate text-xs text-cream/60">{member.role}</p>
+                    <p className="text-sm font-semibold text-cream">{member.name}</p>
+                    <p className="text-xs text-cream/60">{member.role}</p>
+                    {member.bio && <p className="mt-2 text-sm text-cream/80">{member.bio}</p>}
                   </div>
                 </div>
               </Reveal>

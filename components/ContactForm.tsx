@@ -1,7 +1,7 @@
 "use client";
 
 import { CheckCircle2, Loader2, Send } from "lucide-react";
-import { contactSchema, interestOptions } from "@/lib/contact-schema";
+import { availabilityDays, contactSchema, interestOptions } from "@/lib/contact-schema";
 import { site } from "@/lib/site";
 import { useFormSubmit } from "@/lib/useFormSubmit";
 
@@ -11,7 +11,11 @@ export function ContactForm() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    await submit(Object.fromEntries(formData.entries()));
+    await submit({
+      ...Object.fromEntries(formData.entries()),
+      availability: formData.getAll("availability"),
+      updatesOptIn: formData.get("updatesOptIn") === "on",
+    });
   }
 
   if (status === "success") {
@@ -109,6 +113,79 @@ export function ContactForm() {
         </div>
       </div>
 
+      <div className="rounded-xl border border-forest-100 bg-sand/30 p-4 sm:p-5">
+        <p className="text-sm font-medium text-ink/80">
+          About your student <span className="text-ink/40">(optional, helps us match you faster)</span>
+        </p>
+        <div className="mt-3 grid gap-4 sm:grid-cols-2">
+          <div>
+            <label htmlFor="studentFirstName" className="mb-1.5 block text-xs font-medium text-ink/70">
+              Student's first name
+            </label>
+            <input
+              id="studentFirstName"
+              name="studentFirstName"
+              type="text"
+              className={`${inputBase} border-forest-200`}
+              placeholder="First name"
+            />
+          </div>
+          <div>
+            <label htmlFor="studentLastName" className="mb-1.5 block text-xs font-medium text-ink/70">
+              Student's last name
+            </label>
+            <input
+              id="studentLastName"
+              name="studentLastName"
+              type="text"
+              className={`${inputBase} border-forest-200`}
+              placeholder="Last name"
+            />
+          </div>
+          <div>
+            <label htmlFor="studentSchool" className="mb-1.5 block text-xs font-medium text-ink/70">
+              School
+            </label>
+            <input
+              id="studentSchool"
+              name="studentSchool"
+              type="text"
+              className={`${inputBase} border-forest-200`}
+              placeholder="Current school"
+            />
+          </div>
+          <div>
+            <label htmlFor="studentGrade" className="mb-1.5 block text-xs font-medium text-ink/70">
+              Grade
+            </label>
+            <input
+              id="studentGrade"
+              name="studentGrade"
+              type="text"
+              className={`${inputBase} border-forest-200`}
+              placeholder="e.g. 5th grade"
+            />
+          </div>
+        </div>
+
+        <p className="mt-4 text-xs font-medium text-ink/70">
+          If you're interested in Homework Club, which days work best?
+        </p>
+        <div className="mt-2 flex flex-wrap gap-x-5 gap-y-2">
+          {availabilityDays.map((day) => (
+            <label key={day} className="flex items-center gap-2 text-sm text-ink/80">
+              <input
+                type="checkbox"
+                name="availability"
+                value={day}
+                className="h-4 w-4 rounded border-forest-300 text-forest-700 focus:ring-forest-500/30"
+              />
+              {day}
+            </label>
+          ))}
+        </div>
+      </div>
+
       <div>
         <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-ink/80">
           Message <span className="text-red-500">*</span>
@@ -128,6 +205,15 @@ export function ContactForm() {
           {errorMsg}
         </div>
       )}
+
+      <label className="flex items-start gap-2.5 text-sm text-ink/70">
+        <input
+          type="checkbox"
+          name="updatesOptIn"
+          className="mt-0.5 h-4 w-4 rounded border-forest-300 text-forest-700 focus:ring-forest-500/30"
+        />
+        Send me updates about new classes, tutoring openings, and workshops.
+      </label>
 
       <button type="submit" disabled={status === "submitting"} className="btn-primary w-full sm:w-auto">
         {status === "submitting" ? (

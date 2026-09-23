@@ -30,9 +30,16 @@ export const site = {
   ],
   social: {
     instagram: "https://instagram.com/kairoslearningsolutions",
+    facebook: "https://facebook.com/KairosLearningSolutions",
   },
   // External Google Doc catalog for the current school-year classes.
-  fallCatalogUrl: "https://www.kairoslearningsolutions.com/fall-26-classes",
+  fallCatalogUrl:
+    "https://docs.google.com/document/d/1jqaFeqlDoqSls0R64jbl9jZCzxNmYm6_-wjmyh9NbRg/edit?usp=sharing",
+  fallRegistrationUrl:
+    "https://docs.google.com/forms/d/e/1FAIpQLSe4JbmI3AB3jjjCsNns9YKmtvjzEwnGiw_nP6ikyrSzIihexA/viewform?usp=header",
+  schoolCalendarUrl:
+    "https://www.kairoslearningsolutions.com/_files/ugd/89a30a_c52f3d3ff26c4edb9169ed59a9097dc8.pdf",
+  fallClassesDateRange: "August 5 – December 18, 2026",
 } as const;
 
 export type NavItem = {
