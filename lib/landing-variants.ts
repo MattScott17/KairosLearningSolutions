@@ -210,7 +210,8 @@ export const apexOffer: ProgramOffer = {
   priceLine: {
     label: "Tuition",
     value: apex.tuition.monthly,
-    note: `${apex.tuition.annual} · ${apex.tuition.term} · ${apex.gradeRange}`,
+    // Non-breaking spaces keep "Grades 3 – 9" from splitting across lines.
+    note: `${apex.tuition.annual} · ${apex.tuition.term} · ${apex.gradeRange.replace(/ /g, "\u00a0")}`,
   },
   riskReversal: {
     title: "See it before you decide",
