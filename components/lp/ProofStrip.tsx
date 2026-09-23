@@ -1,11 +1,10 @@
-import { Check, Quote } from "lucide-react";
+import { Check } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { stats, testimonials } from "@/lib/content";
 import type { LandingCopy } from "@/lib/landing-content";
+import { TestimonialCards } from "@/components/lp/TestimonialCards";
 
 export function ProofStrip({ copy }: { copy: LandingCopy }) {
-  const shownTestimonials = testimonials.slice(0, 3);
-
   return (
     <section className="bg-sand/60 py-16">
       <div className="container-page">
@@ -35,22 +34,8 @@ export function ProofStrip({ copy }: { copy: LandingCopy }) {
           ))}
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {shownTestimonials.map((t, i) => (
-            <Reveal key={t.author} delay={i * 0.08}>
-              <figure className="flex h-full flex-col rounded-3xl bg-cream p-7 shadow-card">
-                <Quote className="h-7 w-7 text-forest-300" />
-                <blockquote className="mt-3 flex-1 text-base leading-relaxed text-ink/85">
-                  "{t.quote}"
-                </blockquote>
-                <figcaption className="mt-5 border-t border-forest-100 pt-4 text-sm">
-                  <span className="font-semibold text-forest-800">{t.author}</span>
-                  <span className="block text-ink/60">{t.role}</span>
-                  {t.result && <span className="mt-1 block text-forest-700">{t.result}</span>}
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
+        <div className="mt-12">
+          <TestimonialCards items={testimonials.slice(0, 3)} />
         </div>
       </div>
     </section>
