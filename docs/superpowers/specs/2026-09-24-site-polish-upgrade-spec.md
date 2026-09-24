@@ -5,14 +5,14 @@
 This upgrade makes the Kairos site feel like a real, established business instead of an
 AI template, borrowing Wyzant's best moves: real photos everywhere, a two-row marquee of
 the 12 real Google reviews, a rotating subject word in the homepage headline, count-up
-stats, and tutor cards. The homepage and the three homepage concepts get bold motion — and
-each concept now explores a *different* set of interactions — plus a new Concept D built
-around a looping classroom video and a photo gallery. Interior pages get calmer polish
-(tutor cards on About, a review wall on Testimonials, a hover-highlight service grid).
-Motion components are adapted from the free Aceternity UI library rather than hand-built.
-About 30 files change or are added (roughly 12 new components, ~16 new photos, 1 video);
-the main risks are page weight (photos/video) and breaking the "content never hidden"
-motion guarantee, both handled explicitly below.
+stats, and tutor cards. The homepage and the three homepage concepts get bold motion — each
+concept now explores a *different* interaction style — plus a new Concept D built around a
+looping classroom video and a photo gallery. Interior pages get calmer polish (tutor cards
+on About, review marquee on Testimonials, new photos). A handful of motion pieces are adapted
+from the free Aceternity UI library where they genuinely fit; the rest are small custom
+components. It also fixes an existing bug: visitors with "reduce motion" turned on currently
+see most sections as blank. ~30 files change or are added (~10 new components, ~16 photos,
+1 video); main risks are page weight and keeping animated content always visible.
 
 ---
 
@@ -20,64 +20,81 @@ motion guarantee, both handled explicitly below.
 
 ### Feature Description
 
-A parent visiting the site sees real Kairos classrooms and kids (photo-release signed),
+A parent visiting the site sees real Kairos classrooms and kids (photo releases signed),
 real Google reviews gliding past, a headline that cycles through subjects, and numbers that
-count up — the page feels alive but professional. On the four homepage concepts
-(`/concepts/a`–`d`) the owner can compare four genuinely different interaction styles
-before choosing one. Interior pages feel consistent and polished, with calm motion only.
+count up — alive but professional. On `/concepts/a`–`d` the owner compares four genuinely
+different interaction styles. Interior pages stay calm and consistent.
 
 ### Direction per page
 
-| Page | Motion level | What's new |
+| Page | Motion | What's new |
 |---|---|---|
-| `/` (homepage) | Bold | FlipWords headline (keeps "fall in love"), arch-shaped photo collage with drifting accent shapes, count-up stats bar, two-row Google review marquee, "Meet our tutors" card strip, parallax APEX photo band, new photos throughout |
-| `/concepts/a` "The Direct Guide" | Bold — *structured* | Scroll-progress **Timeline** for the 3-step plan, count-up stats, sticky mobile call bar |
-| `/concepts/b` "A Day at Kairos" | Bold — *story* | **Parallax Scroll** photo gallery ("a week at Kairos"), **Animated Testimonials** (photo + rotating quotes) replacing the single pull quote |
-| `/concepts/c` "Find Your Path" | Bold — *interactive* | **Tabs** path-finder ("My child needs… a boost / homework help / a homeschool partner / a full-time school"), **Focus Cards** program grid |
-| `/concepts/d` "See It For Yourself" (NEW) | Bold — *cinematic* | Full-bleed muted looping **video hero**, **Layout Grid** expandable photo gallery, review marquee, tutor cards |
-| `/about` | Calm | **Expandable Card** tutor grid (monogram placeholder until headshots), new photos |
-| `/testimonials` | Calm | Review marquee above the existing masonry wall; Google source badge on cards |
-| `/services` | Calm | **Card Hover Effect** (a highlight glides between service cards) |
-| Other interior pages | Calm | New real photos swapped in where a photo already exists; subtle image hover zoom; no new motion |
+| `/` | Bold | FlipWords headline (keeps "fall in love"), arch-shaped photo collage with slowly drifting accent arches, count-up StatsBar, two-row review marquee, "Meet our tutors" strip, parallax APEX photo band, new photos |
+| `/concepts/a` "The Direct Guide" | Bold — *structured* | Scroll-progress **Timeline** plan, StatsBar count-up, mobile sticky call bar |
+| `/concepts/b` "A Day at Kairos" | Bold — *story* | **Sticky "day at Kairos" scroller** (times of day on the left, sticky photo swaps on the right), page-scroll **parallax photo gallery** |
+| `/concepts/c` "Find Your Path" | Bold — *interactive* | **Path-finder tabs** (sliding pill tab bar: "My child needs a boost / homework help / a homeschool partner / a full-time school" → matched program + CTA), **Focus Cards** program grid |
+| `/concepts/d` "See It For Yourself" (NEW) | Bold — *cinematic* | Full-bleed muted looping **video hero**, **Layout Grid** expandable photo gallery, review marquee, tutor cards, 3-step plan |
+| `/about` | Calm | Tutor card grid (monogram placeholders until headshots), new photos |
+| `/testimonials` | Calm | Review marquee under the hero; masonry wall kept |
+| Other interior pages | Calm | Better real photos where a photo already exists; subtle image hover zoom on image cards |
 
 ### Architecture Decisions
 
-- **Aceternity components are copied in, not installed via CLI.** `npx shadcn add` assumes
-  Tailwind v4 layout. Sources go to `components/aceternity/` with three standard fixes:
-  `motion/react` → `framer-motion`; v3 keyframes into `tailwind.config.ts`; neutral/indigo
-  colors → brand tokens (`forest`, `cream`, `sand`, `gold`, `ink`). Each file gets a header
-  comment crediting Aceternity UI (free tier; commercial use allowed).
-- **Every motion component guards reduced motion** via `useReducedMotion()` (framer) or the
-  existing global CSS rule at `app/globals.css:33-43`. Aceternity sources have no guard —
-  adding it is mandatory. Anything that starts hidden (FlipWords, Timeline) must render its
-  final/static state on reduced motion and never leave text invisible (CLAUDE.md guarantee).
-- **`Reveal` is not modified.** It's used by the `/lp` landing pages; new motion lives in new
-  components.
-- **Stats become countable without breaking `lp/ProofStrip`.** Add optional
-  `count?: number; suffix?: string` to `stats` entries; `value` string stays for existing
-  consumers. A new `StatsBar` renders count-up when `count` exists, else `value`.
-- **Tutor cards use a placeholder monogram** until headshots arrive: add optional
-  `image?: string` to `TeamMember`; `TutorCard` renders `next/image` if set, else a brand
-  monogram tile. `initials()` moves from `app/(site)/about/page.tsx:16` to `lib/initials.ts`.
-- **Brand motif = the arch.** Wyzant's signature is diamonds; ours is an arch
-  (`rounded-t-full`) echoing a tree canopy / doorway. Used for hero photo crops and a few
-  solid forest/gold accent shapes. Gives a consistent, non-template look.
-- **Photos are optimized at import.** Pick ~16 photos from Drive folder
-  "Kairos Pictures 2025-2026" (JPEGs; skip HEIC shortcuts), resize to max 2000px long edge,
-  JPEG quality ~80 with `sips`, name descriptively (`public/images/kairos/<scene>.jpg`).
-  `next/image` then serves AVIF/WebP (`next.config.ts` already sets formats).
-- **Video**: take `IMG_3559.mov` (18 MB) or `IMG_3606.mov` from Drive, trim to an 8–12 s
-  loop, 1280px wide, H.264 MP4 + WebM, no audio, target < 3 MB each, plus a JPEG poster.
-  Encoded with a throwaway `ffmpeg-static` binary in the scratchpad — **not** a project
-  dependency. `<video autoPlay muted loop playsInline preload="metadata" poster>`; reduced
-  motion shows the poster only.
+- **Fix `Reveal` and the home `Hero` for reduced motion** (Changed based on challenger
+  finding 1). Today `useReducedMotion()` is `null` on the server and `true` on the client's
+  first render, so SSR HTML ships `opacity:0` and the client swaps to a plain tag — React does
+  not patch the attribute, content stays invisible (verified: 19/19 Reveal blocks hidden on
+  `/about` with reduced motion). Fix: always render the same motion element; when `reduce`
+  is true, animate to visible immediately with `duration: 0`. Plus a CSS safety net:
+  `Reveal` adds `data-reveal`, and `globals.css` forces `[data-reveal]` to
+  `opacity:1; transform:none` under `@media (prefers-reduced-motion: reduce)` and inside a
+  `<noscript><style>` in `app/layout.tsx`. The public props and normal-motion behaviour of
+  `Reveal` stay identical, so `/lp` pages are unaffected for normal users and fixed for
+  reduced-motion users. Every new motion component follows the same rule: **one element
+  type in both branches; never branch the rendered tree on `useReducedMotion`.**
+- **Adapt Aceternity only where the API fits** (challenger findings 2–8, 10). Copied in by
+  hand (no shadcn CLI — it assumes Tailwind v4), with `motion/react` → `framer-motion`,
+  brand tokens instead of neutral/indigo, `next/image`, lucide icons, reduced-motion safe,
+  credit comment at top (free tier, commercial use allowed). Kept:
+  - **FlipWords** → homepage hero word.
+  - **Timeline** → Concept A plan (content never starts hidden; only the progress line animates).
+  - **FocusCards** → Concept C, *modified*: title always visible (touch has no hover); blur-others only on `md:` hover; image per program from a local slug→photo map in the page.
+  - **LayoutGrid** → Concept D, *modified*: expanded card is `fixed` and viewport-centered with a fixed backdrop, closes on Esc/backdrop click, uses a `<button>` trigger.
+  - **Tabs** → Concept C, *only* the sliding-pill tab bar (`layoutId`); panels rewritten to render just the active panel in normal flow, with `role="tablist"/"tab"/"tabpanel"`, `aria-selected`, arrow-key support.
+  Dropped from the earlier draft: CardHoverEffect (nested `<a>`, duplicates ServiceCard hover),
+  ExpandableCard (a demo, not a component; hides already-visible bios), AnimatedTestimonials
+  (would caption classroom photos with reviewer names — misleading), InfiniteMovingCards
+  (DOM `cloneNode` fails lint, double-clones in StrictMode, no pause control), ParallaxScroll
+  (traps touch scroll in a nested 40rem scroller).
+- **Custom small components instead**: `ReviewMarquee` (list rendered twice in JSX, second copy
+  `aria-hidden`, CSS keyframe, pause on hover/focus **plus a visible pause/play button** for
+  WCAG 2.2.2), `ParallaxGallery` (columns drift on *page* scroll via `useScroll({target})`,
+  no inner scroller; single static column on mobile), `DayScroller` (Concept B).
+- **Stats become countable without breaking `lp/ProofStrip`.** Optional `count?`/`suffix?`
+  on `stats` entries; `value` string kept. `CountUp` SSR-renders the final number; only
+  animates from 0 after hydration when in view and motion allowed.
+- **Tutor cards** use a monogram placeholder: optional `image?: string` on `TeamMember`;
+  `TutorAvatar` + `TutorCard` in `components/TutorCard.tsx`. `initials()` moves from
+  `app/(site)/about/page.tsx:16` to `lib/initials.ts`.
+- **Brand motif = the arch** (`rounded-t-full`, tree canopy / doorway) for hero photo crops and a
+  few solid forest/gold accent shapes — our answer to Wyzant's diamonds.
+- **Photos**: ~16 JPEGs from Drive folder "Kairos Pictures 2025-2026" (skip HEIC shortcuts),
+  resized with `sips -Z 2000`, quality ~80, to `public/images/kairos/<scene>.jpg`, total < 8 MB.
+  Existing `photo-1..5.jpg` kept (used by `/lp`).
+- **Video**: a phone clip (`IMG_3559.mov` 18 MB or `IMG_3606.mov`) trimmed to an 8–12 s loop,
+  1280px wide, H.264 MP4 + WebM, no audio, ≤ 3 MB each, plus JPEG poster. Encoded by
+  installing `ffmpeg-static` into the scratchpad (`npm i ffmpeg-static` there, run the binary
+  at `require('ffmpeg-static')`) — not a project dependency (challenger finding 13).
+  `VideoHero` always renders `<video autoPlay muted loop playsInline preload="metadata" poster>`;
+  under reduced motion it pauses via JS after mount and CSS hides nothing — no element swap.
+- **Naming**: PascalCase component files (`components/aceternity/FlipWords.tsx` …), hooks in
+  `lib/` (challenger finding 12).
 
 ### Data Model Changes
 
-No database. Content-file changes only:
-- `lib/content.ts`: `TeamMember.image?: string`; `stats[]` gains optional `count`/`suffix`.
-- `lib/storybrand.ts`: slug union gains `"d"`; add `conceptD`; append to `concepts`.
-- `lib/site.ts`: no rating/count constant (see Flagged Assumptions).
+No database. Content files only:
+- `lib/content.ts`: `TeamMember.image?: string`; `stats[]` optional `count`/`suffix`.
+- `lib/storybrand.ts`: slug union adds `"d"`; `conceptD`; appended to `concepts`.
 
 ### API Changes
 
@@ -85,149 +102,137 @@ None.
 
 ### UI Changes
 
-New components:
-- `lib/utils.ts` — `cn()` (clsx + tailwind-merge v2).
-- `components/aceternity/infinite-moving-cards.tsx`, `flip-words.tsx`, `timeline.tsx`,
-  `animated-testimonials.tsx`, `expandable-card.tsx` (+ `hooks/use-outside-click.ts`),
-  `focus-cards.tsx`, `card-hover-effect.tsx`, `layout-grid.tsx`, `parallax-scroll.tsx`,
-  `tabs.tsx`.
-- `components/ReviewMarquee.tsx` — two rows of review cards (opposite directions) built on
-  InfiniteMovingCards, fed by `testimonials`.
-- `components/StatsBar.tsx` + `components/ui/CountUp.tsx`.
-- `components/TutorCard.tsx` (+ monogram placeholder).
-- `components/VideoHero.tsx`.
+New: `lib/utils.ts` (`cn`), `lib/initials.ts`, `components/aceternity/{FlipWords,Timeline,FocusCards,LayoutGrid,TabBar}.tsx`,
+`components/ReviewMarquee.tsx`, `components/StatsBar.tsx`, `components/ui/CountUp.tsx`,
+`components/TutorCard.tsx`, `components/VideoHero.tsx`, `components/ParallaxGallery.tsx`,
+`components/concepts/DayScroller.tsx`, `components/concepts/PathFinder.tsx`, `app/(site)/concepts/d/page.tsx`.
 
-Modified: `app/(site)/page.tsx`, `components/home/Hero.tsx`, `app/(site)/concepts/{a,b,c}/page.tsx`,
-`app/(site)/concepts/page.tsx`, `app/(site)/about/page.tsx`, `app/(site)/testimonials/page.tsx`,
-`app/(site)/services/page.tsx`, pages whose single photo is swapped, `tailwind.config.ts`,
-`app/globals.css` (only if a utility is needed), `lib/content.ts`, `lib/storybrand.ts`.
+Modified: `components/ui/Reveal.tsx` (reduced-motion fix only), `components/home/Hero.tsx`,
+`app/layout.tsx` (noscript style), `app/globals.css`, `tailwind.config.ts`, `app/(site)/page.tsx`,
+`app/(site)/concepts/{page,a/page,b/page,c/page}.tsx`, `app/(site)/about/page.tsx`,
+`app/(site)/testimonials/page.tsx`, photo-bearing interior pages, `lib/content.ts`, `lib/storybrand.ts`,
+`e2e/smoke.spec.ts`.
 
 ### Out of Scope
 
-- `/lp/*` and `app/(bare)` landing pages, `components/lp/*`, contact form/API logic.
-- Real tutor headshots (placeholders only), Google rating number/star count.
-- Choosing a winning concept or replacing `/` with a concept.
-- Background Gradient Animation and other "skip" Aceternity pieces (blobs, 3D tilt,
-  device mockups, lens, sparkles) — they read as AI/dev-tool templates.
-- New copywriting beyond short section headings/labels needed for new sections.
+- `/lp/*`, `app/(bare)`, `components/lp/*` (only indirectly affected via the `Reveal` reduced-motion fix), contact form/API.
+- Real headshots, Google rating number/stars.
+- Choosing a winning concept / replacing `/`.
+- Services-page hover effect (dropped), Background Gradient Animation and other gimmicky Aceternity pieces.
+- New copy beyond short headings/labels for new sections.
 
 ### Flagged Assumptions
 
-- **Assumption:** No star rating or "4.9 on Google" number is shown — cards say "Google review".
-  **Reasoning:** We don't have the verified rating/count; CLAUDE-era content rule is never fabricate.
-  **Risk if wrong:** Slightly weaker trust signal; trivial to add once the owner supplies it.
-- **Assumption:** I pick the ~16 photos and the video clip myself (best composition, faces
-  visible, well lit), since all families signed releases.
-  **Reasoning:** Owner delegated; selection is reviewable at Gate 2 via screenshots.
-  **Risk if wrong:** Owner swaps a few files — no code change needed.
-- **Assumption:** Homepage headline stays "Where students fall in love with ___" with a
-  flipping subject word (reading / math / writing / science / learning).
-  **Reasoning:** Keeps brand line and the e2e `/fall/i` assertion.
-  **Risk if wrong:** Copy tweak only.
-- **Assumption:** Homepage "Meet our tutors" strip shows 4 cards + link to About.
-  **Risk if wrong:** Count change only.
+- **Assumption:** No star rating or "4.9 on Google" number; cards say "Google review" (existing figcaption format).
+  **Reasoning:** Rating/count not verified; never fabricate. **Risk if wrong:** weaker trust signal; trivial to add later.
+- **Assumption:** I pick the ~16 photos and the video clip (all families signed releases).
+  **Risk if wrong:** owner swaps files; no code change.
+- **Assumption:** Headline stays "Where students fall in love with ___" (reading / math / writing / science / learning).
+  **Risk if wrong:** copy tweak.
+- **Assumption:** Homepage tutor strip shows 4 cards + link to About. **Risk if wrong:** count change.
 
 ### Research Discoveries
 
-- **Discovery:** 12 real Google reviews already exist with a `pull` excerpt field (PR #7).
-  **Impact:** Marquee uses `pull`, no new content needed; ids must not change (`getTestimonials` throws on unknown ids).
-- **Discovery:** `Reveal` is shared with the `/lp` landing pages and their e2e tests
-  (single h1, no horizontal scroll at 360px, CTA above the fold).
-  **Impact:** `Reveal` untouched; marquee must be clipped (`overflow-hidden`) to avoid horizontal scroll.
-- **Discovery:** Stats bar is copy-pasted in 3 places (`page.tsx`, `concepts/a`, `lp/ProofStrip`).
-  **Impact:** New `StatsBar` replaces the two `(site)` copies; `ProofStrip` left alone (lp out of scope).
-- **Discovery:** Aceternity free-tier sources are Tailwind v3-compatible; need `motion/react` → `framer-motion` and `cn`.
-  **Impact:** Copy-in approach with `clsx` + `tailwind-merge@^2` (v3 targets Tailwind v4).
-- **Discovery:** Drive "Video Clips" subfolder files are 3–16 GB raw; short phone `.mov` clips (18–59 MB) exist in the parent folder; no ffmpeg installed.
-  **Impact:** Use a phone clip; encode with throwaway `ffmpeg-static`.
-- **Discovery:** `AnimatedTestimonials` uses `Math.random()` during render (hydration mismatch) and Tabler icons.
-  **Impact:** Replace with deterministic rotations and lucide icons.
+- **Discovery:** 12 real Google reviews exist with `pull` excerpts and `source: "Google"`. **Impact:** marquee uses `pull`; ids untouched (`getTestimonials` throws on unknown ids); reuse existing figcaption format `author · role · Google review`.
+- **Discovery:** `Reveal` shared with `/lp` + their e2e tests (single h1, no horizontal scroll at 360px, CTA above fold). **Impact:** Reveal's props/normal behaviour unchanged; marquee wrappers `overflow-hidden`.
+- **Discovery:** Reduced-motion users currently see blank sections (challenger, verified with Playwright). **Impact:** fixed in Step 1; tests assert computed opacity, not `toBeVisible`.
+- **Discovery:** Stats bar copy-pasted in 3 places. **Impact:** `StatsBar` replaces the 2 `(site)` copies; `ProofStrip` untouched.
+- **Discovery:** Several Aceternity components don't fit as-is (see Architecture Decisions). **Impact:** 5 adapted, 3 custom.
+- **Discovery:** `StickyCallBar` relies on `pb-20` from `app/(bare)/layout.tsx`. **Impact:** Concept A wraps its content in `pb-20 sm:pb-0`.
+- **Discovery:** `ServiceCard` is a `<Link>` and `Service.icon` is a function (can't cross into client components). **Impact:** client components receive only serializable props (slugs, strings, image paths); icons rendered server-side or looked up inside client files.
 
 ---
 
 ## Reuse Inventory
 
 Must use — do not recreate:
-- `components/ui/Reveal.tsx` — scroll reveal for all non-bespoke content blocks.
-- `components/ui/Section.tsx` (`Section`, `SectionHeading`), `components/ui/PageHero.tsx`, `components/CTASection.tsx`, `components/ServiceCard.tsx`.
-- `lib/content.ts` — `testimonials`, `getTestimonials(ids)`, `team`, `leadership`, `stats`, `services`, `apex`, `earlyLearners`.
-- `lib/storybrand.ts` — concept copy.
-- `lib/site.ts` — phone, name, etc.
-- `components/lp/StickyCallBar.tsx` — generic (uses only `site`) → reuse on Concept A.
-- `app/globals.css` utilities: `container-page`, `btn-*`, `eyebrow`, `prose-kairos`; reduced-motion rule L33-43.
-- `tailwind.config.ts` tokens: `shadow-soft`, `shadow-card`, `rounded-4xl`.
+- `components/ui/Reveal.tsx` (after fix), `components/ui/Section.tsx` (`Section`, `SectionHeading`), `components/ui/PageHero.tsx`, `components/CTASection.tsx`, `components/ServiceCard.tsx`.
+- `components/lp/StickyCallBar.tsx` (Concept A, import only).
+- `lib/content.ts`: `testimonials`, `getTestimonials`, `team`, `leadership`, `stats`, `services`, `apex`, `earlyLearners`.
+- `lib/storybrand.ts`, `lib/site.ts`.
+- `app/globals.css` utilities (`container-page`, `btn-*`, `eyebrow`, `prose-kairos`) and reduced-motion rule.
+- `tailwind.config.ts` tokens (`shadow-soft`, `shadow-card`, `rounded-4xl`).
 
 Can extend:
-- `components/lp/TestimonialCards.tsx` card markup → basis for marquee card (copy markup into `ReviewMarquee`; do NOT modify the lp file).
-- `app/(site)/about/page.tsx:16` `initials()` → move to `lib/initials.ts`, import in About + TutorCard.
-- `tailwind.config.ts:46-54` keyframes → add `scroll` (marquee) keyframe; keep `fade-up`.
+- `components/lp/TestimonialCards.tsx` / testimonials figcaption markup → copied pattern for marquee card (lp file not edited).
+- `initials()` → `lib/initials.ts`.
+- `tailwind.config.ts` keyframes → add `marquee` (keep `fade-up`).
 
 ---
 
 ## Implementation Plan
 
-### Step 1: Foundation
-- **Files:** create `lib/utils.ts`, `lib/initials.ts`; modify `package.json` (`clsx@^2.1.1`, `tailwind-merge@^2.6.1`), `tailwind.config.ts` (add `scroll` keyframe + `animate-scroll` from Aceternity v3 snippet).
-- **Modify details:** `about/page.tsx` imports `initials` from `lib/initials.ts` and deletes the local copy.
-- **Watch out:** don't redefine `fade-up`.
+Built as vertical slices; each slice ends with `npm run typecheck && npm run lint` and a quick screenshot.
 
-### Step 2: Photos and video
-- **Files:** `public/images/kairos/*.jpg` (~16), `public/video/kairos-loop.{mp4,webm}`, `public/video/kairos-loop-poster.jpg`.
-- Download JPEGs from Drive folder `1kApycWRXfL8nMbAEQww4KvVQPuDvYkMK`, view them, pick best by scene (tutoring 1:1, small group, younger kids, older students, classroom wide, outdoors/activity, building). Resize with `sips -Z 2000 -s formatOptions 80`. Keep total added images < 8 MB.
-- Video: `npx --yes ffmpeg-static`-based encode in scratchpad; ≤ 3 MB each.
-- Keep `photo-1..5.jpg` (referenced by lp pages).
+### Step 1: Foundation + reduced-motion fix
+- **Files:** `package.json` (`clsx@^2.1.1`, `tailwind-merge@^2.6.1`), `lib/utils.ts`, `lib/initials.ts`, `components/ui/Reveal.tsx`, `components/home/Hero.tsx`, `app/globals.css`, `app/layout.tsx`, `tailwind.config.ts`, `app/(site)/about/page.tsx` (import `initials`).
+- **Modify details:** Reveal — remove the `if (reduce) return <Tag>` branch; always render `MotionTag` with `data-reveal`; `animate` = visible when `shown || reduce`; transition `duration: reduce ? 0 : 0.55`. Hero — same idea: no tree branching; reduced motion → `transition: {duration: 0}`, add `data-reveal` on animated children. CSS safety net as above. Marquee keyframe.
+- **Test:** add e2e `reduced-motion.spec.ts`: with `reducedMotion: "reduce"`, on `/`, `/about`, `/testimonials`, `/concepts/a`, every `[data-reveal]` and the h1 have computed opacity (element and all ancestors) > 0.9 after load. Run it red first against current code to confirm the bug, then green.
+- **Watch out:** `/lp` e2e must still pass (CTA above fold).
 
-### Step 3: Adapt Aceternity components
-- **Files:** the 10 files under `components/aceternity/` + `components/aceternity/hooks/use-outside-click.ts`, sourced from the downloaded registry JSON (scratchpad `ace/`) or re-fetched from `https://ui.aceternity.com/registry/<name>.json`.
-- Apply: import fix, brand colors, `next/image` instead of `<img>`, lucide icons, deterministic rotation, `useReducedMotion` guard, remove `dark:` variants and `backdrop-blur`.
-- **Callers (each must be used):** infinite-moving-cards → `ReviewMarquee`; flip-words → `Hero`; timeline → concepts/a; animated-testimonials → concepts/b; parallax-scroll → concepts/b; tabs → concepts/c; focus-cards → concepts/c; layout-grid → concepts/d; expandable-card → about; card-hover-effect → services.
+### Step 2: Media
+- Download candidates from Drive folder `1kApycWRXfL8nMbAEQww4KvVQPuDvYkMK` to scratchpad, view, pick ~16 by scene (1:1 tutoring, small group, young kids, older students, wide classroom, hands-on activity, outdoors, building). Resize + save to `public/images/kairos/`. Video encode + poster to `public/video/`.
 
-### Step 4: Shared site components
-- `components/ReviewMarquee.tsx` (client): two InfiniteMovingCards rows, 6 reviews each, opposite directions, different speeds, pause on hover; cards show `pull`, author, role, "Google review" badge. Wrapper `overflow-hidden`. Callers: home, concepts/d, testimonials.
-- `components/ui/CountUp.tsx` (client): framer `useInView` + `animate`; reduced motion → final value immediately; SSR renders the final number (no hidden/zero content without JS). `components/StatsBar.tsx` renders `stats`. Callers: home, concepts/a.
-- `components/TutorCard.tsx`: photo or monogram tile, name, role, first sentence of bio; subject/role tag. Callers: home tutor strip, concepts/d. (About uses expandable-card, which renders TutorCard's monogram/photo via a shared `TutorAvatar` export from the same file.)
-- `components/VideoHero.tsx` (client): full-bleed video, gradient overlay, h1 + CTAs as children; reduced motion → poster `<Image>`. Caller: concepts/d.
-- `lib/content.ts`: `TeamMember.image?`, stats `count`/`suffix` (e.g. 13 → "13+", 30 → "30+ yrs", 2020 → "Since 2020" stays `value`-only).
+### Step 3: Shared components + homepage (bold)
+- `components/ReviewMarquee.tsx` (client): 2 rows × 6 reviews, opposite directions, 40s/55s, pause on hover/focus-within + visible pause button, duplicate list `aria-hidden`, `overflow-hidden` wrapper, edge fade mask.
+- `components/ui/CountUp.tsx` + `components/StatsBar.tsx`.
+- `components/TutorCard.tsx` (`TutorAvatar` + `TutorCard`).
+- `components/aceternity/FlipWords.tsx`; `components/home/Hero.tsx` uses it inside the single h1; arch collage of 2–3 new photos + 2 drifting accent arches.
+- `components/home/ParallaxPhoto.tsx` (client, `useScroll({target})`, ±40px) for the APEX band photo.
+- `app/(site)/page.tsx`: StatsBar replaces inline trust bar; ReviewMarquee replaces the 3-quote preview (keep "Read more stories" link); "Meet our tutors" strip (4 TutorCards + link) before CTA; new photos in callout + APEX band.
 
-### Step 5: Homepage (bold)
-- `components/home/Hero.tsx`: headline "Where students fall in love with <FlipWords>" (single h1, contains "fall"); replace single photo with arch-cropped collage of 2–3 new photos + 2 solid accent arches that drift slowly (framer, reduced-motion static).
-- `app/(site)/page.tsx`: StatsBar replaces inline trust bar; new photos in Early Learners callout + APEX band; APEX band photo gets subtle scroll parallax (`useScroll`/`useTransform`, small client wrapper inside page or in `components/home/`); testimonial preview replaced by ReviewMarquee (keep "Read more stories" link); add "Meet our tutors" strip (4 TutorCards + link to /about) before CTA.
+### Step 4: Concept A (structured)
+- `components/aceternity/Timeline.tsx` for plan steps; StatsBar replaces inline stats; `StickyCallBar` + `pb-20 sm:pb-0` wrapper.
 
-### Step 6: Concepts A–D (each distinct)
-- **A:** Timeline for plan steps; StatsBar replaces its inline stats copy; `StickyCallBar` on mobile.
-- **B:** ParallaxScroll gallery section "A week at Kairos" (~9 photos); AnimatedTestimonials (reviews + photos) replaces the single `melissa-c` pull quote; hero photo → best new wide photo.
-- **C:** Tabs path-finder (4 tabs mapping situation → service/APEX with CTA); FocusCards program grid replacing the plain service-card grid.
-- **D (new):** `app/(site)/concepts/d/page.tsx` with `metadata.robots` noindex; VideoHero → short promise + CTAs → LayoutGrid gallery → ReviewMarquee → tutor cards → plan (3 steps) → CTASection. Copy in `lib/storybrand.ts` `conceptD`.
-- `concepts/page.tsx`: "Four homepage directions", grid `md:grid-cols-2`, lists what each explores.
+### Step 5: Concept B (story)
+- `components/concepts/DayScroller.tsx`: 4–5 moments (morning arrival, focused work, small-group, hands-on project, pickup/homework club) — left column text steps, right sticky photo cross-fades to the active step (`useInView` per step); on mobile each step shows its own photo inline (no sticky).
+- `components/ParallaxGallery.tsx`: 3 columns drifting at different rates on page scroll; mobile single column, no drift. Hero photo → best new wide photo.
 
-### Step 7: Interior pages (calm)
-- `/about`: team grid → ExpandableCard tutor cards (click opens full bio); leadership cards use `TutorAvatar`.
-- `/testimonials`: ReviewMarquee under hero; existing masonry kept; keep h1 text.
-- `/services`: service grid uses CardHoverEffect wrapper around existing `ServiceCard` content.
-- Swap stock/older photos on apex, early-learners, summer, fall-classes, about for fitting new ones. Add `transition-transform duration-700 group-hover:scale-[1.03]` image hover where images are in cards.
+### Step 6: Concept C (interactive)
+- `components/aceternity/TabBar.tsx` (sliding pill) + `components/concepts/PathFinder.tsx` (accessible tabs, only active panel in flow, AnimatePresence cross-fade).
+- `components/aceternity/FocusCards.tsx` replacing the plain service grid; slug→photo map in page; titles always visible.
+- Add `/concepts/c` to the 360px overflow test.
 
-### Step 8: Tests
-- `e2e/smoke.spec.ts`: add `/concepts/a`–`/concepts/d` load checks; add a no-horizontal-overflow check at 360px for `/` and `/concepts/d`.
-- Reduced-motion check: with `reducedMotion: "reduce"`, homepage h1 text is fully visible and marquee cards are visible.
-- Capture desktop + mobile screenshots of `/`, each concept, `/about`, `/testimonials`, `/services` into `e2e/screenshots/polish-*.png` for Gate 2 review.
+### Step 7: Concept D (cinematic, new)
+- `components/VideoHero.tsx`; `components/aceternity/LayoutGrid.tsx` (fixed-position expanded card, Esc close, button triggers); `app/(site)/concepts/d/page.tsx` (noindex) : VideoHero (single h1) → LayoutGrid gallery → ReviewMarquee → TutorCard row → 3-step plan → CTASection. `conceptD` copy in `lib/storybrand.ts`.
+- `app/(site)/concepts/page.tsx`: "Four homepage directions", `md:grid-cols-2`, each card says what it explores.
+
+### Step 8: Interior pages (calm)
+- `/about`: team grid uses `TutorCard`; leadership uses `TutorAvatar`; new photo.
+- `/testimonials`: ReviewMarquee under the hero; masonry kept; h1 unchanged.
+- apex / early-learners / summer / fall-classes: swap in best-fitting new photo; `group-hover:scale-[1.03]` zoom only on linked image cards.
+
+### Step 9: Tests + screenshots
+- `e2e/smoke.spec.ts`: `/concepts/a`–`d` load with one h1; 360px no-horizontal-overflow for `/`, `/concepts/c`, `/concepts/d`, `/testimonials`.
+- Screenshots (desktop 1440 + mobile 390) of `/`, concepts a–d, `/about`, `/testimonials` into `e2e/screenshots/polish-*.png`.
 
 ### Final Step: Verify
-`npm run typecheck && npm run lint && npm run build && npm run test:e2e` — all must pass.
+`npm run typecheck && npm run lint && npm run build && npm run test:e2e` — all pass.
 
 ---
 
 ## Quality Criteria
 
-- [ ] No new helper/component duplicates existing functionality — `Reveal`, `Section`, `SectionHeading`, `PageHero`, `CTASection`, `ServiceCard`, `StickyCallBar`, `getTestimonials` are imported, not recreated; `initials` exists only in `lib/initials.ts` (`grep -rn "function initials" app components lib` → 1 hit).
-- [ ] Every file in `components/aceternity/` is imported by at least one page/component (grep each export).
-- [ ] `grep -rn "motion/react" components app` → 0 hits; `grep -rn "@tabler" .` (excluding node_modules) → 0 hits; `grep -rnE "dark:|purple|indigo|neutral-|zinc-|slate-" components/aceternity` → 0 hits.
-- [ ] Every client component with animation calls `useReducedMotion` or relies only on CSS animations covered by `globals.css` reduced-motion rule; FlipWords/Timeline/CountUp render final text server-side (verified by e2e reduced-motion test).
-- [ ] `components/ui/Reveal.tsx`, `components/lp/*`, `app/(bare)/*` unchanged (`git diff --stat origin/main -- components/lp app/\(bare\) components/ui/Reveal.tsx` empty).
-- [ ] No `Math.random()` in render paths (`grep -rn "Math.random" components app` → 0).
-- [ ] Every page still has exactly one `h1`; `/` h1 contains "fall".
-- [ ] No horizontal scroll at 360px on `/` and `/concepts/d` (e2e).
-- [ ] All images use `next/image` (`grep -rn "<img" components app` → 0) with `sizes`; hero images `priority`.
-- [ ] Total added media: images < 8 MB, each video file ≤ 3 MB (`du -sh public/images/kairos public/video`).
-- [ ] `concepts/d` exports `robots: { index: false, follow: false }` and is not in `app/sitemap.ts`.
-- [ ] Testimonial ids unchanged; no testimonial text edited (`git diff origin/main -- lib/content.ts` shows no quote changes).
+- [ ] No duplicated functionality: `Reveal`, `Section`, `SectionHeading`, `PageHero`, `CTASection`, `ServiceCard`, `StickyCallBar`, `getTestimonials` imported, not recreated; `grep -rn "function initials" app components lib` → 1 hit (`lib/initials.ts`).
+- [ ] Every new component file is imported somewhere (grep each export name).
+- [ ] `grep -rn "motion/react\|@tabler" app components lib` → 0; `grep -rnE "dark:|purple|indigo|neutral-|zinc-|slate-" components/aceternity` → 0.
+- [ ] No component branches its rendered element tree on `useReducedMotion()` (`grep -n "if (reduce)" -A2` shows no early `return`); VideoHero renders `<video>` in all cases.
+- [ ] Reduced-motion e2e asserts computed opacity > 0.9 for all `[data-reveal]` and h1s on `/`, `/about`, `/testimonials`, `/concepts/a`–`d` — and it failed before Step 1's fix.
+- [ ] `git diff origin/main --stat -- components/lp app/\(bare\)` empty; Reveal's exported props unchanged.
+- [ ] `grep -rn "Math.random\|cloneNode" components app` → 0.
+- [ ] Marquee: duplicate list has `aria-hidden="true"`; visible pause button with `aria-pressed`; wrapper `overflow-hidden`.
+- [ ] PathFinder: `role="tablist"`, `role="tab"` with `aria-selected`, `role="tabpanel"`; only the active panel rendered.
+- [ ] No review is shown next to a photo that could be read as the reviewer's portrait.
+- [ ] Client components receive only serializable props (no `icon` / functions from server pages) — build passes without "Functions cannot be passed" errors.
+- [ ] Exactly one `h1` per page; `/` h1 contains "fall".
+- [ ] No horizontal overflow at 360px on `/`, `/concepts/c`, `/concepts/d`, `/testimonials` (e2e).
+- [ ] `grep -rn "<img" components app` → 0; every `next/image` has `sizes`; hero images `priority`.
+- [ ] `du -sh public/images/kairos` < 8 MB; each file in `public/video` ≤ 3 MB.
+- [ ] `concepts/d` exports noindex robots; not in `app/sitemap.ts`.
+- [ ] Testimonial ids and quote text unchanged.
 - [ ] typecheck, lint, build, e2e all pass.
+
+### Minor Notes from Challenger
+- LayoutGrid off-screen expansion on mobile → addressed via fixed positioning (Step 7).
+- Google badge already exists in figcaption → reused, not re-added.
+- Step ordering restructured into vertical slices.
