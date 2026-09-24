@@ -37,7 +37,7 @@ export type ProgramOffer = {
   obstacles: Obstacle[];
   faqs: Faq[];
   quickBullets: string[];
-  testimonialIndexes: number[];
+  testimonialIds: string[];
   photo: { src: string; alt: string };
   heroes: Record<VariantSlug, VariantHero>;
 };
@@ -147,7 +147,7 @@ export const tutoringOffer: ProgramOffer = {
     "Tutor matched to how your student learns",
     "In person in Salinas or online",
   ],
-  testimonialIndexes: [1, 5, 0],
+  testimonialIds: ["jamie-s", "maria-r", "melissa-c"],
   photo: { src: "/images/photo-2.jpg", alt: "A Kairos tutor working with a student" },
   heroes: {
     a: {
@@ -273,7 +273,7 @@ export const apexOffer: ProgramOffer = {
     "Mastery-based academics at your child's pace",
     "Real-world skills and mentorship every day",
   ],
-  testimonialIndexes: [3, 8, 2],
+  testimonialIds: ["jocelyn-w", "maria-r", "andrea-r"],
   photo: { src: "/images/photo-4.jpg", alt: "APEX students learning together at Kairos" },
   heroes: {
     a: {

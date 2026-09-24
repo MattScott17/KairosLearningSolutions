@@ -4,13 +4,14 @@ import { Quote } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/CTASection";
-import { testimonials, values } from "@/lib/content";
+import { getTestimonials, values } from "@/lib/content";
 import { site } from "@/lib/site";
 import { conceptB } from "@/lib/storybrand";
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
 
 export default function ConceptBPage() {
+  const [spotlight] = getTestimonials(["melissa-c"]);
   return (
     <>
       {/* Hero — full-bleed photo, short emotional headline */}
@@ -125,10 +126,10 @@ export default function ConceptBPage() {
           <Reveal>
             <Quote className="mx-auto h-9 w-9 text-forest-300" />
             <blockquote className="mt-4 text-2xl leading-relaxed text-ink/85">
-              "{testimonials[0].quote}"
+              “{spotlight.pull}”
             </blockquote>
             <p className="mt-5 text-sm font-semibold text-forest-800">
-              {testimonials[0].author} · {testimonials[0].role}
+              {spotlight.author} · {spotlight.role}
             </p>
           </Reveal>
         </div>
