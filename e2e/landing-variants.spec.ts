@@ -1,4 +1,7 @@
 import { test, expect } from "@playwright/test";
+import { site } from "../lib/site";
+
+const phoneDigits = site.phone.slice(-8);
 
 // Hormozi-style paid-traffic landing variants (/lp/{tutoring,apex}/{a,b,c}).
 // Every variant must: render one h1, keep the callback form on the page,
@@ -14,7 +17,7 @@ for (const path of variants) {
 
     await expect(page.locator("h1")).toHaveCount(1);
     await expect(page.locator("form#callback")).toBeAttached();
-    await expect(page.getByRole("link", { name: /214-1810/ }).first()).toBeVisible();
+    await expect(page.getByRole("link", { name: new RegExp(phoneDigits) }).first()).toBeVisible();
     // Primary CTA points at the callback form.
     await expect(page.locator('a[href="#callback"]').first()).toBeVisible();
 
