@@ -4,9 +4,14 @@ import { Quote } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/CTASection";
+import { DayScroller, type DayStep } from "@/components/concepts/DayScroller";
+import { ParallaxGallery } from "@/components/ParallaxGallery";
+import { photos, galleryPhotos } from "@/lib/photos";
 import { getTestimonials, values } from "@/lib/content";
 import { site } from "@/lib/site";
-import { conceptB } from "@/lib/storybrand";
+import { conceptB, dayAtKairos } from "@/lib/storybrand";
+
+const daySteps: DayStep[] = dayAtKairos.map((m) => ({ ...m, photo: photos[m.photo] }));
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
 
@@ -17,8 +22,8 @@ export default function ConceptBPage() {
       {/* Hero — full-bleed photo, short emotional headline */}
       <section className="relative flex min-h-[80vh] items-end overflow-hidden pt-24">
         <Image
-          src="/images/photo-5.jpg"
-          alt="Kairos students enjoying an outdoor picnic together"
+          src={photos.outdoors.src}
+          alt={photos.outdoors.alt}
           fill
           priority
           sizes="100vw"
@@ -53,14 +58,22 @@ export default function ConceptBPage() {
         />
       </Section>
 
+      {/* A day at Kairos — sticky photo swaps as the day scrolls by */}
+      <Section className="bg-sand/40">
+        <SectionHeading eyebrow="A day at Kairos" title="What your student's day actually looks like" />
+        <div className="mt-12 lg:mt-4">
+          <DayScroller steps={daySteps} />
+        </div>
+      </Section>
+
       {/* Narrative photo band */}
       <section className="bg-forest-900 py-16 text-cream sm:py-24">
         <div className="container-page grid items-center gap-12 lg:grid-cols-2">
           <Reveal>
             <div className="relative aspect-[4/3] overflow-hidden rounded-4xl shadow-soft">
               <Image
-                src="/images/photo-2.jpg"
-                alt="A focused learning environment at Kairos"
+                src={photos.smallGroup.src}
+                alt={photos.smallGroup.alt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
@@ -88,6 +101,18 @@ export default function ConceptBPage() {
           </Reveal>
         </div>
       </section>
+
+      {/* Life at Kairos — a drifting photo wall */}
+      <Section className="overflow-hidden">
+        <SectionHeading
+          center
+          eyebrow="Life at Kairos"
+          title="Real students. Real days. Real progress."
+        />
+        <div className="mt-12">
+          <ParallaxGallery photos={galleryPhotos} />
+        </div>
+      </Section>
 
       {/* Values, as the "how we guide" beat */}
       <Section>

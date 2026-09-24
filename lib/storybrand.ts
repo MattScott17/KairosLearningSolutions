@@ -97,3 +97,46 @@ export const conceptC: ConceptCopy = {
 };
 
 export const concepts: ConceptCopy[] = [conceptA, conceptB, conceptC];
+
+// Concept B's "a day at Kairos" walk-through. Every detail comes from lib/content.ts
+// (APEX's 2 Hour Learning model, Early Learners' Tue–Thu mornings, Homework Club's
+// 2:30–5:15 PM hours) — no invented schedule times.
+export type DayMoment = {
+  when: string;
+  title: string;
+  body: string;
+  photo: "smallGroup" | "craftProject" | "presenting" | "outdoors" | "studentsLearning";
+};
+
+export const dayAtKairos: DayMoment[] = [
+  {
+    when: "Morning",
+    title: "Focused core academics",
+    body: "APEX students work through core academics in focused, personalized sessions — the 2 Hour Learning model — each at their own pace.",
+    photo: "studentsLearning",
+  },
+  {
+    when: "Tue – Thu mornings",
+    title: "Early Learners, grouped by skill",
+    body: "Our TK–2nd graders learn in small, hands-on groups built around what each child is ready for — not their grade.",
+    photo: "craftProject",
+  },
+  {
+    when: "Afternoon",
+    title: "Real-world skills and projects",
+    body: "With the core work done, the rest of the day goes to projects, presentations, and the life skills that build confident people.",
+    photo: "presenting",
+  },
+  {
+    when: "2:30 – 5:15 PM",
+    title: "Homework Club",
+    body: "After school, students drop in to get homework done with supportive educators — reviewed and complete before they head home.",
+    photo: "smallGroup",
+  },
+  {
+    when: "All year",
+    title: "Community, not just class",
+    body: "Picnics, events, and a close-knit community where every student is known by name.",
+    photo: "outdoors",
+  },
+];
