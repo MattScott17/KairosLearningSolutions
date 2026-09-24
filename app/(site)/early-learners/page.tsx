@@ -7,6 +7,7 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/CTASection";
 import { earlyLearners, registrationFees } from "@/lib/content";
+import { pagePhotos } from "@/lib/photos";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -63,8 +64,8 @@ export default function EarlyLearnersPage() {
           <Reveal>
             <div className="relative aspect-[4/3] overflow-hidden rounded-4xl shadow-soft">
               <Image
-                src="/images/photo-3.jpg"
-                alt="Young students working together in a small skill-based group"
+                src={pagePhotos.earlyLearners.src}
+                alt={pagePhotos.earlyLearners.alt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"

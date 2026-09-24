@@ -4,6 +4,8 @@ import { Quote } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
+import { ReviewMarquee } from "@/components/ReviewMarquee";
+import { photos } from "@/lib/photos";
 import { CTASection } from "@/components/CTASection";
 import { testimonials } from "@/lib/content";
 
@@ -30,8 +32,8 @@ export default function TestimonialsPage() {
           <Reveal>
             <div className="relative aspect-[4/3] overflow-hidden rounded-4xl shadow-soft">
               <Image
-                src="/images/photo-2.jpg"
-                alt="Kairos students in a small-group lesson"
+                src={photos.smallGroup.src}
+                alt={photos.smallGroup.alt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
@@ -49,6 +51,11 @@ export default function TestimonialsPage() {
           </Reveal>
         </div>
       </Section>
+
+      {/* A moving sample of every review before the full wall */}
+      <section className="overflow-hidden pb-4">
+        <ReviewMarquee />
+      </section>
 
       <Section className="bg-sand/50">
         <div className="columns-1 gap-6 sm:columns-2 lg:columns-3 [&>*]:mb-6 [&>*]:break-inside-avoid">

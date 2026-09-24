@@ -22,12 +22,12 @@ export function TutorAvatar({
       ) : (
         <div
           aria-hidden
-          className="flex h-full w-full items-center justify-center bg-gradient-to-br from-forest-700 to-forest-900"
+          className="flex h-full w-full items-center justify-center bg-gradient-to-br from-forest-200/70 via-sand to-forest-100"
         >
-          <span className={cn("font-display font-semibold text-cream/90", textClassName)}>
+          <span className={cn("font-display font-semibold text-forest-700", textClassName)}>
             {initials(member.name)}
           </span>
-          <span className="absolute -bottom-6 -right-4 h-20 w-14 rounded-t-full bg-gold-500/25" />
+          <span className="absolute -bottom-6 -right-4 h-20 w-14 rounded-t-full bg-gold-500/30" />
         </div>
       )}
     </div>
@@ -35,7 +35,18 @@ export function TutorAvatar({
 }
 
 /** Wyzant-style tutor card: arch-topped portrait, name, role tag and a short bio. */
-export function TutorCard({ member, className }: { member: TeamMember; className?: string }) {
+export function TutorCard({
+  member,
+  fullBio = false,
+  className,
+  avatarClassName = "aspect-[4/5]",
+}: {
+  member: TeamMember;
+  /** Show the whole bio instead of clamping it (used on /about). */
+  fullBio?: boolean;
+  className?: string;
+  avatarClassName?: string;
+}) {
   return (
     <article
       className={cn(
@@ -46,7 +57,7 @@ export function TutorCard({ member, className }: { member: TeamMember; className
       <TutorAvatar
         member={member}
         sizes="(max-width: 640px) 70vw, 280px"
-        className="aspect-[4/5] w-full arch"
+        className={cn("arch w-full", avatarClassName)}
       />
       <div className="flex flex-1 flex-col px-2 pb-2 pt-5">
         <span className="self-start rounded-full bg-forest-50 px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-forest-700">
@@ -54,7 +65,11 @@ export function TutorCard({ member, className }: { member: TeamMember; className
         </span>
         <h3 className="mt-3 text-lg font-semibold">{member.name}</h3>
         {/* Clamped so cards stay even; the full bio lives on /about. */}
-        {member.bio && <p className="mt-2 line-clamp-4 text-sm leading-relaxed text-ink/70">{member.bio}</p>}
+        {member.bio && (
+          <p className={cn("mt-2 text-sm leading-relaxed text-ink/70", !fullBio && "line-clamp-4")}>
+            {member.bio}
+          </p>
+        )}
       </div>
     </article>
   );

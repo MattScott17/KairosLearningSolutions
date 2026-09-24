@@ -11,7 +11,7 @@ import { Timeline, type TimelineItem } from "@/components/aceternity/Timeline";
 import { site } from "@/lib/site";
 import { services } from "@/lib/content";
 import { conceptA } from "@/lib/storybrand";
-import { photos, type Photo } from "@/lib/photos";
+import { photos, type Photo, pagePhotos } from "@/lib/photos";
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
 
@@ -127,8 +127,8 @@ export default function ConceptAPage() {
           <Reveal>
             <div className="relative aspect-[4/3] overflow-hidden rounded-4xl shadow-soft">
               <Image
-                src="/images/photo-3.jpg"
-                alt="Two Kairos students working on a craft project together"
+                src={pagePhotos.conceptAGuide.src}
+                alt={pagePhotos.conceptAGuide.alt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"

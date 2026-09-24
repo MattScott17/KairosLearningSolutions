@@ -18,6 +18,16 @@ export const heroPhotos = {
   secondary: photos.presenting,
 };
 
+/** The one feature photo on each interior page. */
+export const pagePhotos = {
+  about: photos.craftProject,
+  apex: photos.presenting,
+  earlyLearners: photos.craftProject,
+  summer: photos.outdoors,
+  fallClasses: photos.craftProject,
+  conceptAGuide: photos.craftProject,
+};
+
 /** Gallery set used by the photo-led concepts (B and D). */
 export const galleryPhotos: Photo[] = [
   photos.smallGroup,

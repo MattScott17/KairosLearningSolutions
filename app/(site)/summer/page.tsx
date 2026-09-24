@@ -6,6 +6,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/CTASection";
+import { pagePhotos } from "@/lib/photos";
 import { summerPrograms } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -50,8 +51,8 @@ export default function SummerPage() {
         <div className="container-page pt-16 sm:pt-20">
           <div className="relative aspect-[21/9] overflow-hidden rounded-4xl shadow-soft">
             <Image
-              src="/images/photo-5.jpg"
-              alt="Kairos students enjoying an outdoor summer activity"
+              src={pagePhotos.summer.src}
+              alt={pagePhotos.summer.alt}
               fill
               sizes="100vw"
               className="object-cover"

@@ -6,7 +6,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/CTASection";
 import { leadership, team, values } from "@/lib/content";
 import { site } from "@/lib/site";
-import { initials } from "@/lib/initials";
+import { pagePhotos } from "@/lib/photos";
+import { TutorAvatar, TutorCard } from "@/components/TutorCard";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -29,8 +30,8 @@ export default function AboutPage() {
           <Reveal>
             <div className="relative aspect-[4/3] overflow-hidden rounded-4xl shadow-soft">
               <Image
-                src="/images/photo-3.jpg"
-                alt="Learning at Kairos Learning Solutions"
+                src={pagePhotos.about.src}
+                alt={pagePhotos.about.alt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
@@ -88,9 +89,12 @@ export default function AboutPage() {
           {leadership.map((person, i) => (
             <Reveal key={person.name} delay={i * 0.08}>
               <div className="flex h-full flex-col gap-5 rounded-3xl border border-forest-100 bg-cream p-8 shadow-card sm:flex-row">
-                <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-forest-800 font-display text-2xl font-semibold text-cream">
-                  {initials(person.name)}
-                </div>
+                <TutorAvatar
+                  member={person}
+                  sizes="80px"
+                  className="h-20 w-20 shrink-0 rounded-2xl"
+                  textClassName="text-2xl"
+                />
                 <div>
                   <h3 className="text-xl font-semibold">{person.name}</h3>
                   <p className="text-sm font-medium text-forest-600">{person.role}</p>
@@ -116,19 +120,15 @@ export default function AboutPage() {
               </span>
             }
           />
-          <div className="mt-12 grid gap-4 sm:grid-cols-2">
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {team.map((member, i) => (
-              <Reveal key={member.name} delay={(i % 4) * 0.06}>
-                <div className="flex h-full gap-4 rounded-2xl bg-forest-800/70 p-5">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-forest-700 text-sm font-semibold text-cream">
-                    {initials(member.name)}
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-cream">{member.name}</p>
-                    <p className="text-xs text-cream/60">{member.role}</p>
-                    {member.bio && <p className="mt-2 text-sm text-cream/80">{member.bio}</p>}
-                  </div>
-                </div>
+              <Reveal key={member.name} delay={(i % 3) * 0.06}>
+                <TutorCard
+                  member={member}
+                  fullBio
+                  avatarClassName="aspect-[16/10] sm:aspect-[4/5]"
+                  className="border-forest-700 hover:translate-y-0"
+                />
               </Reveal>
             ))}
           </div>

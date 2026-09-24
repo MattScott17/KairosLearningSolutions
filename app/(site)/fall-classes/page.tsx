@@ -6,6 +6,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/CTASection";
+import { pagePhotos } from "@/lib/photos";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -122,8 +123,8 @@ export default function FallClassesPage() {
         <Reveal>
           <div className="relative aspect-[21/9] overflow-hidden rounded-4xl shadow-soft">
             <Image
-              src="/images/photo-3.jpg"
-              alt="Kairos students working on an enrichment class project"
+              src={pagePhotos.fallClasses.src}
+              alt={pagePhotos.fallClasses.alt}
               fill
               sizes="100vw"
               className="object-cover"
