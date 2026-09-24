@@ -213,6 +213,8 @@ export type TeamMember = {
   name: string;
   role: string;
   bio?: string;
+  // Headshot path under /public. Until set, cards show a monogram placeholder.
+  image?: string;
 };
 
 export const leadership: TeamMember[] = [
@@ -423,11 +425,21 @@ export function getTestimonials(ids: string[]): Testimonial[] {
   });
 }
 
-export const stats = [
+export type Stat = {
+  icon: LucideIcon;
+  // Display text, used as-is wherever the number isn't animated.
+  value: string;
+  label: string;
+  // Optional numeric form for count-up animation: renders `${count}${suffix}`.
+  count?: number;
+  suffix?: string;
+};
+
+export const stats: Stat[] = [
   { icon: Clock, value: "Since 2020", label: "Serving Salinas families" },
-  { icon: Users, value: "13+", label: "Educators & tutors" },
+  { icon: Users, value: "13+", count: 13, suffix: "+", label: "Educators & tutors" },
   { icon: Lightbulb, value: "All ages", label: "Early reading to AP" },
-  { icon: GraduationCap, value: "30+ yrs", label: "Lead teacher experience" },
+  { icon: GraduationCap, value: "30+ yrs", count: 30, suffix: "+ yrs", label: "Lead teacher experience" },
 ];
 
 export type SummerProgram = {

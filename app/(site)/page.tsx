@@ -1,36 +1,30 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Check, Quote } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { Hero } from "@/components/home/Hero";
+import { ParallaxPhoto } from "@/components/home/ParallaxPhoto";
+import { StatsBar } from "@/components/StatsBar";
+import { ReviewMarquee } from "@/components/ReviewMarquee";
+import { TutorCard } from "@/components/TutorCard";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { ServiceCard } from "@/components/ServiceCard";
 import { CTASection } from "@/components/CTASection";
-import { services, values, stats, getTestimonials, apex, earlyLearners } from "@/lib/content";
+import { services, values, apex, earlyLearners, leadership, team } from "@/lib/content";
+import { photos } from "@/lib/photos";
+
+// A cross-section of the team for the homepage strip; the full team is on /about.
+const featuredTutors = [
+  leadership[0],
+  ...team.filter((m) => ["Trisha Hill", "Brady Berg", "Laura Palmer"].includes(m.name)),
+];
 
 export default function HomePage() {
-  const [featured, ...supporting] = getTestimonials(["crystal-h", "erica-r", "ericka-g"]);
   return (
     <>
       <Hero />
 
-      {/* Trust bar */}
-      <section className="border-y border-forest-100 bg-cream/60">
-        <div className="container-page grid grid-cols-2 gap-6 py-10 md:grid-cols-4">
-          {stats.map((stat) => {
-            const Icon = stat.icon;
-            return (
-              <div key={stat.label} className="flex flex-col items-center text-center">
-                <Icon className="h-6 w-6 text-forest-500" />
-                <p className="mt-2 font-display text-2xl font-semibold text-forest-800">
-                  {stat.value}
-                </p>
-                <p className="mt-0.5 text-xs text-ink/60">{stat.label}</p>
-              </div>
-            );
-          })}
-        </div>
-      </section>
+      <StatsBar />
 
       {/* Services */}
       <Section id="services">
@@ -58,8 +52,8 @@ export default function HomePage() {
           <div className="mt-6 flex flex-col items-center gap-8 rounded-4xl border border-forest-100 bg-sand/50 p-8 shadow-card sm:flex-row sm:p-10">
             <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-3xl shadow-soft sm:w-64">
               <Image
-                src="/images/photo-3.jpg"
-                alt="Young students working together in a small skill-based group"
+                src={photos.craftProject.src}
+                alt={photos.craftProject.alt}
                 fill
                 sizes="(max-width: 640px) 100vw, 256px"
                 className="object-cover"
@@ -87,15 +81,11 @@ export default function HomePage() {
       <section className="relative overflow-hidden bg-forest-800 text-cream">
         <div className="container-page relative grid items-center gap-12 py-16 sm:py-24 lg:grid-cols-2">
           <Reveal>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-4xl shadow-soft">
-              <Image
-                src="/images/photo-2.jpg"
-                alt="A focused learning environment at Kairos APEX"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-              />
-            </div>
+            <ParallaxPhoto
+              photo={photos.smallGroup}
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="aspect-[4/3] arch shadow-soft lg:aspect-[5/5]"
+            />
           </Reveal>
           <Reveal delay={0.1}>
             <span className="inline-flex items-center gap-2 rounded-full bg-forest-700 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-forest-100">
@@ -146,46 +136,47 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* Testimonials preview */}
-      <section className="bg-sand/60 py-16 sm:py-24">
+      {/* Real Google reviews, drifting past */}
+      <section className="overflow-hidden bg-sand/60 py-16 sm:py-24">
         <div className="container-page">
           <SectionHeading
             center
             eyebrow="From our families"
             title="A community that shows up for kids"
+            intro="Real reviews from Kairos parents and students on Google."
           />
-          <div className="mt-12 grid gap-10 lg:grid-cols-5 lg:items-start">
-            <Reveal className="lg:col-span-3">
-              <Quote className="h-10 w-10 text-forest-300" />
-              <blockquote className="mt-4 font-display text-2xl leading-snug text-forest-900 sm:text-3xl">
-                “{featured.pull}”
-              </blockquote>
-              <p className="mt-5 text-sm font-semibold text-forest-800">
-                {featured.author}{" "}
-                <span className="font-normal text-ink/60">· {featured.role}</span>
-              </p>
-            </Reveal>
-            <div className="space-y-6 border-t border-forest-200 pt-6 lg:col-span-2 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
-              {supporting.map((t, i) => (
-                <Reveal key={t.id} delay={i * 0.08 + 0.1}>
-                  <blockquote className="text-base leading-relaxed text-ink/80">
-                    “{t.pull}”
-                  </blockquote>
-                  <p className="mt-2 text-sm font-semibold text-forest-800">
-                    {t.author} <span className="font-normal text-ink/60">· {t.role}</span>
-                  </p>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-          <div className="mt-10 text-center">
-            <Link href="/testimonials" className="btn-outline">
-              Read more stories
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
+        </div>
+        <ReviewMarquee className="mt-12" />
+        <div className="mt-8 text-center">
+          <Link href="/testimonials" className="btn-outline">
+            Read more stories
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
+
+      {/* Meet our tutors */}
+      <Section>
+        <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
+          <SectionHeading
+            eyebrow="Meet our tutors"
+            title="Experienced educators who know your child by name"
+            intro="Credentialed teachers, subject specialists, and tutors from Cal Poly, UC San Diego, and beyond."
+          />
+          <Link href="/about" className="btn-ghost shrink-0">
+            Meet the whole team
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+        {/* Swipeable row on phones, 4-up grid on desktop */}
+        <div className="-mx-5 mt-10 flex snap-x snap-mandatory scroll-pl-5 gap-4 overflow-x-auto px-5 pb-4 sm:-mx-8 sm:scroll-pl-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0">
+          {featuredTutors.map((member, i) => (
+            <Reveal key={member.name} delay={i * 0.08} className="w-[72%] shrink-0 snap-start sm:w-[45%] lg:w-auto">
+              <TutorCard member={member} />
+            </Reveal>
+          ))}
+        </div>
+      </Section>
 
       <CTASection />
     </>
