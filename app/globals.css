@@ -95,6 +95,14 @@
     border-radius: 50% 50% 1.75rem 1.75rem / 40% 40% 1.75rem 1.75rem;
   }
 
+  /* Horizontal scrollers that stay swipeable without a visible scrollbar */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   .link-underline {
     @apply relative font-medium text-forest-700 underline-offset-4 hover:underline;
   }
