@@ -1,14 +1,16 @@
-// StoryBrand-framework copy for the three homepage concept comps at
-// /concepts/a, /b, /c. Each concept tells the same true story — a struggling
+// StoryBrand-framework copy for the homepage concept comps at
+// /concepts/a–d. Each concept tells the same true story — a struggling
 // student, Kairos as the guide, a clear plan, a confident kid on the other
 // side — with a different structural emphasis. Facts here (grade ranges,
 // program names, tuition) come from `lib/content.ts` / `lib/site.ts`; this
 // file only adds narrative framing, not new claims.
 
 export type ConceptCopy = {
-  slug: "a" | "b" | "c";
+  slug: "a" | "b" | "c" | "d";
   label: string;
   pitch: string;
+  // The interaction style this concept tries out, shown on /concepts.
+  explores?: string[];
   heroHeadline: string;
   heroSub: string;
   problem: {
@@ -25,6 +27,7 @@ export type ConceptCopy = {
 
 export const conceptA: ConceptCopy = {
   slug: "a",
+  explores: ["Scroll-progress timeline", "Count-up stats", "Phone call bar"],
   label: "Concept A — The Direct Guide",
   pitch:
     "A direct-response homepage: one problem, one guide, one plan, one CTA — repeated until it's impossible to miss.",
@@ -50,6 +53,7 @@ export const conceptA: ConceptCopy = {
 
 export const conceptB: ConceptCopy = {
   slug: "b",
+  explores: ['"A day at Kairos" sticky photo scroller', "Drifting photo gallery"],
   label: "Concept B — A Day at Kairos",
   pitch:
     "A narrative, photo-led homepage that walks a visitor through what a day at Kairos actually feels like, before asking for anything.",
@@ -74,6 +78,7 @@ export const conceptB: ConceptCopy = {
 
 export const conceptC: ConceptCopy = {
   slug: "c",
+  explores: ['"My student needs…" path-finder', "Photo program cards with focus effect"],
   label: "Concept C — Find Your Path",
   pitch:
     "A path-finder homepage for visitors who arrive already comparing options — structured around 'which program fits your family' rather than a single narrative.",
@@ -96,7 +101,33 @@ export const conceptC: ConceptCopy = {
     "Guessing wrong costs a semester of momentum — and the confidence to try again.",
 };
 
-export const concepts: ConceptCopy[] = [conceptA, conceptB, conceptC];
+export const conceptD: ConceptCopy = {
+  slug: "d",
+  explores: ["Looping classroom video hero", "Tap-to-open photo gallery", "Review marquee & tutor cards"],
+  label: "Concept D — See It For Yourself",
+  pitch:
+    "A cinematic, show-don't-tell homepage: a looping classroom video, a gallery of real Kairos days, real reviews and real tutors — proof first, pitch second.",
+  heroHeadline: "See what learning looks like at Kairos.",
+  heroSub:
+    "Real students, real classrooms, right here in Salinas. Tutoring, homeschool support, and APEX — our full-time alternative to traditional school — all built around the individual.",
+  problem: {
+    external: "It's hard to know what a program is really like from a brochure.",
+    internal: "You want to picture your own child here before you commit.",
+    philosophical: "The best way to judge a school is to see its students.",
+  },
+  plan: [
+    "Book a free call and tell us about your student.",
+    "Come visit — see the space and meet the team.",
+    "Start with the tutor or program that fits.",
+  ],
+  planTitles: ["Call", "Visit", "Start"],
+  successVision:
+    "A student who can't wait to show you what they learned today.",
+  failureStakes:
+    "Every semester in the wrong setting is a semester of momentum lost.",
+};
+
+export const concepts: ConceptCopy[] = [conceptA, conceptB, conceptC, conceptD];
 
 // Concept B's "a day at Kairos" walk-through. Every detail comes from lib/content.ts
 // (APEX's 2 Hour Learning model, Early Learners' Tue–Thu mornings, Homework Club's

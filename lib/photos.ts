@@ -26,3 +26,6 @@ export const galleryPhotos: Photo[] = [
   photos.outdoors,
   photos.studentsLearning,
 ];
+
+/** Concept D's looping hero clip. Undefined until the encoded files are in /public/video. */
+export const heroVideo: { mp4: string; webm?: string } | undefined = undefined;
