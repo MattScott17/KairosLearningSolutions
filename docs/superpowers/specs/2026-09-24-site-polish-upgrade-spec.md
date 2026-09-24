@@ -38,6 +38,34 @@ different interaction styles. Interior pages stay calm and consistent.
 | `/testimonials` | Calm | Review marquee under the hero; masonry wall kept |
 | Other interior pages | Calm | Better real photos where a photo already exists; subtle image hover zoom on image cards |
 
+### Mobile & desktop behaviour (owner requirement)
+
+Every piece must look intentional at **390px (phone), 768px (tablet) and 1440px (desktop)**.
+Hover-only effects always have a touch equivalent; nothing relies on hover to reveal content.
+
+| Piece | Phone (≤ 640px) | Desktop (≥ 1024px) |
+|---|---|---|
+| FlipWords headline | Word wraps onto its own line; reserved min-width so the line never jumps; text ≤ `text-4xl` | Inline in the headline, `text-6xl` |
+| Arch photo collage | One arch photo + one small overlapping arch; accent shapes hidden | 2–3 arches + drifting accent shapes |
+| StatsBar count-up | 2×2 grid | 4 in a row |
+| Review marquee | One row only (second hidden), cards 280px wide, pause button ≥ 44px tap target, edge fades | Two rows, opposite directions, cards 380px, pause on hover + button |
+| Tutor cards | Horizontal swipe row with snap (`snap-x`), or 1 column on About | 4-up grid (home), 3-up (About) |
+| APEX parallax photo | Static (no parallax) | ±40px drift |
+| Timeline (A) | Line at left edge, content full width | Sticky step titles on the left, content on the right |
+| Sticky call bar (A) | Visible, page gets bottom padding so the footer isn't covered | Hidden |
+| DayScroller (B) | Each moment shows its own photo inline, no sticky | Sticky photo on the right swaps as you scroll |
+| Parallax gallery (B) | 2 static columns | 3 columns drifting at different rates |
+| PathFinder tabs (C) | Tab row scrolls sideways with snap; active panel stacks (text over photo) | Pill row, panel side-by-side (text + photo) |
+| Focus cards (C) | Titles always visible, 1 column, no blur | 2–3 columns, hover blurs the others |
+| Video hero (D) | Video fills `70svh`, headline over a dark gradient, poster shows instantly | Full `90vh`, same layout with wider text column |
+| Layout grid gallery (D) | 2-column grid; tap opens photo centered on screen, Esc/tap-outside closes | 3-column mixed-size grid; click expands centered |
+
+**Checks (per slice, not just at the end):**
+- Screenshots at 390 / 768 / 1440 of every page touched in that slice, reviewed by me before moving on (text overflow, overlap, cramped spacing, images cropped badly, tap targets).
+- e2e: no horizontal scroll at 360px on every changed page; header/footer/CTA reachable; all tap targets on new controls ≥ 44px.
+- Real phone behaviour: video autoplays muted with `playsInline` (iOS), no scroll-trapping elements, `svh` units so mobile browser bars don't cut the hero.
+- Performance: Lighthouse mobile run on `/` and `/concepts/d`; LCP image/poster uses `priority`; no layout shift from FlipWords, CountUp or images (fixed aspect ratios, reserved widths).
+
 ### Architecture Decisions
 
 - **Fix `Reveal` and the home `Hero` for reduced motion** (Changed based on challenger
@@ -230,6 +258,10 @@ Built as vertical slices; each slice ends with `npm run typecheck && npm run lin
 - [ ] `du -sh public/images/kairos` < 8 MB; each file in `public/video` ≤ 3 MB.
 - [ ] `concepts/d` exports noindex robots; not in `app/sitemap.ts`.
 - [ ] Testimonial ids and quote text unchanged.
+- [ ] Every row of the "Mobile & desktop behaviour" table verified in screenshots at 390 / 768 / 1440 (`e2e/screenshots/polish-*-{mobile,tablet,desktop}.png`).
+- [ ] No horizontal overflow at 360px on every changed page; new interactive controls ≥ 44×44px.
+- [ ] No hover-only content: `grep -rn "group-hover:opacity-100\|hover:opacity-100" components` hits all have a non-hover visible fallback.
+- [ ] Lighthouse mobile CLS < 0.1 on `/` and `/concepts/d`.
 - [ ] typecheck, lint, build, e2e all pass.
 
 ### Minor Notes from Challenger
