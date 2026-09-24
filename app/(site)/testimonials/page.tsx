@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function TestimonialsPage() {
-  const [featured, ...rest] = testimonials;
+  const featured = testimonials.find((t) => t.id === "melissa-d") ?? testimonials[0];
 
   return (
     <>
@@ -41,7 +41,7 @@ export default function TestimonialsPage() {
           <Reveal delay={0.1}>
             <Quote className="h-10 w-10 text-forest-300" />
             <blockquote className="mt-4 font-display text-2xl leading-snug text-forest-900 sm:text-3xl">
-              “{featured.quote}”
+              “{featured.pull}”
             </blockquote>
             <p className="mt-5 text-sm font-semibold text-forest-800">
               {featured.author} <span className="font-normal text-ink/60">· {featured.role}</span>
@@ -52,8 +52,8 @@ export default function TestimonialsPage() {
 
       <Section className="bg-sand/50">
         <div className="columns-1 gap-6 sm:columns-2 lg:columns-3 [&>*]:mb-6 [&>*]:break-inside-avoid">
-          {rest.map((t, i) => (
-            <Reveal key={t.author} delay={(i % 3) * 0.08}>
+          {testimonials.map((t, i) => (
+            <Reveal key={t.id} delay={(i % 3) * 0.08}>
               <figure className="rounded-3xl border border-forest-100 bg-cream p-7 shadow-card">
                 <Quote className="h-8 w-8 text-forest-300" />
                 <blockquote className="mt-4 text-lg leading-relaxed text-ink/85">
@@ -61,7 +61,10 @@ export default function TestimonialsPage() {
                 </blockquote>
                 <figcaption className="mt-6 border-t border-forest-100 pt-4 text-sm">
                   <span className="font-semibold text-forest-800">{t.author}</span>
-                  <span className="block text-ink/60">{t.role}</span>
+                  <span className="block text-ink/60">
+                    {t.role}
+                    {t.source && <> · {t.source} review</>}
+                  </span>
                 </figcaption>
               </figure>
             </Reveal>

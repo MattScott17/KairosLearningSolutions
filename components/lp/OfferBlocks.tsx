@@ -2,7 +2,7 @@ import { ArrowDown, Check, ChevronDown, Phone, ShieldCheck, X } from "lucide-rea
 import { Reveal } from "@/components/ui/Reveal";
 import { CallbackForm } from "@/components/lp/CallbackForm";
 import { TestimonialCards } from "@/components/lp/TestimonialCards";
-import { testimonials } from "@/lib/content";
+import { getTestimonials } from "@/lib/content";
 import { site } from "@/lib/site";
 import type { ProgramOffer, VariantHero } from "@/lib/landing-variants";
 
@@ -216,7 +216,7 @@ export function FaqList({ offer }: { offer: ProgramOffer }) {
 }
 
 export function Proof({ offer }: { offer: ProgramOffer }) {
-  const items = offer.testimonialIndexes.map((i) => testimonials[i]).filter(Boolean);
+  const items = getTestimonials(offer.testimonialIds);
   return (
     <div>
       <SectionTitle eyebrow="Kairos families" title="Don't take our word for it" />

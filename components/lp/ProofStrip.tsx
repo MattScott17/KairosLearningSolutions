@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
-import { stats, testimonials } from "@/lib/content";
+import { stats, getTestimonials } from "@/lib/content";
 import type { LandingCopy } from "@/lib/landing-content";
 import { TestimonialCards } from "@/components/lp/TestimonialCards";
 
@@ -35,7 +35,7 @@ export function ProofStrip({ copy }: { copy: LandingCopy }) {
         </div>
 
         <div className="mt-12">
-          <TestimonialCards items={testimonials.slice(0, 3)} />
+          <TestimonialCards items={getTestimonials(copy.testimonialIds)} />
         </div>
       </div>
     </section>

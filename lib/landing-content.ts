@@ -10,6 +10,8 @@ export type LandingCopy = {
   painPoints: string[];
   proofPoints: string[];
   ctaLabel: string;
+  // Reviews shown in the proof strip (ids from `testimonials` in lib/content.ts).
+  testimonialIds: string[];
 };
 
 export const apexLanding: LandingCopy = {
@@ -29,6 +31,7 @@ export const apexLanding: LandingCopy = {
     "A free consultation call before you commit to anything.",
   ],
   ctaLabel: "Book a free APEX call",
+  testimonialIds: ["melissa-d", "andrea-r", "erica-r"],
 };
 
 export const tutoringLanding: LandingCopy = {
@@ -48,4 +51,5 @@ export const tutoringLanding: LandingCopy = {
     "Matched to a tutor based on subject, learning style, and personality.",
   ],
   ctaLabel: "Book a free consultation",
+  testimonialIds: ["kristine-a", "angelina-d", "molly-b"],
 };

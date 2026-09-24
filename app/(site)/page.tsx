@@ -6,9 +6,10 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { ServiceCard } from "@/components/ServiceCard";
 import { CTASection } from "@/components/CTASection";
-import { services, values, stats, testimonials, apex, earlyLearners } from "@/lib/content";
+import { services, values, stats, getTestimonials, apex, earlyLearners } from "@/lib/content";
 
 export default function HomePage() {
+  const [featured, ...supporting] = getTestimonials(["crystal-h", "erica-r", "ericka-g"]);
   return (
     <>
       <Hero />
@@ -157,18 +158,18 @@ export default function HomePage() {
             <Reveal className="lg:col-span-3">
               <Quote className="h-10 w-10 text-forest-300" />
               <blockquote className="mt-4 font-display text-2xl leading-snug text-forest-900 sm:text-3xl">
-                “{testimonials[0].quote}”
+                “{featured.pull}”
               </blockquote>
               <p className="mt-5 text-sm font-semibold text-forest-800">
-                {testimonials[0].author}{" "}
-                <span className="font-normal text-ink/60">· {testimonials[0].role}</span>
+                {featured.author}{" "}
+                <span className="font-normal text-ink/60">· {featured.role}</span>
               </p>
             </Reveal>
             <div className="space-y-6 border-t border-forest-200 pt-6 lg:col-span-2 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
-              {testimonials.slice(1, 3).map((t, i) => (
-                <Reveal key={t.author} delay={i * 0.08 + 0.1}>
+              {supporting.map((t, i) => (
+                <Reveal key={t.id} delay={i * 0.08 + 0.1}>
                   <blockquote className="text-base leading-relaxed text-ink/80">
-                    “{t.quote}”
+                    “{t.pull}”
                   </blockquote>
                   <p className="mt-2 text-sm font-semibold text-forest-800">
                     {t.author} <span className="font-normal text-ink/60">· {t.role}</span>
