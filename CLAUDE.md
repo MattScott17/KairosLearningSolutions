@@ -25,14 +25,19 @@ Marketing site for a Salinas, CA tutoring / homeschool / full-time-learning cent
 
 ## Conventions
 
-- Brand colors are Tailwind tokens: `forest-{50..950}`, `cream`, `sand`, `ink`, `gold`.
+- Brand colors are Tailwind tokens: `forest-{50..950}` (sampled from the logo), `cream` (white),
+  `sand` (light band), `ink`, `gold`.
   Use them instead of raw hex.
 - Interior pages open with `<PageHero>` (dark green). The header renders solid on every
   page except `/` (whose hero is light) — see `Navigation.tsx`.
 - `<Reveal>` scroll-animates content but is built to **never leave content hidden**
   (IntersectionObserver + timeout fallback + reduced-motion static render). Keep that
   guarantee if you touch it.
-- Fonts: `Fraunces` (`font-display`, headings) and `Inter` (body).
+- Fonts: `Source Serif 4` (`font-display`, headings) and `Public Sans` (body).
+- Keep it looking hand-made, not AI-templated: greens come from the logo, white page, `rounded-lg`,
+  no drop shadows, no uppercase "eyebrow" labels or pill badges, no em dashes in site copy, and
+  copy in Jackie's plain first-person voice with real facts (prices, hours, credentials).
+- Photos are referenced by role from `lib/photos.ts`, so swapping a picture is a one-line change.
 
 ## Before committing
 

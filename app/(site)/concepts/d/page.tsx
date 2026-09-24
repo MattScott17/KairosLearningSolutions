@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
-import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/CTASection";
 import { VideoHero } from "@/components/VideoHero";
 import { LayoutGrid } from "@/components/aceternity/LayoutGrid";
@@ -15,23 +14,19 @@ import { galleryPhotos, heroVideo, photos } from "@/lib/photos";
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
 
-
-
 export default function ConceptDPage() {
   return (
     <>
-      {/* Hero — a silent, looping look inside a real Kairos classroom */}
+      {/* Hero: a silent, looping look inside a real Kairos classroom */}
       <VideoHero video={heroVideo} poster={photos.smallGroup}>
-        <span className="inline-flex items-center gap-2 rounded-full border border-cream/30 bg-forest-950/30 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-cream">
-          Salinas, CA · Since {site.foundedYear}
-        </span>
-        <h1 className="mt-5 max-w-3xl text-[2.6rem] font-semibold leading-[1.05] text-cream sm:text-6xl lg:text-7xl">
+        <p className="text-sm text-cream/85">Salinas, CA, since {site.foundedYear}</p>
+        <h1 className="mt-3 max-w-3xl text-[2.6rem] font-semibold leading-[1.05] text-cream sm:text-6xl lg:text-7xl">
           {conceptD.heroHeadline}
         </h1>
         <p className="mt-5 max-w-xl text-lg text-cream/85">{conceptD.heroSub}</p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link href="/contact" className="btn-accent">
-            Book a free call
+            Book a call
             <ArrowRight className="h-4 w-4" />
           </Link>
           <a
@@ -44,11 +39,10 @@ export default function ConceptDPage() {
         </div>
       </VideoHero>
 
-      {/* Gallery — tap any photo to see it large */}
+      {/* Gallery: tap any photo to see it large */}
       <Section>
         <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
           <SectionHeading
-            eyebrow="Inside Kairos"
             title="A look around"
             intro={conceptD.problem.philosophical}
           />
@@ -62,7 +56,7 @@ export default function ConceptDPage() {
       {/* Reviews */}
       <section className="overflow-hidden bg-sand/60 py-16 sm:py-24">
         <div className="container-page">
-          <SectionHeading center eyebrow="Don't take our word for it" title="What Kairos families say" />
+          <SectionHeading title="Reviews from Kairos families" />
         </div>
         <ReviewMarquee className="mt-12" />
       </section>
@@ -70,7 +64,7 @@ export default function ConceptDPage() {
       {/* Tutors */}
       <Section>
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
-          <SectionHeading eyebrow="The people" title="Who your student will learn with" />
+          <SectionHeading title="Who your student will learn with" />
           <Link href="/about" className="btn-ghost shrink-0">
             Meet the whole team
             <ArrowRight className="h-4 w-4" />
@@ -81,34 +75,26 @@ export default function ConceptDPage() {
         </div>
       </Section>
 
-      {/* Plan — three steps */}
+      {/* Plan: three steps */}
       <Section className="bg-forest-900 text-cream">
-        <SectionHeading
-          center
-          eyebrow="Getting started"
-          title={<span className="text-cream">Three steps to your first session</span>}
-          className="[&_.eyebrow]:text-forest-300"
-        />
-        <ol className="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-3">
-          {conceptD.plan.map((step, i) => (
-            <Reveal as="li" key={step} delay={i * 0.08}>
-              <div className="flex h-full flex-col items-center rounded-3xl bg-forest-800/70 p-7 text-center">
-                <span className="arch flex h-14 w-12 items-end justify-center bg-gold-500 pb-2 font-display text-lg font-semibold text-ink">
-                  {i + 1}
-                </span>
-                <h3 className="mt-4 text-xl font-semibold text-cream">{conceptD.planTitles?.[i]}</h3>
-                <p className="mt-2 text-sm text-cream/80">{step}</p>
-              </div>
-            </Reveal>
-          ))}
-        </ol>
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
+          <h2 className="text-3xl font-semibold text-cream sm:text-4xl">How to get started</h2>
+          <ol className="border-t border-cream/20">
+            {conceptD.plan.map((step, i) => (
+              <li key={step} className="grid gap-1 border-b border-cream/10 py-5 sm:grid-cols-[10rem_1fr] sm:gap-6">
+                <h3 className="text-xl font-semibold text-cream">
+                  {i + 1}. {conceptD.planTitles?.[i]}
+                </h3>
+                <p className="text-cream/80">{step}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
       </Section>
 
       <CTASection
         title={conceptD.successVision}
-        intro="Book a free call and come see Kairos in person."
-        primaryLabel="Book a free call"
-        primaryHref="/contact"
+        intro="Call me to set up a visit and see Kairos in person."
       />
     </>
   );

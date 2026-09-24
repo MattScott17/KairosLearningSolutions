@@ -12,12 +12,10 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <p className="font-display text-2xl font-semibold text-cream">Kairos</p>
-            <p className="mt-1 text-sm uppercase tracking-[0.2em] text-forest-300">
-              Learning Solutions
-            </p>
+            <p className="mt-1 text-sm text-forest-300">Learning Solutions</p>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-cream/70">
-              Personalized tutoring, homeschool support, and full-time learning in Salinas —
-              raising future world changers since {site.foundedYear}.
+              Tutoring, homeschool support and full-time school on South Main Street in Salinas,
+              since {site.foundedYear}.
             </p>
             <div className="mt-5 flex items-center gap-3">
               <a
@@ -43,7 +41,7 @@ export function Footer() {
 
           {/* Explore */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-cream">Explore</h3>
+            <h3 className="font-semibold text-cream">Explore</h3>
             <ul className="mt-4 space-y-2.5 text-sm">
               {mainNav.map((item) => (
                 <li key={item.href}>
@@ -57,7 +55,7 @@ export function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-cream">Services</h3>
+            <h3 className="font-semibold text-cream">Programs</h3>
             <ul className="mt-4 space-y-2.5 text-sm">
               <li>
                 <Link href="/apex" className="transition-colors hover:text-cream">
@@ -97,7 +95,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-cream">Visit Us</h3>
+            <h3 className="font-semibold text-cream">Visit</h3>
             <ul className="mt-4 space-y-3 text-sm">
               <li>
                 <a

@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
-import { Reveal } from "@/components/ui/Reveal";
 import { concepts } from "@/lib/storybrand";
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
@@ -12,40 +11,31 @@ export default function ConceptsIndexPage() {
   return (
     <>
       <PageHero
-        eyebrow="Internal preview"
-        title="Four homepage directions"
-        intro="Four different ways of telling the Kairos story — each one also tries a different style of motion and interaction. Click through each one, then let us know which direction (or which pieces) feel right."
+        title="Four homepage drafts"
+        intro="Each draft tells the Kairos story a different way and tries a different kind of motion. Look through all four, then tell us which one you like, or which parts of each."
       />
       <Section>
-        <div className="grid gap-6 md:grid-cols-2">
-          {concepts.map((concept, i) => (
-            <Reveal key={concept.slug} delay={i * 0.08}>
+        <ul className="border-t border-forest-200">
+          {concepts.map((concept) => (
+            <li key={concept.slug} className="border-b border-forest-100">
               <Link
                 href={`/concepts/${concept.slug}`}
-                className="group flex h-full flex-col rounded-3xl border border-forest-100 bg-cream p-7 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-forest-200 hover:shadow-soft"
+                className="group grid gap-2 py-6 transition-colors hover:bg-forest-50/60 md:grid-cols-[1fr_1.6fr] md:gap-10 md:px-2"
               >
-                <h2 className="text-xl font-semibold">{concept.label}</h2>
-                <p className="prose-kairos mt-3 text-sm">{concept.pitch}</p>
-                {concept.explores && (
-                  <ul className="mt-4 flex flex-1 flex-wrap content-start gap-2">
-                    {concept.explores.map((item) => (
-                      <li
-                        key={item}
-                        className="h-fit rounded-full bg-forest-50 px-3 py-1 text-xs font-medium text-forest-700"
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-forest-800">
-                  View concept
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </span>
+                <h2 className="flex items-center gap-2 text-xl font-semibold text-forest-900">
+                  {concept.label}
+                  <ArrowRight className="h-4 w-4 text-forest-700 transition-transform group-hover:translate-x-1" />
+                </h2>
+                <div>
+                  <p className="prose-kairos">{concept.pitch}</p>
+                  {concept.explores && (
+                    <p className="mt-2 text-sm text-ink/60">Tries out: {concept.explores.join(", ")}.</p>
+                  )}
+                </div>
               </Link>
-            </Reveal>
+            </li>
           ))}
-        </div>
+        </ul>
       </Section>
     </>
   );

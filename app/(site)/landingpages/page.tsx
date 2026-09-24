@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
-import { Reveal } from "@/components/ui/Reveal";
 import { landingPageGroups } from "@/lib/landing-pages";
 
 export const metadata: Metadata = {
@@ -15,7 +14,6 @@ export default function LandingPagesIndex() {
   return (
     <>
       <PageHero
-        eyebrow="Internal"
         title="Landing pages"
         intro="Every ad landing page we've built, grouped by program. Open them on your phone — that's where most ad traffic lands."
       />
@@ -27,10 +25,10 @@ export default function LandingPagesIndex() {
           </div>
           <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {group.pages.map((page, i) => (
-              <Reveal key={page.href} delay={Math.min(i, 3) * 0.05}>
+              <div key={page.href}>
                 <Link
                   href={page.href}
-                  className="group flex h-full flex-col rounded-3xl border border-forest-100 bg-cream p-6 shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:border-forest-300 hover:shadow-soft"
+                  className="group flex h-full flex-col rounded-lg border border-forest-100 bg-cream p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-forest-300"
                 >
                   <span className="font-semibold text-forest-900">{page.label}</span>
                   <span className="mt-1 font-mono text-xs text-forest-600">{page.href}</span>
@@ -50,7 +48,7 @@ export default function LandingPagesIndex() {
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>
                 </Link>
-              </Reveal>
+              </div>
             ))}
           </div>
         </Section>

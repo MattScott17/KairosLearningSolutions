@@ -21,7 +21,7 @@ function Column({
       {photos.map((photo, i) => (
         <div
           key={photo.src + i}
-          className="relative aspect-[4/5] overflow-hidden rounded-3xl shadow-card odd:aspect-[4/3]"
+          className="relative aspect-[4/5] overflow-hidden rounded-lg odd:aspect-[4/3]"
         >
           <Image
             src={photo.src}

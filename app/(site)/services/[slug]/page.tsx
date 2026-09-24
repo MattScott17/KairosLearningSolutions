@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check, Phone } from "lucide-react";
+import { ArrowLeft, ArrowRight, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
-import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/CTASection";
 import { homeschoolPricing, registrationFees, services } from "@/lib/content";
 import { site } from "@/lib/site";
@@ -38,7 +37,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
 
   return (
     <>
-      <PageHero eyebrow="Services" title={service.title} intro={service.summary}>
+      <PageHero title={service.title} intro={service.summary}>
         <div className="flex flex-col gap-3 sm:flex-row">
           <Link href="/contact" className="btn-accent">
             {service.cta}
@@ -56,38 +55,29 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
 
       {/* Highlights */}
       <section className="border-b border-forest-100 bg-cream">
-        <div className="container-page grid grid-cols-1 divide-y divide-forest-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+        <dl className="container-page grid grid-cols-1 divide-y divide-forest-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           {service.highlights.map((h) => (
-            <div key={h.label} className="py-8 text-center sm:px-6">
-              <p className="text-xs font-semibold uppercase tracking-wider text-forest-600">
-                {h.label}
-              </p>
-              <p className="mt-2 font-display text-xl font-semibold text-forest-800">{h.value}</p>
+            <div key={h.label} className="py-7 sm:px-6 sm:first:pl-0">
+              <dt className="text-sm text-ink/60">{h.label}</dt>
+              <dd className="mt-1 font-display text-xl font-semibold text-forest-800">{h.value}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       </section>
 
       {/* Details */}
       <Section container="narrow">
-        <span className="eyebrow">
-          <span className="h-px w-6 bg-gold-500" aria-hidden />
-          How it works
-        </span>
-        <h2 className="mt-3 text-3xl font-semibold">What to expect</h2>
-        <ul className="mt-8 space-y-4">
-          {service.details.map((detail, i) => (
-            <Reveal as="li" key={detail} delay={i * 0.06}>
-              <div className="flex items-start gap-4 rounded-2xl border border-forest-100 bg-cream p-5 shadow-card">
-                <Check className="mt-0.5 h-5 w-5 shrink-0 text-forest-500" />
-                <p className="text-ink/85">{detail}</p>
-              </div>
-            </Reveal>
+        <h2 className="text-3xl font-semibold">How it works</h2>
+        <ul className="mt-8 border-t border-forest-200">
+          {service.details.map((detail) => (
+            <li key={detail} className="border-b border-forest-100 py-4 text-ink/85">
+              {detail}
+            </li>
           ))}
         </ul>
 
         {slug === "homeschool-support" && (
-          <div className="mt-10 overflow-x-auto rounded-3xl border border-forest-100 bg-cream shadow-card">
+          <div className="mt-10 overflow-x-auto rounded-lg border border-forest-100 bg-cream">
             <table className="w-full min-w-[480px] text-sm">
               <thead>
                 <tr className="border-b border-forest-100 text-left">
@@ -120,7 +110,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
         )}
 
         {(slug === "homeschool-support" || slug === "private-tutoring") && (
-          <div className="mt-6 rounded-2xl border border-forest-100 bg-sand/30 p-5">
+          <div className="mt-6 rounded-lg border border-forest-100 bg-sand/30 p-5">
             <h3 className="text-sm font-semibold text-forest-800">Registration fees</h3>
             <dl className="mt-3 space-y-2">
               {registrationFees.map((fee) => (
@@ -138,29 +128,30 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
           className="mt-10 inline-flex items-center gap-2 text-sm font-semibold text-forest-700"
         >
           <ArrowLeft className="h-4 w-4" />
-          All services
+          All programs and prices
         </Link>
       </Section>
 
       {/* Other services */}
       <section className="bg-sand/60 py-16">
         <div className="container-page">
-          <h2 className="text-2xl font-semibold">Explore other services</h2>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2">
+          <h2 className="text-2xl font-semibold">Other programs</h2>
+          <ul className="mt-6 border-t border-forest-200">
             {others.map((other) => (
-              <Link
-                key={other.slug}
-                href={`/services/${other.slug}`}
-                className="group flex items-center gap-4 rounded-3xl bg-cream p-6 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-soft"
-              >
-                <div>
-                  <p className="font-semibold text-forest-800">{other.title}</p>
-                  <p className="text-sm text-ink/60">{other.short}</p>
-                </div>
-                <ArrowRight className="ml-auto h-5 w-5 text-forest-400 transition-transform group-hover:translate-x-1" />
-              </Link>
+              <li key={other.slug} className="border-b border-forest-100">
+                <Link
+                  href={`/services/${other.slug}`}
+                  className="group flex items-center gap-4 py-5 transition-colors hover:bg-forest-50/60 sm:px-2"
+                >
+                  <div>
+                    <p className="font-semibold text-forest-800">{other.title}</p>
+                    <p className="text-sm text-ink/60">{other.short}</p>
+                  </div>
+                  <ArrowRight className="ml-auto h-5 w-5 text-forest-400 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 

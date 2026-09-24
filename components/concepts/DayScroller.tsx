@@ -28,11 +28,11 @@ function Step({
   return (
     <li ref={ref} className="lg:flex lg:min-h-[70vh] lg:items-center">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold-600">{step.when}</p>
-        <h3 className="mt-3 text-2xl font-semibold sm:text-3xl">{step.title}</h3>
+        <p className="text-sm font-semibold text-forest-700">{step.when}</p>
+        <h3 className="mt-1 text-2xl font-semibold sm:text-3xl">{step.title}</h3>
         <p className="prose-kairos mt-3 max-w-md text-lg">{step.body}</p>
         {/* Phones: each moment carries its own photo */}
-        <div className="arch relative mt-6 aspect-[4/3] overflow-hidden shadow-soft lg:hidden">
+        <div className="arch relative mt-6 aspect-[4/3] overflow-hidden lg:hidden">
           <Image src={step.photo.src} alt={step.photo.alt} fill sizes="90vw" className="object-cover" />
         </div>
       </div>
@@ -59,7 +59,7 @@ export function DayScroller({ steps }: { steps: DayStep[] }) {
 
       <div className="hidden lg:block">
         <div className="sticky top-28 h-[70vh]">
-          <div className="arch relative h-full overflow-hidden shadow-soft">
+          <div className="arch relative h-full overflow-hidden">
             <AnimatePresence initial={false}>
               <motion.div
                 key={photo.src}

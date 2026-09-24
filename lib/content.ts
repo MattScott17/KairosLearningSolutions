@@ -10,8 +10,6 @@ import {
   Home,
   Clock,
   HeartHandshake,
-  Compass,
-  Trophy,
   Lightbulb,
 } from "lucide-react";
 
@@ -30,65 +28,65 @@ export const services: Service[] = [
   {
     slug: "private-tutoring",
     title: "Private Tutoring",
-    short: "One-on-one, all ages and subjects",
+    short: "One-on-one, any age and subject",
     icon: BookOpen,
     summary:
-      "Our team of experienced, friendly tutors work one-on-one with students of every age and subject — from early reading to AP science courses. We start with a short consultation call to match your student with the right tutor.",
+      "Our tutors work one-on-one with students of every age, from early reading to AP science. We start with a short consultation call so we can match your student with the right tutor.",
     details: [
-      "In-person sessions at our Salinas center or online — whatever fits your family.",
-      "Every subject, every level: early literacy, math, writing, world languages, test prep, and AP coursework.",
-      "We match each student with a tutor based on subject, learning style, and personality.",
-      "$70–$120 per hour, depending on subject and tutor — set during your consultation with Jackie.",
-      "Prefer a standing weekly session? A 1 session/week monthly plan is $360/month.",
+      "Sessions are at our center on South Main Street in Salinas, or online.",
+      "Subjects include early literacy, math, writing, world languages, test prep and AP coursework.",
+      "We match each student with a tutor by subject, learning style and personality.",
+      "Sessions are $70 to $120 an hour, depending on the subject and tutor. Jackie sets the rate during your consultation.",
+      "For a standing weekly session, the monthly plan is $360 for one session a week.",
     ],
     highlights: [
-      { label: "Format", value: "In-person & online" },
+      { label: "Format", value: "In person or online" },
       { label: "Ages", value: "All ages" },
-      { label: "Pricing", value: "$70–$120 / hour" },
+      { label: "Pricing", value: "$70 to $120 an hour" },
     ],
     cta: "Book a consultation",
   },
   {
     slug: "homework-club",
     title: "Homework Club",
-    short: "After-school homework, handled",
+    short: "After-school homework help, Monday to Thursday",
     icon: Clock,
     summary:
-      "Let us take the stress out of after-school homework. Choose how many days a week your student needs, drop them off after school, and pick them up when the work is done — reviewed and complete.",
+      "Drop your student off after school and pick them up when the homework is done. We check it before they leave. Choose one to four days a week.",
     details: [
-      "Open Monday through Thursday, 2:30–5:15 PM.",
+      "Open Monday through Thursday, 2:30 to 5:15 PM.",
       "Monthly plans: 1 day/week $180, 2 days/week $250, 3 days/week $320, 4 days/week $360.",
       "Second child on the same plan: $140, $180, $220, or $260 for the same day counts.",
-      "No plan yet? Drop in for $20/hour or $50/day.",
-      "Supportive educators keep students focused and on task, and homework gets checked before your student heads home.",
+      "Without a plan, drop in for $20 an hour or $50 a day.",
+      "Our teachers keep students on task and check the homework before they head home.",
     ],
     highlights: [
-      { label: "Days", value: "Mon – Thu" },
-      { label: "Time", value: "2:30 – 5:15 PM" },
-      { label: "Pricing", value: "From $180 / mo" },
+      { label: "Days", value: "Mon to Thu" },
+      { label: "Time", value: "2:30 to 5:15 PM" },
+      { label: "Pricing", value: "From $180 a month" },
     ],
     cta: "Reserve a spot",
   },
   {
     slug: "homeschool-support",
     title: "Homeschool Support",
-    short: "Flexible packages for homeschool families",
+    short: "Month-to-month packages for homeschool families",
     icon: Home,
     summary:
-      "Every homeschooling journey is unique. Whether you want full curriculum planning and teaching or simply a flexible workspace for independent study, our tiered packages meet you where you are.",
+      "Four levels of support, from a place to work with occasional help (Level A) to a custom program planned and taught by our teachers (Level D). Memberships are month to month.",
     details: [
-      "Level A — a safe, supportive space with socialization and occasional instruction or tutoring.",
-      "Level B — full assessment, planning, and instruction at Kairos, plus time and space to complete work.",
-      "Level C — everything in Level B, plus private tutoring, for a highly individualized plan.",
-      "Level D — every Kairos benefit, for families who want a fully custom program built around their student.",
-      "Month-to-month memberships, low student-to-teacher ratios, and flexible hourly packages — no long-term commitment required.",
+      "Level A: a place to work alongside other students, with occasional instruction or tutoring.",
+      "Level B: we assess your student, plan the work and teach it at Kairos, with time and space to finish assignments.",
+      "Level C: everything in Level B, plus private tutoring.",
+      "Level D: every Kairos service, built into a custom program for your student.",
+      "Memberships are month to month, with small student-to-teacher ratios and hourly packages. There's no long-term contract.",
     ],
     highlights: [
-      { label: "Structure", value: "Levels A – D" },
-      { label: "Commitment", value: "Month-to-month" },
-      { label: "Support", value: "As much as you need" },
+      { label: "Structure", value: "Levels A to D" },
+      { label: "Commitment", value: "Month to month" },
+      { label: "Hours", value: "24 to 100 a month" },
     ],
-    cta: "Find your package",
+    cta: "Ask about packages",
   },
 ];
 
@@ -117,34 +115,34 @@ export type EnrichmentNote = {
 
 export const enrichment: EnrichmentNote = {
   title: "Enrichment Classes",
-  body: "Throughout the year Kairos hosts enrichment courses — writing, Spanish, STEM, and seasonal activities — so students can hone a skill or feed their curiosity. Spaces fill quickly; current offerings are posted on Instagram and in our seasonal catalogs.",
+  body: "We run classes through the year in writing, Spanish, STEM and seasonal topics. They fill up fast. Current classes are posted on Instagram and in our seasonal catalog.",
   icon: Sparkles,
 };
 
 export const values = [
   {
     icon: Users,
-    title: "Specialized Attention",
-    body: "Our entire model is built around the individual needs of your child — not a one-size-fits-all classroom.",
+    title: "Individual attention",
+    body: "Lessons are planned around each student, one-on-one or in small groups.",
   },
   {
     icon: GraduationCap,
-    title: "Professional Educators",
-    body: "Our teachers and tutors bring deep experience in their subjects — and they're warm, patient, and genuinely fun to learn from.",
+    title: "Experienced teachers",
+    body: "Many of our teachers spent 15 to 38 years in classrooms before joining Kairos.",
   },
   {
     icon: HeartHandshake,
-    title: "Goal-Oriented Mentorship",
-    body: "We blend tutoring, group instruction, and mentoring to grow both academic skills and confident, capable people.",
+    title: "Mentoring",
+    body: "We combine tutoring, group lessons and mentoring to build skills and confidence.",
   },
 ];
 
 export const apex = {
   name: "APEX",
-  tagline: "A full-time learning program, reimagined",
+  tagline: "Full-time school for grades 3 to 9",
   intro:
-    "APEX is a full-time alternative to traditional school — a small-group program where your child is seen, supported, and challenged. We combine personalized academics, real life skills, and hands-on learning so students grow in both ability and confidence.",
-  gradeRange: "Grades 3 – 9",
+    "APEX is our full-time program for grades 3 to 9, run in small groups as an alternative to traditional school. Students do personalized, mastery-based academics first, then spend the rest of the day on projects and life skills.",
+  gradeRange: "Grades 3 to 9",
   tuition: {
     monthly: "$1,800 / month",
     annual: "$18,000 / year",
@@ -154,58 +152,54 @@ export const apex = {
     {
       name: "APEX (full program)",
       price: "$1,800 / month",
-      description: "The complete program — academics plus workshops.",
+      description: "Academics and workshops.",
     },
     {
       name: "APEX Academics only",
       price: "$1,450 / month",
-      description: "Just the personalized, mastery-based academic block.",
+      description: "The personalized, mastery-based academic block only.",
     },
     {
       name: "APEX Workshops only",
       price: "$650 / month",
-      description: "Just the hands-on projects and life-skills workshops.",
+      description: "The hands-on project and life-skills workshops only.",
     },
   ],
   model:
-    "APEX uses the 2 Hour Learning model — the same approach used at Alpha Schools — where students master core academics in focused, personalized sessions, then spend the rest of the day building real-world skills.",
+    "APEX uses the 2 Hour Learning model, the same approach Alpha Schools use. Students work through core academics in focused, personalized sessions, then spend the rest of the day on real-world skills.",
   pillars: [
     {
-      icon: Compass,
-      title: "Personalized pace",
-      body: "Each student moves at their own pace — not the pace of the class. Ready to move ahead? Go for it.",
+      title: "Each student's own pace",
+      body: "Each student moves at their own pace, and a student who is ready to move ahead can.",
     },
     {
-      icon: Users,
-      title: "Small-group environment",
-      body: "A close community where every student is known by name and supported day to day.",
+      title: "Small groups",
+      body: "Groups are small, so every teacher knows each student by name and sees their work every day.",
     },
     {
-      icon: Clock,
-      title: "Focused academics",
-      body: "Core subjects are mastered in efficient, high-focus blocks that respect a child's attention and energy.",
+      title: "Short academic blocks",
+      body: "Core subjects are covered in short, high-focus blocks sized to a child's attention span.",
     },
     {
-      icon: Trophy,
-      title: "Confidence & independence",
-      body: "Structure and accountability that help students become capable, self-directed learners.",
+      title: "Structure and accountability",
+      body: "Daily structure and check-ins help students learn to manage their own work.",
     },
   ],
   included: [
     "Personalized, mastery-based academics",
-    "Small-group, community-driven environment",
-    "Flexible pacing that lets students accelerate",
-    "Built-in structure and accountability",
-    "Life-skills and hands-on, project-based learning",
-    "Mentorship that develops confidence and independence",
+    "Small groups",
+    "Students move ahead when they're ready",
+    "Daily structure and accountability",
+    "Life skills and hands-on projects",
+    "Mentoring toward independence",
   ],
   outcomesNote:
-    "Mid-year academic data shows APEX students outperforming national growth norms, with achievement gains from fall to winter across a wide range of learners.",
+    "Our mid-year data showed APEX students growing faster than national norms, with gains from fall to winter across a wide range of learners.",
   comparison: [
-    { traditional: "One pace for everyone", apex: "Personalized pace and progress" },
-    { traditional: "Limited flexibility", apex: "Flexible, responsive structure" },
-    { traditional: "Passive learning", apex: "Active, engaging learning" },
-    { traditional: "Hard to feel known", apex: "Strong relationships and support" },
+    { traditional: "One pace for everyone", apex: "Each student at their own pace" },
+    { traditional: "Limited flexibility", apex: "Flexible structure" },
+    { traditional: "Passive learning", apex: "Active, hands-on learning" },
+    { traditional: "Hard to feel known", apex: "Teachers know each student well" },
   ],
 };
 
@@ -221,12 +215,12 @@ export const leadership: TeamMember[] = [
   {
     name: "Jackie Scott",
     role: "Owner & Lead Teacher",
-    bio: "Jackie brings more than 30 years of teaching experience across grades 3–12, many subjects, and a range of educational settings. She holds an MA in Educational Leadership and Curriculum & Instruction, and her passion is helping students fall in love with learning.",
+    bio: "Jackie has taught for more than 30 years, in grades 3 to 12, in many subjects and many kinds of schools. She holds an MA in Educational Leadership and Curriculum & Instruction, and opened Kairos in 2020.",
   },
   {
     name: "Venessa Gilbride",
     role: "Director",
-    bio: "Venessa leads program development and community partnerships, drawing on a background in community engagement — including launching the first science fair at Washington Union School District.",
+    bio: "Venessa runs program development and community partnerships. Her background is in community engagement, and she started the first science fair at Washington Union School District.",
   },
 ];
 
@@ -239,12 +233,12 @@ export const team: TeamMember[] = [
   {
     name: "Lisa Bleicher",
     role: "Teacher",
-    bio: "38 years of kindergarten teaching experience before recently retiring — now bringing that same warmth to Kairos.",
+    bio: "Taught kindergarten for 38 years before retiring, and now teaches at Kairos.",
   },
   {
     name: "Lori Grainger",
     role: "Teacher",
-    bio: "27 years of teaching experience, primarily in 2nd grade, before retiring from the classroom.",
+    bio: "27 years of teaching experience, mostly in 2nd grade, before retiring from the classroom.",
   },
   {
     name: "Brady Berg",
@@ -269,12 +263,12 @@ export const team: TeamMember[] = [
   {
     name: "Trisha Hill",
     role: "Subject Specialist",
-    bio: "15 years of teaching experience, full-time at New Republic Elementary in Salinas — nominated for Monterey County Teacher of the Year in 2022.",
+    bio: "15 years of teaching experience. She teaches full time at New Republic Elementary in Salinas and was nominated for Monterey County Teacher of the Year in 2022.",
   },
   {
     name: "Daryl Lyon",
     role: "Subject Specialist",
-    bio: "BA in English Education from Southern Oregon University and 24 years teaching grades 11–12, with an emphasis on writing and critical thinking.",
+    bio: "BA in English Education from Southern Oregon University and 24 years teaching grades 11 and 12, with an emphasis on writing and critical thinking.",
   },
   {
     name: "Laura Palmer",
@@ -284,7 +278,7 @@ export const team: TeamMember[] = [
   {
     name: "Mendy Amaral",
     role: "Operations",
-    bio: "A lifelong Salinas resident and 20+ year community volunteer who keeps everything at Kairos running.",
+    bio: "A lifelong Salinas resident and community volunteer for more than 20 years. She runs day-to-day operations at Kairos.",
   },
 ];
 
@@ -475,9 +469,9 @@ export const summerPrograms: SummerProgram[] = [
   {
     slug: "back-to-school-boot-camp",
     title: "Back-to-School Boot Camp",
-    dates: "July 20 – 23 & July 27 – 30, 2026",
+    dates: "July 20 to 23 and July 27 to 30, 2026",
     description:
-      "Focused sessions in reading, math, and language arts — plus enrichment activities — designed to beat the summer slide and start the school year strong.",
+      "Reading, math and language arts sessions, with some enrichment activities, so students don't lose ground over the summer and start the school year ready.",
     schedule: [
       { label: "Morning session", value: "9:30 AM – 12:00 PM" },
       { label: "Afternoon session", value: "1:00 – 3:30 PM" },
@@ -489,19 +483,19 @@ export const summerPrograms: SummerProgram[] = [
       { label: "Full day, both weeks (16 sessions)", value: "$650" },
       { label: "Individual sessions", value: "$50 each" },
     ],
-    note: "Spots are limited — reach out to reserve a spot.",
+    note: "Spots are limited. Call or send a message to reserve one.",
   },
   {
     slug: "love-note-music-camp",
     title: "Love Note Music Camp",
-    dates: "June 22 – 25 & June 29 – July 2, 2026",
+    dates: "June 22 to 25 and June 29 to July 2, 2026",
     description:
-      "A hosted music camp with experienced instructor Jenny Cogswell — violin, ukulele, guitar, and voice. All skill levels welcome, and instruments are available to borrow.",
+      "A music camp with instructor Jenny Cogswell: violin, ukulele, guitar and voice. All skill levels are welcome, and students can borrow an instrument.",
     schedule: [
-      { label: "Violin — Jun 22–25", value: "9:00 AM – 12:00 PM" },
-      { label: "Ukulele — Jun 22–25", value: "1:00 – 4:00 PM" },
-      { label: "Guitar — Jun 29–Jul 2", value: "9:00 AM – 12:00 PM" },
-      { label: "Voice — Jun 29–Jul 2", value: "1:00 – 4:00 PM" },
+      { label: "Violin, Jun 22–25", value: "9:00 AM – 12:00 PM" },
+      { label: "Ukulele, Jun 22–25", value: "1:00 – 4:00 PM" },
+      { label: "Guitar, Jun 29–Jul 2", value: "9:00 AM – 12:00 PM" },
+      { label: "Voice, Jun 29–Jul 2", value: "1:00 – 4:00 PM" },
     ],
     pricing: [{ label: "Earlybird (register by May 31)", value: "$240" }],
     hostedBy: "Love Note Music Studio",
@@ -512,30 +506,82 @@ export const summerPrograms: SummerProgram[] = [
 
 export const earlyLearners = {
   name: "Early Learners",
-  tagline: "Grouped by skill, not by grade — so every student can go further, or go at their own pace",
-  ageRange: "TK – 2nd grade",
+  tagline: "Grouped by skill instead of grade, so each child can move ahead or take more time",
+  ageRange: "TK to 2nd grade",
   intro:
-    "For our youngest students, we group by skill instead of age or grade. A child who's ready to stretch further can — and a child who needs more time gets it, without ever feeling behind. Small groups, hands-on learning, and a half-day program built around how each student actually learns.",
+    "A half-day program for TK through 2nd grade, Tuesday to Thursday mornings. We group children by skill instead of age or grade, so a child who is ready can move ahead and a child who needs more time gets it.",
   groups: [
     {
       name: "Explorers",
-      body: "For students just starting to build foundational skills — lots of hands-on, playful discovery, at a pace that feels right for them.",
+      body: "Children just starting on foundational skills. Lots of hands-on play, at a comfortable pace.",
     },
     {
       name: "Navigators",
-      body: "For students building confidence and independence with core skills, moving forward as they master each one.",
+      body: "Children getting more confident and independent with core skills, moving on as they master each one.",
     },
     {
       name: "Discoverers",
-      body: "For students ready to stretch further — more challenge, more independence, as fast as they're ready to go.",
+      body: "Children ready for more challenge and more independence, moving as fast as they are ready to go.",
     },
   ],
   schedule: [
-    { label: "Core program", value: "Tuesday – Thursday, 9:00 AM – 12:00 PM" },
-    { label: "Monday enrichment (optional)", value: "Additional day, extra cost" },
+    { label: "Core program", value: "Tuesday to Thursday, 9:00 AM to 12:00 PM" },
+    { label: "Monday enrichment (optional)", value: "An extra day, priced separately" },
   ],
   pricing: [
     { label: "Core program", value: "$600 / month" },
     { label: "Monday enrichment (optional)", value: "$250 / month" },
   ],
 };
+
+// One line per program, for the at-a-glance price list on the homepage and /services.
+// Built from the data above so prices and hours only live in one place.
+export type ProgramRow = { name: string; href: string; who: string; when: string; price: string };
+
+export function getProgramList(): ProgramRow[] {
+  const [tutoring, homework, homeschool] = services;
+  return [
+    {
+      name: tutoring.title,
+      href: `/services/${tutoring.slug}`,
+      who: "Any age, any subject",
+      when: "Weekly or as needed, in person or online",
+      price: "$70 to $120 an hour",
+    },
+    {
+      name: homework.title,
+      href: `/services/${homework.slug}`,
+      who: "School-age kids with homework",
+      when: "Monday to Thursday, 2:30 to 5:15 PM",
+      price: "From $180 a month",
+    },
+    {
+      name: homeschool.title,
+      href: `/services/${homeschool.slug}`,
+      who: "Homeschool families",
+      when: `Month to month, ${homeschoolPricing.hoursPerMonth[0]} to ${homeschoolPricing.hoursPerMonth[homeschoolPricing.hoursPerMonth.length - 1]} hours`,
+      price: `From $${homeschoolPricing.levels.A[0]} a month`,
+    },
+    {
+      name: earlyLearners.name,
+      href: "/early-learners",
+      who: "TK to 2nd grade",
+      when: "Tuesday to Thursday, 9 AM to noon",
+      price: earlyLearners.pricing[0].value.replace(" / ", " a "),
+    },
+    {
+      name: "APEX",
+      href: "/apex",
+      who: "Grades 3 to 9",
+      when: `Full school day, ${apex.tuition.term.toLowerCase()}`,
+      price: apex.tuition.monthly.replace(" / ", " a "),
+    },
+    {
+      name: "Classes and enrichment",
+      href: "/fall-classes",
+      who: "All ages",
+      when: "Each season: writing, Spanish, STEM and more",
+      price: "Priced per class",
+    },
+  ];
+}

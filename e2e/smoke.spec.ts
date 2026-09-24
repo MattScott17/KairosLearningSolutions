@@ -8,14 +8,14 @@ const pages = [
   { path: "/", heading: /fall/i, title: /Kairos Learning Solutions/ },
   { path: "/apex", heading: /APEX/, title: /APEX/ },
   { path: "/about", heading: /whole child/i, title: /About/ },
-  { path: "/services", heading: /find the support/i, title: /Services/ },
+  { path: "/services", heading: /programs and prices/i, title: /Services/ },
   { path: "/services/private-tutoring", heading: /Private Tutoring/, title: /Private Tutoring/ },
   { path: "/services/homework-club", heading: /Homework Club/, title: /Homework Club/ },
   { path: "/services/homeschool-support", heading: /Homeschool Support/, title: /Homeschool Support/ },
-  { path: "/fall-classes", heading: /Classes & Enrichment/, title: /Classes/ },
-  { path: "/summer", heading: /summer of curiosity/i, title: /Summer/ },
-  { path: "/testimonials", heading: /Stories from our families/i, title: /Testimonials/ },
-  { path: "/contact", heading: /talk about your student/i, title: /Contact/ },
+  { path: "/fall-classes", heading: /Fall 2026 classes/i, title: /Classes/ },
+  { path: "/summer", heading: /Summer 2026 at Kairos/i, title: /Summer/ },
+  { path: "/testimonials", heading: /Reviews from Kairos families/i, title: /Testimonials/ },
+  { path: "/contact", heading: /Call, email or visit/i, title: /Contact/ },
 ];
 
 for (const p of pages) {

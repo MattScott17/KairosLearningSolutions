@@ -45,7 +45,7 @@ export function PathFinder({ paths }: { paths: Path[] }) {
         id={panelId}
         role="tabpanel"
         aria-labelledby={`${panelId}-tab-${path.id}`}
-        className="mt-8 rounded-4xl border border-forest-100 bg-cream p-5 shadow-soft sm:p-8"
+        className="mt-8 rounded-lg border border-forest-100 bg-cream p-5 sm:p-8"
       >
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
@@ -66,13 +66,12 @@ export function PathFinder({ paths }: { paths: Path[] }) {
               />
             </div>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold-600">Your path</p>
-              <h3 className="mt-2 text-3xl font-semibold">{path.program}</h3>
+              <h3 className="text-3xl font-semibold">{path.program}</h3>
               <p className="prose-kairos mt-3">{path.summary}</p>
               <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-forest-100 pt-5 sm:grid-cols-3">
                 {path.facts.map((f) => (
                   <div key={f.label}>
-                    <dt className="text-xs uppercase tracking-wide text-ink/55">{f.label}</dt>
+                    <dt className="text-sm text-ink/60">{f.label}</dt>
                     <dd className="mt-1 font-display text-lg font-semibold text-forest-800">{f.value}</dd>
                   </div>
                 ))}

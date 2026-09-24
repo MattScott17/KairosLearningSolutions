@@ -3,8 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
-import { Section, SectionHeading } from "@/components/ui/Section";
-import { Reveal } from "@/components/ui/Reveal";
+import { Section } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
 import { earlyLearners, registrationFees } from "@/lib/content";
 import { pagePhotos } from "@/lib/photos";
@@ -13,16 +12,16 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Early Learners",
   description:
-    "For TK through 2nd grade in Salinas, CA — grouped by skill instead of age or grade, so every student can stretch further or learn at their own pace. Small groups, Tuesday through Thursday mornings.",
+    "A half-day program for TK through 2nd grade in Salinas, CA. Children are grouped by skill instead of grade. Tuesday to Thursday, 9 AM to noon, $600 a month.",
 };
 
 export default function EarlyLearnersPage() {
   return (
     <>
-      <PageHero eyebrow={earlyLearners.ageRange} title={earlyLearners.name} intro={earlyLearners.intro}>
+      <PageHero title={`${earlyLearners.name}, ${earlyLearners.ageRange}`} intro={earlyLearners.intro}>
         <div className="flex flex-col gap-3 sm:flex-row">
           <Link href="/contact" className="btn-accent">
-            Book a tour &amp; conversation
+            Book a tour
             <ArrowRight className="h-4 w-4" />
           </Link>
           <a
@@ -35,104 +34,62 @@ export default function EarlyLearnersPage() {
         </div>
       </PageHero>
 
-      {/* Quick facts */}
-      <section className="border-b border-forest-100 bg-cream">
-        <div className="container-page grid grid-cols-1 divide-y divide-forest-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-          <div className="py-8 text-center sm:px-6">
-            <p className="text-xs font-semibold uppercase tracking-wider text-forest-600">Ages</p>
-            <p className="mt-2 font-display text-2xl font-semibold text-forest-800">
-              {earlyLearners.ageRange}
-            </p>
-          </div>
-          <div className="py-8 text-center sm:px-6">
-            <p className="text-xs font-semibold uppercase tracking-wider text-forest-600">Core price</p>
-            <p className="mt-2 font-display text-2xl font-semibold text-forest-800">
-              {earlyLearners.pricing[0].value}
-            </p>
-          </div>
-          <div className="py-8 text-center sm:px-6">
-            <p className="text-xs font-semibold uppercase tracking-wider text-forest-600">Format</p>
-            <p className="mt-2 font-display text-2xl font-semibold text-forest-800">Half-day</p>
-            <p className="mt-1 text-xs text-ink/60">Skill-based small groups</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Skill-based, not grade-based */}
+      {/* The three groups */}
       <Section>
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <Reveal>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-4xl shadow-soft">
-              <Image
-                src={pagePhotos.earlyLearners.src}
-                alt={pagePhotos.earlyLearners.alt}
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-              />
-            </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <SectionHeading
-              eyebrow="How groups work"
-              title="Grouped by skill, not by age"
-              intro="Every child starts right where they are — not where their birthday says they should be. Students move between three small groups as they grow."
+        <div className="grid items-start gap-12 lg:grid-cols-2">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+            <Image
+              src={pagePhotos.earlyLearners.src}
+              alt={pagePhotos.earlyLearners.alt}
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
             />
-          </Reveal>
-        </div>
-
-        <div className="mt-12 grid gap-6 sm:grid-cols-3">
-          {earlyLearners.groups.map((group, i) => (
-            <Reveal key={group.name} delay={i * 0.08}>
-              <div className="h-full rounded-3xl border border-forest-100 bg-cream p-7 text-center shadow-card">
-                <h3 className="text-lg font-semibold">{group.name}</h3>
-                <p className="prose-kairos mt-2 text-sm">{group.body}</p>
-              </div>
-            </Reveal>
-          ))}
+          </div>
+          <div>
+            <h2 className="text-3xl font-semibold sm:text-4xl">Three groups, by skill</h2>
+            <p className="prose-kairos mt-4 text-lg">
+              Each child starts in the group that matches what they can already do, and moves up
+              when they&apos;re ready, whatever their age.
+            </p>
+            <dl className="mt-8 border-t border-forest-200">
+              {earlyLearners.groups.map((group) => (
+                <div key={group.name} className="border-b border-forest-100 py-5">
+                  <dt className="text-lg font-semibold text-forest-900">{group.name}</dt>
+                  <dd className="prose-kairos mt-1">{group.body}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
       </Section>
 
       {/* Schedule & pricing */}
       <section className="bg-sand/60 py-16 sm:py-24">
-        <div className="container-page">
-          <SectionHeading center eyebrow="Schedule & pricing" title="What it costs, when it runs" />
-          <div className="mx-auto mt-12 grid max-w-2xl gap-6 sm:grid-cols-2">
-            <div className="rounded-3xl bg-cream p-7 shadow-card">
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-forest-600">
-                Schedule
-              </h3>
-              <dl className="mt-4 space-y-3">
-                {earlyLearners.schedule.map((s) => (
-                  <div key={s.label}>
-                    <dt className="text-xs text-ink/60">{s.label}</dt>
-                    <dd className="text-sm font-medium text-forest-800">{s.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-            <div className="rounded-3xl bg-cream p-7 shadow-card">
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-forest-600">
-                Pricing
-              </h3>
-              <dl className="mt-4 space-y-3">
-                {earlyLearners.pricing.map((p) => (
-                  <div key={p.label}>
-                    <dt className="text-xs text-ink/60">{p.label}</dt>
-                    <dd className="text-sm font-medium text-forest-800">{p.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          </div>
+        <div className="container-page grid gap-10 lg:grid-cols-[1fr_1.6fr]">
+          <h2 className="text-3xl font-semibold sm:text-4xl">Schedule and prices</h2>
+          <div>
+            <dl className="border-t border-forest-200">
+              {earlyLearners.schedule.map((s) => (
+                <div
+                  key={s.label}
+                  className="grid gap-1 border-b border-forest-100 py-4 sm:grid-cols-[1fr_auto_auto] sm:gap-6"
+                >
+                  <dt className="font-semibold text-forest-900">{s.label}</dt>
+                  <dd className="text-ink/75">{s.value}</dd>
+                  <dd className="font-medium text-forest-800 sm:text-right">
+                    {earlyLearners.pricing.find((p) => p.label === s.label)?.value.replace(" / ", " a ")}
+                  </dd>
+                </div>
+              ))}
+            </dl>
 
-          <div className="mx-auto mt-6 max-w-2xl rounded-2xl border border-forest-100 bg-cream/60 p-5">
-            <h3 className="text-sm font-semibold text-forest-800">Registration fees</h3>
+            <h3 className="mt-10 text-sm font-semibold text-forest-800">Registration fees</h3>
             <dl className="mt-3 space-y-2">
               {registrationFees.map((fee) => (
                 <div key={fee.label} className="flex justify-between gap-4 text-sm">
                   <dt className="text-ink/60">{fee.label}</dt>
-                  <dd className="text-right font-medium text-forest-800">{fee.value}</dd>
+                  <dd className="whitespace-nowrap text-right font-medium text-forest-800">{fee.value}</dd>
                 </div>
               ))}
             </dl>
@@ -141,9 +98,9 @@ export default function EarlyLearnersPage() {
       </section>
 
       <CTASection
-        title="Curious if Early Learners is right for your student?"
-        intro="Book a tour, meet the team, and see the space — then decide together whether it's the right fit."
-        primaryLabel="Book a tour"
+        title="Come for a tour"
+        intro="Call me to set up a tour. You can see the space, meet the teachers, and ask which group your child would start in."
+        primaryLabel="Or send a message"
         primaryHref="/contact"
       />
     </>

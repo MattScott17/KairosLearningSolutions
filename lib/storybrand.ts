@@ -28,103 +28,96 @@ export type ConceptCopy = {
 export const conceptA: ConceptCopy = {
   slug: "a",
   explores: ["Scroll-progress timeline", "Count-up stats", "Phone call bar"],
-  label: "Concept A — The Direct Guide",
+  label: "Concept A: Direct",
   pitch:
-    "A direct-response homepage: one problem, one guide, one plan, one CTA — repeated until it's impossible to miss.",
-  heroHeadline: "Your child is capable of more than their current classroom can give them.",
+    "A direct-response homepage. It names the problem, introduces Jackie and Kairos, lays out three steps, and repeats one call to action.",
+  heroHeadline: "Tutoring, homeschool support and full-time school in Salinas, planned around your child.",
   heroSub:
-    "Kairos is a Salinas tutoring and homeschool center built around one idea: meet every student exactly where they are, then help them go further. Book a free call and we'll help you find the right fit — a tutor, a program, or APEX, our full-time alternative to traditional school.",
+    "I'm Jackie Scott. I've taught for more than 30 years, and in 2020 I opened Kairos on South Main Street. Call me and tell me about your student. I'll suggest a tutor, a program, or APEX, our full-time program for grades 3 to 9.",
   problem: {
-    external: "Falling behind, disengaged, or stuck in a classroom that moves at one speed for everyone.",
-    internal: "You worry you've run out of ways to help, or that you're not enough on your own.",
-    philosophical: "Every kid deserves an education built around them, not the other way around.",
+    external: "Your student is behind, or bored, in a class that moves at one speed.",
+    internal: "You've tried helping at home and it isn't working.",
+    philosophical: "School should move at your child's pace.",
   },
   plan: [
-    "Book a free call — tell us where your student is struggling or what they need.",
-    "We match your student with the right tutor or program.",
-    "Watch them build the confidence and skills to keep going on their own.",
+    "Call or send a message and tell us what your student is struggling with.",
+    "We match your student with a tutor or program.",
+    "Your student starts at their own level and moves on when they're ready.",
   ],
-  planTitles: ["Book a free call", "Get matched", "Watch them grow"],
-  successVision:
-    "A student who looks forward to learning again — confident, capable, and supported by people who know their name.",
-  failureStakes:
-    "Left unaddressed, small gaps become years of frustration — for your student, and for you.",
+  planTitles: ["Call us", "Get matched", "Start"],
+  successVision: "A student who knows the material and walks into class ready.",
+  failureStakes: "Gaps in reading and math are easier to close early.",
 };
 
 export const conceptB: ConceptCopy = {
   slug: "b",
   explores: ['"A day at Kairos" sticky photo scroller', "Drifting photo gallery"],
-  label: "Concept B — A Day at Kairos",
+  label: "Concept B: A day at Kairos",
   pitch:
-    "A narrative, photo-led homepage that walks a visitor through what a day at Kairos actually feels like, before asking for anything.",
-  heroHeadline: "Where students fall in love with learning again.",
+    "A photo-led homepage that walks through a day at Kairos before asking for anything.",
+  heroHeadline: "A day at Kairos, from morning academics to Homework Club.",
   heroSub:
-    "Since 2020, Kairos has helped Salinas families turn homework battles and school-day dread into something calmer — one student, one relationship, one small win at a time.",
+    "Since 2020 we've taught Salinas students one-on-one and in small groups at 836 South Main Street. Here's what a day here looks like.",
   problem: {
-    external: "A student who dreads school, homework, or falling further behind each semester.",
-    internal: "The quiet fear that this is just how it's going to be for your family.",
-    philosophical: "Kids don't need to be fixed — they need a place built for how they actually learn.",
+    external: "Homework fights every night, or a child who dreads going to school.",
+    internal: "You're worried this is how it's going to stay.",
+    philosophical: "A small group and a teacher who knows your child can change how school feels.",
   },
   plan: [
-    "Come see the space and meet the team — book a free call to start.",
-    "Your student is matched with a tutor or program that fits their pace and personality.",
-    "Progress you can actually see, session by session.",
+    "Call to set up a visit and meet the teachers.",
+    "We match your student with a tutor or program that fits their pace.",
+    "Your student starts at their own level.",
   ],
-  successVision:
-    "A student who walks in the door glad to be there, and walks out a little more sure of themselves than the day before.",
-  failureStakes:
-    "The longer the daily struggle goes unaddressed, the more it becomes about identity, not just academics.",
+  successVision: "A student who's glad to walk in the door.",
+  failureStakes: "The longer school stays a daily fight, the harder it is to turn around.",
 };
 
 export const conceptC: ConceptCopy = {
   slug: "c",
   explores: ['"My student needs…" path-finder', "Photo program cards with focus effect"],
-  label: "Concept C — Find Your Path",
+  label: "Concept C: Find your program",
   pitch:
-    "A path-finder homepage for visitors who arrive already comparing options — structured around 'which program fits your family' rather than a single narrative.",
-  heroHeadline: "Every family's path through Kairos looks a little different. Here's how to find yours.",
+    "A program-finder homepage for parents who arrive already comparing options. It's organized around which program fits, with less story.",
+  heroHeadline: "Which Kairos program fits your student?",
   heroSub:
-    "From an hour of homework help to a full-time alternative to traditional school, Kairos offers a level of support that grows with your student — all in Salinas, all built around the individual, none of it one-size-fits-all.",
+    "We offer everything from an hour of homework help to a full school day for grades 3 to 9, all at our center in Salinas. Pick what your student needs below, or call and I'll help you choose.",
   problem: {
-    external: "Too many options that all sound the same, and no clear way to tell which one your student actually needs.",
-    internal: "Not wanting to guess wrong on something this important.",
-    philosophical: "The right amount of support is the one that fits your specific student — not the most popular one.",
+    external: "Tutoring, homework help, homeschool support and full-time school can sound alike, and it's hard to tell which one your student needs.",
+    internal: "You don't want to pay for the wrong one.",
+    philosophical: "The right amount of help depends on your student, so start with what they need now.",
   },
   plan: [
-    "Answer one question: how much support does your student need right now?",
-    "See the program that fits — Private Tutoring, Homework Club, Homeschool Support, or full-time APEX.",
-    "Book a free call to confirm the fit before committing to anything.",
+    "Pick what your student needs right now.",
+    "See the matching program: Private Tutoring, Homework Club, Homeschool Support or APEX.",
+    "Call us to check the fit before you sign up.",
   ],
   successVision:
-    "A family that knows exactly which door to walk through, and a student getting exactly the right level of support.",
-  failureStakes:
-    "Guessing wrong costs a semester of momentum — and the confidence to try again.",
+    "You know which program to start with, and your student gets the amount of help they need.",
+  failureStakes: "Picking the wrong program can cost a semester.",
 };
 
 export const conceptD: ConceptCopy = {
   slug: "d",
   explores: ["Looping classroom video hero", "Tap-to-open photo gallery", "Review marquee & tutor cards"],
-  label: "Concept D — See It For Yourself",
+  label: "Concept D: See it first",
   pitch:
-    "A cinematic, show-don't-tell homepage: a looping classroom video, a gallery of real Kairos days, real reviews and real tutors — proof first, pitch second.",
-  heroHeadline: "See what learning looks like at Kairos.",
+    "A looping classroom video, a photo gallery, Google reviews and tutor cards come first. The pitch comes last.",
+  heroHeadline: "Inside Kairos, on South Main Street in Salinas.",
   heroSub:
-    "Real students, real classrooms, right here in Salinas. Tutoring, homeschool support, and APEX — our full-time alternative to traditional school — all built around the individual.",
+    "Tutoring, homeschool support and APEX, our full-time program for grades 3 to 9. This is a real class at Kairos.",
   problem: {
-    external: "It's hard to know what a program is really like from a brochure.",
-    internal: "You want to picture your own child here before you commit.",
-    philosophical: "The best way to judge a school is to see its students.",
+    external: "It's hard to judge a program from a brochure.",
+    internal: "You want to picture your child here before you sign up.",
+    philosophical: "Photos from ordinary days at Kairos.",
   },
   plan: [
-    "Book a free call and tell us about your student.",
-    "Come visit — see the space and meet the team.",
+    "Call and tell us about your student.",
+    "Visit to see the space and meet the teachers.",
     "Start with the tutor or program that fits.",
   ],
   planTitles: ["Call", "Visit", "Start"],
-  successVision:
-    "A student who can't wait to show you what they learned today.",
-  failureStakes:
-    "Every semester in the wrong setting is a semester of momentum lost.",
+  successVision: "Your student comes home wanting to tell you what they learned.",
+  failureStakes: "A semester in the wrong setting is hard to get back.",
 };
 
 export const concepts: ConceptCopy[] = [conceptA, conceptB, conceptC, conceptD];
@@ -142,32 +135,32 @@ export type DayMoment = {
 export const dayAtKairos: DayMoment[] = [
   {
     when: "Morning",
-    title: "Focused core academics",
-    body: "APEX students work through core academics in focused, personalized sessions — the 2 Hour Learning model — each at their own pace.",
+    title: "Core academics",
+    body: "APEX students work through core subjects in focused, personalized sessions using the 2 Hour Learning model, each at their own level.",
     photo: "studentsLearning",
   },
   {
-    when: "Tue – Thu mornings",
+    when: "Tuesday to Thursday mornings",
     title: "Early Learners, grouped by skill",
-    body: "Our TK–2nd graders learn in small, hands-on groups built around what each child is ready for — not their grade.",
+    body: "TK to 2nd graders learn in small, hands-on groups based on what each child is ready for.",
     photo: "craftProject",
   },
   {
     when: "Afternoon",
-    title: "Real-world skills and projects",
-    body: "With the core work done, the rest of the day goes to projects, presentations, and the life skills that build confident people.",
+    title: "Projects and life skills",
+    body: "With the core work done, APEX students spend the rest of the day on projects, presentations and life skills.",
     photo: "presenting",
   },
   {
-    when: "2:30 – 5:15 PM",
+    when: "2:30 to 5:15 PM",
     title: "Homework Club",
-    body: "After school, students drop in to get homework done with supportive educators — reviewed and complete before they head home.",
+    body: "After school, students come in to finish their homework, and we check it before they go home.",
     photo: "smallGroup",
   },
   {
     when: "All year",
-    title: "Community, not just class",
-    body: "Picnics, events, and a close-knit community where every student is known by name.",
+    title: "Events and picnics",
+    body: "Social events through the year, with teachers who know every student by name.",
     photo: "outdoors",
   },
 ];

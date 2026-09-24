@@ -3,9 +3,10 @@
 export const site = {
   name: "Kairos Learning Solutions",
   shortName: "Kairos",
+  // Old slogan. No longer shown anywhere on the site; kept in case the owner wants it back.
   tagline: "Raising Future World Changers",
   description:
-    "Personalized tutoring, homeschool support, and full-time learning in Salinas, CA. Since 2020, Kairos has helped students of every age fall in love with learning.",
+    "Tutoring, homework help, homeschool support and a full-time program for grades 3 to 9 at 836 South Main Street in Salinas, CA. Open since 2020.",
   url: "https://www.kairoslearningsolutions.com",
   foundedYear: 2020,
   phone: "(831) 500-2520",

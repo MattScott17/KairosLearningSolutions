@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section, SectionHeading } from "@/components/ui/Section";
-import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/CTASection";
-import { leadership, team, values } from "@/lib/content";
+import { leadership, team } from "@/lib/content";
 import { site } from "@/lib/site";
 import { pagePhotos } from "@/lib/photos";
 import { TutorAvatar, TutorCard } from "@/components/TutorCard";
@@ -19,125 +18,81 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="About Kairos"
         title="Educators who see the whole child"
-        intro="Since 2020, Kairos Learning Solutions has been a place in Salinas where students are known by name, met where they are, and challenged to grow — academically and personally."
+        intro="Most of our teachers are Salinas parents and grandparents. Between them they've taught kindergarten through 12th grade, several for more than 25 years, and one still teaches full time at New Republic Elementary."
       />
 
-      {/* Mission */}
+      {/* Jackie, in her own words */}
       <Section>
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <Reveal>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-4xl shadow-soft">
-              <Image
-                src={pagePhotos.about.src}
-                alt={pagePhotos.about.alt}
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-              />
-            </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <SectionHeading
-              eyebrow="Our mission"
-              title="Talented, passionate educators — focused on your student"
-              intro="The team at Kairos is composed of talented and passionate educators whose main goal is to serve your student's academic and personal needs. Most of our team are parents and grandparents with deep roots in the Salinas community, and we bring hundreds of combined years of experience to every child who walks through our doors."
+        <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.1fr]">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+            <Image
+              src={pagePhotos.about.src}
+              alt={pagePhotos.about.alt}
+              fill
+              sizes="(max-width: 1024px) 100vw, 45vw"
+              className="object-cover"
             />
-            <dl className="mt-8 grid grid-cols-2 gap-6">
-              <div>
-                <dt className="font-display text-3xl font-semibold text-forest-800">Since {site.foundedYear}</dt>
-                <dd className="mt-1 text-sm text-ink/60">Serving Salinas families</dd>
-              </div>
-              <div>
-                <dt className="font-display text-3xl font-semibold text-forest-800">All ages</dt>
-                <dd className="mt-1 text-sm text-ink/60">Early reading through AP courses</dd>
-              </div>
-            </dl>
-          </Reveal>
+          </div>
+          <div>
+            <h2 className="text-3xl font-semibold sm:text-4xl">Why I opened Kairos</h2>
+            <div className="prose-kairos mt-5 space-y-4 text-lg">
+              <p>
+                I taught grades 3 through 12 for more than 30 years, in many subjects and many kinds of
+                schools. In {site.foundedYear} I opened Kairos so students could work at their own
+                pace, one-on-one or in small groups, with teachers who know them by name.
+              </p>
+              <p>
+                My goal is the same one I had in the classroom: help students fall in love with
+                learning.
+              </p>
+            </div>
+            <p className="mt-6 text-sm text-ink/60">Jackie Scott, owner and lead teacher</p>
+          </div>
         </div>
       </Section>
 
-      {/* Values */}
-      <section className="bg-sand/60 py-16 sm:py-24">
+      {/* Leadership */}
+      <section className="border-t border-forest-100 py-16 sm:py-20">
         <div className="container-page">
-          <SectionHeading
-            center
-            eyebrow="What we believe"
-            title="Three commitments to every family"
-          />
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {values.map((value, i) => (
-              <Reveal key={value.title} delay={i * 0.08}>
-                <div className="h-full rounded-3xl bg-cream p-8 shadow-card">
-                  <h3 className="text-xl font-semibold">{value.title}</h3>
-                  <p className="prose-kairos mt-3 text-sm">{value.body}</p>
+          <SectionHeading title="Who runs Kairos" />
+          <div className="mt-10 grid gap-10 md:grid-cols-2">
+            {leadership.map((person) => (
+              <div key={person.name} className="flex gap-5">
+                <TutorAvatar
+                  member={person}
+                  sizes="80px"
+                  className="h-20 w-20 shrink-0 rounded-lg"
+                />
+                <div>
+                  <h3 className="text-xl font-semibold">{person.name}</h3>
+                  <p className="text-sm text-forest-700">{person.role}</p>
+                  <p className="prose-kairos mt-3 text-sm">{person.bio}</p>
                 </div>
-              </Reveal>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Leadership */}
-      <Section>
-        <SectionHeading
-          eyebrow="Leadership"
-          title="Meet the people leading the way"
-        />
-        <div className="mt-12 grid gap-8 md:grid-cols-2">
-          {leadership.map((person, i) => (
-            <Reveal key={person.name} delay={i * 0.08}>
-              <div className="flex h-full flex-col gap-5 rounded-3xl border border-forest-100 bg-cream p-8 shadow-card sm:flex-row">
-                <TutorAvatar
-                  member={person}
-                  sizes="80px"
-                  className="h-20 w-20 shrink-0 rounded-2xl"
-                  textClassName="text-2xl"
-                />
-                <div>
-                  <h3 className="text-xl font-semibold">{person.name}</h3>
-                  <p className="text-sm font-medium text-forest-600">{person.role}</p>
-                  <p className="prose-kairos mt-3 text-sm">{person.bio}</p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </Section>
-
       {/* Team */}
-      <section className="bg-forest-900 py-16 text-cream sm:py-24">
+      <section className="bg-sand py-16 sm:py-20">
         <div className="container-page">
           <SectionHeading
-            center
-            eyebrow="Our team"
-            title={<span className="text-cream">Teachers, tutors &amp; specialists</span>}
-            intro={
-              <span className="text-cream/80">
-                A close-knit team of educators, each bringing their own subjects, warmth, and years
-                of experience.
-              </span>
-            }
+            title="Our teachers and tutors"
+            intro="Credentialed classroom teachers, subject specialists, and college tutors in math and science."
           />
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {team.map((member, i) => (
-              <Reveal key={member.name} delay={(i % 3) * 0.06}>
-                <TutorCard
-                  member={member}
-                  fullBio
-                  avatarClassName="aspect-[16/10] sm:aspect-[4/5]"
-                  className="border-forest-700 hover:translate-y-0"
-                />
-              </Reveal>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {team.map((member) => (
+              <TutorCard key={member.name} member={member} fullBio />
             ))}
           </div>
         </div>
       </section>
 
       <CTASection
-        title="Come see Kairos for yourself"
-        intro="The best way to understand what makes Kairos different is to visit. Reach out and we'll set up a time to talk."
+        title="Come visit"
+        intro="Call me and we'll find a time for you and your student to see the space and meet the teachers."
       />
     </>
   );

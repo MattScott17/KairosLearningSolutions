@@ -25,7 +25,7 @@ export function FocusCards({ cards }: { cards: FocusCard[] }) {
           onMouseEnter={() => setHovered(i)}
           onMouseLeave={() => setHovered(null)}
           className={cn(
-            "group relative block h-72 overflow-hidden rounded-3xl shadow-card transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-500 focus-visible:ring-offset-2 md:h-96",
+            "group relative block h-72 overflow-hidden rounded-lg transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-500 focus-visible:ring-offset-2 md:h-96",
             hovered !== null && hovered !== i && "md:scale-[0.98] md:blur-sm"
           )}
         >
@@ -38,7 +38,7 @@ export function FocusCards({ cards }: { cards: FocusCard[] }) {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-forest-950/85 via-forest-950/25 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 p-6 text-cream">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold-400">{card.detail}</p>
+            <p className="text-sm text-cream/85">{card.detail}</p>
             <h3 className="mt-1 flex items-center justify-between gap-3 text-2xl font-semibold text-cream">
               {card.title}
               <ArrowRight className="h-5 w-5 shrink-0 transition-transform group-hover:translate-x-1" />

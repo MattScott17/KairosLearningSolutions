@@ -66,7 +66,7 @@ export function LayoutGrid({ photos }: { photos: Photo[] }) {
                 transition={transition}
                 onClick={() => setSelected(i)}
                 aria-label={`Open photo: ${photo.alt}`}
-                className="group absolute inset-0 overflow-hidden rounded-3xl shadow-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-500 focus-visible:ring-offset-2"
+                className="group absolute inset-0 overflow-hidden rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-500 focus-visible:ring-offset-2"
               >
                 <Image
                   src={photo.src}
@@ -102,7 +102,7 @@ export function LayoutGrid({ photos }: { photos: Photo[] }) {
               layoutId={`grid-photo-${selected}`}
               transition={transition}
               // Sized to the viewport so tall photos aren't cropped and short screens still fit it.
-              className="relative h-[min(80svh,52rem)] w-full max-w-5xl overflow-hidden rounded-3xl bg-forest-950 shadow-soft"
+              className="relative h-[min(80svh,52rem)] w-full max-w-5xl overflow-hidden rounded-lg bg-forest-950"
             >
               <Image
                 src={open.src}
@@ -117,7 +117,7 @@ export function LayoutGrid({ photos }: { photos: Photo[] }) {
               type="button"
               onClick={close}
               aria-label="Close photo"
-              className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-cream text-forest-900 shadow-soft sm:right-8 sm:top-8"
+              className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-cream text-forest-900 sm:right-8 sm:top-8"
             >
               <X className="h-5 w-5" />
             </button>

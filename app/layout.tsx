@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { Inter, Fraunces } from "next/font/google";
+import { Public_Sans, Source_Serif_4 } from "next/font/google";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const inter = Inter({
+const publicSans = Public_Sans({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
 });
 
-const fraunces = Fraunces({
+const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
@@ -29,6 +29,8 @@ export const metadata: Metadata = {
     "private tutor Salinas CA",
     "homework help Salinas",
     "APEX learning program",
+    "full-time school grades 3-9 Salinas",
+    "TK kindergarten program Salinas",
     "Kairos Learning Solutions",
   ],
   authors: [{ name: site.name }],
@@ -74,8 +76,8 @@ const orgJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
-      <body className="min-h-screen bg-cream bg-leaf-texture">
+    <html lang="en" className={`${publicSans.variable} ${sourceSerif.variable}`}>
+      <body className="min-h-screen bg-white">
         {/* Without JS, scroll-reveal content would stay at its initial opacity:0. */}
         <noscript>
           <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>

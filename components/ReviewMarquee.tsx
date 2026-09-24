@@ -1,28 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { Pause, Play, Quote } from "lucide-react";
+import { Pause, Play } from "lucide-react";
 import { testimonials, type Testimonial } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
-// Soft tints rotate across cards so the rows read as individual voices, not a grid.
-const tints = [
-  "bg-cream border-forest-100",
-  "bg-forest-50 border-forest-100",
-  "bg-sand/70 border-sand",
-  "bg-gold-400/10 border-gold-400/30",
-];
-
-function ReviewCard({ t, tint }: { t: Testimonial; tint: string }) {
+function ReviewCard({ t }: { t: Testimonial }) {
   return (
     <figure
-      className={cn(
-        "flex w-[280px] shrink-0 flex-col rounded-3xl border p-6 shadow-card sm:w-[380px] sm:p-7",
-        tint
-      )}
+      className="flex w-[280px] shrink-0 flex-col rounded-lg border border-forest-100 bg-white p-6 sm:w-[380px] sm:p-7"
     >
-      <Quote className="h-6 w-6 text-forest-300" aria-hidden />
-      <blockquote className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-ink/85">
+      <blockquote className="flex-1 text-[0.95rem] leading-relaxed text-ink/85">
         “{t.pull}”
       </blockquote>
       <figcaption className="mt-5 text-sm">
@@ -42,14 +30,12 @@ function Row({
   reverse,
   duration,
   paused,
-  offset,
   className,
 }: {
   items: Testimonial[];
   reverse?: boolean;
   duration: number;
   paused: boolean;
-  offset: number;
   className?: string;
 }) {
   return (
@@ -69,15 +55,15 @@ function Row({
         )}
         style={{ ["--marquee-duration" as string]: `${duration}s` }}
       >
-        {items.map((t, i) => (
+        {items.map((t) => (
           <div key={t.id} className="flex snap-start">
-            <ReviewCard t={t} tint={tints[(i + offset) % tints.length]} />
+            <ReviewCard t={t} />
           </div>
         ))}
         {/* Second copy makes the loop seamless; hidden from assistive tech. */}
         <div aria-hidden className="flex gap-6 motion-reduce:hidden">
-          {items.map((t, i) => (
-            <ReviewCard key={`${t.id}-copy`} t={t} tint={tints[(i + offset) % tints.length]} />
+          {items.map((t) => (
+            <ReviewCard key={`${t.id}-copy`} t={t} />
           ))}
         </div>
       </div>
@@ -99,9 +85,9 @@ export function ReviewMarquee({ className }: { className?: string }) {
     <div className={cn("relative", className)}>
       <div className="space-y-6">
         {/* On phones one row carries every review. */}
-        <Row items={testimonials} duration={90} paused={paused} offset={0} className="sm:hidden" />
-        <Row items={first} duration={55} paused={paused} offset={0} className="hidden sm:flex" />
-        <Row items={second} duration={70} paused={paused} offset={2} reverse className="hidden sm:flex" />
+        <Row items={testimonials} duration={90} paused={paused} className="sm:hidden" />
+        <Row items={first} duration={55} paused={paused} className="hidden sm:flex" />
+        <Row items={second} duration={70} paused={paused} reverse className="hidden sm:flex" />
       </div>
       <div className="container-page mt-6 flex justify-end motion-reduce:hidden">
         <button
