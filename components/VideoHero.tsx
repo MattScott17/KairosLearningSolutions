@@ -3,14 +3,13 @@
 import Image from "next/image";
 import { useEffect, useRef, type ReactNode } from "react";
 import { useReducedMotion } from "framer-motion";
-import type { Photo } from "@/lib/photos";
-
-export type HeroVideo = { mp4: string; webm?: string };
+import type { HeroVideo, Photo } from "@/lib/photos";
 
 /**
  * Full-bleed, muted, looping classroom video behind the hero copy.
- * The poster shows instantly (and is the LCP image); reduced-motion visitors
- * get the video paused on its poster. Without a video file it's a still photo hero.
+ * The optimized poster photo sits underneath and is the LCP image. Playback only
+ * starts from JS when motion is allowed, so reduced-motion and no-JS visitors keep
+ * the still photo. Without a video file it's simply a photo hero.
  */
 export function VideoHero({
   video,
@@ -38,12 +37,10 @@ export function VideoHero({
         <video
           ref={ref}
           className="absolute inset-0 h-full w-full object-cover"
-          autoPlay
           muted
           loop
           playsInline
           preload="metadata"
-          poster={poster.src}
           aria-hidden
         >
           {video.webm && <source src={video.webm} type="video/webm" />}

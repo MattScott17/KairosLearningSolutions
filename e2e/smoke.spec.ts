@@ -116,7 +116,7 @@ test("review marquee can be paused with its button", async ({ page }) => {
   const box = await button.boundingBox();
   expect(box?.height ?? 0).toBeGreaterThanOrEqual(44);
   await button.click();
-  await expect(page.getByRole("button", { name: /play reviews/i })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("button", { name: /play reviews/i })).toBeVisible();
 });
 
 test("path-finder tabs switch the recommended program", async ({ page }) => {
@@ -136,6 +136,9 @@ test("gallery photo opens and closes with Escape", async ({ page }) => {
   await photo.scrollIntoViewIfNeeded();
   await photo.click();
   await expect(page.getByRole("dialog")).toBeVisible();
+  // Focus stays inside the dialog
+  await page.keyboard.press("Tab");
+  await expect(page.getByRole("button", { name: "Close photo" })).toBeFocused();
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).toHaveCount(0);
 });

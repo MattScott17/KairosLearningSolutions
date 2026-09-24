@@ -5,50 +5,43 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/CTASection";
 import { VideoHero } from "@/components/VideoHero";
-import { LayoutGrid, type GridPhoto } from "@/components/aceternity/LayoutGrid";
+import { LayoutGrid } from "@/components/aceternity/LayoutGrid";
 import { ReviewMarquee } from "@/components/ReviewMarquee";
-import { TutorCard } from "@/components/TutorCard";
-import { leadership, team } from "@/lib/content";
+import { TutorRow } from "@/components/TutorCard";
+import { featuredTutors, getTeamMembers } from "@/lib/content";
 import { site } from "@/lib/site";
 import { conceptD } from "@/lib/storybrand";
 import { galleryPhotos, heroVideo, photos } from "@/lib/photos";
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
 
-const gallery: GridPhoto[] = galleryPhotos.map((p) => ({ ...p, caption: p.alt }));
 
-const tutors = [
-  leadership[1],
-  ...team.filter((m) => ["Michelle Ball", "Lisa Bleicher", "Daryl Lyon"].includes(m.name)),
-];
 
 export default function ConceptDPage() {
   return (
     <>
       {/* Hero — a silent, looping look inside a real Kairos classroom */}
       <VideoHero video={heroVideo} poster={photos.smallGroup}>
-        <Reveal>
-          <span className="inline-flex items-center gap-2 rounded-full border border-cream/30 bg-forest-950/30 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-cream">
-            Salinas, CA · Since {site.foundedYear}
-          </span>
-          <h1 className="mt-5 max-w-3xl text-[2.6rem] font-semibold leading-[1.05] text-cream sm:text-6xl lg:text-7xl">
-            {conceptD.heroHeadline}
-          </h1>
-          <p className="mt-5 max-w-xl text-lg text-cream/85">{conceptD.heroSub}</p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link href="/contact" className="btn-accent">
-              Book a free call
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <a
-              href={site.phoneHref}
-              className="btn border-2 border-cream/70 text-cream hover:bg-cream hover:text-forest-900"
-            >
-              <Phone className="h-4 w-4" />
-              {site.phone}
-            </a>
-          </div>
-        </Reveal>
+        <span className="inline-flex items-center gap-2 rounded-full border border-cream/30 bg-forest-950/30 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-cream">
+          Salinas, CA · Since {site.foundedYear}
+        </span>
+        <h1 className="mt-5 max-w-3xl text-[2.6rem] font-semibold leading-[1.05] text-cream sm:text-6xl lg:text-7xl">
+          {conceptD.heroHeadline}
+        </h1>
+        <p className="mt-5 max-w-xl text-lg text-cream/85">{conceptD.heroSub}</p>
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <Link href="/contact" className="btn-accent">
+            Book a free call
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+          <a
+            href={site.phoneHref}
+            className="btn border-2 border-cream/70 text-cream hover:bg-cream hover:text-forest-900"
+          >
+            <Phone className="h-4 w-4" />
+            {site.phone}
+          </a>
+        </div>
       </VideoHero>
 
       {/* Gallery — tap any photo to see it large */}
@@ -62,7 +55,7 @@ export default function ConceptDPage() {
           <p className="text-sm text-ink/60">Tap a photo to see it larger.</p>
         </div>
         <div className="mt-10">
-          <LayoutGrid photos={gallery} />
+          <LayoutGrid photos={galleryPhotos} />
         </div>
       </Section>
 
@@ -83,12 +76,8 @@ export default function ConceptDPage() {
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
-        <div className="-mx-5 mt-10 flex snap-x snap-mandatory scroll-pl-5 gap-4 overflow-x-auto px-5 pb-4 sm:-mx-8 sm:scroll-pl-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0">
-          {tutors.map((member, i) => (
-            <Reveal key={member.name} delay={i * 0.08} className="w-[72%] shrink-0 snap-start sm:w-[45%] lg:w-auto">
-              <TutorCard member={member} />
-            </Reveal>
-          ))}
+        <div className="mt-10">
+          <TutorRow members={getTeamMembers(featuredTutors.conceptD)} />
         </div>
       </Section>
 

@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import type { Photo } from "@/lib/photos";
+import { useIsDesktop } from "@/lib/useIsDesktop";
 import { cn } from "@/lib/utils";
 
 function Column({
@@ -42,15 +43,7 @@ function Column({
 export function ParallaxGallery({ photos }: { photos: Photo[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
-  const [desktop, setDesktop] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
-    const update = () => setDesktop(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
+  const desktop = useIsDesktop();
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const up = useTransform(scrollYProgress, [0, 1], [60, -60]);

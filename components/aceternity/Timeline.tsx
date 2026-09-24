@@ -31,27 +31,29 @@ export function Timeline({ items }: { items: TimelineItem[] }) {
   const lineOpacity = useTransform(scrollYProgress, [0, 0.08], [0, 1]);
 
   return (
-    <ol ref={listRef} className="relative">
-      {items.map((item, i) => (
-        <li key={item.title} className="flex justify-start pt-10 first:pt-0 md:gap-10 md:pt-24 md:first:pt-4">
-          {/* Sticky marker + title (desktop) */}
-          <div className="sticky top-32 z-10 flex flex-col items-center self-start md:w-full md:max-w-xs md:flex-row lg:max-w-sm">
-            <div className="absolute left-1 flex h-10 w-10 items-center justify-center rounded-full bg-cream shadow-card ring-1 ring-forest-100">
-              <span className="font-display text-sm font-semibold text-forest-800">{i + 1}</span>
+    <div className="relative">
+      <ol ref={listRef}>
+        {items.map((item, i) => (
+          <li key={item.title} className="flex justify-start pt-10 first:pt-0 md:gap-10 md:pt-24 md:first:pt-4">
+            {/* Sticky marker + title (desktop) */}
+            <div className="sticky top-32 z-10 flex flex-col items-center self-start md:w-full md:max-w-xs md:flex-row lg:max-w-sm">
+              <div className="absolute left-1 flex h-10 w-10 items-center justify-center rounded-full bg-cream shadow-card ring-1 ring-forest-100">
+                <span className="font-display text-sm font-semibold text-forest-800">{i + 1}</span>
+              </div>
+              <h3 className="hidden pl-20 font-display text-3xl font-semibold text-forest-800 md:block lg:text-4xl">
+                {item.title}
+              </h3>
             </div>
-            <h3 className="hidden pl-20 font-display text-3xl font-semibold text-forest-800 md:block lg:text-4xl">
-              {item.title}
-            </h3>
-          </div>
 
-          <div className="relative w-full pl-16 md:pl-4">
-            <h3 className="mb-4 font-display text-2xl font-semibold text-forest-800 md:hidden">
-              {item.title}
-            </h3>
-            {item.content}
-          </div>
-        </li>
-      ))}
+            <div className="relative w-full pl-16 md:pl-4">
+              <h3 className="mb-4 font-display text-2xl font-semibold text-forest-800 md:hidden">
+                {item.title}
+              </h3>
+              {item.content}
+            </div>
+          </li>
+        ))}
+      </ol>
 
       {/* Track + scroll-linked progress line */}
       <div
@@ -64,6 +66,6 @@ export function Timeline({ items }: { items: TimelineItem[] }) {
           className="absolute inset-x-0 top-0 w-[2px] rounded-full bg-gradient-to-t from-gold-500 via-forest-500 to-transparent"
         />
       </div>
-    </ol>
+    </div>
   );
 }

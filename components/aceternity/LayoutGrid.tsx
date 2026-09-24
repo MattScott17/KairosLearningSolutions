@@ -13,12 +13,10 @@ import { X } from "lucide-react";
 import type { Photo } from "@/lib/photos";
 import { cn } from "@/lib/utils";
 
-export type GridPhoto = Photo & { caption?: string };
-
 // Repeating rhythm of wide and narrow tiles on desktop (3 columns).
 const span = (i: number) => (i % 4 === 0 || i % 4 === 3 ? "md:col-span-2" : "md:col-span-1");
 
-export function LayoutGrid({ photos }: { photos: GridPhoto[] }) {
+export function LayoutGrid({ photos }: { photos: Photo[] }) {
   const [selected, setSelected] = useState<number | null>(null);
   const reduce = useReducedMotion();
   const triggers = useRef<(HTMLButtonElement | null)[]>([]);
@@ -34,7 +32,14 @@ export function LayoutGrid({ photos }: { photos: GridPhoto[] }) {
   useEffect(() => {
     if (selected === null) return;
     closeRef.current?.focus();
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && close();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+      // The close button is the only control in the dialog, so Tab stays on it.
+      if (e.key === "Tab") {
+        e.preventDefault();
+        closeRef.current?.focus();
+      }
+    };
     const overflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKey);
@@ -80,10 +85,10 @@ export function LayoutGrid({ photos }: { photos: GridPhoto[] }) {
         {open && selected !== null && (
           <div
             key="lightbox"
-            className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-10"
+            className="fixed inset-0 z-[60] flex items-center justify-center px-4 py-16 sm:p-16"
             role="dialog"
             aria-modal="true"
-            aria-label={open.alt}
+            aria-label="Photo viewer"
           >
             <motion.div
               className="absolute inset-0 bg-forest-950/80"
@@ -96,14 +101,16 @@ export function LayoutGrid({ photos }: { photos: GridPhoto[] }) {
             <motion.figure
               layoutId={`grid-photo-${selected}`}
               transition={transition}
-              className="relative aspect-[4/3] w-full max-w-4xl overflow-hidden rounded-3xl shadow-soft"
+              // Sized to the viewport so tall photos aren't cropped and short screens still fit it.
+              className="relative h-[min(80svh,52rem)] w-full max-w-5xl overflow-hidden rounded-3xl bg-forest-950 shadow-soft"
             >
-              <Image src={open.src} alt={open.alt} fill sizes="(max-width: 1024px) 95vw, 900px" className="object-cover" />
-              {open.caption && (
-                <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-forest-950/85 to-transparent p-5 pt-12 text-sm text-cream sm:p-7 sm:text-base">
-                  {open.caption}
-                </figcaption>
-              )}
+              <Image
+                src={open.src}
+                alt={open.alt}
+                fill
+                sizes="(max-width: 1024px) 95vw, 1000px"
+                className="object-contain"
+              />
             </motion.figure>
             <button
               ref={closeRef}

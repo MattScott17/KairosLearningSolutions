@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { TeamMember } from "@/lib/content";
 import { initials } from "@/lib/initials";
 import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/ui/Reveal";
 
 /** Headshot, or a brand monogram until the headshot exists. Fills its (sized) parent. */
 export function TutorAvatar({
@@ -72,5 +73,18 @@ export function TutorCard({
         )}
       </div>
     </article>
+  );
+}
+
+/** A swipeable row of tutor cards on phones that becomes a 4-up grid on desktop. */
+export function TutorRow({ members }: { members: TeamMember[] }) {
+  return (
+    <div className="-mx-5 flex snap-x snap-mandatory scroll-pl-5 gap-4 overflow-x-auto px-5 pb-4 sm:-mx-8 sm:scroll-pl-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0">
+      {members.map((member, i) => (
+        <Reveal key={member.name} delay={i * 0.08} className="w-[72%] shrink-0 snap-start sm:w-[45%] lg:w-auto">
+          <TutorCard member={member} />
+        </Reveal>
+      ))}
+    </div>
   );
 }

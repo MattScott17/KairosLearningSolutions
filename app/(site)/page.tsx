@@ -5,19 +5,14 @@ import { Hero } from "@/components/home/Hero";
 import { ParallaxPhoto } from "@/components/home/ParallaxPhoto";
 import { StatsBar } from "@/components/StatsBar";
 import { ReviewMarquee } from "@/components/ReviewMarquee";
-import { TutorCard } from "@/components/TutorCard";
+import { TutorRow } from "@/components/TutorCard";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { ServiceCard } from "@/components/ServiceCard";
 import { CTASection } from "@/components/CTASection";
-import { services, values, apex, earlyLearners, leadership, team } from "@/lib/content";
+import { services, values, apex, earlyLearners, featuredTutors, getTeamMembers } from "@/lib/content";
 import { photos } from "@/lib/photos";
 
-// A cross-section of the team for the homepage strip; the full team is on /about.
-const featuredTutors = [
-  leadership[0],
-  ...team.filter((m) => ["Trisha Hill", "Brady Berg", "Laura Palmer"].includes(m.name)),
-];
 
 export default function HomePage() {
   return (
@@ -168,13 +163,8 @@ export default function HomePage() {
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
-        {/* Swipeable row on phones, 4-up grid on desktop */}
-        <div className="-mx-5 mt-10 flex snap-x snap-mandatory scroll-pl-5 gap-4 overflow-x-auto px-5 pb-4 sm:-mx-8 sm:scroll-pl-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0">
-          {featuredTutors.map((member, i) => (
-            <Reveal key={member.name} delay={i * 0.08} className="w-[72%] shrink-0 snap-start sm:w-[45%] lg:w-auto">
-              <TutorCard member={member} />
-            </Reveal>
-          ))}
+        <div className="mt-10">
+          <TutorRow members={getTeamMembers(featuredTutors.home)} />
         </div>
       </Section>
 

@@ -288,6 +288,22 @@ export const team: TeamMember[] = [
   },
 ];
 
+/** Look up leadership/team members by name, in the order given. Throws on a typo. */
+export function getTeamMembers(names: string[]): TeamMember[] {
+  const everyone = [...leadership, ...team];
+  return names.map((name) => {
+    const m = everyone.find((p) => p.name === name);
+    if (!m) throw new Error(`Unknown team member: ${name}`);
+    return m;
+  });
+}
+
+// Who appears in the homepage-style "meet our tutors" rows.
+export const featuredTutors = {
+  home: ["Jackie Scott", "Trisha Hill", "Brady Berg", "Laura Palmer"],
+  conceptD: ["Venessa Gilbride", "Michelle Ball", "Lisa Bleicher", "Daryl Lyon"],
+};
+
 export type Testimonial = {
   // Stable handle so pages can pick specific reviews without relying on order.
   id: string;

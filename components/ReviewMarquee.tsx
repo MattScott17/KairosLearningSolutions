@@ -56,22 +56,26 @@ function Row({
     <div
       className={cn(
         "group flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]",
+        // Reduced motion: no auto-scroll — the row becomes a normal swipe/scroll row instead.
+        "motion-reduce:snap-x motion-reduce:overflow-x-auto motion-reduce:[mask-image:none]",
         className
       )}
     >
       <div
         className={cn(
-          "flex w-max shrink-0 gap-6 py-2 animate-marquee group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]",
+          "flex w-max shrink-0 gap-6 py-2 animate-marquee group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused] motion-reduce:animate-none motion-reduce:px-5",
           reverse && "[animation-direction:reverse]",
           paused && "[animation-play-state:paused]"
         )}
         style={{ ["--marquee-duration" as string]: `${duration}s` }}
       >
         {items.map((t, i) => (
-          <ReviewCard key={t.id} t={t} tint={tints[(i + offset) % tints.length]} />
+          <div key={t.id} className="flex snap-start">
+            <ReviewCard t={t} tint={tints[(i + offset) % tints.length]} />
+          </div>
         ))}
         {/* Second copy makes the loop seamless; hidden from assistive tech. */}
-        <div aria-hidden className="flex gap-6">
+        <div aria-hidden className="flex gap-6 motion-reduce:hidden">
           {items.map((t, i) => (
             <ReviewCard key={`${t.id}-copy`} t={t} tint={tints[(i + offset) % tints.length]} />
           ))}
@@ -99,11 +103,10 @@ export function ReviewMarquee({ className }: { className?: string }) {
         <Row items={first} duration={55} paused={paused} offset={0} className="hidden sm:flex" />
         <Row items={second} duration={70} paused={paused} offset={2} reverse className="hidden sm:flex" />
       </div>
-      <div className="container-page mt-6 flex justify-end">
+      <div className="container-page mt-6 flex justify-end motion-reduce:hidden">
         <button
           type="button"
           onClick={() => setPaused((p) => !p)}
-          aria-pressed={paused}
           className="inline-flex h-11 items-center gap-2 rounded-full border border-forest-200 bg-cream px-4 text-sm font-semibold text-forest-800 transition-colors hover:bg-forest-50"
         >
           {paused ? <Play className="h-4 w-4" aria-hidden /> : <Pause className="h-4 w-4" aria-hidden />}
