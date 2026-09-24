@@ -6,20 +6,13 @@ import { Reveal } from "@/components/ui/Reveal";
 import { CTASection } from "@/components/CTASection";
 import { leadership, team, values } from "@/lib/content";
 import { site } from "@/lib/site";
+import { initials } from "@/lib/initials";
 
 export const metadata: Metadata = {
   title: "About Us",
   description:
     "Meet the team behind Kairos Learning Solutions — passionate Salinas educators dedicated to your student's academic and personal growth.",
 };
-
-function initials(name: string) {
-  return name
-    .split(" ")
-    .map((n) => n[0])
-    .slice(0, 2)
-    .join("");
-}
 
 export default function AboutPage() {
   return (

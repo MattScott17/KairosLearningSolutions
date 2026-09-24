@@ -16,7 +16,12 @@ type RevealProps = {
  * Resilience is deliberate: it uses a manually-controlled IntersectionObserver
  * plus a timeout fallback, so content is *guaranteed* to become visible even if
  * the observer never fires (e.g. the element is the last on a tall page, or IO
- * is unavailable). Reduced-motion users get static, always-visible content.
+ * is unavailable).
+ *
+ * Reduced motion: the same motion element is always rendered (swapping to a
+ * plain tag after hydration leaves the server's inline opacity:0 in place), and
+ * it simply snaps to visible. `data-reveal` also lets globals.css force it
+ * visible for reduced-motion and no-JS visitors.
  */
 export function Reveal({ children, delay = 0, className, as = "div" }: RevealProps) {
   const reduce = useReducedMotion();
@@ -53,20 +58,19 @@ export function Reveal({ children, delay = 0, className, as = "div" }: RevealPro
     };
   }, []);
 
-  if (reduce) {
-    const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
-  }
-
   const MotionTag = motion[as];
+  const visible = shown || reduce;
 
   return (
     <MotionTag
       ref={ref as never}
+      data-reveal=""
       className={className}
       initial={{ opacity: 0, y: 20 }}
-      animate={shown ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
+      animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={
+        reduce ? { duration: 0 } : { duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }
+      }
     >
       {children}
     </MotionTag>

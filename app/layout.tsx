@@ -76,6 +76,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
       <body className="min-h-screen bg-cream bg-leaf-texture">
+        {/* Without JS, scroll-reveal content would stay at its initial opacity:0. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}

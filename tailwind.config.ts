@@ -48,9 +48,14 @@ const config: Config = {
           "0%": { opacity: "0", transform: "translateY(16px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        // Content is rendered twice; shifting by half (plus half the gap) loops seamlessly.
+        marquee: {
+          to: { transform: "translateX(calc(-50% - 0.75rem))" },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.6s ease-out both",
+        marquee: "marquee var(--marquee-duration, 50s) linear infinite",
       },
       backgroundImage: {
         "leaf-texture":
