@@ -17,6 +17,8 @@ export type ConceptCopy = {
     philosophical: string;
   };
   plan: string[];
+  // Short headings for each plan step, where a concept shows them.
+  planTitles?: string[];
   successVision: string;
   failureStakes: string;
 };
@@ -39,6 +41,7 @@ export const conceptA: ConceptCopy = {
     "We match your student with the right tutor or program.",
     "Watch them build the confidence and skills to keep going on their own.",
   ],
+  planTitles: ["Book a free call", "Get matched", "Watch them grow"],
   successVision:
     "A student who looks forward to learning again — confident, capable, and supported by people who know their name.",
   failureStakes:
