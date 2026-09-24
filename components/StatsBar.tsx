@@ -12,7 +12,7 @@ export function StatsBar({ className }: { className?: string }) {
           return (
             <div key={stat.label} className="flex flex-col items-center text-center">
               <Icon className="h-6 w-6 text-forest-500" aria-hidden />
-              <p className="mt-2 font-display text-2xl font-semibold text-forest-800 sm:text-3xl">
+              <p className="mt-2 font-display text-2xl font-semibold text-forest-800 lg:text-3xl">
                 {stat.count != null ? <CountUp to={stat.count} suffix={stat.suffix} /> : stat.value}
               </p>
               <p className="mt-0.5 text-xs text-ink/60">{stat.label}</p>
