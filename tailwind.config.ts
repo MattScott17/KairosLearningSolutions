@@ -48,9 +48,10 @@ const config: Config = {
           "0%": { opacity: "0", transform: "translateY(16px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
-        // Content is rendered twice; shifting by half (plus half the gap) loops seamlessly.
+        // Content is rendered twice; shifting by half (plus half the gap between the copies) loops
+        // seamlessly. Set --marquee-half-gap when the gap isn't gap-6.
         marquee: {
-          to: { transform: "translateX(calc(-50% - 0.75rem))" },
+          to: { transform: "translateX(calc(-50% - var(--marquee-half-gap, 0.75rem)))" },
         },
       },
       animation: {

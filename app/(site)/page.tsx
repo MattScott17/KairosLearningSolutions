@@ -7,14 +7,17 @@ import { ReviewMarquee } from "@/components/ReviewMarquee";
 import { TutorRow } from "@/components/TutorCard";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { ProgramList } from "@/components/ProgramList";
+import { PhotoStrip } from "@/components/PhotoStrip";
 import { CTASection } from "@/components/CTASection";
 import { apex, featuredTutors, getTeamMembers, testimonials } from "@/lib/content";
-import { photos } from "@/lib/photos";
+import { galleryPhotos, photos } from "@/lib/photos";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
+
+      <PhotoStrip photos={galleryPhotos} className="mb-2" />
 
       <StatsBar />
 

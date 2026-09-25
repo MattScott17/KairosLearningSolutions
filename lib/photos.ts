@@ -41,3 +41,13 @@ export type HeroVideo = { mp4: string; webm?: string };
 
 /** Concept D's looping hero clip. Undefined until the encoded files are in /public/video. */
 export const heroVideo: HeroVideo | undefined = undefined;
+
+/** Photo shown beside each row of the programs-and-prices list, keyed by the row's link. */
+export const programPhotos: Record<string, Photo> = {
+  "/services/private-tutoring": photos.presenting,
+  "/services/homework-club": photos.smallGroup,
+  "/services/homeschool-support": photos.studentsLearning,
+  "/early-learners": photos.craftProject,
+  "/apex": photos.smallGroup,
+  "/fall-classes": photos.outdoors,
+};
