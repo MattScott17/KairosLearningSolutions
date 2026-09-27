@@ -4,8 +4,8 @@
 
 @layer base {
   :root {
-    --font-body: "Inter", system-ui, sans-serif;
-    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "Public Sans", system-ui, sans-serif;
+    --font-display: "Source Serif 4", Georgia, serif;
   }
 
   html {
@@ -26,7 +26,7 @@
   h2,
   h3,
   h4 {
-    @apply font-display tracking-tight text-forest-900;
+    @apply font-display text-forest-900;
     text-wrap: balance;
   }
 
@@ -39,6 +39,12 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.001ms !important;
       scroll-behavior: auto !important;
+    }
+
+    /* Scroll-reveal content must never stay hidden (see components/ui/Reveal.tsx) */
+    [data-reveal] {
+      opacity: 1 !important;
+      transform: none !important;
     }
   }
 }
@@ -53,18 +59,18 @@
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold
       transition-all duration-200 focus-visible:outline-none focus-visible:ring-2
       focus-visible:ring-forest-500 focus-visible:ring-offset-2 focus-visible:ring-offset-cream
       disabled:cursor-not-allowed disabled:opacity-60;
   }
 
   .btn-primary {
-    @apply btn bg-forest-800 text-cream shadow-soft hover:bg-forest-700 active:translate-y-px;
+    @apply btn bg-forest-800 text-cream hover:bg-forest-700 active:translate-y-px;
   }
 
   .btn-accent {
-    @apply btn bg-gold-500 text-ink shadow-soft hover:bg-gold-400 active:translate-y-px;
+    @apply btn bg-gold-500 text-ink hover:bg-gold-400 active:translate-y-px;
   }
 
   .btn-outline {
@@ -81,6 +87,20 @@
 
   .prose-kairos {
     @apply text-base leading-relaxed text-ink/80;
+  }
+
+  /* Kairos's recurring shape: a doorway / tree-canopy arch with softly rounded feet.
+     Elliptical radii avoid the corner-squashing you get from rounded-t-full. */
+  .arch {
+    border-radius: 50% 50% 1.75rem 1.75rem / 40% 40% 1.75rem 1.75rem;
+  }
+
+  /* Horizontal scrollers that stay swipeable without a visible scrollbar */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 
   .link-underline {

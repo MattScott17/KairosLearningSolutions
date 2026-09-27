@@ -20,12 +20,11 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-3xl border border-forest-200 bg-forest-50 p-8 text-center shadow-card">
+      <div className="rounded-lg border border-forest-200 bg-forest-50 p-8 text-center">
         <CheckCircle2 className="mx-auto h-12 w-12 text-forest-600" />
-        <h3 className="mt-4 text-2xl font-semibold">Message sent!</h3>
+        <h3 className="mt-4 text-2xl font-semibold">Message sent</h3>
         <p className="prose-kairos mx-auto mt-2 max-w-md">
-          Thanks for reaching out. We'll get back to you as soon as we can — usually within one
-          business day. Need something sooner? Call us at{" "}
+          Thanks. I&apos;ll get back to you as soon as I can. If it&apos;s urgent, call me at{" "}
           <a href={site.phoneHref} className="link-underline">
             {site.phone}
           </a>
@@ -195,7 +194,7 @@ export function ContactForm() {
           name="message"
           rows={5}
           className={`${inputBase} ${errClass("message")} resize-y`}
-          placeholder="Tell us about your student — their age, what they need, and any questions you have."
+          placeholder="Your student's age, what they need help with, and any questions you have."
         />
         {fieldErrors.message && <p className="mt-1 text-xs text-red-600">{fieldErrors.message}</p>}
       </div>

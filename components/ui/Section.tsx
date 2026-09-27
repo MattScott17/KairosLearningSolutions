@@ -22,29 +22,16 @@ export function Section({ children, id, className = "", container = "page" }: Se
 }
 
 type SectionHeadingProps = {
-  eyebrow?: string;
   title: ReactNode;
   intro?: ReactNode;
   center?: boolean;
   className?: string;
 };
 
-export function SectionHeading({
-  eyebrow,
-  title,
-  intro,
-  center = false,
-  className = "",
-}: SectionHeadingProps) {
+export function SectionHeading({ title, intro, center = false, className = "" }: SectionHeadingProps) {
   return (
     <div className={`${center ? "mx-auto max-w-2xl text-center" : "max-w-2xl"} ${className}`}>
-      {eyebrow && (
-        <span className="eyebrow">
-          <span className="h-px w-6 bg-gold-500" aria-hidden />
-          {eyebrow}
-        </span>
-      )}
-      <h2 className="mt-3 text-3xl font-semibold sm:text-4xl">{title}</h2>
+      <h2 className="text-3xl font-semibold sm:text-4xl">{title}</h2>
       {intro && <p className="prose-kairos mt-4 text-lg">{intro}</p>}
     </div>
   );

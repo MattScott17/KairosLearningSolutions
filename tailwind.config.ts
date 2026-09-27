@@ -9,23 +9,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Brand palette derived from the Kairos tree logo
+        // Brand greens sampled from the Kairos logo (public/images/logo.png)
         forest: {
-          50: "#f4f7ec",
-          100: "#e6eecf",
-          200: "#cfe0a4",
-          300: "#b2cd73",
-          400: "#94b74a",
-          500: "#7cb342", // leaf green — primary accent
-          600: "#5f8c2f",
-          700: "#4a6d26",
-          800: "#3d5310", // deep olive — headings / primary
-          900: "#2f3f11",
-          950: "#18220a",
+          50: "#f5f8ee",
+          100: "#e9f0d9",
+          200: "#d3e1b0",
+          300: "#b5cc7c",
+          400: "#9cb957",
+          500: "#88a838", // logo leaf green
+          600: "#6a8c1f",
+          700: "#4a700a", // logo wordmark green
+          800: "#3b5a08",
+          900: "#2c4306",
+          950: "#1a2804",
         },
-        cream: "#faf8f2",
-        sand: "#f2eede",
-        ink: "#26241d",
+        cream: "#ffffff", // page + card surface (kept as a token so text-cream still reads as white-on-green)
+        sand: "#f4f5f0", // the one light neutral used for alternating bands
+        ink: "#1f2319",
         gold: {
           400: "#e6b64c",
           500: "#e0a23c",
@@ -48,13 +48,15 @@ const config: Config = {
           "0%": { opacity: "0", transform: "translateY(16px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        // Content is rendered twice; shifting by half (plus half the gap between the copies) loops
+        // seamlessly. Set --marquee-half-gap when the gap isn't gap-6.
+        marquee: {
+          to: { transform: "translateX(calc(-50% - var(--marquee-half-gap, 0.75rem)))" },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.6s ease-out both",
-      },
-      backgroundImage: {
-        "leaf-texture":
-          "radial-gradient(circle at 20% 20%, rgba(124,179,66,0.08), transparent 40%), radial-gradient(circle at 80% 0%, rgba(224,162,60,0.06), transparent 35%)",
+        marquee: "marquee var(--marquee-duration, 50s) linear infinite",
       },
     },
   },

@@ -44,7 +44,7 @@ export function Navigation() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        solid ? "bg-cream/95 shadow-card backdrop-blur" : "bg-transparent"
+        solid ? "bg-cream/95 backdrop-blur" : "bg-transparent"
       }`}
     >
       <nav className="container-page flex h-16 items-center justify-between sm:h-20">
@@ -57,7 +57,7 @@ export function Navigation() {
               <li key={item.href} className="group relative">
                 <Link
                   href={item.href}
-                  className={`flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
+                  className={`flex items-center gap-1 rounded-md px-3.5 py-2 text-sm font-medium transition-colors ${
                     isActive(item.href)
                       ? "text-forest-800"
                       : "text-ink/75 hover:text-forest-800"
@@ -67,12 +67,12 @@ export function Navigation() {
                   <ChevronDown className="h-4 w-4 transition-transform group-hover:rotate-180" />
                 </Link>
                 <div className="invisible absolute left-0 top-full w-72 translate-y-2 pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-                  <div className="overflow-hidden rounded-2xl border border-forest-100 bg-cream p-2 shadow-soft">
+                  <div className="overflow-hidden rounded-lg border border-forest-100 bg-cream p-2">
                     {item.children.map((child) => (
                       <Link
                         key={child.href}
                         href={child.href}
-                        className="block rounded-xl px-3 py-2.5 transition-colors hover:bg-forest-50"
+                        className="block rounded-md px-3 py-2.5 transition-colors hover:bg-forest-50"
                       >
                         <span className="block text-sm font-semibold text-forest-800">
                           {child.label}
@@ -91,7 +91,7 @@ export function Navigation() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className={`rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
+                  className={`rounded-md px-3.5 py-2 text-sm font-medium transition-colors ${
                     isActive(item.href)
                       ? "text-forest-800"
                       : "text-ink/75 hover:text-forest-800"
@@ -137,7 +137,7 @@ export function Navigation() {
                     <button
                       type="button"
                       onClick={() => setServicesOpen((v) => !v)}
-                      className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-left text-base font-medium text-ink/80"
+                      className="flex w-full items-center justify-between rounded-md px-4 py-3 text-left text-base font-medium text-ink/80"
                       aria-expanded={servicesOpen}
                     >
                       {item.label}
@@ -172,7 +172,7 @@ export function Navigation() {
                     <Link
                       href={item.href}
                       onClick={closeMobile}
-                      className={`block rounded-xl px-4 py-3 text-base font-medium ${
+                      className={`block rounded-md px-4 py-3 text-base font-medium ${
                         isActive(item.href) ? "text-forest-800" : "text-ink/80"
                       }`}
                     >

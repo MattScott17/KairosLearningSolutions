@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Quote } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
-import { Reveal } from "@/components/ui/Reveal";
+import { ReviewMarquee } from "@/components/ReviewMarquee";
+import { photos } from "@/lib/photos";
 import { CTASection } from "@/components/CTASection";
 import { testimonials } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Testimonials",
   description:
-    "Hear from Kairos Learning Solutions families and students in Salinas about the difference personalized tutoring and mentorship has made.",
+    "Google reviews from Kairos Learning Solutions families in Salinas, CA, about tutoring, homeschool support, Early Learners and APEX, quoted in full.",
 };
 
 export default function TestimonialsPage() {
@@ -19,44 +19,46 @@ export default function TestimonialsPage() {
   return (
     <>
       <PageHero
-        eyebrow="In their words"
-        title="Stories from our families"
-        intro="The heart of Kairos is the students and families we get to walk alongside. Here's what a few of them have shared."
+        title="Reviews from Kairos families"
+        intro={`These are ${testimonials.length} Google reviews from Kairos parents and grandparents, quoted word for word. Names are shortened to a last initial.`}
       />
 
       {/* Featured story, with a real photo, before the full wall of quotes */}
       <Section>
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <Reveal>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-4xl shadow-soft">
+          <div>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
               <Image
-                src="/images/photo-2.jpg"
-                alt="Kairos students in a small-group lesson"
+                src={photos.smallGroup.src}
+                alt={photos.smallGroup.alt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <Quote className="h-10 w-10 text-forest-300" />
-            <blockquote className="mt-4 font-display text-2xl leading-snug text-forest-900 sm:text-3xl">
+          </div>
+          <div>
+            <blockquote className="font-display text-2xl leading-snug text-forest-900 sm:text-3xl">
               “{featured.pull}”
             </blockquote>
             <p className="mt-5 text-sm font-semibold text-forest-800">
               {featured.author} <span className="font-normal text-ink/60">· {featured.role}</span>
             </p>
-          </Reveal>
+          </div>
         </div>
       </Section>
 
+      {/* A moving sample of every review before the full wall */}
+      <section className="overflow-hidden pb-4">
+        <ReviewMarquee />
+      </section>
+
       <Section className="bg-sand/50">
         <div className="columns-1 gap-6 sm:columns-2 lg:columns-3 [&>*]:mb-6 [&>*]:break-inside-avoid">
-          {testimonials.map((t, i) => (
-            <Reveal key={t.id} delay={(i % 3) * 0.08}>
-              <figure className="rounded-3xl border border-forest-100 bg-cream p-7 shadow-card">
-                <Quote className="h-8 w-8 text-forest-300" />
-                <blockquote className="mt-4 text-lg leading-relaxed text-ink/85">
+          {testimonials.map((t) => (
+            <div key={t.id}>
+              <figure className="rounded-lg border border-forest-100 bg-cream p-7">
+                <blockquote className="text-lg leading-relaxed text-ink/85">
                   “{t.quote}”
                 </blockquote>
                 <figcaption className="mt-6 border-t border-forest-100 pt-4 text-sm">
@@ -67,15 +69,12 @@ export default function TestimonialsPage() {
                   </span>
                 </figcaption>
               </figure>
-            </Reveal>
+            </div>
           ))}
         </div>
       </Section>
 
-      <CTASection
-        title="Ready to write your own story?"
-        intro="We'd love to be part of your family's journey. Reach out and let's talk about your student."
-      />
+      <CTASection />
     </>
   );
 }

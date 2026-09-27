@@ -1,26 +1,37 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Check, Phone } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section, SectionHeading } from "@/components/ui/Section";
-import { Reveal } from "@/components/ui/Reveal";
+import { CTASection } from "@/components/CTASection";
 import { apex, registrationFees } from "@/lib/content";
+import { pagePhotos } from "@/lib/photos";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "APEX — Full-Time Learning Program",
+  title: "APEX Full-Time Program",
   description:
-    "APEX is a full-time alternative to traditional school for grades 3–9 in Salinas. Personalized, mastery-based academics using the 2 Hour Learning model, plus life skills and mentorship.",
+    "APEX is a full-time program for grades 3 to 9 in Salinas, CA, using the 2 Hour Learning model: personalized, mastery-based academics, then projects and life skills. $1,800 a month.",
 };
+
+const facts = [
+  { label: "Grades", value: apex.gradeRange.replace("Grades ", ""), note: "" },
+  {
+    label: "Tuition",
+    value: apex.tuition.monthly.replace(" / ", " a "),
+    note: `${apex.tuition.annual.replace(" / ", " a ")}, ${apex.tuition.term.toLowerCase()}`,
+  },
+  { label: "Schedule", value: "Full school day", note: "Small groups" },
+];
 
 export default function ApexPage() {
   return (
     <>
-      <PageHero eyebrow="Our flagship program" title="APEX" intro={apex.intro}>
+      <PageHero title="APEX, full-time school for grades 3 to 9" intro={apex.intro}>
         <div className="flex flex-col gap-3 sm:flex-row">
           <Link href="/contact" className="btn-accent">
-            Book a tour &amp; conversation
+            Book a tour
             <ArrowRight className="h-4 w-4" />
           </Link>
           <a
@@ -35,203 +46,133 @@ export default function ApexPage() {
 
       {/* Quick facts */}
       <section className="border-b border-forest-100 bg-cream">
-        <div className="container-page grid grid-cols-1 divide-y divide-forest-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-          <div className="py-8 text-center sm:px-6">
-            <p className="text-xs font-semibold uppercase tracking-wider text-forest-600">Grades</p>
-            <p className="mt-2 font-display text-2xl font-semibold text-forest-800">
-              {apex.gradeRange}
-            </p>
-          </div>
-          <div className="py-8 text-center sm:px-6">
-            <p className="text-xs font-semibold uppercase tracking-wider text-forest-600">Tuition</p>
-            <p className="mt-2 font-display text-2xl font-semibold text-forest-800">
-              {apex.tuition.monthly}
-            </p>
-            <p className="mt-1 text-xs text-ink/60">
-              {apex.tuition.annual} · {apex.tuition.term}
-            </p>
-          </div>
-          <div className="py-8 text-center sm:px-6">
-            <p className="text-xs font-semibold uppercase tracking-wider text-forest-600">Format</p>
-            <p className="mt-2 font-display text-2xl font-semibold text-forest-800">Full-time</p>
-            <p className="mt-1 text-xs text-ink/60">Small-group learning</p>
-          </div>
-        </div>
+        <dl className="container-page grid grid-cols-1 divide-y divide-forest-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+          {facts.map((f) => (
+            <div key={f.label} className="py-7 sm:px-6 sm:first:pl-0">
+              <dt className="text-sm text-ink/60">{f.label}</dt>
+              <dd className="mt-1 font-display text-2xl font-semibold text-forest-800">{f.value}</dd>
+              {f.note && <dd className="mt-1 text-sm text-ink/60">{f.note}</dd>}
+            </div>
+          ))}
+        </dl>
       </section>
 
       {/* The model */}
       <Section>
         <div className="grid items-center gap-12 lg:grid-cols-2">
-          <Reveal>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-4xl shadow-soft">
-              <Image
-                src="/images/photo-4.jpg"
-                alt="A Kairos student presenting a hands-on project she built"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-              />
-            </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <SectionHeading
-              eyebrow="The learning model"
-              title="Two hours of focused academics. A whole day of growth."
-              intro={apex.model}
+          <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+            <Image
+              src={pagePhotos.apex.src}
+              alt={pagePhotos.apex.alt}
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
             />
+          </div>
+          <div>
+            <SectionHeading title="How the day works" intro={apex.model} />
             <p className="prose-kairos mt-4">
-              The result: students master more in less time, then invest the rest of the day in
-              projects, life skills, and the kind of hands-on learning that builds real confidence.
+              That leaves most of the day for projects, presentations and life skills like budgeting
+              and running a small business.
             </p>
-            <p className="prose-kairos mt-4 rounded-2xl bg-forest-50 p-4 text-sm text-forest-800">
-              {apex.outcomesNote}
-            </p>
-          </Reveal>
+            <p className="prose-kairos mt-4 text-sm">{apex.outcomesNote}</p>
+          </div>
         </div>
       </Section>
+
+      {/* How APEX is set up: a plain list, not a card grid */}
+      <section className="border-t border-forest-100 py-16 sm:py-20">
+        <div className="container-page grid gap-10 lg:grid-cols-[1fr_1.6fr]">
+          <h2 className="text-3xl font-semibold sm:text-4xl">How APEX is set up</h2>
+          <div>
+            <dl className="border-t border-forest-200">
+              {apex.pillars.map((pillar) => (
+                <div
+                  key={pillar.title}
+                  className="grid gap-1 border-b border-forest-100 py-5 sm:grid-cols-[14rem_1fr] sm:gap-6"
+                >
+                  <dt className="font-semibold text-forest-900">{pillar.title}</dt>
+                  <dd className="prose-kairos">{pillar.body}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="prose-kairos mt-6">
+              Every APEX student also gets hands-on projects, life-skills workshops and mentoring
+              from our teachers.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Traditional school vs. APEX */}
       <section className="bg-forest-800 py-16 text-cream sm:py-20">
-        <div className="container-page">
-          <SectionHeading
-            center
-            eyebrow="The difference"
-            title={<span className="text-cream">Traditional school vs. APEX</span>}
-          />
-          <div className="mx-auto mt-12 max-w-2xl overflow-hidden rounded-3xl border border-cream/15">
-            <div className="grid grid-cols-2 bg-forest-900/40 text-xs font-semibold uppercase tracking-wider text-cream/70">
-              <div className="px-5 py-3">Traditional school</div>
-              <div className="px-5 py-3">APEX</div>
-            </div>
-            {apex.comparison.map((row, i) => (
-              <div
-                key={row.traditional}
-                className={`grid grid-cols-2 ${i % 2 === 0 ? "bg-cream/5" : ""}`}
-              >
-                <div className="px-5 py-4 text-sm text-cream/70">{row.traditional}</div>
-                <div className="px-5 py-4 text-sm font-medium text-cream">{row.apex}</div>
-              </div>
-            ))}
-          </div>
+        <div className="container-page grid gap-10 lg:grid-cols-[1fr_1.6fr]">
+          <h2 className="text-3xl font-semibold text-cream sm:text-4xl">
+            Compared with a traditional classroom
+          </h2>
+          <table className="w-full text-left text-sm">
+            <thead>
+              <tr className="border-b border-cream/20 text-cream/70">
+                <th className="py-3 pr-4 font-semibold">Traditional school</th>
+                <th className="py-3 font-semibold">APEX</th>
+              </tr>
+            </thead>
+            <tbody>
+              {apex.comparison.map((row) => (
+                <tr key={row.traditional} className="border-b border-cream/10">
+                  <td className="py-4 pr-4 text-cream/70">{row.traditional}</td>
+                  <td className="py-4 font-medium text-cream">{row.apex}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </section>
 
-      {/* Pillars */}
-      <section className="bg-sand/60 py-16 sm:py-24">
-        <div className="container-page">
-          <SectionHeading center eyebrow="Why families choose APEX" title="Built around each student" />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2">
-            {apex.pillars.map((pillar, i) => {
-              return (
-                <Reveal key={pillar.title} delay={i * 0.08}>
-                  <div className="flex h-full gap-5 rounded-3xl bg-cream p-7 shadow-card">
-                    <div>
-                      <h3 className="text-lg font-semibold">{pillar.title}</h3>
-                      <p className="prose-kairos mt-2 text-sm">{pillar.body}</p>
-                    </div>
-                  </div>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* What's included */}
-      <Section>
-        <div className="grid gap-12 lg:grid-cols-2">
+      {/* Pricing */}
+      <Section className="bg-sand/50">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
           <SectionHeading
-            eyebrow="What's included"
-            title="Everything your student needs to thrive"
-            intro="APEX is more than academics — it's a full-time environment designed to grow capable, independent young people."
+            title="Tuition"
+            intro="You can enroll in the full program, or in the academics or the workshops on their own."
           />
-          <Reveal delay={0.1}>
-            <ul className="grid gap-3 sm:grid-cols-1">
-              {apex.included.map((item) => (
+          <div>
+            <ul className="border-t border-forest-200">
+              {apex.tiers.map((tier) => (
                 <li
-                  key={item}
-                  className="flex items-start gap-3 rounded-2xl border border-forest-100 bg-cream p-4 shadow-card"
+                  key={tier.name}
+                  className="flex flex-col gap-1 border-b border-forest-100 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
                 >
-                  <Check className="mt-0.5 h-5 w-5 shrink-0 text-forest-500" />
-                  <span className="text-sm text-ink/85">{item}</span>
+                  <div>
+                    <p className="font-semibold text-forest-900">{tier.name}</p>
+                    <p className="text-sm text-ink/70">{tier.description}</p>
+                  </div>
+                  <p className="font-display text-xl font-semibold text-forest-800 sm:text-right">
+                    {tier.price.replace(" / ", " a ")}
+                  </p>
                 </li>
               ))}
             </ul>
-          </Reveal>
-        </div>
-      </Section>
 
-      {/* Pricing tiers */}
-      <Section className="bg-sand/50">
-        <SectionHeading
-          center
-          eyebrow="Ways to enroll"
-          title="Choose academics, workshops, or both"
-        />
-        <div className="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-3">
-          {apex.tiers.map((tier, i) => (
-            <Reveal key={tier.name} delay={i * 0.08}>
-              <div
-                className={`h-full rounded-3xl p-7 text-center shadow-card ${
-                  i === 0 ? "bg-forest-800 text-cream" : "bg-cream"
-                }`}
-              >
-                <h3 className={`text-lg font-semibold ${i === 0 ? "text-cream" : ""}`}>
-                  {tier.name}
-                </h3>
-                <p
-                  className={`mt-2 font-display text-2xl font-semibold ${
-                    i === 0 ? "text-cream" : "text-forest-800"
-                  }`}
-                >
-                  {tier.price}
-                </p>
-                <p className={`prose-kairos mt-3 text-sm ${i === 0 ? "text-cream/80" : ""}`}>
-                  {tier.description}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
-        <div className="mx-auto mt-6 max-w-4xl rounded-2xl border border-forest-100 bg-cream/60 p-5">
-          <h3 className="text-sm font-semibold text-forest-800">Registration fees</h3>
-          <dl className="mt-3 space-y-2">
-            {registrationFees.map((fee) => (
-              <div key={fee.label} className="flex justify-between gap-4 text-sm">
-                <dt className="text-ink/60">{fee.label}</dt>
-                <dd className="text-right font-medium text-forest-800">{fee.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </Section>
-
-      {/* Enroll CTA */}
-      <section className="py-16 sm:py-20">
-        <div className="container-page">
-          <div className="relative overflow-hidden rounded-4xl bg-forest-800 px-6 py-14 text-center text-cream shadow-soft sm:px-12">
-            <h2 className="text-3xl font-semibold text-cream sm:text-4xl">
-              Curious if APEX is right for your child?
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-cream/80">
-              The best next step is a conversation. Book a tour, meet the team, and see the space —
-              then decide together whether APEX is the right fit.
-            </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Link href="/contact" className="btn-accent w-full sm:w-auto">
-                Book a tour &amp; conversation
-              </Link>
-              <a
-                href={site.emailHref}
-                className="btn-outline w-full border-cream text-cream hover:bg-cream hover:text-forest-800 sm:w-auto"
-              >
-                Email Jackie
-              </a>
-            </div>
+            <h3 className="mt-10 text-sm font-semibold text-forest-800">Registration fees</h3>
+            <dl className="mt-3 space-y-2">
+              {registrationFees.map((fee) => (
+                <div key={fee.label} className="flex justify-between gap-4 text-sm">
+                  <dt className="text-ink/60">{fee.label}</dt>
+                  <dd className="whitespace-nowrap text-right font-medium text-forest-800">{fee.value}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </div>
-      </section>
+      </Section>
+
+      <CTASection
+        title="Come see APEX"
+        intro="Call me to set up a tour. You and your student can meet the teachers and see the space before you decide."
+        primaryLabel="Or email Jackie"
+        primaryHref={site.emailHref}
+      />
     </>
   );
 }

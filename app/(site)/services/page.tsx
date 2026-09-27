@@ -1,78 +1,66 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section, SectionHeading } from "@/components/ui/Section";
-import { Reveal } from "@/components/ui/Reveal";
 import { ServiceCard } from "@/components/ServiceCard";
+import { ProgramList } from "@/components/ProgramList";
 import { CTASection } from "@/components/CTASection";
-import { services, enrichment, earlyLearners } from "@/lib/content";
+import { services, enrichment, earlyLearners, apex } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Private tutoring, homework club, homeschool support, and enrichment classes in Salinas, CA. Flexible options for students of every age and ability.",
+    "Private tutoring from $70 an hour, Homework Club from $180 a month, homeschool support, Early Learners for TK to 2nd grade, APEX for grades 3 to 9, and enrichment classes in Salinas, CA.",
 };
+
+const rows = [
+  ...services.map((s) => ({
+    href: `/services/${s.slug}`,
+    title: s.title,
+    short: s.short,
+    summary: s.summary,
+  })),
+  {
+    href: "/early-learners",
+    title: earlyLearners.name,
+    short: `Half-day program, ${earlyLearners.ageRange}`,
+    summary: earlyLearners.intro,
+  },
+  {
+    href: "/apex",
+    title: "APEX",
+    short: `Full-time program, ${apex.gradeRange.toLowerCase()}`,
+    summary: apex.intro,
+  },
+  {
+    href: "/fall-classes",
+    title: enrichment.title,
+    short: "Seasonal classes for all ages",
+    summary: enrichment.body,
+  },
+];
 
 export default function ServicesPage() {
   return (
     <>
       <PageHero
-        eyebrow="What we offer"
-        title="Find the support that fits"
-        intro="Whether your student needs a weekly boost, daily homework help, a homeschool partner, or a full-time program, we have a flexible option for you."
+        title="Programs and prices"
+        intro="We run everything from one tutoring session a week to a full school day. Here's who each program is for, when it runs and what it costs. If you're not sure which one fits, call me."
       />
 
       <Section>
-        <div className="grid gap-6 md:grid-cols-3">
-          {services.map((service, i) => (
-            <Reveal key={service.slug} delay={i * 0.08}>
-              <ServiceCard service={service} />
-            </Reveal>
-          ))}
-        </div>
-
-        {/* Early Learners + Enrichment + APEX callouts */}
-        <div className="mt-6 grid gap-6 md:grid-cols-3">
-          <Reveal>
-            <div className="flex h-full flex-col rounded-3xl border border-forest-100 bg-sand/50 p-8 shadow-card">
-              <h3 className="text-xl font-semibold">{earlyLearners.name}</h3>
-              <p className="prose-kairos mt-3 flex-1 text-sm">{earlyLearners.tagline}.</p>
-              <Link
-                href="/early-learners"
-                className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-forest-800"
-              >
-                Explore Early Learners
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <div className="flex h-full flex-col rounded-3xl border border-forest-100 bg-sand/50 p-8 shadow-card">
-              <h3 className="text-xl font-semibold">{enrichment.title}</h3>
-              <p className="prose-kairos mt-3 flex-1 text-sm">{enrichment.body}</p>
-              <Link href="/fall-classes" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-forest-800">
-                See current classes
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </Reveal>
-          <Reveal delay={0.16}>
-            <div className="flex h-full flex-col rounded-3xl bg-forest-800 p-8 text-cream shadow-card">
-              <h3 className="text-xl font-semibold text-cream">APEX Full-Time Program</h3>
-              <p className="mt-3 flex-1 text-sm text-cream/80">
-                Looking for more than support? APEX is our full-time alternative to traditional
-                school for grades 3–9 — personalized, mastery-based, and built to grow confident,
-                independent learners.
-              </p>
-              <Link href="/apex" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-gold-400">
-                Explore APEX
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </Reveal>
-        </div>
+        <ProgramList />
       </Section>
+
+      <section className="border-t border-forest-100 bg-sand/50 py-16 sm:py-20">
+        <div className="container-page">
+          <SectionHeading title="What each program includes" />
+          <ul className="mt-8 border-t border-forest-200">
+            {rows.map((row) => (
+              <ServiceCard key={row.href} {...row} />
+            ))}
+          </ul>
+        </div>
+      </section>
 
       <CTASection />
     </>
