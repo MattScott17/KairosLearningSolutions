@@ -15,6 +15,8 @@ export type ConceptCopy = {
   explores?: string[];
   heroHeadline: string;
   heroSub: string;
+  /** Shorter hero line for phones, where the full heroSub is too much text. */
+  heroSubShort?: string;
   problem: {
     external: string;
     internal: string;
@@ -83,6 +85,7 @@ export const conceptC: ConceptCopy = {
   heroHeadline: "Which Kairos program fits your student?",
   heroSub:
     "We offer everything from an hour of homework help to a full school day for grades 3 to 9, all at our center in Salinas. Pick what your student needs below, or call and I'll help you choose.",
+  heroSubShort: "From an hour of homework help to a full school day, all at our center in Salinas.",
   problem: {
     external: "Tutoring, homework help, homeschool support and full-time school can sound alike, and it's hard to tell which one your student needs.",
     internal: "You don't want to pay for the wrong one.",

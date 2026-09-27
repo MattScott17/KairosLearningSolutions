@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
 import { PathFinder, type Path } from "@/components/concepts/PathFinder";
 import { FocusCards, type FocusCard } from "@/components/aceternity/FocusCards";
-import { services, apex, earlyLearners, enrichment } from "@/lib/content";
+import { HandArrow, HandUnderline } from "@/components/concepts/HandDrawn";
+import { NameRing } from "@/components/concepts/NameRing";
+import { services, apex, earlyLearners, enrichment, leadership } from "@/lib/content";
+import { site } from "@/lib/site";
 import { conceptC } from "@/lib/storybrand";
-import { photos, type Photo } from "@/lib/photos";
+import { photos, heroPhotos, type Photo } from "@/lib/photos";
 
 const servicePhoto: Record<string, Photo> = {
   "private-tutoring": photos.readingTogether,
@@ -92,25 +96,107 @@ const programCards: FocusCard[] = [
   { title: enrichment.title, detail: "Writing, Spanish, STEM & more", href: "/fall-classes", photo: photos.cooking },
 ];
 
+// Split the headline so "your student" can carry the hand-drawn underline.
+const headlineMarkText = "your student";
+const markAt = conceptC.heroHeadline.indexOf(headlineMarkText);
+const headlineLead = markAt >= 0 ? conceptC.heroHeadline.slice(0, markAt) : conceptC.heroHeadline;
+const headlineMark = markAt >= 0 ? headlineMarkText : "";
+const headlineTail = markAt >= 0 ? conceptC.heroHeadline.slice(markAt + headlineMarkText.length) : "";
+
+const jackie = leadership[0];
+const weekdayHours = site.hours[0].time.replace(" – ", " to ").replace(/:00 AM/, " AM");
+
+// `short` is the phone version; facts without one are desktop only.
+const quickFacts: { full: string; short?: string }[] = [
+  { full: "TK to 9th grade", short: "TK to 9th grade" },
+  { full: `${site.address.street}, ${site.address.city}`, short: site.address.city },
+  { full: `Mon to Thu, ${weekdayHours}` },
+  { full: `Open since ${site.foundedYear}`, short: `Since ${site.foundedYear}` },
+];
+
 export const metadata: Metadata = { robots: { index: false, follow: false } };
 
 export default function ConceptCPage() {
   return (
     <>
-      {/* Hero: the decision framing */}
+      {/* Hero: the decision framing, split with an arched photo */}
       <section className="relative overflow-hidden pt-24 sm:pt-28">
-        <div className="container-page text-center">
-          <div>
-            <h1 className="mx-auto max-w-3xl text-4xl font-semibold leading-[1.1] sm:text-5xl">
-              {conceptC.heroHeadline}
+        <div className="container-page grid items-center gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+          <div className="text-center lg:text-left">
+            <h1 className="mx-auto max-w-2xl text-4xl font-semibold leading-[1.1] sm:text-5xl lg:mx-0 lg:text-[3.5rem]">
+              {headlineLead}
+              <span className="relative inline-block whitespace-nowrap">
+                {headlineMark}
+                <HandUnderline className="absolute -bottom-2 left-0 h-3 w-full text-gold-500 sm:-bottom-3 sm:h-4" />
+              </span>
+              {headlineTail}
             </h1>
-            <p className="prose-kairos mx-auto mt-6 max-w-2xl text-lg">{conceptC.heroSub}</p>
+            <p className="prose-kairos mx-auto mt-6 max-w-sm text-lg lg:hidden">
+              {conceptC.heroSubShort ?? conceptC.heroSub}
+            </p>
+            <p className="prose-kairos mt-8 hidden max-w-xl text-lg lg:block">{conceptC.heroSub}</p>
+
+            <div className="mt-8 hidden max-w-xl gap-4 border-l-2 border-gold-500/60 pl-5 lg:flex">
+              <div>
+                <p className="font-display text-lg italic text-forest-800">
+                  &ldquo;Tell me about your student and I&rsquo;ll tell you where I&rsquo;d start.&rdquo;
+                </p>
+                <p className="mt-2 text-sm text-ink/70">
+                  {jackie.name}, {jackie.role.toLowerCase()} ·{" "}
+                  <a href={site.phoneHref} className="link-underline whitespace-nowrap">
+                    {site.phone}
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative mx-auto w-full max-w-[20rem] sm:max-w-sm lg:max-w-none">
+            <NameRing>
+              <div className="arch relative aspect-[4/5] overflow-hidden">
+                <Image
+                  src={heroPhotos.main.src}
+                  alt={heroPhotos.main.alt}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 20rem, 40vw"
+                  className="object-cover"
+                />
+              </div>
+            </NameRing>
+          </div>
+
+          {/* Phones: one clear call button in place of the quote */}
+          <div className="text-center lg:hidden">
+            <a href={site.phoneHref} className="btn-primary">
+              <Phone className="h-4 w-4" />
+              Call Jackie at {site.phone}
+            </a>
+          </div>
+        </div>
+
+        {/* Quick facts, then a hand-drawn nudge down to the chooser */}
+        <div className="container-page mt-12">
+          <ul className="flex flex-wrap items-center justify-center border-y border-forest-100 py-4 text-sm text-ink/75">
+            {quickFacts.map((fact, i) => (
+              <li key={fact.full} className={`items-center ${fact.short ? "flex" : "hidden lg:flex"}`}>
+                {i > 0 && (
+                  <span aria-hidden="true" className="mx-3 inline-block h-1 w-1 rounded-full bg-gold-500 lg:mx-5" />
+                )}
+                <span className="lg:hidden">{fact.short}</span>
+                <span className="hidden lg:inline">{fact.full}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-8 flex items-center justify-center gap-4 text-forest-700">
+            <span className="font-display text-3xl italic sm:text-4xl">Start here</span>
+            <HandArrow className="h-14 w-11 sm:h-16 sm:w-12" />
           </div>
         </div>
       </section>
 
       {/* The path-finder: the core mechanic of this concept */}
-      <Section>
+      <Section className="!pt-4 sm:!pt-6">
         <div>
           <PathFinder paths={paths} />
         </div>
