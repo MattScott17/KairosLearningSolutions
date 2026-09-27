@@ -3,7 +3,7 @@ import Image from "next/image";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
-import { leadership, team } from "@/lib/content";
+import { leadership, team, testimonials } from "@/lib/content";
 import { site } from "@/lib/site";
 import { pagePhotos } from "@/lib/photos";
 import { TutorAvatar, TutorCard } from "@/components/TutorCard";
@@ -11,7 +11,7 @@ import { TutorAvatar, TutorCard } from "@/components/TutorCard";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Meet the team behind Kairos Learning Solutions — passionate Salinas educators dedicated to your student's academic and personal growth.",
+    "Meet the teachers behind Kairos Learning Solutions in Salinas, CA, and read Google reviews from Kairos families quoted in full.",
 };
 
 export default function AboutPage() {
@@ -89,6 +89,28 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* Google reviews, quoted in full */}
+      <Section id="reviews" className="scroll-mt-20">
+        <SectionHeading
+          title="What families say"
+          intro={`These are ${testimonials.length} Google reviews from Kairos parents and grandparents, quoted word for word. Names are shortened to a last initial.`}
+        />
+        <div className="mt-10 columns-1 gap-6 sm:columns-2 lg:columns-3 [&>*]:mb-6 [&>*]:break-inside-avoid">
+          {testimonials.map((t) => (
+            <figure key={t.id} className="rounded-lg border border-forest-100 bg-cream p-7">
+              <blockquote className="text-lg leading-relaxed text-ink/85">“{t.quote}”</blockquote>
+              <figcaption className="mt-6 border-t border-forest-100 pt-4 text-sm">
+                <span className="font-semibold text-forest-800">{t.author}</span>
+                <span className="block text-ink/60">
+                  {t.role}
+                  {t.source && <> · {t.source} review</>}
+                </span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </Section>
 
       <CTASection
         title="Come visit"

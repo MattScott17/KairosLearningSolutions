@@ -50,12 +50,15 @@ export type NavItem = {
 };
 
 export const mainNav: NavItem[] = [
-  { label: "APEX", href: "/apex" },
-  { label: "About", href: "/about" },
   {
-    label: "Services",
+    label: "Programs",
     href: "/services",
     children: [
+      {
+        label: "APEX",
+        href: "/apex",
+        description: "Full-time learning program",
+      },
       {
         label: "Early Learners",
         href: "/early-learners",
@@ -76,10 +79,18 @@ export const mainNav: NavItem[] = [
         href: "/services/homeschool-support",
         description: "Flexible packages for homeschool families",
       },
+      {
+        label: "Fall Classes",
+        href: "/fall-classes",
+        description: "Enrichment classes, August – December",
+      },
+      {
+        label: "Summer",
+        href: "/summer",
+        description: "Summer program at Kairos",
+      },
     ],
   },
-  { label: "Classes", href: "/fall-classes" },
-  { label: "Summer", href: "/summer" },
-  { label: "Testimonials", href: "/testimonials" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];

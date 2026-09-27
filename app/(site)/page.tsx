@@ -95,7 +95,7 @@ export default function HomePage() {
       <section className="overflow-hidden border-t border-forest-100 bg-sand py-16 sm:py-20">
         <div className="container-page flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
           <SectionHeading title="What parents say on Google" />
-          <Link href="/testimonials" className="link-underline shrink-0">
+          <Link href="/about#reviews" className="link-underline shrink-0">
             Read all {testimonials.length} reviews in full
           </Link>
         </div>

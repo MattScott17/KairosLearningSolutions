@@ -25,6 +25,8 @@ const nextConfig: NextConfig = {
       { source: "/fall-26-classes", destination: "/fall-classes", permanent: true },
       { source: "/homeworkclub", destination: "/services/homework-club", permanent: true },
       { source: "/tutors", destination: "/services/private-tutoring", permanent: true },
+      // Reviews moved onto the About page.
+      { source: "/testimonials", destination: "/about#reviews", permanent: true },
       {
         source: "/homeschool-support",
         destination: "/services/homeschool-support",
