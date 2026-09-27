@@ -2,6 +2,7 @@
 // landing page, add one entry here so the team can find it.
 
 import { variantMeta, variantSlugs, type ProgramSlug } from "@/lib/landing-variants";
+import { concepts } from "@/lib/storybrand";
 
 export type LandingPageEntry = {
   href: string;
@@ -52,5 +53,23 @@ export const landingPageGroups: LandingPageGroup[] = [
     program: "APEX",
     intro: "The full-time program for grades 3–9. Every page books a free APEX call and tour.",
     pages: [...offerVariants("apex"), ...originals("apex", "APEX")],
+  },
+  {
+    program: "Homepage concepts",
+    intro: "Four homepage drafts, each telling the Kairos story a different way. The overview at /concepts compares them side by side.",
+    pages: [
+      {
+        href: "/concepts",
+        label: "All concepts overview",
+        description: "The index page listing all four homepage drafts and what each one tries out.",
+        tags: ["Overview", "Site nav"],
+      },
+      ...concepts.map((c) => ({
+        href: `/concepts/${c.slug}`,
+        label: c.label,
+        description: c.pitch,
+        tags: ["Homepage draft", "Site nav", ...(c.explores ?? []).slice(0, 1)],
+      })),
+    ],
   },
 ];
