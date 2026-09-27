@@ -20,8 +20,8 @@ export default function ConceptBPage() {
       {/* Hero: full-bleed photo, short headline */}
       <section className="relative flex min-h-[80vh] items-end overflow-hidden pt-24">
         <Image
-          src={photos.outdoors.src}
-          alt={photos.outdoors.alt}
+          src={photos.collage.src}
+          alt={photos.collage.alt}
           fill
           priority
           sizes="100vw"

@@ -5,6 +5,8 @@
 // program names, tuition) come from `lib/content.ts` / `lib/site.ts`; this
 // file only adds narrative framing, not new claims.
 
+import type { photos } from "@/lib/photos";
+
 export type ConceptCopy = {
   slug: "a" | "b" | "c" | "d";
   label: string;
@@ -129,7 +131,7 @@ export type DayMoment = {
   when: string;
   title: string;
   body: string;
-  photo: "smallGroup" | "craftProject" | "presenting" | "outdoors" | "studentsLearning";
+  photo: keyof typeof photos;
 };
 
 export const dayAtKairos: DayMoment[] = [
@@ -155,7 +157,7 @@ export const dayAtKairos: DayMoment[] = [
     when: "2:30 to 5:15 PM",
     title: "Homework Club",
     body: "After school, students come in to finish their homework, and we check it before they go home.",
-    photo: "smallGroup",
+    photo: "homework",
   },
   {
     when: "All year",

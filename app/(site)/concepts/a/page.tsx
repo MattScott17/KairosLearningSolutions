@@ -50,7 +50,7 @@ const planSteps: TimelineItem[] = [
         <p className="mt-3 text-sm text-ink/60">
           {[...services.map((s) => s.title), "Early Learners", "APEX"].join(", ")}
         </p>
-        <StepPhoto photo={photos.smallGroup} />
+        <StepPhoto photo={photos.readingTogether} />
       </>
     ),
   },

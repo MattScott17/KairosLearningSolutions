@@ -10,8 +10,8 @@ import { conceptC } from "@/lib/storybrand";
 import { photos, type Photo } from "@/lib/photos";
 
 const servicePhoto: Record<string, Photo> = {
-  "private-tutoring": photos.presenting,
-  "homework-club": photos.smallGroup,
+  "private-tutoring": photos.readingTogether,
+  "homework-club": photos.homework,
   "homeschool-support": photos.studentsLearning,
 };
 
@@ -76,7 +76,7 @@ const paths: Path[] = [
     ],
     href: "/apex",
     cta: "Explore APEX",
-    photo: photos.outdoors,
+    photo: photos.threeDPrinting,
   },
 ];
 
@@ -88,8 +88,8 @@ const programCards: FocusCard[] = [
     photo: servicePhoto[s.slug],
   })),
   { title: earlyLearners.name, detail: earlyLearners.ageRange, href: "/early-learners", photo: photos.craftProject },
-  { title: "APEX", detail: `Full-time · ${apex.gradeRange}`, href: "/apex", photo: photos.outdoors },
-  { title: enrichment.title, detail: "Writing, Spanish, STEM & more", href: "/fall-classes", photo: photos.presenting },
+  { title: "APEX", detail: `Full-time · ${apex.gradeRange}`, href: "/apex", photo: photos.threeDPrinting },
+  { title: enrichment.title, detail: "Writing, Spanish, STEM & more", href: "/fall-classes", photo: photos.cooking },
 ];
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
