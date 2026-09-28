@@ -99,7 +99,7 @@ const programCards: FocusCard[] = [
   })),
   { title: earlyLearners.name, detail: earlyLearners.ageRange, href: "/early-learners", photo: photos.craftProject },
   { title: "APEX", detail: `Full-time · ${apex.gradeRange}`, href: "/apex", photo: photos.threeDPrinting },
-  { title: enrichment.title, detail: "Writing, Spanish, STEM & more", href: "/fall-classes", photo: photos.cooking },
+  { title: enrichment.title, detail: "Writing, speaking, art & reading", href: "/fall-classes", photo: photos.cooking },
 ];
 
 // Split the headline so "your student" can carry the hand-drawn underline.
@@ -177,7 +177,7 @@ export default function ConceptCPage() {
           <div className="text-center lg:hidden">
             <a href={site.phoneHref} className="btn-primary">
               <Phone className="h-4 w-4" />
-              Call Jackie at {site.phone}
+              Call {site.phone}
             </a>
           </div>
         </div>
@@ -278,7 +278,7 @@ export default function ConceptCPage() {
 
       <CTASection
         title="Not sure which program fits?"
-        intro="Call me and tell me about your student. I'll tell you where I'd start."
+        intro="Tell us about your student and we'll tell you where we'd start."
       />
     </>
   );

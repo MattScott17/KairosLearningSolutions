@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const { name, phone, program, page, company } = parsed.data;
+  const { name, phone, program, page, grade, classInterest, company } = parsed.data;
 
   // Honeypot tripped — pretend success so bots don't learn anything.
   if (company) {
@@ -37,6 +37,8 @@ export async function POST(request: Request) {
       phone,
       program,
       page,
+      grade,
+      classInterest,
     });
     return NextResponse.json(
       {
@@ -55,6 +57,8 @@ export async function POST(request: Request) {
       <p><strong>Name:</strong> ${escapeHtml(name)}</p>
       <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
       <p><strong>Program:</strong> ${escapeHtml(program)}</p>
+      ${classInterest ? `<p><strong>Class:</strong> ${escapeHtml(classInterest)}</p>` : ""}
+      ${grade ? `<p><strong>Student's grade:</strong> ${escapeHtml(grade)}</p>` : ""}
       <p><strong>Landing page:</strong> ${escapeHtml(page)}</p>
     </div>
   `;

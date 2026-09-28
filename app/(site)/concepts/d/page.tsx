@@ -97,7 +97,7 @@ export default function ConceptDPage() {
 
       <CTASection
         title={conceptD.successVision}
-        intro="Call me to set up a visit and see Kairos in person."
+        intro="Give us a call to set up a visit and see Kairos in person."
       />
     </>
   );

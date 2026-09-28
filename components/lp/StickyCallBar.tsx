@@ -19,7 +19,7 @@ export function StickyCallBar() {
   return (
     <div
       aria-hidden={!show}
-      className={`fixed inset-x-0 bottom-0 z-50 border-t border-forest-100 bg-cream/95 p-3 shadow-soft backdrop-blur transition-transform duration-300 motion-reduce:transition-none sm:hidden ${
+      className={`sticky-call-bar fixed inset-x-0 bottom-0 z-50 border-t border-forest-100 bg-cream/95 p-3 shadow-soft backdrop-blur transition-transform duration-300 motion-reduce:transition-none sm:hidden ${
         show ? "translate-y-0" : "pointer-events-none translate-y-full"
       }`}
     >

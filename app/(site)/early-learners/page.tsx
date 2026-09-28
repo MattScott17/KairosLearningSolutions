@@ -99,7 +99,7 @@ export default function EarlyLearnersPage() {
 
       <CTASection
         title="Come for a tour"
-        intro="Call me to set up a tour. You can see the space, meet the teachers, and ask which group your child would start in."
+        intro="Give us a call to set up a tour. You can see the space, meet the teachers, and ask which group your child would start in."
         primaryLabel="Or send a message"
         primaryHref="/contact"
       />

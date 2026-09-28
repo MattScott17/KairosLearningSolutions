@@ -169,7 +169,7 @@ export default function ApexPage() {
 
       <CTASection
         title="Come see APEX"
-        intro="Call me to set up a tour. You and your student can meet the teachers and see the space before you decide."
+        intro="Give us a call to set up a tour. You and your student can meet the teachers and see the space before you decide."
         primaryLabel="Or email Jackie"
         primaryHref={site.emailHref}
       />
