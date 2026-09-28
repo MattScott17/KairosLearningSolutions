@@ -12,6 +12,8 @@ export type Path = {
   id: string;
   /** Finishes the sentence "My student needs…" */
   need: string;
+  /** Shorter wording for the phone-sized tab */
+  needShort?: string;
   program: string;
   summary: string;
   facts: { label: string; value: string }[];
@@ -29,23 +31,23 @@ export function PathFinder({ paths }: { paths: Path[] }) {
 
   return (
     <div>
-      <p className="text-center font-display text-xl font-semibold text-forest-900 sm:text-2xl">
+      <p className="text-center font-display text-2xl font-semibold text-forest-900 sm:text-3xl">
         My student needs…
       </p>
       <TabBar
-        tabs={paths.map((p) => ({ id: p.id, label: p.need }))}
+        tabs={paths.map((p) => ({ id: p.id, label: p.need, shortLabel: p.needShort }))}
         active={active}
         onChange={setActive}
         panelId={panelId}
         label="What does your student need?"
-        className="mt-5"
+        className="mt-6"
       />
 
       <div
         id={panelId}
         role="tabpanel"
         aria-labelledby={`${panelId}-tab-${path.id}`}
-        className="mt-8 rounded-lg border border-forest-100 bg-cream p-5 sm:p-8"
+        className="mx-auto mt-6 max-w-5xl rounded-lg border border-forest-200 bg-forest-100 p-4 sm:p-6"
       >
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
@@ -54,9 +56,9 @@ export function PathFinder({ paths }: { paths: Path[] }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: reduce ? 0 : -8 }}
             transition={{ duration: reduce ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="grid items-center gap-6 md:grid-cols-[0.9fr_1.1fr] md:gap-10"
+            className="grid items-center gap-6 md:grid-cols-[0.85fr_1.15fr] md:gap-12"
           >
-            <div className="arch relative aspect-[4/3] overflow-hidden md:aspect-[4/5]">
+            <div className="arch relative aspect-[4/3] overflow-hidden border-[6px] border-cream ring-1 ring-forest-300 md:aspect-[5/6]">
               <Image
                 src={path.photo.src}
                 alt={path.photo.alt}
@@ -65,13 +67,13 @@ export function PathFinder({ paths }: { paths: Path[] }) {
                 className="object-cover"
               />
             </div>
-            <div>
+            <div className="md:pr-4">
               <h3 className="text-3xl font-semibold">{path.program}</h3>
               <p className="prose-kairos mt-3">{path.summary}</p>
-              <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-forest-100 pt-5 sm:grid-cols-3">
+              <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-forest-300/70 pt-5 sm:grid-cols-3">
                 {path.facts.map((f) => (
                   <div key={f.label}>
-                    <dt className="text-sm text-ink/60">{f.label}</dt>
+                    <dt className="text-sm text-ink/70">{f.label}</dt>
                     <dd className="mt-1 font-display text-lg font-semibold text-forest-800">{f.value}</dd>
                   </div>
                 ))}
