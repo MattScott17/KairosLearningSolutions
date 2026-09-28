@@ -13,6 +13,7 @@ const pages = [
   { path: "/services/homework-club", heading: /Homework Club/, title: /Homework Club/ },
   { path: "/services/homeschool-support", heading: /Homeschool Support/, title: /Homeschool Support/ },
   { path: "/fall-classes", heading: /Fall 2026 classes/i, title: /Classes/ },
+  { path: "/fall-classes/register", heading: /Fall 2026 registration/i, title: /Registration/ },
   { path: "/summer", heading: /Summer 2026 at Kairos/i, title: /Summer/ },
   { path: "/contact", heading: /Call, email or visit/i, title: /Contact/ },
 ];
@@ -153,4 +154,14 @@ test("concepts page has the banner editor behind a PIN", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Announcement banner" })).toBeVisible();
   await expect(page.getByLabel("PIN")).toHaveAttribute("pattern", "\\d{4}");
   await expect(page.getByLabel("Headline")).not.toHaveValue("");
+});
+
+test("fall registration form flags missing answers and supports more students", async ({ page }) => {
+  await page.goto("/fall-classes/register?class=writing-lab-a");
+  await expect(page.getByRole("checkbox", { name: /Writing Lab A/ })).toBeChecked();
+  await page.getByRole("button", { name: "Add another child" }).click();
+  await expect(page.getByRole("heading", { name: "Student 2" })).toBeVisible();
+  await page.getByRole("button", { name: "Submit registration" }).click();
+  await expect(page.getByText("Enter your first name")).toBeVisible();
+  await expect(page.getByText("Pick at least one class or program")).toBeVisible();
 });

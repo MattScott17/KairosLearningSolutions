@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 
 export function StickyCallBar() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-forest-100 bg-cream/95 p-3 shadow-soft backdrop-blur sm:hidden">
+    <div className="sticky-call-bar fixed inset-x-0 bottom-0 z-50 border-t border-forest-100 bg-cream/95 p-3 shadow-soft backdrop-blur sm:hidden">
       <a
         href={site.phoneHref}
         className="btn-primary flex w-full items-center justify-center gap-2"
