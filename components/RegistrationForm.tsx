@@ -13,7 +13,7 @@ import { site } from "@/lib/site";
 type Status = "idle" | "submitting" | "success" | "error";
 
 const inputBase =
-  "w-full rounded-lg border bg-cream px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-500/30";
+  "w-full rounded-lg border bg-cream scroll-mt-24 px-4 py-3 text-base text-ink outline-none sm:text-sm transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-500/30";
 
 const childFields = ["firstName", "lastName", "age", "grade", "school", "phone", "email", "goals", "concerns", "health"] as const;
 

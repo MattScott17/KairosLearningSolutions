@@ -19,7 +19,7 @@ export default function ConceptBPage() {
   return (
     <>
       {/* Hero: full-bleed photo, short headline */}
-      <section className="relative flex min-h-[80vh] items-end overflow-hidden pt-24">
+      <section className="relative flex min-h-[80vh] flex-col justify-end overflow-hidden pt-24">
         <Image
           src={photos.collage.src}
           alt={photos.collage.alt}
@@ -29,17 +29,20 @@ export default function ConceptBPage() {
           className="object-cover"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-forest-950/90 via-forest-950/50 to-forest-950/10"
+          className="absolute inset-0 bg-gradient-to-t from-forest-950/95 via-forest-950/75 to-forest-950/35 sm:from-forest-950/90 sm:via-forest-950/50 sm:to-forest-950/10"
           aria-hidden
         />
-        <FallClassesBanner variant="light" className="absolute inset-x-0 top-24 sm:top-28" />
+        <FallClassesBanner
+          variant="light"
+          className="relative mb-8 sm:absolute sm:inset-x-0 sm:top-28 sm:mb-0"
+        />
         <div className="container-page relative pb-16 text-cream sm:pb-24">
           <div>
-            <p className="text-sm text-cream/80">Salinas, since {site.foundedYear}</p>
+            <p className="text-sm font-medium text-cream">Salinas, since {site.foundedYear}</p>
             <h1 className="mt-3 max-w-2xl text-4xl font-semibold leading-[1.1] text-cream sm:text-5xl">
               {conceptB.heroHeadline}
             </h1>
-            <p className="mt-5 max-w-xl text-lg text-cream/85">{conceptB.heroSub}</p>
+            <p className="mt-5 max-w-xl text-lg text-cream/90">{conceptB.heroSub}</p>
             <a href="#story" className="btn-accent mt-8 inline-flex">
               See a day at Kairos
             </a>

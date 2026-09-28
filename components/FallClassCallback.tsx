@@ -7,7 +7,7 @@ import { site } from "@/lib/site";
 import { useFormSubmit } from "@/lib/useFormSubmit";
 
 const inputBase =
-  "w-full rounded-lg border bg-cream px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-500/30";
+  "w-full rounded-lg border bg-cream scroll-mt-24 px-4 py-3 text-base text-ink outline-none sm:text-sm transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-500/30";
 
 /** Short "call us back" form for /fall-classes. Goes to the same inbox as the ad landing pages. */
 export function FallClassCallback({ classTitles }: { classTitles: string[] }) {
@@ -16,8 +16,9 @@ export function FallClassCallback({ classTitles }: { classTitles: string[] }) {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    await submit({ ...Object.fromEntries(formData.entries()), program: "Fall Classes", page: pathname });
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    await submit({ ...Object.fromEntries(formData.entries()), program: "Fall Classes", page: pathname }, form);
   }
 
   if (status === "success") {

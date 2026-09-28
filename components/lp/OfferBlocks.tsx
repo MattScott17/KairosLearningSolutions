@@ -80,7 +80,7 @@ export function SectionTitle({
     <div>
       {eyebrow && (
         <p
-          className={`text-xs font-bold uppercase tracking-[0.18em] ${
+          className={`text-sm font-semibold ${
             dark ? "text-gold-400" : "text-forest-600"
           }`}
         >
@@ -127,7 +127,7 @@ export function PriceLine({ offer, className = "" }: { offer: ProgramOffer; clas
     <div
       className={`rounded-2xl border-2 border-dashed border-forest-800 bg-forest-50 p-5 text-center ${className}`}
     >
-      <p className="text-xs font-bold uppercase tracking-[0.18em] text-forest-700">
+      <p className="text-sm font-semibold text-forest-700">
         {offer.priceLine.label}
       </p>
       <p className="mt-1 font-display text-4xl font-semibold text-forest-900">
@@ -239,7 +239,7 @@ export function FormBlock({
       <div className="mx-auto max-w-md text-center">
         <h2 className="text-[1.75rem] font-semibold leading-tight sm:text-4xl">{title}</h2>
         <p className="mt-2 text-sm text-ink/70">
-          Leave your name and number. We'll call you back — or call us now at{" "}
+          Leave your name and number. We'll call you back, or you can call us now at{" "}
           <a href={site.phoneHref} className="link-underline">
             {site.phone}
           </a>

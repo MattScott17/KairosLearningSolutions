@@ -55,11 +55,11 @@ export const tutoringOffer: ProgramOffer = {
   stack: [
     {
       title: "A free consultation call",
-      body: "We start by learning exactly where your student is stuck — before anyone books a session.",
+      body: "We start by learning exactly where your student is stuck, before anyone books a session.",
     },
     {
       title: "A tutor matched to your student",
-      body: "Matched on subject, learning style, and personality — not just whoever's free.",
+      body: "Matched on subject, learning style, and personality, not just whoever's free.",
     },
     {
       title: "True one-on-one sessions",
@@ -67,7 +67,7 @@ export const tutoringOffer: ProgramOffer = {
     },
     {
       title: "In person or online",
-      body: `At our Salinas center on South Main Street, or online — whatever fits your family.`,
+      body: `At our Salinas center on South Main Street, or online, whatever fits your family.`,
     },
     {
       title: "Every subject, every level",
@@ -75,7 +75,7 @@ export const tutoringOffer: ProgramOffer = {
     },
     {
       title: "Progress you can actually see",
-      body: "Flexible scheduling, with progress you can see — not just hours logged.",
+      body: "Flexible scheduling, with progress you can see, not just hours logged.",
     },
     {
       title: "A team led by a 30-year teacher",
@@ -89,7 +89,7 @@ export const tutoringOffer: ProgramOffer = {
   },
   riskReversal: {
     title: "Zero risk to find out",
-    body: "The first step is a free consultation call — you don't commit to anything until you know it's the right fit.",
+    body: "The first step is a free consultation call. You don't commit to anything until you know it's the right fit.",
   },
   forYou: [
     "Your student is stuck on a specific subject or skill.",
@@ -100,7 +100,7 @@ export const tutoringOffer: ProgramOffer = {
   notForYou: [
     "You want someone to do the homework for your student.",
     "You're looking for a one-size-fits-all worksheet program.",
-    "You just need homework checked after school — our Homework Club is built for that.",
+    "You just need homework checked after school. Our Homework Club is built for that.",
   ],
   obstacles: [
     {
@@ -117,13 +117,13 @@ export const tutoringOffer: ProgramOffer = {
     },
     {
       fear: "“How will I know it's working?”",
-      fix: "Progress you can actually see — not just hours on an invoice.",
+      fix: "Progress you can actually see, not just hours on an invoice.",
     },
   ],
   faqs: [
     {
       q: "How much does tutoring cost?",
-      a: "It depends on the subject and schedule your student needs. We'll walk you through options on your free consultation call — no commitment.",
+      a: "It depends on the subject and schedule your student needs. We'll walk you through options on your free consultation call, with no commitment.",
     },
     {
       q: "Is it in person or online?",
@@ -131,7 +131,7 @@ export const tutoringOffer: ProgramOffer = {
     },
     {
       q: "What ages and subjects do you cover?",
-      a: "All ages — from early reading to AP science. Math, writing, world languages, test prep, and more.",
+      a: "All ages, from early reading to AP science. Math, writing, world languages, test prep, and more.",
     },
     {
       q: "How do you pick the tutor?",
@@ -152,23 +152,23 @@ export const tutoringOffer: ProgramOffer = {
   heroes: {
     a: {
       eyebrow: "Private tutoring · Salinas & online",
-      headline: "Get your student unstuck — with a tutor matched to how they actually learn.",
+      headline: "Get your student unstuck with a tutor matched to how they actually learn.",
       highlight: "unstuck",
       subhead:
-        "One-on-one help for every age and subject — in Salinas or online — starting with a free consultation call.",
+        "One-on-one help for every age and subject, in Salinas or online, starting with a free consultation call.",
     },
     b: {
       eyebrow: "For parents who've tried everything",
       headline: "Grades slipping? Homework fights every night? It's usually not your kid. It's the fit.",
       highlight: "It's the fit.",
       subhead:
-        "Most students who struggle don't need more hours of the same thing — they need the right person explaining it the right way. That's what we do.",
+        "Most students who struggle don't need more hours of the same thing. They need the right person explaining it the right way. That's what we do.",
     },
     c: {
       eyebrow: "Private tutoring in Salinas",
       headline: "A tutor who actually fits your student.",
       highlight: "actually fits",
-      subhead: "Tell us where to call — we'll set up your free consultation.",
+      subhead: "Tell us where to call and we'll set up your free consultation.",
     },
   },
 };
@@ -180,7 +180,7 @@ export const apexOffer: ProgramOffer = {
   stack: [
     {
       title: "Focused, mastery-based academics",
-      body: "Core subjects mastered in efficient, high-focus blocks using the 2 Hour Learning model — the same approach used at Alpha Schools.",
+      body: "Core subjects mastered in efficient, high-focus blocks using the 2 Hour Learning model, the same approach used at Alpha Schools.",
     },
     {
       title: "Your child's pace, not the class's",
@@ -219,19 +219,19 @@ export const apexOffer: ProgramOffer = {
   },
   forYou: [
     `Your child is in ${apex.gradeRange.toLowerCase()}.`,
-    "School is moving too fast — or too slow — for them.",
+    "School is moving too fast, or too slow, for them.",
     "They're getting lost in a big classroom.",
     "You want more for them than a one-size-fits-all school day.",
   ],
   notForYou: [
     "You want a traditional lecture-style classroom.",
-    "You're looking for part-time help — private tutoring or homeschool support fits better.",
+    "You're looking for part-time help. Private tutoring or homeschool support fits better.",
     "You want your child to move at the class's pace instead of their own.",
   ],
   obstacles: [
     {
       fear: "“School moves at the wrong speed for my kid.”",
-      fix: "Each student moves at their own pace — not the pace of the class.",
+      fix: "Each student moves at their own pace, not the pace of the class.",
     },
     {
       fear: "“My child disappears in a class that big.”",
@@ -243,7 +243,7 @@ export const apexOffer: ProgramOffer = {
     },
     {
       fear: "“Homeschooling full-time is too much for me alone.”",
-      fix: "APEX is a full-time program — we handle the structure, teaching, and accountability.",
+      fix: "APEX is a full-time program. We handle the structure, teaching, and accountability.",
     },
   ],
   faqs: [
@@ -278,23 +278,23 @@ export const apexOffer: ProgramOffer = {
   heroes: {
     a: {
       eyebrow: `Now enrolling · ${apex.gradeRange}`,
-      headline: "A school day built around your child — not a classroom of 30.",
+      headline: "A school day built around your child, not a classroom of 30.",
       highlight: "built around your child",
       subhead:
-        "Full-time, small-group learning in Salinas. Core academics in focused sessions — real-world skills the rest of the day.",
+        "Full-time, small-group learning in Salinas. Core academics in focused sessions, then real-world skills the rest of the day.",
     },
     b: {
       eyebrow: "For parents rethinking school",
       headline: "Is your child bored, behind, or lost in the crowd?",
       highlight: "lost in the crowd?",
       subhead:
-        "Traditional school moves one speed for everyone. APEX moves at your child's — and uses the time it saves to build the skills school never gets to.",
+        "Traditional school moves one speed for everyone. APEX moves at your child's, and uses the time it saves to build the skills school never gets to.",
     },
     c: {
       eyebrow: `APEX · ${apex.gradeRange} · Salinas`,
       headline: "Full-time school, at your child's pace.",
       highlight: "your child's pace.",
-      subhead: "Tell us where to call — we'll set up a free call and tour.",
+      subhead: "Tell us where to call and we'll set up a free call and tour.",
     },
   },
 };
@@ -306,15 +306,15 @@ export const programOffers: Record<ProgramSlug, ProgramOffer> = {
 
 export const variantMeta: Record<VariantSlug, { label: string; pitch: string }> = {
   a: {
-    label: "A — Grand Slam Offer",
+    label: "A: Grand Slam Offer",
     pitch: "Bold dream-outcome hero, the full offer stack, who it's for / not for, risk reversal, then the form.",
   },
   b: {
-    label: "B — Problem → Fix",
+    label: "B: Problem → Fix",
     pitch: "Leads with the parent's frustration, answers each objection with a fix, proof, then the form.",
   },
   c: {
-    label: "C — Short & Fast",
+    label: "C: Short & Fast",
     pitch: "One-line promise and the callback form above the fold. Three bullets, proof, FAQ. Built for thumbs.",
   },
 };

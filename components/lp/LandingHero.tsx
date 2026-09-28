@@ -8,9 +8,7 @@ export function LandingHero({ copy }: { copy: LandingCopy }) {
     <section className="relative overflow-hidden pt-16 sm:pt-20">
       <div className="container-page text-center">
         <Reveal>
-          <span className="inline-flex items-center gap-2 rounded-full border border-forest-200 bg-forest-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-forest-700">
-            {copy.eyebrow}
-          </span>
+          <p className="text-sm font-semibold text-forest-700">{copy.eyebrow}</p>
           <h1 className="mx-auto mt-6 max-w-3xl text-4xl font-semibold leading-[1.1] sm:text-5xl">
             {copy.headline}
           </h1>

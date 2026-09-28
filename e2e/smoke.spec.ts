@@ -105,7 +105,22 @@ for (const slug of ["a", "b", "c", "d"]) {
 }
 
 // Marquees, swipe rows and galleries must never make phones scroll sideways.
-for (const path of ["/", "/about", "/concepts/a", "/concepts/b", "/concepts/c", "/concepts/d"]) {
+for (const path of [
+  "/",
+  "/about",
+  "/apex",
+  "/contact",
+  "/early-learners",
+  "/fall-classes",
+  "/fall-classes/register",
+  "/services",
+  "/services/private-tutoring",
+  "/summer",
+  "/concepts/a",
+  "/concepts/b",
+  "/concepts/c",
+  "/concepts/d",
+]) {
   test(`no horizontal scroll at 360px on ${path}`, async ({ page }) => {
     await page.setViewportSize({ width: 360, height: 780 });
     await page.goto(path);

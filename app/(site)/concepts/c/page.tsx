@@ -238,18 +238,20 @@ export default function ConceptCPage() {
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
-            <div className="grid grid-cols-3 gap-4 border-t border-cream/15 pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
-              <div>
-                <p className="font-display text-xl font-semibold text-cream">{apex.gradeRange}</p>
-                <p className="mt-1 text-sm text-cream/60">Grades</p>
+            <div className="grid gap-3 border-t border-cream/15 pt-6 lg:border-l lg:border-t-0 lg:pl-8 sm:grid-cols-3 sm:gap-4 lg:pt-0">
+              <div className="flex flex-row-reverse items-baseline justify-between gap-4 sm:block">
+                <p className="font-display text-xl font-semibold text-cream">
+                  {apex.gradeRange.replace(/^Grades /, "")}
+                </p>
+                <p className="text-sm text-cream/60 sm:mt-1">Grades</p>
               </div>
-              <div>
+              <div className="flex flex-row-reverse items-baseline justify-between gap-4 sm:block">
                 <p className="font-display text-xl font-semibold text-cream">{apex.tuition.monthly}</p>
-                <p className="mt-1 text-sm text-cream/60">Tuition</p>
+                <p className="text-sm text-cream/60 sm:mt-1">Tuition</p>
               </div>
-              <div>
+              <div className="flex flex-row-reverse items-baseline justify-between gap-4 sm:block">
                 <p className="font-display text-xl font-semibold text-cream">Full-time</p>
-                <p className="mt-1 text-sm text-cream/60">Format</p>
+                <p className="text-sm text-cream/60 sm:mt-1">Format</p>
               </div>
             </div>
           </div>

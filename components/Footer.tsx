@@ -49,10 +49,10 @@ export function Footer() {
           {/* Explore */}
           <div>
             <h3 className="font-semibold text-cream">Explore</h3>
-            <ul className="mt-4 space-y-2.5 text-sm">
+            <ul className="mt-3 space-y-0.5 text-sm">
               {footerNav.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="transition-colors hover:text-cream">
+                  <Link href={item.href} className="inline-block py-1.5 transition-colors hover:text-cream">
                     {item.label}
                   </Link>
                 </li>
@@ -63,42 +63,42 @@ export function Footer() {
           {/* Services */}
           <div>
             <h3 className="font-semibold text-cream">Programs</h3>
-            <ul className="mt-4 space-y-2.5 text-sm">
+            <ul className="mt-3 space-y-0.5 text-sm">
               <li>
-                <Link href="/apex" className="transition-colors hover:text-cream">
+                <Link href="/apex" className="inline-block py-1.5 transition-colors hover:text-cream">
                   APEX Full-Time Program
                 </Link>
               </li>
               <li>
-                <Link href="/early-learners" className="transition-colors hover:text-cream">
+                <Link href="/early-learners" className="inline-block py-1.5 transition-colors hover:text-cream">
                   Early Learners
                 </Link>
               </li>
               <li>
-                <Link href="/services/private-tutoring" className="transition-colors hover:text-cream">
+                <Link href="/services/private-tutoring" className="inline-block py-1.5 transition-colors hover:text-cream">
                   Private Tutoring
                 </Link>
               </li>
               <li>
-                <Link href="/services/homework-club" className="transition-colors hover:text-cream">
+                <Link href="/services/homework-club" className="inline-block py-1.5 transition-colors hover:text-cream">
                   Homework Club
                 </Link>
               </li>
               <li>
                 <Link
                   href="/services/homeschool-support"
-                  className="transition-colors hover:text-cream"
+                  className="inline-block py-1.5 transition-colors hover:text-cream"
                 >
                   Homeschool Support
                 </Link>
               </li>
               <li>
-                <Link href="/fall-classes" className="transition-colors hover:text-cream">
+                <Link href="/fall-classes" className="inline-block py-1.5 transition-colors hover:text-cream">
                   Enrichment Classes
                 </Link>
               </li>
               <li>
-                <Link href="/summer" className="transition-colors hover:text-cream">
+                <Link href="/summer" className="inline-block py-1.5 transition-colors hover:text-cream">
                   Summer
                 </Link>
               </li>

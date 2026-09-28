@@ -30,13 +30,13 @@ function originals(program: ProgramSlug, name: string): LandingPageEntry[] {
   return [
     {
       href: `/lp/${program}`,
-      label: "Original — no nav",
+      label: "Original, no nav",
       description: `The first ${name} ad page: headline, pain points, proof strip, and callback form, with no site navigation.`,
       tags: ["Original", "No nav"],
     },
     {
       href: `/lp/${program}-site`,
-      label: "Original — with site nav",
+      label: "Original, with site nav",
       description: `Same content as the original ${name} page, wrapped in the full site header and footer.`,
       tags: ["Original", "Site nav"],
     },
@@ -51,7 +51,7 @@ export const landingPageGroups: LandingPageGroup[] = [
   },
   {
     program: "APEX",
-    intro: "The full-time program for grades 3–9. Every page books a free APEX call and tour.",
+    intro: "The full-time program for grades 3 to 9. Every page books a free APEX call and tour.",
     pages: [...offerVariants("apex"), ...originals("apex", "APEX")],
   },
   {

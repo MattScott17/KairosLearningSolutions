@@ -84,7 +84,7 @@ export function OfferVariant({ offer }: { offer: ProgramOffer }) {
       <section className="bg-forest-950 pb-14 pt-10 text-cream sm:pb-20 sm:pt-16">
         <div className={heroGrid}>
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold-400">
+            <p className="text-sm font-semibold text-gold-400">
               {hero.eyebrow}
             </p>
             <Headline hero={hero} className="mt-4 text-cream" />
@@ -149,7 +149,7 @@ export function ProblemFixVariant({ offer }: { offer: ProgramOffer }) {
       <section className="pb-14 pt-8 sm:pb-20 sm:pt-14">
         <div className={heroGrid}>
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-forest-600">
+            <p className="text-sm font-semibold text-forest-600">
               {hero.eyebrow}
             </p>
             <Headline hero={hero} className="mt-4" />
@@ -240,7 +240,7 @@ export function ShortVariant({ offer }: { offer: ProgramOffer }) {
       <section className="bg-forest-950 pb-12 pt-8 text-cream sm:pb-16 sm:pt-12">
         <div className={heroGrid}>
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold-400">
+            <p className="text-sm font-semibold text-gold-400">
               {hero.eyebrow}
             </p>
             <Headline hero={hero} className="mt-3 text-cream" />
@@ -304,7 +304,7 @@ function isVariant(v: string): v is VariantSlug {
 export function variantMetadata(program: ProgramSlug, variant: string): Metadata {
   const name = program === "apex" ? "APEX" : "Private Tutoring";
   return {
-    title: isVariant(variant) ? `${name} — Free Consultation` : name,
+    title: isVariant(variant) ? `${name}: Free Consultation` : name,
     robots: { index: false, follow: false },
   };
 }

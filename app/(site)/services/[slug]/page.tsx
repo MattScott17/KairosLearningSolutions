@@ -116,7 +116,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
               {registrationFees.map((fee) => (
                 <div key={fee.label} className="flex justify-between gap-4 text-sm">
                   <dt className="text-ink/60">{fee.label}</dt>
-                  <dd className="text-right font-medium text-forest-800">{fee.value}</dd>
+                  <dd className="whitespace-nowrap text-right font-medium text-forest-800">{fee.value}</dd>
                 </div>
               ))}
             </dl>

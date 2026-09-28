@@ -49,7 +49,7 @@ export function VideoHero({
       )}
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-t from-forest-950/90 via-forest-950/45 to-forest-950/10"
+        className="absolute inset-0 bg-gradient-to-t from-forest-950/95 via-forest-950/75 to-forest-950/35 sm:from-forest-950/90 sm:via-forest-950/45 sm:to-forest-950/10"
       />
       <div className="container-page relative pb-14 text-cream sm:pb-24">{children}</div>
     </section>

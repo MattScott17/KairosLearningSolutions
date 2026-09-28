@@ -10,12 +10,13 @@ export function ContactForm() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     await submit({
       ...Object.fromEntries(formData.entries()),
       availability: formData.getAll("availability"),
       updatesOptIn: formData.get("updatesOptIn") === "on",
-    });
+    }, form);
   }
 
   if (status === "success") {
@@ -35,7 +36,7 @@ export function ContactForm() {
   }
 
   const inputBase =
-    "w-full rounded-xl border bg-cream px-4 py-3 text-sm text-ink shadow-sm outline-none transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-500/30";
+    "w-full rounded-xl border bg-cream scroll-mt-24 px-4 py-3 text-base text-ink shadow-sm sm:text-sm outline-none transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-500/30";
 
   const errClass = (field: string) =>
     fieldErrors[field] ? "border-red-400" : "border-forest-200";

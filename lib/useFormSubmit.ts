@@ -15,7 +15,7 @@ export function useFormSubmit<T>(schema: ZodType<T>, endpoint: string) {
   const [errorMsg, setErrorMsg] = useState("");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
-  async function submit(raw: Record<string, unknown>) {
+  async function submit(raw: Record<string, unknown>, form?: HTMLFormElement) {
     setFieldErrors({});
     setErrorMsg("");
 
@@ -29,6 +29,12 @@ export function useFormSubmit<T>(schema: ZodType<T>, endpoint: string) {
       setFieldErrors(next);
       setStatus("error");
       setErrorMsg("Please fix the highlighted fields.");
+      // On a phone the first bad field is usually scrolled off above the
+      // submit button, so move focus (and the viewport) to it.
+      const firstInvalid = form
+        ? Array.from(form.elements).find((el) => (el as HTMLInputElement).name in next)
+        : undefined;
+      (firstInvalid as HTMLElement | undefined)?.focus();
       return;
     }
 
