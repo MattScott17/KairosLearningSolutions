@@ -9,7 +9,7 @@ import { useFormSubmit } from "@/lib/useFormSubmit";
 const inputBase =
   "w-full rounded-lg border bg-cream px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-500/30";
 
-/** Short "call me back" form for /fall-classes. Goes to the same inbox as the ad landing pages. */
+/** Short "call us back" form for /fall-classes. Goes to the same inbox as the ad landing pages. */
 export function FallClassCallback({ classTitles }: { classTitles: string[] }) {
   const pathname = usePathname();
   const { status, errorMsg, fieldErrors, submit } = useFormSubmit(landingSchema, "/api/lp-callback");
@@ -24,9 +24,9 @@ export function FallClassCallback({ classTitles }: { classTitles: string[] }) {
     return (
       <div id="call-me" className="rounded-lg bg-cream p-7 text-ink">
         <CheckCircle2 className="h-10 w-10 text-forest-600" />
-        <h2 className="mt-3 text-2xl font-semibold">Thanks, I&apos;ll call you soon</h2>
+        <h2 className="mt-3 text-2xl font-semibold">Thanks, we&apos;ll call you soon</h2>
         <p className="prose-kairos mt-2">
-          I call back during our hours, Monday to Thursday. Can&apos;t wait? Call{" "}
+          We call back during our hours, Monday to Thursday. Can&apos;t wait? Call{" "}
           <a href={site.phoneHref} className="link-underline">
             {site.phone}
           </a>
@@ -43,7 +43,7 @@ export function FallClassCallback({ classTitles }: { classTitles: string[] }) {
       <div>
         <h2 className="text-2xl font-semibold">Save a spot</h2>
         <p className="mt-1 text-sm text-ink/70">
-          Leave your number and I&apos;ll call you to find the right class and sign your student up.
+          Leave your number and we&apos;ll call you to find the right class and sign your student up.
         </p>
       </div>
 
@@ -106,7 +106,7 @@ export function FallClassCallback({ classTitles }: { classTitles: string[] }) {
         ) : (
           <>
             <PhoneCall className="h-4 w-4" />
-            Call me back
+            Request a call
           </>
         )}
       </button>

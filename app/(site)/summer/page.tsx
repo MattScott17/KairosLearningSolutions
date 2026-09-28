@@ -99,7 +99,7 @@ export default function SummerPage() {
 
       <CTASection
         title="Questions about summer?"
-        intro="Call me with your student's age and which weeks you're around, and I'll tell you which sessions fit."
+        intro="Give us a call with your student's age and which weeks you're around, and we'll tell you which sessions fit."
       />
     </>
   );

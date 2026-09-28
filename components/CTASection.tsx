@@ -10,8 +10,8 @@ type CTASectionProps = {
 
 /** Closing contact band: the phone number big, plus where we are and when we're open. */
 export function CTASection({
-  title = "Call Jackie",
-  intro = "Tell me what's going on with your student. I'll suggest a tutor or a program and tell you what it costs, right on the call.",
+  title = "Give us a call",
+  intro = "Tell us what's going on with your student. We'll suggest a tutor or a program and tell you what it costs, right on the call.",
   primaryLabel = "Or send a message",
   primaryHref = "/contact",
 }: CTASectionProps) {

@@ -21,7 +21,7 @@ export default async function RegisterPage({ searchParams }: Props) {
     <>
       <PageHero
         title="Fall 2026 registration"
-        intro="Fill this out once for each family, with up to three students. It saves your student's spot, and spots are first come, first served. Rather do it on the phone? Call me and we'll do it together."
+        intro="Fill this out once for each family, with up to three students. It saves your student's spot, and spots are first come, first served. Rather do it on the phone? Give us a call and we'll do it together."
       />
 
       <section className="py-14 sm:py-20">
@@ -60,7 +60,7 @@ export default async function RegisterPage({ searchParams }: Props) {
                     </a>{" "}
                     or{" "}
                     <a href={site.emailHref} className="link-underline">
-                      email Jackie
+                      send us an email
                     </a>
                     .
                   </dd>

@@ -24,7 +24,7 @@ export function ContactForm() {
         <CheckCircle2 className="mx-auto h-12 w-12 text-forest-600" />
         <h3 className="mt-4 text-2xl font-semibold">Message sent</h3>
         <p className="prose-kairos mx-auto mt-2 max-w-md">
-          Thanks. I&apos;ll get back to you as soon as I can. If it&apos;s urgent, call me at{" "}
+          Thanks. We&apos;ll get back to you as soon as we can. If it&apos;s urgent, call{" "}
           <a href={site.phoneHref} className="link-underline">
             {site.phone}
           </a>

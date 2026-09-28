@@ -94,7 +94,7 @@ export default function FallClassesPage() {
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-cream/85">
               Small weekly classes in writing, speaking, art and reading, at our center on South Main
-              Street. Classes run through {endDate}. Call me and I&apos;ll help you pick the right class
+              Street. Classes run through {endDate}. Give us a call and we&apos;ll help you pick the right class
               and sign your student up right on the phone.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -130,7 +130,7 @@ export default function FallClassesPage() {
           <h2 className="text-3xl font-semibold sm:text-4xl">This fall&apos;s classes</h2>
           <p className="prose-kairos mt-4 text-lg">
             Each class meets once a week in a small group. There&apos;s a {classFee} registration fee on
-            top of the class price. Not sure which one fits? Call me and tell me about your student.
+            top of the class price. Not sure which one fits? Give us a call and tell us about your student.
           </p>
         </div>
 
@@ -236,7 +236,7 @@ export default function FallClassesPage() {
 
       <CTASection
         title="Call to save a spot"
-        intro="Tell me your student's age and what they're into, and I'll tell you which classes have room."
+        intro="Tell us your student's age and what they're into, and we'll tell you which classes have room."
         primaryLabel="Or register online"
         primaryHref="/fall-classes/register"
       />
