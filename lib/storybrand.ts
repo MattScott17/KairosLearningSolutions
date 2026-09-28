@@ -37,7 +37,7 @@ export const conceptA: ConceptCopy = {
     "A direct-response homepage. It names the problem, introduces Jackie and Kairos, lays out three steps, and repeats one call to action.",
   heroHeadline: "Tutoring, homeschool support and full-time school in Salinas, planned around your child.",
   heroSub:
-    "I'm Jackie Scott. I've taught for more than 30 years, and in 2020 I opened Kairos on South Main Street. Call me and tell me about your student. I'll suggest a tutor, a program, or APEX, our full-time program for grades 3 to 9.",
+    "I'm Jackie Scott. I've taught for more than 30 years, and in 2020 I opened Kairos on South Main Street. Tell us about your student and we'll suggest a tutor, a program, or APEX, our full-time program for grades 3 to 9.",
   problem: {
     external: "Your student is behind, or bored, in a class that moves at one speed.",
     internal: "You've tried helping at home and it isn't working.",

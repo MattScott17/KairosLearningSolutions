@@ -155,8 +155,8 @@ export default function ConceptAPage() {
       </Section>
 
       <CTASection
-        title="Call Jackie"
-        intro={`${conceptA.failureStakes} Call me and tell me what's going on with your student.`}
+        title="Give us a call"
+        intro={`${conceptA.failureStakes} Tell us what's going on with your student.`}
       />
       <StickyCallBar />
     </div>

@@ -154,7 +154,7 @@ export default function ConceptBPage() {
 
       <CTASection
         title={conceptB.successVision}
-        intro="Call me to set up a visit. You and your student can see a day at Kairos for yourselves."
+        intro="Give us a call to set up a visit. You and your student can see a day at Kairos for yourselves."
       />
     </>
   );

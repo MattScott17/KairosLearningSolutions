@@ -114,7 +114,7 @@ export default function AboutPage() {
 
       <CTASection
         title="Come visit"
-        intro="Call me and we'll find a time for you and your student to see the space and meet the teachers."
+        intro="Give us a call and we'll find a time for you and your student to see the space and meet the teachers."
       />
     </>
   );

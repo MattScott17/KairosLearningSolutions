@@ -177,7 +177,7 @@ export default function ConceptCPage() {
           <div className="text-center lg:hidden">
             <a href={site.phoneHref} className="btn-primary">
               <Phone className="h-4 w-4" />
-              Call Jackie at {site.phone}
+              Call {site.phone}
             </a>
           </div>
         </div>
@@ -276,7 +276,7 @@ export default function ConceptCPage() {
 
       <CTASection
         title="Not sure which program fits?"
-        intro="Call me and tell me about your student. I'll tell you where I'd start."
+        intro="Tell us about your student and we'll tell you where we'd start."
       />
     </>
   );

@@ -44,7 +44,7 @@ export default function ServicesPage() {
     <>
       <PageHero
         title="Programs and prices"
-        intro="We run everything from one tutoring session a week to a full school day. Here's who each program is for, when it runs and what it costs. If you're not sure which one fits, call me."
+        intro="We run everything from one tutoring session a week to a full school day. Here's who each program is for, when it runs and what it costs. If you're not sure which one fits, give us a call."
       />
 
       <Section>

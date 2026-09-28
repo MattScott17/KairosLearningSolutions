@@ -138,7 +138,7 @@ export default function FallClassesPage() {
 
       <CTASection
         title="Not sure which class to pick?"
-        intro="Call me and tell me your student's age and interests. I'll point you to the classes that fit."
+        intro="Tell us your student's age and interests, and we'll point you to the classes that fit."
       />
     </>
   );
