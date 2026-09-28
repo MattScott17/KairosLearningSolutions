@@ -152,7 +152,7 @@ export function Navigation() {
                           onClick={closeMobile}
                           className="rounded-lg px-4 py-2.5 text-sm font-medium text-forest-800"
                         >
-                          All Services
+                          All programs
                         </Link>
                         {item.children.map((child) => (
                           <Link

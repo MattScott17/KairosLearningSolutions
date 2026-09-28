@@ -14,7 +14,6 @@ const pages = [
   { path: "/services/homeschool-support", heading: /Homeschool Support/, title: /Homeschool Support/ },
   { path: "/fall-classes", heading: /Fall 2026 classes/i, title: /Classes/ },
   { path: "/summer", heading: /Summer 2026 at Kairos/i, title: /Summer/ },
-  { path: "/testimonials", heading: /Reviews from Kairos families/i, title: /Testimonials/ },
   { path: "/contact", heading: /Call, email or visit/i, title: /Contact/ },
 ];
 
@@ -34,6 +33,12 @@ for (const p of pages) {
     await expect(page.getByRole("link", { name: new RegExp(phoneDigits) }).first()).toBeVisible();
   });
 }
+
+test("old /testimonials URL lands on the About page reviews", async ({ page }) => {
+  await page.goto("/testimonials");
+  await expect(page).toHaveURL(/\/about#reviews$/);
+  await expect(page.locator("#reviews h2")).toContainText(/what families say/i);
+});
 
 test("404 page renders for unknown route", async ({ page }) => {
   const res = await page.goto("/this-page-does-not-exist");
@@ -99,7 +104,7 @@ for (const slug of ["a", "b", "c", "d"]) {
 }
 
 // Marquees, swipe rows and galleries must never make phones scroll sideways.
-for (const path of ["/", "/about", "/testimonials", "/concepts/a", "/concepts/b", "/concepts/c", "/concepts/d"]) {
+for (const path of ["/", "/about", "/concepts/a", "/concepts/b", "/concepts/c", "/concepts/d"]) {
   test(`no horizontal scroll at 360px on ${path}`, async ({ page }) => {
     await page.setViewportSize({ width: 360, height: 780 });
     await page.goto(path);

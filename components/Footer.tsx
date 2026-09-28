@@ -1,6 +1,13 @@
 import Link from "next/link";
 import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
-import { mainNav, site } from "@/lib/site";
+import { site } from "@/lib/site";
+
+const footerNav = [
+  { label: "All programs", href: "/services" },
+  { label: "About", href: "/about" },
+  { label: "Reviews", href: "/about#reviews" },
+  { label: "Contact", href: "/contact" },
+];
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -43,7 +50,7 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-cream">Explore</h3>
             <ul className="mt-4 space-y-2.5 text-sm">
-              {mainNav.map((item) => (
+              {footerNav.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className="transition-colors hover:text-cream">
                     {item.label}
@@ -88,6 +95,11 @@ export function Footer() {
               <li>
                 <Link href="/fall-classes" className="transition-colors hover:text-cream">
                   Enrichment Classes
+                </Link>
+              </li>
+              <li>
+                <Link href="/summer" className="transition-colors hover:text-cream">
+                  Summer
                 </Link>
               </li>
             </ul>

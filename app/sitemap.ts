@@ -11,7 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/services",
     "/fall-classes",
     "/summer",
-    "/testimonials",
     "/contact",
     ...services.map((s) => `/services/${s.slug}`),
   ];
