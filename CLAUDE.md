@@ -49,5 +49,9 @@ npm run typecheck && npm run lint && npm run build && npm run test:e2e
 
 - Fall/enrichment class details live in an external Google Doc catalog linked from
   `/fall-classes` (`site.fallCatalogUrl`).
+- The announcement banner (homepage + concept pages) is edited from `/concepts` with a 4-digit
+  PIN. Settings live in the `kairos-site` Vercel Global Config store (`lib/banner.ts`, save action
+  in `app/(site)/concepts/banner-actions.ts`). Needs `GLOBAL_CONFIG`, `BANNER_PIN`,
+  `VERCEL_API_TOKEN`; without the store it falls back to `defaultBanner`.
 - The contact form degrades gracefully when `RESEND_API_KEY` is unset — it never hard-fails
   the visitor; the call/email buttons are always the fallback.

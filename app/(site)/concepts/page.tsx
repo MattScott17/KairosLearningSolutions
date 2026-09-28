@@ -4,10 +4,13 @@ import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { concepts } from "@/lib/storybrand";
+import { BannerEditor } from "@/components/concepts/BannerEditor";
+import { getBanner } from "@/lib/banner";
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
 
-export default function ConceptsIndexPage() {
+export default async function ConceptsIndexPage() {
+  const banner = await getBanner();
   return (
     <>
       <PageHero
@@ -36,6 +39,17 @@ export default function ConceptsIndexPage() {
             </li>
           ))}
         </ul>
+      </Section>
+
+      <Section id="banner" className="border-t border-forest-100 bg-sand">
+        <h2 className="text-2xl font-semibold sm:text-3xl">Announcement banner</h2>
+        <p className="prose-kairos mt-3 max-w-2xl">
+          The banner at the top of the homepage and these drafts. Change the words or link, or
+          switch it off, then enter the PIN and save. It updates on the site right away.
+        </p>
+        <div className="mt-8">
+          <BannerEditor initial={banner} />
+        </div>
       </Section>
     </>
   );

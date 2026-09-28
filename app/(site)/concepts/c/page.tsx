@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
+import { FallClassesBanner } from "@/components/home/FallClassesBanner";
 import { PathFinder, type Path } from "@/components/concepts/PathFinder";
 import { FocusCards, type FocusCard } from "@/components/aceternity/FocusCards";
 import { HandArrow, HandUnderline } from "@/components/concepts/HandDrawn";
@@ -126,6 +127,7 @@ export default function ConceptCPage() {
     <>
       {/* Hero: the decision framing, split with an arched photo */}
       <section className="relative overflow-hidden pt-24 sm:pt-28">
+        <FallClassesBanner className="mb-10 lg:mb-14" />
         <div className="container-page grid items-center gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
           <div className="text-center lg:text-left">
             <h1 className="mx-auto max-w-2xl text-4xl font-semibold leading-[1.1] sm:text-5xl lg:mx-0 lg:text-[3.5rem]">

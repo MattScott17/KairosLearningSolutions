@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Phone } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
+import { FallClassesBanner } from "@/components/home/FallClassesBanner";
 import { ProgramList } from "@/components/ProgramList";
 import { StatsBar } from "@/components/StatsBar";
 import { StickyCallBar } from "@/components/lp/StickyCallBar";
@@ -71,6 +72,7 @@ export default function ConceptAPage() {
     <div className="pb-20 sm:pb-0">
       {/* Hero: the problem, named plainly, one CTA */}
       <section className="relative overflow-hidden pt-24 sm:pt-28">
+        <FallClassesBanner className="mb-10 lg:mb-14" />
         <div className="container-page text-center">
           <div>
             <h1 className="mx-auto max-w-3xl text-4xl font-semibold leading-[1.1] sm:text-5xl lg:text-6xl">
