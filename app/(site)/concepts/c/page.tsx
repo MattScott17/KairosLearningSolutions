@@ -27,6 +27,7 @@ const paths: Path[] = [
   {
     id: "boost",
     need: "a little extra help",
+    needShort: "extra help",
     program: tutoring.title,
     summary: tutoring.summary,
     facts: tutoring.highlights,
@@ -37,6 +38,7 @@ const paths: Path[] = [
   {
     id: "homework",
     need: "homework help after school",
+    needShort: "homework help",
     program: homework.title,
     summary: homework.summary,
     facts: homework.highlights,
@@ -47,6 +49,7 @@ const paths: Path[] = [
   {
     id: "homeschool",
     need: "a homeschool partner",
+    needShort: "homeschool help",
     program: homeschool.title,
     summary: homeschool.summary,
     facts: homeschool.highlights,
@@ -57,6 +60,7 @@ const paths: Path[] = [
   {
     id: "early",
     need: "a strong start (TK–2nd)",
+    needShort: "early learning (TK–2nd)",
     program: earlyLearners.name,
     summary: earlyLearners.intro,
     facts: [
@@ -71,6 +75,7 @@ const paths: Path[] = [
   {
     id: "fulltime",
     need: "a full-time school",
+    needShort: "full-time school",
     program: "APEX",
     summary: apex.intro,
     facts: [

@@ -132,7 +132,7 @@ test("path-finder tabs switch the recommended program", async ({ page }) => {
   await expect(page.getByRole("tabpanel").getByRole("heading", { name: "APEX" })).toBeVisible();
   // Arrow keys move between tabs
   await tab.press("ArrowLeft");
-  await expect(page.getByRole("tab", { name: /strong start/i })).toHaveAttribute("aria-selected", "true");
+  await expect(page.getByRole("tab", { name: /TK–2nd/i })).toHaveAttribute("aria-selected", "true");
 });
 
 test("gallery photo opens and closes with Escape", async ({ page }) => {
