@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
+import { FallClassesBanner } from "@/components/home/FallClassesBanner";
 import { VideoHero } from "@/components/VideoHero";
 import { LayoutGrid } from "@/components/aceternity/LayoutGrid";
 import { ReviewMarquee } from "@/components/ReviewMarquee";
@@ -17,6 +18,8 @@ export const metadata: Metadata = { robots: { index: false, follow: false } };
 export default function ConceptDPage() {
   return (
     <>
+      <FallClassesBanner className="pb-6 pt-24 sm:pt-28" />
+
       {/* Hero: a silent, looping look inside a real Kairos classroom */}
       <VideoHero video={heroVideo} poster={photos.smallGroup}>
         <p className="text-sm text-cream/85">Salinas, CA, since {site.foundedYear}</p>

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { Phone } from "lucide-react";
 import { FlipWords } from "@/components/aceternity/FlipWords";
 import { site } from "@/lib/site";
@@ -9,10 +10,12 @@ import { heroPhotos } from "@/lib/photos";
 
 const flipWords = ["learning", "reading", "math", "writing", "science"];
 
-export function Hero() {
+/** `banner` is the announcement card, rendered on the server and passed in. */
+export function Hero({ banner }: { banner?: ReactNode }) {
   return (
     <section className="pt-24 sm:pt-28">
-      <div className="container-page grid items-center gap-12 py-10 lg:grid-cols-[1.1fr_1fr] lg:py-16">
+      {banner}
+      <div className="container-page grid items-center gap-12 py-10 lg:grid-cols-[1.1fr_1fr] lg:py-14">
         <div>
           {/* "Fall in love with learning" is Jackie's own phrase; the last word cycles through subjects. */}
           <h1 className="text-[2.6rem] font-semibold leading-[1.08] sm:text-5xl lg:text-6xl">

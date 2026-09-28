@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Check } from "lucide-react";
 import { Hero } from "@/components/home/Hero";
+import { FallClassesBanner } from "@/components/home/FallClassesBanner";
 import { ParallaxPhoto } from "@/components/home/ParallaxPhoto";
 import { StatsBar } from "@/components/StatsBar";
 import { ReviewMarquee } from "@/components/ReviewMarquee";
@@ -15,7 +16,7 @@ import { galleryPhotos, photos } from "@/lib/photos";
 export default function HomePage() {
   return (
     <>
-      <Hero />
+      <Hero banner={<FallClassesBanner />} />
 
       <PhotoStrip photos={galleryPhotos} className="mb-2" />
 

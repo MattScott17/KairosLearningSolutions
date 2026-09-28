@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
+import { FallClassesBanner } from "@/components/home/FallClassesBanner";
 import { DayScroller, type DayStep } from "@/components/concepts/DayScroller";
 import { ParallaxGallery } from "@/components/ParallaxGallery";
 import { photos, galleryPhotos } from "@/lib/photos";
@@ -31,6 +32,7 @@ export default function ConceptBPage() {
           className="absolute inset-0 bg-gradient-to-t from-forest-950/90 via-forest-950/50 to-forest-950/10"
           aria-hidden
         />
+        <FallClassesBanner variant="light" className="absolute inset-x-0 top-24 sm:top-28" />
         <div className="container-page relative pb-16 text-cream sm:pb-24">
           <div>
             <p className="text-sm text-cream/80">Salinas, since {site.foundedYear}</p>
