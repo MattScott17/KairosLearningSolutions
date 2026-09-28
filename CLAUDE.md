@@ -47,11 +47,23 @@ npm run typecheck && npm run lint && npm run build && npm run test:e2e
 
 ## Notes
 
-- Fall/enrichment class details live in an external Google Doc catalog linked from
-  `/fall-classes` (`site.fallCatalogUrl`).
+- Fall classes are data (`fallClasses` in `lib/content.ts`), copied from Jackie's Google Doc
+  catalog. `/fall-classes/register` rebuilds her Google registration form (`lib/registration.ts`);
+  `/api/register` emails it via Resend and also tries to copy it into that Google Form
+  (`lib/registration-google.ts`, which only works while the form doesn't require sign-in).
 - The announcement banner (homepage + concept pages) is edited from `/concepts` with a 4-digit
   PIN. Settings live in the `kairos-site` Vercel Global Config store (`lib/banner.ts`, save action
   in `app/(site)/concepts/banner-actions.ts`). Needs `GLOBAL_CONFIG`, `BANNER_PIN`,
   `VERCEL_API_TOKEN`; without the store it falls back to `defaultBanner`.
 - The contact form degrades gracefully when `RESEND_API_KEY` is unset — it never hard-fails
   the visitor; the call/email buttons are always the fallback.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

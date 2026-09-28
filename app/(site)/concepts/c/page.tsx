@@ -99,7 +99,7 @@ const programCards: FocusCard[] = [
   })),
   { title: earlyLearners.name, detail: earlyLearners.ageRange, href: "/early-learners", photo: photos.craftProject },
   { title: "APEX", detail: `Full-time · ${apex.gradeRange}`, href: "/apex", photo: photos.threeDPrinting },
-  { title: enrichment.title, detail: "Writing, Spanish, STEM & more", href: "/fall-classes", photo: photos.cooking },
+  { title: enrichment.title, detail: "Writing, speaking, art & reading", href: "/fall-classes", photo: photos.cooking },
 ];
 
 // Split the headline so "your student" can carry the hand-drawn underline.

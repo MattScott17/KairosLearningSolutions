@@ -107,6 +107,128 @@ export const registrationFees = [
   { label: "Tutor / enrichment registration", value: "$75 / semester" },
 ];
 
+export type FallClass = {
+  slug: string;
+  title: string;
+  grades: string;
+  // Which list the class appears in on /fall-classes.
+  group: "younger" | "older";
+  day: string;
+  time: string;
+  // Only for classes that don't run the whole term.
+  dates?: string;
+  price: string;
+  description: string;
+  // Set when a partner organization teaches the class.
+  partner?: string;
+  // Classes made of separately bookable hour blocks (the K-2 Learning Lab).
+  blocks?: { label: string; time: string }[];
+};
+
+// Fall 2026 classes, from Jackie's 2026-2027 Google Doc catalog. The term runs
+// site.fallClassesDateRange.
+export const fallClasses: FallClass[] = [
+  {
+    slug: "k2-learning-lab",
+    title: "K to 2 Learning Lab",
+    grades: "Kindergarten to 2nd",
+    group: "younger",
+    day: "Monday",
+    time: "9:00 AM to 12:00 PM",
+    price: "$160 a month per class, or $250 a month for all three",
+    description:
+      "Three one-hour classes in small, mixed-age groups, with each child working at their own level. Book one hour or the whole morning.",
+    blocks: [
+      { label: "Reading and writing", time: "9:00 to 10:00 AM" },
+      { label: "Math and science", time: "10:00 to 11:00 AM" },
+      { label: "Art, music and enrichment", time: "11:00 AM to 12:00 PM" },
+    ],
+  },
+  {
+    slug: "imagination-lab",
+    title: "Imagination Lab",
+    grades: "Kindergarten to 3rd",
+    group: "younger",
+    day: "Wednesday",
+    time: "10:30 to 11:30 AM",
+    dates: "Starts October 7",
+    price: "$160 a month",
+    description:
+      "An hour to build whatever they dream up. Kids get recycled materials, paper towel rolls and the run of the art space, and they decide what to make.",
+  },
+  {
+    slug: "book-to-life",
+    title: "Book to Life",
+    grades: "1st to 3rd",
+    group: "younger",
+    day: "Wednesday",
+    time: "12:30 to 2:00 PM",
+    dates: "Charlotte's Web, Sep 30 to Oct 28. Winnie the Pooh, Nov 4 to Dec 16.",
+    price: "$250 a session",
+    description:
+      "We read a classic book aloud together and bring it to life with projects and activities. It builds comprehension and a love of stories. This is literature enrichment, not reading instruction.",
+  },
+  {
+    slug: "writing-lab-a",
+    title: "Writing Lab A",
+    grades: "3rd and 4th",
+    group: "older",
+    day: "Wednesday",
+    time: "10:00 to 11:00 AM",
+    price: "$160 a month",
+    description:
+      "Strong sentences, then paragraphs, then short pieces. Students practice narrative, opinion and informational writing and get more confident putting ideas on paper.",
+  },
+  {
+    slug: "writing-lab-b",
+    title: "Writing Lab B",
+    grades: "5th to 7th",
+    group: "older",
+    day: "Wednesday",
+    time: "11:00 AM to 12:00 PM",
+    price: "$160 a month",
+    description:
+      "Multi-paragraph writing, essays and projects, with a focus on structure, organization and voice. Students also work on grammar and revising their own writing.",
+  },
+  {
+    slug: "express-and-connect-lab",
+    title: "Express & Connect Lab",
+    grades: "3rd to 6th",
+    group: "older",
+    day: "Wednesday",
+    time: "1:00 to 2:00 PM",
+    price: "$160 a month",
+    description:
+      "For kids who go quiet in a group. Each class has a short skill lesson, then speaking practice with coaching in the moment, so students learn to organize their thoughts and say them clearly.",
+  },
+  {
+    slug: "nature-journaling",
+    title: "Nature Journaling",
+    grades: "3rd to 6th",
+    group: "older",
+    day: "Monday",
+    time: "11:00 AM to 12:00 PM",
+    dates: "6 weeks, Sep 14 to Oct 19",
+    price: "$265 for the 6 weeks",
+    partner: "Mini Makers Collective",
+    description:
+      "Students study field guides, draw from life and sketch local plants and wildlife in watercolor and colored pencil, learning to look closely and record what they find.",
+  },
+  {
+    slug: "visual-arts",
+    title: "Visual Arts",
+    grades: "3rd to 6th",
+    group: "older",
+    day: "Monday",
+    time: "11:00 AM to 12:00 PM",
+    dates: "6 weeks, Oct 26 to Nov 30",
+    price: "$265 for the 6 weeks",
+    partner: "Mini Makers Collective",
+    description:
+      "Drawing, sculpture, textile art and mixed media, plus color theory and a look at artists who changed how we see.",
+  },
+];
+
 export type EnrichmentNote = {
   title: string;
   body: string;
@@ -115,7 +237,7 @@ export type EnrichmentNote = {
 
 export const enrichment: EnrichmentNote = {
   title: "Enrichment Classes",
-  body: "We run classes through the year in writing, Spanish, STEM and seasonal topics. They fill up fast. Current classes are posted on Instagram and in our seasonal catalog.",
+  body: "Small weekly classes for grades K to 7 in writing, speaking, art and reading. They fill up fast, so call to save a spot.",
   icon: Sparkles,
 };
 
@@ -579,9 +701,9 @@ export function getProgramList(): ProgramRow[] {
     {
       name: "Classes and enrichment",
       href: "/fall-classes",
-      who: "All ages",
-      when: "Each season: writing, Spanish, STEM and more",
-      price: "Priced per class",
+      who: "Grades K to 7",
+      when: "Weekly: writing, speaking, art and reading",
+      price: "From $160 a month",
     },
   ];
 }

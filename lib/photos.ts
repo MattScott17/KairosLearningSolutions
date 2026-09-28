@@ -40,7 +40,7 @@ export const pagePhotos = {
   apex: photos.threeDPrinting,
   earlyLearners: photos.circleTime,
   summer: photos.outdoors,
-  fallClasses: photos.cooking,
+  fallClasses: photos.collage,
   conceptAGuide: photos.handprints,
 };
 
@@ -72,5 +72,5 @@ export const programPhotos: Record<string, Photo> = {
   "/services/homeschool-support": photos.studentsLearning,
   "/early-learners": photos.craftProject,
   "/apex": photos.threeDPrinting,
-  "/fall-classes": photos.cooking,
+  "/fall-classes": photos.collage,
 };
