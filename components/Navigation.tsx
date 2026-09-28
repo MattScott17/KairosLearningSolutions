@@ -129,7 +129,7 @@ export function Navigation() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="bg-cream lg:hidden">
-          <div className="container-page flex min-h-[calc(100dvh-4rem)] flex-col overflow-y-auto pb-8 pt-2">
+          <div className="container-page flex h-[calc(100dvh-4rem)] flex-col overflow-y-auto overscroll-contain pb-8 pt-2">
             <ul className="flex flex-col gap-1">
               {mainNav.map((item) =>
                 item.children ? (

@@ -28,7 +28,7 @@ const facts = [
 export default function ApexPage() {
   return (
     <>
-      <PageHero title="APEX, full-time school for grades 3 to 9" intro={apex.intro}>
+      <PageHero title="APEX, full‑time school for grades 3 to 9" intro={apex.intro}>
         <div className="flex flex-col gap-3 sm:flex-row">
           <Link href="/contact" className="btn-accent">
             Book a tour

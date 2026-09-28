@@ -48,7 +48,7 @@ export default function HomePage() {
           />
           <div>
             <h2 className="text-3xl font-semibold text-cream sm:text-4xl">
-              APEX, our full-time school day for grades 3 to 9
+              APEX, our full‑time school day for grades 3 to 9
             </h2>
             <p className="mt-4 text-lg text-cream/85">
               Students finish their core academics in about two focused hours each morning, each at

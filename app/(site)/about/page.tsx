@@ -98,8 +98,8 @@ export default function AboutPage() {
         />
         <div className="mt-10 columns-1 gap-6 sm:columns-2 lg:columns-3 [&>*]:mb-6 [&>*]:break-inside-avoid">
           {testimonials.map((t) => (
-            <figure key={t.id} className="rounded-lg border border-forest-100 bg-cream p-7">
-              <blockquote className="text-lg leading-relaxed text-ink/85">“{t.quote}”</blockquote>
+            <figure key={t.id} className="rounded-lg border border-forest-100 bg-cream p-5 sm:p-7">
+              <blockquote className="text-base leading-relaxed sm:text-lg text-ink/85">“{t.quote}”</blockquote>
               <figcaption className="mt-6 border-t border-forest-100 pt-4 text-sm">
                 <span className="font-semibold text-forest-800">{t.author}</span>
                 <span className="block text-ink/60">

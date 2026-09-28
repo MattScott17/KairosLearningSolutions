@@ -22,11 +22,11 @@ export default function ConceptDPage() {
 
       {/* Hero: a silent, looping look inside a real Kairos classroom */}
       <VideoHero video={heroVideo} poster={photos.smallGroup}>
-        <p className="text-sm text-cream/85">Salinas, CA, since {site.foundedYear}</p>
+        <p className="text-sm font-medium text-cream">Salinas, CA, since {site.foundedYear}</p>
         <h1 className="mt-3 max-w-3xl text-[2.6rem] font-semibold leading-[1.05] text-cream sm:text-6xl lg:text-7xl">
           {conceptD.heroHeadline}
         </h1>
-        <p className="mt-5 max-w-xl text-lg text-cream/85">{conceptD.heroSub}</p>
+        <p className="mt-5 max-w-xl text-lg text-cream/90">{conceptD.heroSub}</p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link href="/contact" className="btn-accent">
             Book a call

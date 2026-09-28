@@ -16,12 +16,13 @@ export function CallbackForm({ copy }: { copy: LandingCopy }) {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     await submit({
       ...Object.fromEntries(formData.entries()),
       program: copy.program,
       page: pathname,
-    });
+    }, form);
   }
 
   if (status === "success") {
@@ -30,7 +31,7 @@ export function CallbackForm({ copy }: { copy: LandingCopy }) {
         <CheckCircle2 className="mx-auto h-12 w-12 text-forest-600" />
         <h3 className="mt-4 text-2xl font-semibold">We'll call you back!</h3>
         <p className="prose-kairos mx-auto mt-2 max-w-md">
-          Thanks — someone from our team will call you shortly. Need something sooner? Call us at{" "}
+          Thanks. Someone from our team will call you shortly. Need something sooner? Call us at{" "}
           <a href={site.phoneHref} className="link-underline">
             {site.phone}
           </a>
@@ -41,7 +42,7 @@ export function CallbackForm({ copy }: { copy: LandingCopy }) {
   }
 
   const inputBase =
-    "w-full rounded-xl border bg-cream px-4 py-3 text-sm text-ink shadow-sm outline-none transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-500/30";
+    "w-full rounded-xl border bg-cream scroll-mt-24 px-4 py-3 text-base text-ink shadow-sm sm:text-sm outline-none transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-500/30";
 
   const errClass = (field: string) =>
     fieldErrors[field] ? "border-red-400" : "border-forest-200";

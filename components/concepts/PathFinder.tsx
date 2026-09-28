@@ -70,11 +70,11 @@ export function PathFinder({ paths }: { paths: Path[] }) {
             <div className="md:pr-4">
               <h3 className="text-3xl font-semibold">{path.program}</h3>
               <p className="prose-kairos mt-3">{path.summary}</p>
-              <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-forest-300/70 pt-5 sm:grid-cols-3">
+              <dl className="mt-6 grid gap-3 border-t border-forest-300/70 pt-5 sm:grid-cols-3 sm:gap-4">
                 {path.facts.map((f) => (
-                  <div key={f.label}>
+                  <div key={f.label} className="flex items-baseline justify-between gap-4 sm:block">
                     <dt className="text-sm text-ink/70">{f.label}</dt>
-                    <dd className="mt-1 font-display text-lg font-semibold text-forest-800">{f.value}</dd>
+                    <dd className="text-right font-display text-lg sm:mt-1 sm:text-left font-semibold text-forest-800">{f.value}</dd>
                   </div>
                 ))}
               </dl>

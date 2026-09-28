@@ -15,7 +15,7 @@ export default function LandingPagesIndex() {
     <>
       <PageHero
         title="Landing pages"
-        intro="Every ad landing page and homepage concept we've built, grouped by program. Open them on your phone — that's where most ad traffic lands."
+        intro="Every ad landing page and homepage concept we've built, grouped by program. Open them on your phone, since that's where most ad traffic lands."
       />
       {landingPageGroups.map((group, gi) => (
         <Section key={group.program} className={gi % 2 ? "bg-sand/50" : ""}>
