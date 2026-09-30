@@ -68,7 +68,6 @@ export const heroVideo: HeroVideo | undefined = undefined;
 /** Photo shown beside each row of the programs-and-prices list, keyed by the row's link. */
 export const programPhotos: Record<string, Photo> = {
   "/services/private-tutoring": photos.readingTogether,
-  "/services/homework-club": photos.homework,
   "/services/homeschool-support": photos.studentsLearning,
   "/early-learners": photos.craftProject,
   "/apex": photos.threeDPrinting,

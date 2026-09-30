@@ -9,7 +9,7 @@ import { services, enrichment, earlyLearners, apex } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Private tutoring from $70 an hour, Homework Club from $180 a month, homeschool support, Early Learners for TK to 2nd grade, APEX for grades 3 to 9, and enrichment classes in Salinas, CA.",
+    "Private tutoring from $70 an hour, homeschool support, Early Learners for TK to 2nd grade, APEX for grades 3 to 9, and enrichment classes in Salinas, CA.",
 };
 
 const rows = [

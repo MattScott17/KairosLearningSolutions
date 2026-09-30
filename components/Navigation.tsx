@@ -109,8 +109,8 @@ export function Navigation() {
             <Phone className="h-4 w-4" />
             {site.phone}
           </a>
-          <Link href="/apex" className="btn-primary shrink-0 whitespace-nowrap">
-            Enroll in APEX
+          <Link href="/contact" className="btn-primary shrink-0 whitespace-nowrap">
+            Book a call
           </Link>
         </div>
 
@@ -187,8 +187,8 @@ export function Navigation() {
                 <Phone className="h-4 w-4" />
                 {site.phone}
               </a>
-              <Link href="/apex" onClick={closeMobile} className="btn-primary w-full">
-                Enroll in APEX
+              <Link href="/contact" onClick={closeMobile} className="btn-primary w-full">
+                Book a call
               </Link>
             </div>
           </div>

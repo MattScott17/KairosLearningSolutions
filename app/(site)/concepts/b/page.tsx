@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
+import { Pathways } from "@/components/Pathways";
 import { FallClassesBanner } from "@/components/home/FallClassesBanner";
 import { DayScroller, type DayStep } from "@/components/concepts/DayScroller";
 import { ParallaxGallery } from "@/components/ParallaxGallery";
@@ -53,7 +54,7 @@ export default function ConceptBPage() {
       {/* The problem, told gently */}
       <Section id="story" container="narrow">
         <SectionHeading
-          title="When homework and school get hard"
+          title="When school gets hard"
           intro={conceptB.problem.external}
         />
       </Section>
@@ -154,6 +155,8 @@ export default function ConceptBPage() {
           </div>
         </div>
       </section>
+
+      <Pathways className="border-t border-forest-100" />
 
       <CTASection
         title={conceptB.successVision}

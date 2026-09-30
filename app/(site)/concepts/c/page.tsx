@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
+import { Pathways } from "@/components/Pathways";
 import { FallClassesBanner } from "@/components/home/FallClassesBanner";
 import { PathFinder, type Path } from "@/components/concepts/PathFinder";
 import { FocusCards, type FocusCard } from "@/components/aceternity/FocusCards";
@@ -16,11 +17,10 @@ import { photos, heroPhotos, type Photo } from "@/lib/photos";
 
 const servicePhoto: Record<string, Photo> = {
   "private-tutoring": photos.readingTogether,
-  "homework-club": photos.homework,
   "homeschool-support": photos.studentsLearning,
 };
 
-const [tutoring, homework, homeschool] = ["private-tutoring", "homework-club", "homeschool-support"].map(
+const [tutoring, homeschool] = ["private-tutoring", "homeschool-support"].map(
   (slug) => services.find((s) => s.slug === slug)!
 );
 
@@ -35,17 +35,6 @@ const paths: Path[] = [
     href: `/services/${tutoring.slug}`,
     cta: tutoring.cta,
     photo: servicePhoto[tutoring.slug],
-  },
-  {
-    id: "homework",
-    need: "homework help after school",
-    needShort: "homework help",
-    program: homework.title,
-    summary: homework.summary,
-    facts: homework.highlights,
-    href: `/services/${homework.slug}`,
-    cta: homework.cta,
-    photo: servicePhoto[homework.slug],
   },
   {
     id: "homeschool",
@@ -91,7 +80,7 @@ const paths: Path[] = [
 ];
 
 const programCards: FocusCard[] = [
-  ...[tutoring, homework, homeschool].map((s) => ({
+  ...[tutoring, homeschool].map((s) => ({
     title: s.title,
     detail: s.short,
     href: `/services/${s.slug}`,
@@ -224,39 +213,9 @@ export default function ConceptCPage() {
         <div className="mt-12">
           <FocusCards cards={programCards} />
         </div>
-
-        {/* APEX called out separately as the "full-time" end of the spectrum */}
-        <div>
-          <div className="mt-6 grid gap-8 rounded-lg bg-forest-800 p-8 text-cream lg:grid-cols-[1.4fr_1fr] lg:items-center">
-            <div>
-              <h3 className="text-2xl font-semibold text-cream">
-                APEX, full-time for {apex.gradeRange.toLowerCase()}
-              </h3>
-              <p className="mt-2 max-w-xl text-cream/80">{apex.intro}</p>
-              <Link href="/apex" className="btn-accent mt-6 inline-flex">
-                Explore APEX
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-            <div className="grid gap-3 border-t border-cream/15 pt-6 lg:border-l lg:border-t-0 lg:pl-8 sm:grid-cols-3 sm:gap-4 lg:pt-0">
-              <div className="flex flex-row-reverse items-baseline justify-between gap-4 sm:block">
-                <p className="font-display text-xl font-semibold text-cream">
-                  {apex.gradeRange.replace(/^Grades /, "")}
-                </p>
-                <p className="text-sm text-cream/60 sm:mt-1">Grades</p>
-              </div>
-              <div className="flex flex-row-reverse items-baseline justify-between gap-4 sm:block">
-                <p className="font-display text-xl font-semibold text-cream">{apex.tuition.monthly}</p>
-                <p className="text-sm text-cream/60 sm:mt-1">Tuition</p>
-              </div>
-              <div className="flex flex-row-reverse items-baseline justify-between gap-4 sm:block">
-                <p className="font-display text-xl font-semibold text-cream">Full-time</p>
-                <p className="text-sm text-cream/60 sm:mt-1">Format</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </Section>
+
+      <Pathways />
 
       {/* Plan: confirm the fit before committing */}
       <Section>

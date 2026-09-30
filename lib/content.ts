@@ -47,27 +47,6 @@ export const services: Service[] = [
     cta: "Book a consultation",
   },
   {
-    slug: "homework-club",
-    title: "Homework Club",
-    short: "After-school homework help, Monday to Thursday",
-    icon: Clock,
-    summary:
-      "Drop your student off after school and pick them up when the homework is done. We check it before they leave. Choose one to four days a week.",
-    details: [
-      "Open Monday through Thursday, 2:30 to 5:15 PM.",
-      "Monthly plans: 1 day/week $180, 2 days/week $250, 3 days/week $320, 4 days/week $360.",
-      "Second child on the same plan: $140, $180, $220, or $260 for the same day counts.",
-      "Without a plan, drop in for $20 an hour or $50 a day.",
-      "Our teachers keep students on task and check the homework before they head home.",
-    ],
-    highlights: [
-      { label: "Days", value: "Mon to Thu" },
-      { label: "Time", value: "2:30 to 5:15 PM" },
-      { label: "Pricing", value: "From $180 a month" },
-    ],
-    cta: "Reserve a spot",
-  },
-  {
     slug: "homeschool-support",
     title: "Homeschool Support",
     short: "Month-to-month packages for homeschool families",
@@ -661,7 +640,7 @@ export const earlyLearners = {
 export type ProgramRow = { name: string; href: string; who: string; when: string; price: string };
 
 export function getProgramList(): ProgramRow[] {
-  const [tutoring, homework, homeschool] = services;
+  const [tutoring, homeschool] = services;
   return [
     {
       name: tutoring.title,
@@ -669,13 +648,6 @@ export function getProgramList(): ProgramRow[] {
       who: "Any age, any subject",
       when: "Weekly or as needed, in person or online",
       price: "$70 to $120 an hour",
-    },
-    {
-      name: homework.title,
-      href: `/services/${homework.slug}`,
-      who: "School-age kids with homework",
-      when: "Monday to Thursday, 2:30 to 5:15 PM",
-      price: "From $180 a month",
     },
     {
       name: homeschool.title,
@@ -707,3 +679,44 @@ export function getProgramList(): ProgramRow[] {
     },
   ];
 }
+
+// The four ways families and schools work with Kairos. The homepage and the homepage drafts
+// all show this same list, so Kairos leads and APEX is one option among four.
+export type Pathway = {
+  title: string;
+  body: string;
+  href: string;
+  cta: string;
+  photo: "threeDPrinting" | "readingTogether" | "studentsLearning" | "presenting";
+};
+
+export const pathways: Pathway[] = [
+  {
+    title: "APEX",
+    body: `Our full-time program for ${apex.gradeRange.toLowerCase()}, run in small groups as an alternative to traditional school.`,
+    href: "/apex",
+    cta: "How APEX works",
+    photo: "threeDPrinting",
+  },
+  {
+    title: "Tutoring",
+    body: "One-on-one help for any age and subject, from early reading to AP, in person or online.",
+    href: "/services/private-tutoring",
+    cta: "See tutoring",
+    photo: "readingTogether",
+  },
+  {
+    title: "Homeschool support and classes",
+    body: "Month-to-month support packages for homeschool families, plus small weekly enrichment classes.",
+    href: "/services/homeschool-support",
+    cta: "See homeschool support",
+    photo: "studentsLearning",
+  },
+  {
+    title: "District partnerships",
+    body: "We work with school districts to bring Kairos teaching to students outside our center.",
+    href: "/district-partnerships",
+    cta: "Partner with us",
+    photo: "presenting",
+  },
+];

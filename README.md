@@ -38,7 +38,7 @@ Change it there and it updates everywhere. Pages live in `app/<route>/page.tsx`;
 
 ## Pages
 
-`/` · `/apex` · `/about` · `/services` (+ `/services/private-tutoring`, `/homework-club`,
+`/` · `/apex` · `/about` · `/services` (+ `/services/private-tutoring`,
 `/homeschool-support`) · `/fall-classes` · `/summer` · `/testimonials` · `/contact`
 
 ## Contact form (email delivery)
