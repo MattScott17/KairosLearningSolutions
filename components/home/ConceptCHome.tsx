@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
-import { PhotoStrip } from "@/components/PhotoStrip";
+import { PhotosFromKairos, HowWeTeach, GetStarted } from "@/components/home/HomeSections";
 import { TutorRow } from "@/components/TutorCard";
 import { FallClassesBanner } from "@/components/home/FallClassesBanner";
 import { PathFinder, type Path } from "@/components/concepts/PathFinder";
@@ -18,11 +18,10 @@ import {
   leadership,
   featuredTutors,
   getTeamMembers,
-  getTestimonials,
 } from "@/lib/content";
 import { site } from "@/lib/site";
-import { conceptB, conceptC } from "@/lib/storybrand";
-import { photos, heroPhotos, galleryPhotos, type Photo } from "@/lib/photos";
+import { conceptC } from "@/lib/storybrand";
+import { photos, heroPhotos, type Photo } from "@/lib/photos";
 
 const servicePhoto: Record<string, Photo> = {
   "private-tutoring": photos.readingTogether,
@@ -120,7 +119,6 @@ const headlineMark = markAt >= 0 ? headlineMarkText : "";
 const headlineTail = markAt >= 0 ? conceptC.heroHeadline.slice(markAt + headlineMarkText.length) : "";
 
 const jackie = leadership[0];
-const [spotlight] = getTestimonials(["melissa-c"]);
 const weekdayHours = site.hours[0].time.replace(" – ", " to ").replace(/:00 AM/, " AM");
 
 // `short` is the phone version; facts without one are desktop only.
@@ -218,25 +216,9 @@ export function ConceptCHome() {
         </div>
       </Section>
 
-      {/* Photos of the center and students */}
-      <PhotoStrip photos={galleryPhotos} />
+      <PhotosFromKairos />
 
-      {/* How we teach */}
-      <Section>
-        <div className="grid gap-8 lg:grid-cols-[1fr_1.4fr]">
-          <h2 className="text-3xl font-semibold sm:text-4xl">Small groups, and a plan for each student</h2>
-          <div className="prose-kairos space-y-4 text-lg">
-            <p>
-              Groups here are small, so every teacher knows each student by name and knows what they
-              are working on.
-            </p>
-            <p>
-              Every student starts with a plan built on what they already know, and moves on when
-              they&apos;re ready, not when the calendar says so.
-            </p>
-          </div>
-        </div>
-      </Section>
+      <HowWeTeach />
 
       {/* Who teaches */}
       <Section className="bg-sand/50">
@@ -285,29 +267,7 @@ export function ConceptCHome() {
         </div>
       </Section>
 
-      {/* Plan, told as a short timeline that flows into a parent quote */}
-      <section className="bg-sand/50 py-16 sm:py-24">
-        <div className="container-narrow">
-          <SectionHeading title="How to get started" />
-          <div className="mt-10 space-y-8 border-l-2 border-forest-200 pl-8">
-            {conceptB.plan.map((step, i) => (
-              <div key={step} className="relative">
-                <span className="absolute -left-12 flex h-8 w-8 items-center justify-center rounded-full bg-forest-800 font-display text-sm font-semibold text-cream">
-                  {i + 1}
-                </span>
-                <p className="prose-kairos text-lg">{step}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="container-page mx-auto mt-20 max-w-2xl text-center">
-          <blockquote className="text-2xl leading-relaxed text-ink/85">&ldquo;{spotlight.pull}&rdquo;</blockquote>
-          <p className="mt-5 text-sm font-semibold text-forest-800">
-            {spotlight.author} · {spotlight.role}
-          </p>
-        </div>
-      </section>
+      <GetStarted />
 
       <CTASection
         title="Not sure which program fits?"

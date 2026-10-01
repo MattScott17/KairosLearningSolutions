@@ -8,17 +8,15 @@ import { ReviewMarquee } from "@/components/ReviewMarquee";
 import { TutorRow } from "@/components/TutorCard";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { ProgramList } from "@/components/ProgramList";
-import { PhotoStrip } from "@/components/PhotoStrip";
+import { PhotosFromKairos, HowWeTeach, GetStarted } from "@/components/home/HomeSections";
 import { CTASection } from "@/components/CTASection";
 import { apex, featuredTutors, getTeamMembers, testimonials } from "@/lib/content";
-import { galleryPhotos, photos } from "@/lib/photos";
+import { photos } from "@/lib/photos";
 
 export function ClassicHome() {
   return (
     <>
       <Hero banner={<FallClassesBanner />} />
-
-      <PhotoStrip photos={galleryPhotos} className="mb-2" />
 
       <StatsBar />
 
@@ -74,23 +72,9 @@ export function ClassicHome() {
         </div>
       </section>
 
-      {/* Why families stay */}
-      <Section>
-        <div className="grid gap-8 lg:grid-cols-[1fr_1.4fr]">
-          <h2 className="text-3xl font-semibold sm:text-4xl">Small groups, experienced teachers</h2>
-          <div className="prose-kairos space-y-4 text-lg">
-            <p>
-              Groups here are small, so every teacher knows each student by name and knows what they
-              are working on. Many of our teachers spent 15 to 38 years in classrooms before joining
-              Kairos.
-            </p>
-            <p>
-              Every student starts with a plan built on what they already know, and moves on when
-              they&apos;re ready.
-            </p>
-          </div>
-        </div>
-      </Section>
+      <PhotosFromKairos />
+
+      <HowWeTeach />
 
       {/* Real Google reviews */}
       <section className="overflow-hidden border-t border-forest-100 bg-sand py-16 sm:py-20">
@@ -118,6 +102,8 @@ export function ClassicHome() {
           <TutorRow members={getTeamMembers(featuredTutors.home)} />
         </div>
       </Section>
+
+      <GetStarted />
 
       <CTASection />
     </>
