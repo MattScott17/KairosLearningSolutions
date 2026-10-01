@@ -39,6 +39,11 @@ export default async function ConceptsIndexPage() {
             </li>
           ))}
         </ul>
+        <p className="prose-kairos mt-8 max-w-2xl">
+          Concept C is now the main homepage at <Link href="/" className="link-underline">/</Link>.
+          The original homepage is still available at{" "}
+          <Link href="/classic" className="link-underline">/classic</Link>.
+        </p>
       </Section>
 
       <Section id="banner" className="border-t border-forest-100 bg-sand">

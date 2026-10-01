@@ -5,7 +5,7 @@ import { site } from "../lib/site";
 const phoneDigits = site.phone.slice(-8);
 
 const pages = [
-  { path: "/", heading: /fall/i, title: /Kairos Learning Solutions/ },
+  { path: "/", heading: /which kairos program/i, title: /Kairos Learning Solutions/ },
   { path: "/apex", heading: /APEX/, title: /APEX/ },
   { path: "/about", heading: /whole child/i, title: /About/ },
   { path: "/services", heading: /programs and prices/i, title: /Services/ },
@@ -104,6 +104,14 @@ for (const slug of ["a", "b", "c", "d"]) {
   });
 }
 
+// The original homepage stays up as a noindex alternate to the main homepage.
+test("classic homepage loads as a noindex alternate", async ({ page }) => {
+  const response = await page.goto("/classic");
+  expect(response?.status()).toBeLessThan(400);
+  await expect(page.locator("h1")).toHaveCount(1);
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+});
+
 // Marquees, swipe rows and galleries must never make phones scroll sideways.
 for (const path of [
   "/",
@@ -116,6 +124,7 @@ for (const path of [
   "/services",
   "/services/private-tutoring",
   "/summer",
+  "/classic",
   "/concepts/a",
   "/concepts/b",
   "/concepts/c",
@@ -131,7 +140,7 @@ for (const path of [
 }
 
 test("review marquee can be paused with its button", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/classic");
   const button = page.getByRole("button", { name: /pause reviews/i });
   await button.scrollIntoViewIfNeeded();
   const box = await button.boundingBox();
@@ -141,7 +150,7 @@ test("review marquee can be paused with its button", async ({ page }) => {
 });
 
 test("path-finder tabs switch the recommended program", async ({ page }) => {
-  await page.goto("/concepts/c");
+  await page.goto("/");
   const tab = page.getByRole("tab", { name: /full-time school/i });
   await tab.click();
   await expect(tab).toHaveAttribute("aria-selected", "true");
