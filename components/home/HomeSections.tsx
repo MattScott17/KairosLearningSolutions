@@ -1,6 +1,7 @@
 import { ParallaxGallery } from "@/components/ParallaxGallery";
 import { Section, SectionHeading } from "@/components/ui/Section";
-import { getTestimonials, values } from "@/lib/content";
+import Link from "next/link";
+import { getTestimonials, testimonials, values } from "@/lib/content";
 import { galleryPhotos } from "@/lib/photos";
 import { conceptB } from "@/lib/storybrand";
 
@@ -62,6 +63,9 @@ export function GetStarted() {
         <p className="mt-5 text-sm font-semibold text-forest-800">
           {spotlight.author} · {spotlight.role}
         </p>
+        <Link href="/about#reviews" className="link-underline mt-4 inline-block text-sm">
+          Read all {testimonials.length} parent reviews
+        </Link>
       </div>
     </section>
   );

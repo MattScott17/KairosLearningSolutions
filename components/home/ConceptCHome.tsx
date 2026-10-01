@@ -3,18 +3,18 @@ import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
+import { ParallaxPhoto } from "@/components/home/ParallaxPhoto";
+import { StickyCallBar } from "@/components/lp/StickyCallBar";
 import { PhotosFromKairos, HowWeTeach, GetStarted } from "@/components/home/HomeSections";
 import { TutorRow } from "@/components/TutorCard";
 import { FallClassesBanner } from "@/components/home/FallClassesBanner";
 import { PathFinder, type Path } from "@/components/concepts/PathFinder";
-import { FocusCards, type FocusCard } from "@/components/aceternity/FocusCards";
 import { HandArrow, HandUnderline } from "@/components/concepts/HandDrawn";
 import { NameRing } from "@/components/concepts/NameRing";
 import {
   services,
   apex,
   earlyLearners,
-  enrichment,
   leadership,
   featuredTutors,
   getTeamMembers,
@@ -99,18 +99,6 @@ const paths: Path[] = [
   },
 ];
 
-const programCards: FocusCard[] = [
-  ...[tutoring, homework, homeschool].map((s) => ({
-    title: s.title,
-    detail: s.short,
-    href: `/services/${s.slug}`,
-    photo: servicePhoto[s.slug],
-  })),
-  { title: earlyLearners.name, detail: earlyLearners.ageRange, href: "/early-learners", photo: photos.craftProject },
-  { title: "APEX", detail: `Full-time · ${apex.gradeRange}`, href: "/apex", photo: photos.threeDPrinting },
-  { title: enrichment.title, detail: "Writing, speaking, art & reading", href: "/fall-classes", photo: photos.cooking },
-];
-
 // Split the headline so "your student" can carry the hand-drawn underline.
 const headlineMarkText = "your student";
 const markAt = conceptC.heroHeadline.indexOf(headlineMarkText);
@@ -149,6 +137,16 @@ export function ConceptCHome() {
               {conceptC.heroSubShort ?? conceptC.heroSub}
             </p>
             <p className="prose-kairos mt-8 hidden max-w-xl text-lg lg:block">{conceptC.heroSub}</p>
+
+            <div className="mt-8 hidden gap-3 lg:flex">
+              <a href={site.phoneHref} className="btn-primary">
+                <Phone className="h-4 w-4" />
+                Call {site.phone}
+              </a>
+              <a href="#programs" className="btn-outline">
+                Find your program
+              </a>
+            </div>
 
             <div className="mt-8 hidden max-w-xl gap-4 border-l-2 border-gold-500/60 pl-5 lg:flex">
               <div>
@@ -210,10 +208,14 @@ export function ConceptCHome() {
       </section>
 
       {/* The path-finder: the core mechanic of this concept */}
-      <Section className="!pt-4 sm:!pt-6">
-        <div>
-          <PathFinder paths={paths} />
-        </div>
+      <Section id="programs" className="!pt-4 sm:!pt-6">
+        <PathFinder paths={paths} />
+        <p className="mt-8 text-center text-ink/75">
+          Looking for weekly classes in writing, speaking, art and reading?{" "}
+          <Link href="/fall-classes" className="link-underline">
+            See our fall classes
+          </Link>
+        </p>
       </Section>
 
       <PhotosFromKairos />
@@ -236,36 +238,33 @@ export function ConceptCHome() {
         </div>
       </Section>
 
-      {/* Program photo cards */}
-      <Section>
-        <SectionHeading title="From an hour a week to a full school day" />
-        <div className="mt-12">
-          <FocusCards cards={programCards} />
-        </div>
-
-        {/* APEX called out separately: how it works, rather than repeating the card above */}
-        <div>
-          <div className="mt-6 grid gap-8 rounded-lg bg-forest-800 p-8 text-cream lg:grid-cols-[1.2fr_1fr] lg:items-center">
-            <div>
-              <h3 className="text-2xl font-semibold text-cream">How APEX works</h3>
-              <p className="mt-3 max-w-xl text-cream/80">{apex.model}</p>
-              <p className="mt-3 max-w-xl text-cream/80">{apex.outcomesNote}</p>
-              <Link href="/apex" className="btn-accent mt-6 inline-flex">
-                See how a day goes
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-            <dl className="divide-y divide-cream/15 border-t border-cream/15 lg:border-l lg:border-t-0 lg:pl-8">
+      {/* APEX: how it works, for parents weighing a full-time option */}
+      <section className="bg-forest-900 text-cream">
+        <div className="container-page grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-2">
+          <ParallaxPhoto
+            photo={photos.smallGroup}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="aspect-[4/3] rounded-lg"
+          />
+          <div>
+            <h2 className="text-3xl font-semibold text-cream sm:text-4xl">How APEX works</h2>
+            <p className="mt-4 text-lg text-cream/85">{apex.model}</p>
+            <dl className="mt-6 divide-y divide-cream/15 border-y border-cream/15">
               {apex.comparison.map((row) => (
-                <div key={row.traditional} className="py-3 first:pt-0 last:pb-0 lg:first:pt-3 lg:last:pb-3">
-                  <dt className="text-sm text-cream/60 line-through decoration-cream/30">{row.traditional}</dt>
-                  <dd className="mt-0.5 font-display text-lg font-semibold text-cream">{row.apex}</dd>
+                <div key={row.traditional} className="grid gap-1 py-3 sm:grid-cols-2 sm:gap-6">
+                  <dt className="text-cream/60 line-through decoration-cream/30">{row.traditional}</dt>
+                  <dd className="font-semibold text-cream">{row.apex}</dd>
                 </div>
               ))}
             </dl>
+            <p className="mt-6 text-cream/85">{apex.outcomesNote}</p>
+            <Link href="/apex" className="btn-accent mt-8 inline-flex">
+              See how a day goes
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
-      </Section>
+      </section>
 
       <GetStarted />
 
@@ -273,6 +272,8 @@ export function ConceptCHome() {
         title="Not sure which program fits?"
         intro="Tell us about your student and we'll tell you where we'd start."
       />
+
+      <StickyCallBar />
     </>
   );
 }
