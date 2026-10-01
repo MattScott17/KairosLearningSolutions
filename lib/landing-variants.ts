@@ -208,10 +208,10 @@ export const apexOffer: ProgramOffer = {
     },
   ],
   priceLine: {
-    label: "Tuition",
-    value: apex.tuition.monthly,
+    label: "Your first step",
+    value: "Free call and tour",
     // Non-breaking spaces keep "Grades 3 – 9" from splitting across lines.
-    note: `${apex.tuition.annual} · ${apex.tuition.term} · ${apex.gradeRange.replace(/ /g, "\u00a0")}`,
+    note: `${apex.tuition.term} · ${apex.gradeRange.replace(/ /g, "\u00a0")}`,
   },
   riskReversal: {
     title: "See it before you decide",
@@ -256,8 +256,8 @@ export const apexOffer: ProgramOffer = {
       a: `${apex.gradeRange}.`,
     },
     {
-      q: "How much is tuition?",
-      a: `${apex.tuition.monthly}, or ${apex.tuition.annual} for the ${apex.tuition.term}.`,
+      q: "How much does APEX cost?",
+      a: "It depends on whether your student does the full program or just part of it. Call us or book a free tour and we'll go over it with you.",
     },
     {
       q: "What does the rest of the day look like?",

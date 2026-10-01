@@ -3,15 +3,26 @@ import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
+import { PhotoStrip } from "@/components/PhotoStrip";
+import { TutorRow } from "@/components/TutorCard";
 import { FallClassesBanner } from "@/components/home/FallClassesBanner";
 import { PathFinder, type Path } from "@/components/concepts/PathFinder";
 import { FocusCards, type FocusCard } from "@/components/aceternity/FocusCards";
 import { HandArrow, HandUnderline } from "@/components/concepts/HandDrawn";
 import { NameRing } from "@/components/concepts/NameRing";
-import { services, apex, earlyLearners, enrichment, leadership } from "@/lib/content";
+import {
+  services,
+  apex,
+  earlyLearners,
+  enrichment,
+  leadership,
+  featuredTutors,
+  getTeamMembers,
+  getTestimonials,
+} from "@/lib/content";
 import { site } from "@/lib/site";
-import { conceptC } from "@/lib/storybrand";
-import { photos, heroPhotos, type Photo } from "@/lib/photos";
+import { conceptB, conceptC } from "@/lib/storybrand";
+import { photos, heroPhotos, galleryPhotos, type Photo } from "@/lib/photos";
 
 const servicePhoto: Record<string, Photo> = {
   "private-tutoring": photos.readingTogether,
@@ -80,7 +91,7 @@ const paths: Path[] = [
     summary: apex.intro,
     facts: [
       { label: "Grades", value: apex.gradeRange },
-      { label: "Tuition", value: apex.tuition.monthly },
+      { label: "First step", value: "Free call and tour" },
       { label: "Format", value: "Full-time" },
     ],
     href: "/apex",
@@ -109,6 +120,7 @@ const headlineMark = markAt >= 0 ? headlineMarkText : "";
 const headlineTail = markAt >= 0 ? conceptC.heroHeadline.slice(markAt + headlineMarkText.length) : "";
 
 const jackie = leadership[0];
+const [spotlight] = getTestimonials(["melissa-c"]);
 const weekdayHours = site.hours[0].time.replace(" – ", " to ").replace(/:00 AM/, " AM");
 
 // `short` is the phone version; facts without one are desktop only.
@@ -206,72 +218,96 @@ export function ConceptCHome() {
         </div>
       </Section>
 
-      {/* Problem: framed as a decision problem */}
+      {/* Photos of the center and students */}
+      <PhotoStrip photos={galleryPhotos} />
+
+      {/* How we teach */}
+      <Section>
+        <div className="grid gap-8 lg:grid-cols-[1fr_1.4fr]">
+          <h2 className="text-3xl font-semibold sm:text-4xl">Small groups, and a plan for each student</h2>
+          <div className="prose-kairos space-y-4 text-lg">
+            <p>
+              Groups here are small, so every teacher knows each student by name and knows what they
+              are working on.
+            </p>
+            <p>
+              Every student starts with a plan built on what they already know, and moves on when
+              they&apos;re ready, not when the calendar says so.
+            </p>
+          </div>
+        </div>
+      </Section>
+
+      {/* Who teaches */}
       <Section className="bg-sand/50">
-        <SectionHeading title="Choosing a program" intro={conceptC.problem.external} />
-        <div className="mt-8 max-w-2xl space-y-4 border-l-2 border-gold-500/40 pl-6">
-          <p className="prose-kairos">{conceptC.problem.internal}</p>
-          <p className="font-display text-lg text-forest-800">{conceptC.problem.philosophical}</p>
+        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+          <SectionHeading
+            title="Who will be teaching your child"
+            intro="Retired classroom teachers, a Monterey County Teacher of the Year nominee, and math and science tutors from Cal Poly, UC San Diego and CSU Monterey Bay."
+          />
+          <Link href="/about" className="link-underline shrink-0">
+            Meet the whole team
+          </Link>
+        </div>
+        <div className="mt-10">
+          <TutorRow members={getTeamMembers(featuredTutors.home)} />
         </div>
       </Section>
 
       {/* Program photo cards */}
-      <Section className="bg-sand/50">
+      <Section>
         <SectionHeading title="From an hour a week to a full school day" />
         <div className="mt-12">
           <FocusCards cards={programCards} />
         </div>
 
-        {/* APEX called out separately as the "full-time" end of the spectrum */}
+        {/* APEX called out separately: how it works, rather than repeating the card above */}
         <div>
-          <div className="mt-6 grid gap-8 rounded-lg bg-forest-800 p-8 text-cream lg:grid-cols-[1.4fr_1fr] lg:items-center">
+          <div className="mt-6 grid gap-8 rounded-lg bg-forest-800 p-8 text-cream lg:grid-cols-[1.2fr_1fr] lg:items-center">
             <div>
-              <h3 className="text-2xl font-semibold text-cream">
-                APEX, full-time for {apex.gradeRange.toLowerCase()}
-              </h3>
-              <p className="mt-2 max-w-xl text-cream/80">{apex.intro}</p>
+              <h3 className="text-2xl font-semibold text-cream">How APEX works</h3>
+              <p className="mt-3 max-w-xl text-cream/80">{apex.model}</p>
+              <p className="mt-3 max-w-xl text-cream/80">{apex.outcomesNote}</p>
               <Link href="/apex" className="btn-accent mt-6 inline-flex">
-                Explore APEX
+                See how a day goes
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
-            <div className="grid gap-3 border-t border-cream/15 pt-6 lg:border-l lg:border-t-0 lg:pl-8 sm:grid-cols-3 sm:gap-4 lg:pt-0">
-              <div className="flex flex-row-reverse items-baseline justify-between gap-4 sm:block">
-                <p className="font-display text-xl font-semibold text-cream">
-                  {apex.gradeRange.replace(/^Grades /, "")}
-                </p>
-                <p className="text-sm text-cream/60 sm:mt-1">Grades</p>
-              </div>
-              <div className="flex flex-row-reverse items-baseline justify-between gap-4 sm:block">
-                <p className="font-display text-xl font-semibold text-cream">{apex.tuition.monthly}</p>
-                <p className="text-sm text-cream/60 sm:mt-1">Tuition</p>
-              </div>
-              <div className="flex flex-row-reverse items-baseline justify-between gap-4 sm:block">
-                <p className="font-display text-xl font-semibold text-cream">Full-time</p>
-                <p className="text-sm text-cream/60 sm:mt-1">Format</p>
-              </div>
-            </div>
+            <dl className="divide-y divide-cream/15 border-t border-cream/15 lg:border-l lg:border-t-0 lg:pl-8">
+              {apex.comparison.map((row) => (
+                <div key={row.traditional} className="py-3 first:pt-0 last:pb-0 lg:first:pt-3 lg:last:pb-3">
+                  <dt className="text-sm text-cream/60 line-through decoration-cream/30">{row.traditional}</dt>
+                  <dd className="mt-0.5 font-display text-lg font-semibold text-cream">{row.apex}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </div>
       </Section>
 
-      {/* Plan: confirm the fit before committing */}
-      <Section>
-        <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
-          <h2 className="text-3xl font-semibold sm:text-4xl">How to get started</h2>
-          <div>
-            <ol className="border-t border-forest-200">
-              {conceptC.plan.map((step, i) => (
-                <li key={step} className="flex gap-5 border-b border-forest-100 py-5">
-                  <span className="font-display text-xl font-semibold text-forest-700">{i + 1}.</span>
-                  <p className="prose-kairos text-lg">{step}</p>
-                </li>
-              ))}
-            </ol>
-            <p className="mt-8 text-lg font-medium text-forest-800">{conceptC.successVision}</p>
+      {/* Plan, told as a short timeline that flows into a parent quote */}
+      <section className="bg-sand/50 py-16 sm:py-24">
+        <div className="container-narrow">
+          <SectionHeading title="How to get started" />
+          <div className="mt-10 space-y-8 border-l-2 border-forest-200 pl-8">
+            {conceptB.plan.map((step, i) => (
+              <div key={step} className="relative">
+                <span className="absolute -left-12 flex h-8 w-8 items-center justify-center rounded-full bg-forest-800 font-display text-sm font-semibold text-cream">
+                  {i + 1}
+                </span>
+                <p className="prose-kairos text-lg">{step}</p>
+              </div>
+            ))}
           </div>
         </div>
-      </Section>
+
+        <div className="container-page mx-auto mt-20 max-w-2xl text-center">
+          <blockquote className="text-2xl leading-relaxed text-ink/85">&ldquo;{spotlight.pull}&rdquo;</blockquote>
+          <p className="mt-5 text-sm font-semibold text-forest-800">
+            {spotlight.author} · {spotlight.role}
+          </p>
+        </div>
+      </section>
 
       <CTASection
         title="Not sure which program fits?"

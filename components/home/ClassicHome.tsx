@@ -67,7 +67,7 @@ export function ClassicHome() {
                 How APEX works
               </Link>
               <p className="text-cream/75">
-                {apex.tuition.monthly.replace(" / ", " a ")}, {apex.tuition.term.toLowerCase()}
+                Call us to set up a free tour
               </p>
             </div>
           </div>
