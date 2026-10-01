@@ -11,7 +11,7 @@ export type ConceptCopy = {
   slug: "a" | "b" | "c" | "d";
   label: string;
   pitch: string;
-  // The interaction style this concept tries out, shown on /concepts.
+  // The interaction style this concept tries out, shown on /landingpages.
   explores?: string[];
   heroHeadline: string;
   heroSub: string;

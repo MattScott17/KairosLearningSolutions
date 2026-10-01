@@ -3,7 +3,7 @@
 import { startTransition, useActionState, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { BannerCard } from "@/components/home/BannerCard";
-import { saveBanner, type SaveBannerState } from "@/app/(site)/concepts/banner-actions";
+import { saveBanner, type SaveBannerState } from "@/app/(site)/landingpages/banner-actions";
 import type { BannerSettings } from "@/lib/banner-schema";
 import { cn } from "@/lib/utils";
 

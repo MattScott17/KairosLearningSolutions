@@ -173,8 +173,8 @@ test("gallery photo opens and closes with Escape", async ({ page }) => {
   await expect(page.getByRole("dialog")).toHaveCount(0);
 });
 
-test("concepts page has the banner editor behind a PIN", async ({ page }) => {
-  await page.goto("/concepts");
+test("landing pages hub has the banner editor behind a PIN", async ({ page }) => {
+  await page.goto("/landingpages");
   await expect(page.getByRole("heading", { name: "Announcement banner" })).toBeVisible();
   await expect(page.getByLabel("PIN")).toHaveAttribute("pattern", "\\d{4}");
   await expect(page.getByLabel("Headline")).not.toHaveValue("");

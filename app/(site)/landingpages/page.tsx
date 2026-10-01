@@ -4,18 +4,21 @@ import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { landingPageGroups } from "@/lib/landing-pages";
+import { BannerEditor } from "@/components/concepts/BannerEditor";
+import { getBanner } from "@/lib/banner";
 
 export const metadata: Metadata = {
   title: "Landing Pages",
   robots: { index: false, follow: false },
 };
 
-export default function LandingPagesIndex() {
+export default async function LandingPagesIndex() {
+  const banner = await getBanner();
   return (
     <>
       <PageHero
         title="Landing pages"
-        intro="Every ad landing page and homepage concept we've built, grouped by program. Open them on your phone, since that's where most ad traffic lands."
+        intro="Everything in one place: every ad landing page, every homepage option, and the announcement banner editor. Open them on your phone, since that's where most ad traffic lands."
       />
       {landingPageGroups.map((group, gi) => (
         <Section key={group.program} className={gi % 2 ? "bg-sand/50" : ""}>
@@ -53,6 +56,17 @@ export default function LandingPagesIndex() {
           </div>
         </Section>
       ))}
+
+      <Section id="banner" className="border-t border-forest-100 bg-sand">
+        <h2 className="text-2xl font-semibold sm:text-3xl">Announcement banner</h2>
+        <p className="prose-kairos mt-3 max-w-2xl">
+          The banner at the top of the homepage and these drafts. Change the words or link, or
+          switch it off, then enter the PIN and save. It updates on the site right away.
+        </p>
+        <div className="mt-8">
+          <BannerEditor initial={banner} />
+        </div>
+      </Section>
     </>
   );
 }

@@ -25,6 +25,8 @@ const nextConfig: NextConfig = {
       { source: "/fall-26-classes", destination: "/fall-classes", permanent: true },
       { source: "/homeworkclub", destination: "/services/homework-club", permanent: true },
       { source: "/tutors", destination: "/services/private-tutoring", permanent: true },
+      // The concepts overview and banner editor now live on the landing pages hub.
+      { source: "/concepts", destination: "/landingpages", permanent: false },
       // Reviews moved onto the About page.
       { source: "/testimonials", destination: "/about#reviews", permanent: true },
       {

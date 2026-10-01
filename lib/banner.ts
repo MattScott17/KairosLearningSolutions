@@ -3,7 +3,7 @@ import { unstable_cache } from "next/cache";
 import { bannerSchema, defaultBanner, type BannerSettings } from "@/lib/banner-schema";
 
 // Banner settings live in the "kairos-site" Vercel Global Config store so they can be
-// changed from /concepts without a redeploy. GLOBAL_CONFIG is its read connection string.
+// changed from /landingpages without a redeploy. GLOBAL_CONFIG is its read connection string.
 export const BANNER_KEY = "fallBanner";
 export const BANNER_TAG = "fall-banner";
 
@@ -20,5 +20,5 @@ async function readBanner(): Promise<BannerSettings> {
   }
 }
 
-/** Cached so pages stay static; saving from /concepts expires the tag. */
+/** Cached so pages stay static; saving from /landingpages expires the tag. */
 export const getBanner = unstable_cache(readBanner, [BANNER_TAG], { tags: [BANNER_TAG] });

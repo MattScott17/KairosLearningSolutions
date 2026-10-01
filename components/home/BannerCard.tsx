@@ -6,7 +6,7 @@ import { isExternalHref, type BannerSettings } from "@/lib/banner-schema";
 export type BannerVariant = "dark" | "light";
 
 /**
- * The announcement card itself; the whole card is the link. Pure, so the /concepts editor
+ * The announcement card itself; the whole card is the link. Pure, so the /landingpages editor
  * can preview it. `light` is a smaller white card for sitting on top of a photo hero.
  */
 export function BannerCard({
