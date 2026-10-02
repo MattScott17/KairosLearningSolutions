@@ -10,7 +10,6 @@ const pages = [
   { path: "/about", heading: /whole child/i, title: /About/ },
   { path: "/services", heading: /programs and prices/i, title: /Services/ },
   { path: "/services/private-tutoring", heading: /Private Tutoring/, title: /Private Tutoring/ },
-  { path: "/services/homework-club", heading: /Homework Club/, title: /Homework Club/ },
   { path: "/services/homeschool-support", heading: /Homeschool Support/, title: /Homeschool Support/ },
   { path: "/fall-classes", heading: /Fall 2026 classes/i, title: /Classes/ },
   { path: "/fall-classes/register", heading: /Fall 2026 registration/i, title: /Registration/ },

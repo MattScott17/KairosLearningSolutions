@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
+import { Pathways } from "@/components/Pathways";
 import { FallClassesBanner } from "@/components/home/FallClassesBanner";
 import { VideoHero } from "@/components/VideoHero";
 import { LayoutGrid } from "@/components/aceternity/LayoutGrid";
@@ -94,6 +95,8 @@ export default function ConceptDPage() {
           </ol>
         </div>
       </Section>
+
+      <Pathways className="border-t border-forest-100" />
 
       <CTASection
         title={conceptD.successVision}

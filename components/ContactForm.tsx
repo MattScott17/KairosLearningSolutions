@@ -1,7 +1,7 @@
 "use client";
 
 import { CheckCircle2, Loader2, Send } from "lucide-react";
-import { availabilityDays, contactSchema, interestOptions } from "@/lib/contact-schema";
+import { contactSchema, interestOptions } from "@/lib/contact-schema";
 import { site } from "@/lib/site";
 import { useFormSubmit } from "@/lib/useFormSubmit";
 
@@ -14,7 +14,6 @@ export function ContactForm() {
     const formData = new FormData(form);
     await submit({
       ...Object.fromEntries(formData.entries()),
-      availability: formData.getAll("availability"),
       updatesOptIn: formData.get("updatesOptIn") === "on",
     }, form);
   }
@@ -166,23 +165,6 @@ export function ContactForm() {
               placeholder="e.g. 5th grade"
             />
           </div>
-        </div>
-
-        <p className="mt-4 text-xs font-medium text-ink/70">
-          If you're interested in Homework Club, which days work best?
-        </p>
-        <div className="mt-2 flex flex-wrap gap-x-5 gap-y-2">
-          {availabilityDays.map((day) => (
-            <label key={day} className="flex items-center gap-2 text-sm text-ink/80">
-              <input
-                type="checkbox"
-                name="availability"
-                value={day}
-                className="h-4 w-4 rounded border-forest-300 text-forest-700 focus:ring-forest-500/30"
-              />
-              {day}
-            </label>
-          ))}
         </div>
       </div>
 

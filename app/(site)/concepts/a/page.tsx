@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Phone } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
+import { Pathways } from "@/components/Pathways";
 import { FallClassesBanner } from "@/components/home/FallClassesBanner";
 import { ProgramList } from "@/components/ProgramList";
 import { StatsBar } from "@/components/StatsBar";
@@ -49,7 +50,7 @@ const planSteps: TimelineItem[] = [
       <>
         <p className="prose-kairos max-w-xl text-lg">{conceptA.plan[1]}</p>
         <p className="mt-3 text-sm text-ink/60">
-          {[...services.map((s) => s.title), "Early Learners", "APEX"].join(", ")}
+          {[...services.map((s) => s.title), "Early Learners", "APEX", "District Partnerships"].join(", ")}
         </p>
         <StepPhoto photo={photos.readingTogether} />
       </>
@@ -153,6 +154,8 @@ export default function ConceptAPage() {
           {conceptA.successVision}
         </p>
       </Section>
+
+      <Pathways className="border-t border-forest-100" />
 
       <CTASection
         title="Give us a call"

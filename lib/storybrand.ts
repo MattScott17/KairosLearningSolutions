@@ -35,9 +35,9 @@ export const conceptA: ConceptCopy = {
   label: "Concept A: Direct",
   pitch:
     "A direct-response homepage. It names the problem, introduces Jackie and Kairos, lays out three steps, and repeats one call to action.",
-  heroHeadline: "Tutoring, homeschool support and full-time school in Salinas, planned around your child.",
+  heroHeadline: "Kairos Learning Solutions: tutoring, homeschool support, classes and APEX in Salinas, planned around your child.",
   heroSub:
-    "I'm Jackie Scott. I've taught for more than 30 years, and in 2020 I opened Kairos on South Main Street. Tell us about your student and we'll suggest a tutor, a program, or APEX, our full-time program for grades 3 to 9.",
+    "I'm Jackie Scott. I've taught for more than 30 years, and in 2020 I opened Kairos on South Main Street. Tell us about your student and we'll suggest a tutor, a class, homeschool support, or APEX, our full-time program for grades 3 to 9. We also partner with school districts.",
   problem: {
     external: "Your student is behind, or bored, in a class that moves at one speed.",
     internal: "You've tried helping at home and it isn't working.",
@@ -59,11 +59,11 @@ export const conceptB: ConceptCopy = {
   label: "Concept B: A day at Kairos",
   pitch:
     "A photo-led homepage that walks through a day at Kairos before asking for anything.",
-  heroHeadline: "A day at Kairos, from morning academics to Homework Club.",
+  heroHeadline: "A day at Kairos, from morning academics to afternoon projects.",
   heroSub:
     "Since 2020 we've taught Salinas students one-on-one and in small groups at 836 South Main Street. Here's what a day here looks like.",
   problem: {
-    external: "Homework fights every night, or a child who dreads going to school.",
+    external: "Nightly homework fights, or a child who dreads going to school.",
     internal: "You're worried this is how it's going to stay.",
     philosophical: "A small group and a teacher who knows your child can change how school feels.",
   },
@@ -84,16 +84,16 @@ export const conceptC: ConceptCopy = {
     "A program-finder homepage for parents who arrive already comparing options. It's organized around which program fits, with less story.",
   heroHeadline: "Which Kairos program fits your student?",
   heroSub:
-    "We offer everything from an hour of homework help to a full school day for grades 3 to 9, all at our center in Salinas. Pick what your student needs below, or call and I'll help you choose.",
-  heroSubShort: "From an hour of homework help to a full school day, all at our center in Salinas.",
+    "We offer everything from an hour of tutoring to a full school day for grades 3 to 9, all at our center in Salinas. Pick what your student needs below, or call and I'll help you choose.",
+  heroSubShort: "From an hour of tutoring to a full school day, all at our center in Salinas.",
   problem: {
-    external: "Tutoring, homework help, homeschool support and full-time school can sound alike, and it's hard to tell which one your student needs.",
+    external: "Tutoring, homeschool support, classes and full-time school can sound alike, and it's hard to tell which one your student needs.",
     internal: "You don't want to pay for the wrong one.",
     philosophical: "The right amount of help depends on your student, so start with what they need now.",
   },
   plan: [
     "Pick what your student needs right now.",
-    "See the matching program: Private Tutoring, Homework Club, Homeschool Support or APEX.",
+    "See the matching program: Private Tutoring, Homeschool Support and Classes, or APEX.",
     "Call us to check the fit before you sign up.",
   ],
   successVision:
@@ -109,7 +109,7 @@ export const conceptD: ConceptCopy = {
     "A looping classroom video, a photo gallery, Google reviews and tutor cards come first. The pitch comes last.",
   heroHeadline: "Inside Kairos, on South Main Street in Salinas.",
   heroSub:
-    "Tutoring, homeschool support and APEX, our full-time program for grades 3 to 9. This is a real class at Kairos.",
+    "Tutoring, homeschool support, classes and APEX, our full-time program for grades 3 to 9. This is a real class at Kairos.",
   problem: {
     external: "It's hard to judge a program from a brochure.",
     internal: "You want to picture your child here before you sign up.",
@@ -128,8 +128,8 @@ export const conceptD: ConceptCopy = {
 export const concepts: ConceptCopy[] = [conceptA, conceptB, conceptC, conceptD];
 
 // Concept B's "a day at Kairos" walk-through. Every detail comes from lib/content.ts
-// (APEX's 2 Hour Learning model, Early Learners' Tue–Thu mornings, Homework Club's
-// 2:30–5:15 PM hours) — no invented schedule times.
+// (APEX's 2 Hour Learning model, Early Learners' Tue–Thu mornings, the center's
+// Monday to Thursday hours) — no invented schedule times.
 export type DayMoment = {
   when: string;
   title: string;
@@ -155,12 +155,6 @@ export const dayAtKairos: DayMoment[] = [
     title: "Projects and life skills",
     body: "With the core work done, APEX students spend the rest of the day on projects, presentations and life skills.",
     photo: "presenting",
-  },
-  {
-    when: "2:30 to 5:15 PM",
-    title: "Homework Club",
-    body: "After school, students come in to finish their homework, and we check it before they go home.",
-    photo: "homework",
   },
   {
     when: "All year",

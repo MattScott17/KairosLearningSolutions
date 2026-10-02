@@ -29,7 +29,6 @@ export async function POST(request: Request) {
     studentLastName,
     studentSchool,
     studentGrade,
-    availability,
     updatesOptIn,
     message,
     company,
@@ -73,11 +72,6 @@ export async function POST(request: Request) {
       ${studentName ? `<p><strong>Student:</strong> ${escapeHtml(studentName)}</p>` : ""}
       ${studentSchool ? `<p><strong>School:</strong> ${escapeHtml(studentSchool)}</p>` : ""}
       ${studentGrade ? `<p><strong>Grade:</strong> ${escapeHtml(studentGrade)}</p>` : ""}
-      ${
-        availability && availability.length > 0
-          ? `<p><strong>Available:</strong> ${escapeHtml(availability.join(", "))}</p>`
-          : ""
-      }
       <p><strong>Message:</strong></p>
       <p style="white-space:pre-wrap;">${escapeHtml(message)}</p>
       <p style="margin-top:16px; color:#6b7280; font-size:13px;">
