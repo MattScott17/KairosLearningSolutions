@@ -41,7 +41,7 @@ test("/landingpages directory links every landing page", async ({ page }) => {
   await page.goto("/landingpages");
   await expect(page.locator("h1")).toContainText(/landing pages/i);
   const originals = ["/lp/tutoring", "/lp/tutoring-site", "/lp/apex", "/lp/apex-site"];
-  const concepts = ["/concepts", "/concepts/a", "/concepts/b", "/concepts/c", "/concepts/d"];
+  const concepts = ["/", "/classic", "/concepts/a", "/concepts/b", "/concepts/c", "/concepts/d"];
   for (const path of [...variants, ...originals, ...concepts]) {
     await expect(page.locator(`a[href="${path}"]`)).toBeVisible();
   }

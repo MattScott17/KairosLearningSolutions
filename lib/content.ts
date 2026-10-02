@@ -668,7 +668,7 @@ export function getProgramList(): ProgramRow[] {
       href: "/apex",
       who: "Grades 3 to 9",
       when: `Full school day, ${apex.tuition.term.toLowerCase()}`,
-      price: apex.tuition.monthly.replace(" / ", " a "),
+      price: "Call for a tour",
     },
     {
       name: "Classes and enrichment",

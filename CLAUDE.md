@@ -51,9 +51,11 @@ npm run typecheck && npm run lint && npm run build && npm run test:e2e
   catalog. `/fall-classes/register` rebuilds her Google registration form (`lib/registration.ts`);
   `/api/register` emails it via Resend and also tries to copy it into that Google Form
   (`lib/registration-google.ts`, which only works while the form doesn't require sign-in).
-- The announcement banner (homepage + concept pages) is edited from `/concepts` with a 4-digit
+- `/landingpages` is the one team hub: every ad landing page, every homepage option (`/`, `/classic`,
+  `/concepts/a` to `d`) and the banner editor. `/concepts` redirects there.
+- The announcement banner (homepage + concept pages) is edited from `/landingpages` with a 4-digit
   PIN. Settings live in the `kairos-site` Vercel Global Config store (`lib/banner.ts`, save action
-  in `app/(site)/concepts/banner-actions.ts`). Needs `GLOBAL_CONFIG`, `BANNER_PIN`,
+  in `app/(site)/landingpages/banner-actions.ts`). Needs `GLOBAL_CONFIG`, `BANNER_PIN`,
   `VERCEL_API_TOKEN`; without the store it falls back to `defaultBanner`.
 - The contact form degrades gracefully when `RESEND_API_KEY` is unset — it never hard-fails
   the visitor; the call/email buttons are always the fallback.

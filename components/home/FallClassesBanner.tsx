@@ -1,7 +1,7 @@
 import { BannerCard, type BannerVariant } from "@/components/home/BannerCard";
 import { getBanner } from "@/lib/banner";
 
-/** The announcement banner, as set on /concepts. Renders nothing when it's switched off. */
+/** The announcement banner, as set on /landingpages. Renders nothing when it's switched off. */
 export async function FallClassesBanner({
   variant,
   className,

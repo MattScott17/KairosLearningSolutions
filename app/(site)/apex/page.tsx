@@ -12,15 +12,15 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "APEX Full-Time Program",
   description:
-    "APEX is a full-time program for grades 3 to 9 in Salinas, CA, using the 2 Hour Learning model: personalized, mastery-based academics, then projects and life skills. $1,800 a month.",
+    "APEX is a full-time program for grades 3 to 9 in Salinas, CA, using the 2 Hour Learning model: personalized, mastery-based academics, then projects and life skills.",
 };
 
 const facts = [
   { label: "Grades", value: apex.gradeRange.replace("Grades ", ""), note: "" },
   {
-    label: "Tuition",
-    value: apex.tuition.monthly.replace(" / ", " a "),
-    note: `${apex.tuition.annual.replace(" / ", " a ")}, ${apex.tuition.term.toLowerCase()}`,
+    label: "First step",
+    value: "Free call and tour",
+    note: apex.tuition.term,
   },
   { label: "Schedule", value: "Full school day", note: "Small groups" },
 ];
@@ -133,8 +133,8 @@ export default function ApexPage() {
       <Section className="bg-sand/50">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
           <SectionHeading
-            title="Tuition"
-            intro="You can enroll in the full program, or in the academics or the workshops on their own."
+            title="Ways to enroll"
+            intro="You can enroll in the full program, or in the academics or the workshops on their own. Call us and we'll go over tuition when you come in for a tour."
           />
           <div>
             <ul className="border-t border-forest-200">
@@ -147,9 +147,6 @@ export default function ApexPage() {
                     <p className="font-semibold text-forest-900">{tier.name}</p>
                     <p className="text-sm text-ink/70">{tier.description}</p>
                   </div>
-                  <p className="font-display text-xl font-semibold text-forest-800 sm:text-right">
-                    {tier.price.replace(" / ", " a ")}
-                  </p>
                 </li>
               ))}
             </ul>

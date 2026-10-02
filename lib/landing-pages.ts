@@ -55,14 +55,20 @@ export const landingPageGroups: LandingPageGroup[] = [
     pages: [...offerVariants("apex"), ...originals("apex", "APEX")],
   },
   {
-    program: "Homepage concepts",
-    intro: "Four homepage drafts, each telling the Kairos story a different way. The overview at /concepts compares them side by side.",
+    program: "Homepage options",
+    intro: "The live homepage, the original one kept as a backup, and four drafts that each tell the Kairos story a different way.",
     pages: [
       {
-        href: "/concepts",
-        label: "All concepts overview",
-        description: "The index page listing all four homepage drafts and what each one tries out.",
-        tags: ["Overview", "Site nav"],
+        href: "/",
+        label: "Main homepage (Concept C)",
+        description: "The live homepage. Parents pick what their student needs and see the matching program.",
+        tags: ["Homepage", "Site nav"],
+      },
+      {
+        href: "/classic",
+        label: "Original homepage",
+        description: "The first homepage, kept as an alternate. Same content, laid out with the full program list and APEX up front.",
+        tags: ["Homepage alternate", "Site nav"],
       },
       ...concepts.map((c) => ({
         href: `/concepts/${c.slug}`,

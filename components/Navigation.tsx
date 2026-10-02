@@ -36,9 +36,9 @@ export function Navigation() {
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
-  // The home hero is light, so a transparent bar reads well there. Every other
+  // Both homepages (/ and the /classic alternate) have a light hero, so a transparent bar reads well there. Every other
   // page opens on a dark hero, so keep the header solid for legible contrast.
-  const isHome = pathname === "/";
+  const isHome = pathname === "/" || pathname === "/classic";
   const solid = scrolled || mobileOpen || !isHome;
 
   return (
