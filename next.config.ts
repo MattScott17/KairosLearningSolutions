@@ -23,7 +23,9 @@ const nextConfig: NextConfig = {
       { source: "/salinas-apex", destination: "/apex", permanent: true },
       { source: "/summerprogramsatkairos", destination: "/summer", permanent: true },
       { source: "/fall-26-classes", destination: "/fall-classes", permanent: true },
-      { source: "/homeworkclub", destination: "/services/homework-club", permanent: true },
+      // Homework Club is discontinued.
+      { source: "/homeworkclub", destination: "/services", permanent: true },
+      { source: "/services/homework-club", destination: "/services", permanent: true },
       { source: "/tutors", destination: "/services/private-tutoring", permanent: true },
       // The concepts overview and banner editor now live on the landing pages hub.
       { source: "/concepts", destination: "/landingpages", permanent: false },

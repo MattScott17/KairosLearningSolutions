@@ -80,16 +80,16 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/services/homework-club" className="inline-block py-1.5 transition-colors hover:text-cream">
-                  Homework Club
-                </Link>
-              </li>
-              <li>
                 <Link
                   href="/services/homeschool-support"
                   className="inline-block py-1.5 transition-colors hover:text-cream"
                 >
                   Homeschool Support
+                </Link>
+              </li>
+              <li>
+                <Link href="/district-partnerships" className="inline-block py-1.5 transition-colors hover:text-cream">
+                  District Partnerships
                 </Link>
               </li>
               <li>

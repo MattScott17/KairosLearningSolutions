@@ -28,8 +28,8 @@ export function Hero({ banner }: { banner?: ReactNode }) {
           <p className="prose-kairos mt-7 max-w-xl text-lg">
             I&apos;m Jackie Scott. I taught grades 3 through 12 for more than 30 years, and in{" "}
             {site.foundedYear} I opened Kairos on South Main Street so kids in Salinas could learn at
-            their own pace. We tutor every subject from early reading to AP, run an after-school
-            homework club, support homeschool families, and teach{" "}
+            their own pace. We tutor every subject from early reading to AP, support homeschool
+            families, teach classes, partner with school districts, and run{" "}
             <Link href="/apex" className="font-semibold text-forest-800 underline underline-offset-4">
               APEX
             </Link>

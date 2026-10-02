@@ -5,6 +5,7 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
 import { ParallaxPhoto } from "@/components/home/ParallaxPhoto";
 import { StickyCallBar } from "@/components/lp/StickyCallBar";
+import { Pathways } from "@/components/Pathways";
 import { PhotosFromKairos, HowWeTeach, GetStarted } from "@/components/home/HomeSections";
 import { TutorRow } from "@/components/TutorCard";
 import { FallClassesBanner } from "@/components/home/FallClassesBanner";
@@ -25,11 +26,10 @@ import { photos, heroPhotos, type Photo } from "@/lib/photos";
 
 const servicePhoto: Record<string, Photo> = {
   "private-tutoring": photos.readingTogether,
-  "homework-club": photos.homework,
   "homeschool-support": photos.studentsLearning,
 };
 
-const [tutoring, homework, homeschool] = ["private-tutoring", "homework-club", "homeschool-support"].map(
+const [tutoring, homeschool] = ["private-tutoring", "homeschool-support"].map(
   (slug) => services.find((s) => s.slug === slug)!
 );
 
@@ -44,17 +44,6 @@ const paths: Path[] = [
     href: `/services/${tutoring.slug}`,
     cta: tutoring.cta,
     photo: servicePhoto[tutoring.slug],
-  },
-  {
-    id: "homework",
-    need: "homework help after school",
-    needShort: "homework help",
-    program: homework.title,
-    summary: homework.summary,
-    facts: homework.highlights,
-    href: `/services/${homework.slug}`,
-    cta: homework.cta,
-    photo: servicePhoto[homework.slug],
   },
   {
     id: "homeschool",
@@ -237,6 +226,8 @@ export function ConceptCHome() {
           <TutorRow members={getTeamMembers(featuredTutors.home)} />
         </div>
       </Section>
+
+      <Pathways />
 
       {/* APEX: how it works, for parents weighing a full-time option */}
       <section className="bg-forest-900 text-cream">

@@ -100,7 +100,6 @@ export const tutoringOffer: ProgramOffer = {
   notForYou: [
     "You want someone to do the homework for your student.",
     "You're looking for a one-size-fits-all worksheet program.",
-    "You just need homework checked after school. Our Homework Club is built for that.",
   ],
   obstacles: [
     {

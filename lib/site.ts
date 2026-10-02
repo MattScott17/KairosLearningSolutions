@@ -6,7 +6,7 @@ export const site = {
   // Old slogan. No longer shown anywhere on the site; kept in case the owner wants it back.
   tagline: "Raising Future World Changers",
   description:
-    "Tutoring, homework help, homeschool support and a full-time program for grades 3 to 9 at 836 South Main Street in Salinas, CA. Open since 2020.",
+    "Tutoring, homeschool support, classes, district partnerships and APEX, a full-time program for grades 3 to 9, at 836 South Main Street in Salinas, CA. Open since 2020.",
   url: "https://www.kairoslearningsolutions.com",
   foundedYear: 2020,
   phone: "(831) 500-2520",
@@ -65,14 +65,14 @@ export const mainNav: NavItem[] = [
         description: "One-on-one help, all ages and subjects",
       },
       {
-        label: "Homework Club",
-        href: "/services/homework-club",
-        description: "After-school homework support",
-      },
-      {
         label: "Homeschool Support",
         href: "/services/homeschool-support",
         description: "Flexible packages for homeschool families",
+      },
+      {
+        label: "District Partnerships",
+        href: "/district-partnerships",
+        description: "Working with schools and districts",
       },
       {
         label: "Fall Classes",
