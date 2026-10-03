@@ -8,7 +8,7 @@ const pages = [
   { path: "/", heading: /which kairos program/i, title: /Kairos Learning Solutions/ },
   { path: "/apex", heading: /APEX/, title: /APEX/ },
   { path: "/about", heading: /whole child/i, title: /About/ },
-  { path: "/services", heading: /programs and prices/i, title: /Services/ },
+  { path: "/services", heading: /programs and prices/i, title: /Tutoring and Homeschool/ },
   { path: "/services/private-tutoring", heading: /Private Tutoring/, title: /Private Tutoring/ },
   { path: "/services/homeschool-support", heading: /Homeschool Support/, title: /Homeschool Support/ },
   { path: "/fall-classes", heading: /Fall 2026 classes/i, title: /Classes/ },

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/ui/Reveal";
+import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import Image from "next/image";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section, SectionHeading } from "@/components/ui/Section";
@@ -9,11 +11,13 @@ import { site } from "@/lib/site";
 import { pagePhotos, photos } from "@/lib/photos";
 import { TutorAvatar, TutorCard } from "@/components/TutorCard";
 
-export const metadata: Metadata = {
-  title: "About Us",
+export const metadata: Metadata = pageMetadata({
+  title: "About Our Teachers",
   description:
     "Meet the teachers behind Kairos Learning Solutions in Salinas, CA, and read Google reviews from Kairos families quoted in full.",
-};
+  path: "/about",
+  image: pagePhotos.about,
+});
 
 type Review = (typeof testimonials)[number];
 
@@ -35,6 +39,7 @@ function ReviewCard({ t }: { t: Review }) {
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "About", path: "/about" }])} />
       <PageHero
         title="Educators who see the whole child"
         mark="whole child"

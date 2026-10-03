@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import Link from "next/link";
 import { ArrowRight, Mail, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
@@ -6,15 +8,18 @@ import { CTASection } from "@/components/CTASection";
 import { pagePhotos, photos } from "@/lib/photos";
 import { summerPrograms } from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Summer Programs",
   description:
     "Summer 2026 at Kairos in Salinas, CA: a Back-to-School Boot Camp in reading, math and language arts, and the Love Note Music Camp. Dates, times and prices.",
-};
+  path: "/summer",
+  image: pagePhotos.summer,
+});
 
 export default function SummerPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Summer Programs", path: "/summer" }])} />
       <PageHero
         title="Summer 2026 at Kairos"
         mark="Kairos"

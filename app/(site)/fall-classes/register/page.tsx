@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/ui/PageHero";
 import { RegistrationForm } from "@/components/RegistrationForm";
 import { registrationFees } from "@/lib/content";
@@ -6,9 +7,13 @@ import { registrationOptions } from "@/lib/registration";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Fall 2026 Registration",
-  description:
-    "Register for Fall 2026 at Kairos in Salinas, CA: APEX, homeschool support, tutoring, early learners and fall classes. Spots are first come, first served.",
+  ...pageMetadata({
+    title: "Fall 2026 Registration",
+    description:
+      "Register for Fall 2026 at Kairos in Salinas, CA: APEX, homeschool support, tutoring, early learners and fall classes. Spots are first come, first served.",
+    path: "/fall-classes/register",
+  }),
+  robots: { index: false, follow: true },
 };
 
 type Props = { searchParams: Promise<{ class?: string }> };

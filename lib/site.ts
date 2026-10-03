@@ -24,6 +24,16 @@ export const site = {
     embedUrl:
       "https://www.google.com/maps?q=836+South+Main+Street+Salinas+CA+93901&output=embed",
   },
+  // Used for schema.org markup only. Double-check against the pin on Google Maps.
+  geo: { latitude: 36.6694, longitude: -121.6553 },
+  // Towns families drive in from. Used for schema.org areaServed only.
+  areasServed: ["Salinas", "Monterey", "Seaside", "Marina", "Castroville", "Prunedale", "Gonzales"],
+  // Same hours as below, in the shape schema.org wants. Keep the two in step.
+  hoursSpec: {
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+    opens: "09:00",
+    closes: "17:15",
+  },
   hours: [
     { day: "Monday – Thursday", time: "9:00 AM – 5:15 PM" },
     { day: "Friday", time: "By appointment" },

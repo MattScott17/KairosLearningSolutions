@@ -1,17 +1,21 @@
 import type { Metadata } from "next";
+import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContactForm } from "@/components/ContactForm";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Contact",
+export const metadata: Metadata = pageMetadata({
+  title: "Contact and Directions",
   description:
     "Contact Kairos Learning Solutions at 836 South Main Street, Salinas, CA. Call (831) 500-2520, email jackie@kairoslearningsolutions.com, or send a message.",
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Contact", path: "/contact" }])} />
       <PageHero
         title="Call, email or visit"
         mark="visit"

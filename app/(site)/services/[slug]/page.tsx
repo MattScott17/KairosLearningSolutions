@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/ui/Reveal";
+import { pageMetadata, breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
+import { Faq } from "@/components/Faq";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +10,7 @@ import { ArrowLeft, ArrowRight, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
-import { apex, earlyLearners, homeschoolPricing, registrationFees, services } from "@/lib/content";
+import { apex, earlyLearners, faqs, homeschoolPricing, registrationFees, services } from "@/lib/content";
 import { site } from "@/lib/site";
 import { FocusCards, type FocusCard } from "@/components/aceternity/FocusCards";
 import { photos, programPhotos, type Photo } from "@/lib/photos";
@@ -35,10 +38,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const service = services.find((s) => s.slug === slug);
   if (!service) return {};
-  return {
-    title: service.title,
+  return pageMetadata({
+    title: `${service.title} in Salinas`,
     description: service.summary,
-  };
+    path: `/services/${service.slug}`,
+  });
 }
 
 export default async function ServiceDetailPage({ params }: { params: Promise<Params> }) {
@@ -80,6 +84,19 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
 
   return (
     <>
+      <JsonLd
+        data={[
+          breadcrumbJsonLd([
+            { name: "Services", path: "/services" },
+            { name: service.title, path: `/services/${service.slug}` },
+          ]),
+          serviceJsonLd({
+            name: `${service.title} in Salinas`,
+            description: service.summary,
+            path: `/services/${service.slug}`,
+          }),
+        ]}
+      />
       <PageHero
         title={service.title}
         mark={service.title.split(" ").pop()}
@@ -236,6 +253,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
         </div>
       </section>
 
+      <Faq items={service.slug === "private-tutoring" ? faqs.tutoring : faqs.homeschool} />
       <CTASection />
     </>
   );

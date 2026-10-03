@@ -1,24 +1,39 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/ui/Reveal";
+import { pageMetadata, breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
+import { Faq } from "@/components/Faq";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
-import { earlyLearners, registrationFees } from "@/lib/content";
+import { earlyLearners, faqs, registrationFees } from "@/lib/content";
 import { pagePhotos, photos } from "@/lib/photos";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Early Learners",
+export const metadata: Metadata = pageMetadata({
+  title: "TK to 2nd Grade Half-Day Program",
   description:
     "A half-day program for TK through 2nd grade in Salinas, CA. Children are grouped by skill instead of grade. Tuesday to Thursday, 9 AM to noon, $600 a month.",
-};
+  path: "/early-learners",
+  image: pagePhotos.earlyLearners,
+});
 
 export default function EarlyLearnersPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          breadcrumbJsonLd([{ name: "Early Learners", path: "/early-learners" }]),
+          serviceJsonLd({
+            name: "Early Learners half-day program in Salinas",
+            description: metadata.description as string,
+            path: "/early-learners",
+          }),
+        ]}
+      />
       <PageHero
         title={`${earlyLearners.name}, ${earlyLearners.ageRange}`}
         mark={earlyLearners.ageRange}
@@ -115,6 +130,7 @@ export default function EarlyLearnersPage() {
         </div>
       </section>
 
+      <Faq items={faqs.earlyLearners} />
       <CTASection
         title="Come for a tour"
         intro="Give us a call to set up a tour. You can see the space, meet the teachers, and ask which group your child would start in."
