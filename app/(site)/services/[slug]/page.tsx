@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata, breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
+import { Faq } from "@/components/Faq";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
-import { homeschoolPricing, registrationFees, services } from "@/lib/content";
+import { faqs, homeschoolPricing, registrationFees, services } from "@/lib/content";
 import { site } from "@/lib/site";
 
 type Params = { slug: string };
@@ -22,10 +25,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const service = services.find((s) => s.slug === slug);
   if (!service) return {};
-  return {
-    title: service.title,
+  return pageMetadata({
+    title: `${service.title} in Salinas`,
     description: service.summary,
-  };
+    path: `/services/${service.slug}`,
+  });
 }
 
 export default async function ServiceDetailPage({ params }: { params: Promise<Params> }) {
@@ -37,6 +41,19 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
 
   return (
     <>
+      <JsonLd
+        data={[
+          breadcrumbJsonLd([
+            { name: "Services", path: "/services" },
+            { name: service.title, path: `/services/${service.slug}` },
+          ]),
+          serviceJsonLd({
+            name: `${service.title} in Salinas`,
+            description: service.summary,
+            path: `/services/${service.slug}`,
+          }),
+        ]}
+      />
       <PageHero title={service.title} intro={service.summary}>
         <div className="flex flex-col gap-3 sm:flex-row">
           <Link href="/contact" className="btn-accent">
@@ -155,6 +172,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
         </div>
       </section>
 
+      <Faq items={service.slug === "private-tutoring" ? faqs.tutoring : faqs.homeschool} />
       <CTASection />
     </>
   );

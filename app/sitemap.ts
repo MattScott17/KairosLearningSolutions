@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { services } from "@/lib/content";
 
+// Every indexable page. Registration, landing pages and concept pages are noindex and stay out.
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
@@ -10,19 +11,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about",
     "/services",
     "/fall-classes",
-    "/fall-classes/register",
     "/summer",
     "/district-partnerships",
     "/contact",
     ...services.map((s) => `/services/${s.slug}`),
   ];
 
-  const lastModified = new Date("2026-09-18");
-
-  return routes.map((route) => ({
-    url: `${site.url}${route}`,
-    lastModified,
-    changeFrequency: route === "" ? "weekly" : "monthly",
-    priority: route === "" ? 1 : route === "/apex" || route === "/early-learners" ? 0.9 : 0.7,
-  }));
+  return routes.map((route) => ({ url: `${site.url}${route}` }));
 }

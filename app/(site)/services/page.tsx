@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { ServiceCard } from "@/components/ServiceCard";
@@ -6,11 +8,12 @@ import { ProgramList } from "@/components/ProgramList";
 import { CTASection } from "@/components/CTASection";
 import { services, enrichment, earlyLearners, apex } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Services",
+export const metadata: Metadata = pageMetadata({
+  title: "Tutoring and Homeschool Support",
   description:
     "Private tutoring from $70 an hour, homeschool support, Early Learners for TK to 2nd grade, APEX for grades 3 to 9, and enrichment classes in Salinas, CA.",
-};
+  path: "/services",
+});
 
 const rows = [
   ...services.map((s) => ({
@@ -42,6 +45,7 @@ const rows = [
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Services", path: "/services" }])} />
       <PageHero
         title="Programs and prices"
         intro="We run everything from one tutoring session a week to a full school day. Here's who each program is for, when it runs and what it costs. If you're not sure which one fits, give us a call."

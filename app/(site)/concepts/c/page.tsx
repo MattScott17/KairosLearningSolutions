@@ -4,7 +4,6 @@ import { ConceptCHome } from "@/components/home/ConceptCHome";
 // Concept C is now the main homepage at /. This copy stays so old preview links keep working.
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
-  alternates: { canonical: "/" },
 };
 
 export default function ConceptCPage() {

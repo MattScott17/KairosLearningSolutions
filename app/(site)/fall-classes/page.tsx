@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
@@ -11,11 +13,13 @@ import { site } from "@/lib/site";
 import { fallClasses, getTestimonials, registrationFees, type FallClass } from "@/lib/content";
 import { registrationOptions } from "@/lib/registration";
 
-export const metadata: Metadata = {
-  title: "Fall Classes",
+export const metadata: Metadata = pageMetadata({
+  title: "Fall 2026 Classes, Grades K to 7",
   description:
     "Fall 2026 classes for grades K to 7 at Kairos in Salinas, CA: writing labs, a speaking lab, art, nature journaling and a K to 2 learning lab. From $160 a month. Call (831) 500-2520 to save a spot.",
-};
+  path: "/fall-classes",
+  image: pagePhotos.fallClasses,
+});
 
 const classFee = registrationFees.find((f) => f.label.includes("enrichment"))?.value.replace(" / ", " a ");
 const endDate = site.fallClassesDateRange.split(" – ")[1];
@@ -86,6 +90,7 @@ function ClassCard({ c }: { c: FallClass }) {
 export default function FallClassesPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Fall Classes", path: "/fall-classes" }])} />
       <section className="bg-forest-900 pb-16 pt-32 text-cream sm:pb-20 sm:pt-40">
         <div className="container-page grid items-start gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
           <div>

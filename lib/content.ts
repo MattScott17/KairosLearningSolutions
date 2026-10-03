@@ -2,6 +2,8 @@
 // Reused and polished from the existing Kairos site. Edit freely.
 
 import type { LucideIcon } from "lucide-react";
+import { site } from "@/lib/site";
+import type { FaqItem } from "@/lib/seo";
 import {
   BookOpen,
   Users,
@@ -720,3 +722,82 @@ export const pathways: Pathway[] = [
     photo: "presenting",
   },
 ];
+
+// Questions families ask before calling. Shown on each page and sent to search engines as
+// FAQPage markup, so every answer must stay true to the data above.
+const newFee = registrationFees[0].value.replace(" / ", " a ");
+const returningFee = registrationFees[1].value.replace(" / ", " a ");
+
+export const faqs: Record<"apex" | "earlyLearners" | "tutoring" | "homeschool", FaqItem[]> = {
+  apex: [
+    {
+      question: "What is APEX?",
+      answer: `APEX is our full-time program for ${apex.gradeRange.toLowerCase()} in Salinas, run in small groups as an alternative to traditional school. Students do personalized, mastery-based academics first, then spend the rest of the day on projects and life skills.`,
+    },
+    {
+      question: "How much does APEX cost?",
+      answer: `The full program is ${apex.tuition.monthly} (${apex.tuition.annual}) over a ${apex.tuition.term}. Academics only is ${apex.tiers[1].price}, and workshops only is ${apex.tiers[2].price}. There is also a registration fee of ${newFee} for a new student or ${returningFee} for a returning one.`,
+    },
+    {
+      question: "What is the 2 Hour Learning model?",
+      answer: apex.model,
+    },
+    {
+      question: "How do we get started?",
+      answer: `Call us at ${site.phone} to set up a free call and tour. We're at ${site.address.full}.`,
+    },
+  ],
+  earlyLearners: [
+    {
+      question: "Which children is Early Learners for?",
+      answer: `Early Learners is a half-day program for ${earlyLearners.ageRange}. We group children by skill instead of grade, so a child who is ready can move ahead and a child who needs more time gets it.`,
+    },
+    {
+      question: "What are the hours?",
+      answer: `${earlyLearners.schedule[0].value}. Monday enrichment is an optional extra day.`,
+    },
+    {
+      question: "How much does it cost?",
+      answer: `The core program is ${earlyLearners.pricing[0].value.replace(" / ", " a ")}, and optional Monday enrichment is ${earlyLearners.pricing[1].value.replace(" / ", " a ")}.`,
+    },
+    {
+      question: "How are the groups set up?",
+      answer: `Children join one of three groups by skill: ${earlyLearners.groups.map((g) => g.name).join(", ")}. They move up as they master each skill.`,
+    },
+  ],
+  tutoring: [
+    {
+      question: "Where do tutoring sessions happen?",
+      answer: `At our center at ${site.address.full}, or online.`,
+    },
+    {
+      question: "How much does tutoring cost?",
+      answer: `${services[0].details[3]} ${services[0].details[4]}`,
+    },
+    {
+      question: "What subjects do you tutor?",
+      answer:
+        "Early literacy, math, writing, world languages, test prep and AP coursework, for students of every age.",
+    },
+    {
+      question: "How do I get started?",
+      answer: `Call ${site.phone} for a short consultation. We'll match your student with a tutor by subject, learning style and personality.`,
+    },
+  ],
+  homeschool: [
+    {
+      question: "How does Homeschool Support work?",
+      answer:
+        "There are four levels. Level A is a place to work alongside other students with occasional help. Level B adds assessment, planning and teaching from our teachers. Level C adds private tutoring. Level D is a custom program built from every Kairos service.",
+    },
+    {
+      question: "Is there a contract?",
+      answer:
+        "No. Memberships are month to month, with small student-to-teacher ratios and hourly packages.",
+    },
+    {
+      question: "How much does it cost?",
+      answer: `It depends on the level and the hours per month, from ${homeschoolPricing.hoursPerMonth[0]} to ${homeschoolPricing.hoursPerMonth[homeschoolPricing.hoursPerMonth.length - 1]} hours. Level A starts at $${homeschoolPricing.levels.A[0]} a month. Registration is ${newFee} for a new student or ${returningFee} for a returning one.`,
+    },
+  ],
+};

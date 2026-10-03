@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Public_Sans, Source_Serif_4 } from "next/font/google";
+import { JsonLd } from "@/components/JsonLd";
+import { organizationJsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -19,7 +21,7 @@ const sourceSerif = Source_Serif_4({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | Tutoring & Homeschool Support in Salinas, CA`,
+    default: `${site.name} | Tutoring & Homeschool, Salinas CA`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
@@ -39,7 +41,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: site.url,
     siteName: site.name,
-    title: `${site.name} | Tutoring & Homeschool Support in Salinas, CA`,
+    title: `${site.name} | Tutoring & Homeschool, Salinas CA`,
     description: site.description,
     images: [{ url: "/images/photo-2.jpg", width: 1800, height: 1350, alt: site.name }],
   },
@@ -48,30 +50,13 @@ export const metadata: Metadata = {
     title: site.name,
     description: site.description,
   },
-  alternates: { canonical: site.url },
+  verification: process.env.NEXT_PUBLIC_GSC_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GSC_VERIFICATION }
+    : undefined,
   icons: {
     icon: "/favicon.svg",
     apple: "/images/logo.png",
   },
-};
-
-const orgJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "EducationalOrganization",
-  name: site.name,
-  url: site.url,
-  telephone: site.phone,
-  email: site.email,
-  foundingDate: String(site.foundedYear),
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: site.address.street,
-    addressLocality: site.address.city,
-    addressRegion: site.address.state,
-    postalCode: site.address.zip,
-    addressCountry: "US",
-  },
-  sameAs: [site.social.instagram],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -82,10 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <noscript>
           <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
-        />
+        <JsonLd data={organizationJsonLd()} />
         {children}
       </body>
     </html>
