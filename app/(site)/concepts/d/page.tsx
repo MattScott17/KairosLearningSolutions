@@ -62,7 +62,7 @@ export default function ConceptDPage() {
         <div className="container-page">
           <SectionHeading title="Reviews from Kairos families" />
         </div>
-        <ReviewMarquee className="mt-12" />
+        <ReviewMarquee className="mt-12" fade="from-[#f9faf7]" />
       </section>
 
       {/* Tutors */}

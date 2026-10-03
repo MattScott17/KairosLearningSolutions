@@ -17,7 +17,7 @@ function Column({
   className?: string;
 }) {
   return (
-    <motion.div className={cn("grid content-start gap-4 sm:gap-6", className)} style={y ? { y } : undefined}>
+    <motion.div className={cn("grid content-start gap-4 sm:gap-6", y && "will-change-transform", className)} style={y ? { y } : undefined}>
       {photos.map((photo, i) => (
         <div
           key={photo.src + i}
