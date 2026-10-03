@@ -21,7 +21,7 @@ export function ProgramList() {
   const photo = programPhotos[active];
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[1fr_15rem]">
+    <div className="grid gap-8 lg:grid-cols-[1fr_19rem]">
       <div className="border-t border-forest-200">
         <div className="hidden grid-cols-[1.2fr_1fr_1.4fr_1fr_auto] gap-6 border-b border-forest-100 px-2 py-3 text-xs font-semibold text-ink/55 md:grid">
           <span>Program</span>
@@ -73,7 +73,7 @@ export function ProgramList() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: reduce ? 0 : 0.35 }}
               >
-                <Image src={photo.src} alt="" fill sizes="240px" className="object-cover" />
+                <Image src={photo.src} alt="" fill sizes="304px" className="object-cover" />
               </motion.div>
             )}
           </AnimatePresence>

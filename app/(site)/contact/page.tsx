@@ -18,13 +18,30 @@ export default function ContactPage() {
       <JsonLd data={breadcrumbJsonLd([{ name: "Contact", path: "/contact" }])} />
       <PageHero
         title="Call, email or visit"
+        mark="visit"
+        aside={
+          <a
+            href={site.phoneHref}
+            className="block rounded-lg bg-forest-800 p-8 text-cream transition-colors hover:bg-forest-700 sm:p-10"
+          >
+            <span className="block text-sm text-cream/70">Call us</span>
+            <span className="mt-2 block font-display text-3xl font-semibold text-cream sm:text-4xl">
+              {site.phone}
+            </span>
+            <span className="mt-6 block border-t border-cream/15 pt-4 text-sm text-cream/80">
+              {site.address.street}, {site.address.city}
+              <br />
+              {site.hours[0].day.replace(" – ", " to ")}, {site.hours[0].time.replace(" – ", " to ")}
+            </span>
+          </a>
+        }
         intro={`The quickest way to reach me is by phone at ${site.phone}. You can also email, use the form below, or stop by ${site.address.street} during open hours.`}
       />
 
       <section className="py-16 sm:py-24">
         <div className="container-page grid gap-12 lg:grid-cols-5">
           {/* Contact details */}
-          <div className="min-w-0 lg:col-span-2">
+          <div className="min-w-0 self-start [@media(min-height:760px)_and_(min-width:1024px)]:sticky [@media(min-height:760px)_and_(min-width:1024px)]:top-28 lg:col-span-2">
             <h2 className="text-2xl font-semibold">Phone, email and address</h2>
 
             <div className="mt-6 space-y-4">
@@ -95,10 +112,10 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Map */}
-      <section aria-label="Map to Kairos Learning Solutions" className="pb-16">
+      {/* Map: the embed can be blocked or slow, so the link below always works */}
+      <section aria-label="Map to Kairos Learning Solutions" className="pb-16 sm:pb-24">
         <div className="container-page">
-          <div className="overflow-hidden rounded-lg border border-forest-100">
+          <div className="overflow-hidden rounded-lg border border-forest-100 bg-sand">
             <iframe
               title="Map to Kairos Learning Solutions"
               src={site.address.embedUrl}
@@ -106,9 +123,20 @@ export default function ContactPage() {
               height="420"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="block w-full"
+              className="block min-h-[420px] w-full"
             />
           </div>
+          <p className="mt-4 text-sm text-ink/70">
+            {site.address.street}, {site.address.city}, {site.address.state} {site.address.zip}.{" "}
+            <a
+              href={site.address.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-underline inline-flex min-h-[44px] items-center"
+            >
+              Open in Google Maps
+            </a>
+          </p>
         </div>
       </section>
     </>

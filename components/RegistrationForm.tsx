@@ -133,7 +133,7 @@ export function RegistrationForm({ initialClass }: { initialClass?: string }) {
         inputMode={opts.inputMode}
         className={`${inputBase} ${border(name)}`}
       />
-      {opts.hint && !errors[name] && <p className="mt-1 text-xs text-ink/50">{opts.hint}</p>}
+      {opts.hint && !errors[name] && <p className="mt-1 text-sm text-ink/65">{opts.hint}</p>}
       {err(name)}
     </div>
   );
@@ -246,7 +246,7 @@ export function RegistrationForm({ initialClass }: { initialClass?: string }) {
                           />
                           <span>
                             <span className="block text-sm font-medium text-ink">{o.label}</span>
-                            <span className="block text-xs text-ink/60">{o.detail}</span>
+                            <span className="block text-sm text-ink/70">{o.detail}</span>
                           </span>
                         </label>
                       ))}

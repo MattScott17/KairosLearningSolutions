@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Reveal } from "@/components/ui/Reveal";
 import { ArrowRight } from "lucide-react";
 
 type ServiceRowProps = {
@@ -11,7 +12,7 @@ type ServiceRowProps = {
 /** One program as a divided list row: name and one-liner on the left, summary on the right. */
 export function ServiceCard({ href, title, short, summary }: ServiceRowProps) {
   return (
-    <li className="border-b border-forest-100">
+    <Reveal as="li" className="border-b border-forest-100">
       <Link
         href={href}
         className="group grid gap-2 py-6 transition-colors hover:bg-forest-50/60 md:grid-cols-[1fr_1.6fr] md:gap-10 md:px-2"
@@ -25,6 +26,6 @@ export function ServiceCard({ href, title, short, summary }: ServiceRowProps) {
         </div>
         <p className="prose-kairos">{summary}</p>
       </Link>
-    </li>
+    </Reveal>
   );
 }

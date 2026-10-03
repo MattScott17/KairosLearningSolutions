@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Mail, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { CTASection } from "@/components/CTASection";
-import { pagePhotos } from "@/lib/photos";
+import { pagePhotos, photos } from "@/lib/photos";
 import { summerPrograms } from "@/lib/content";
 
 export const metadata: Metadata = pageMetadata({
@@ -23,22 +22,13 @@ export default function SummerPage() {
       <JsonLd data={breadcrumbJsonLd([{ name: "Summer Programs", path: "/summer" }])} />
       <PageHero
         title="Summer 2026 at Kairos"
+        mark="Kairos"
+        photo={pagePhotos.summer}
+        variant="wide"
         intro="Two programs this summer: our Back-to-School Boot Camp in July for reading, math and language arts, and a music camp in late June and early July hosted by Love Note Music Studio. Dates, times and prices are below."
       />
 
-      <div className="container-page pt-16 sm:pt-20">
-        <div className="relative aspect-[21/9] overflow-hidden rounded-lg">
-          <Image
-            src={pagePhotos.summer.src}
-            alt={pagePhotos.summer.alt}
-            fill
-            sizes="100vw"
-            className="object-cover"
-          />
-        </div>
-      </div>
-
-      <section className="py-16 sm:py-20">
+      <section className="py-16 sm:py-24">
         <div className="container-page grid gap-12 lg:grid-cols-2 lg:gap-16">
           {summerPrograms.map((program) => (
             <div key={program.slug} className="flex flex-col border-t-2 border-forest-800 pt-6">
@@ -103,6 +93,7 @@ export default function SummerPage() {
       </section>
 
       <CTASection
+        photo={photos.cooking}
         title="Questions about summer?"
         intro="Give us a call with your student's age and which weeks you're around, and we'll tell you which sessions fit."
       />

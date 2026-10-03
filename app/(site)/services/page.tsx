@@ -48,6 +48,8 @@ export default function ServicesPage() {
       <JsonLd data={breadcrumbJsonLd([{ name: "Services", path: "/services" }])} />
       <PageHero
         title="Programs and prices"
+        mark="prices"
+        variant="centered"
         intro="We run everything from one tutoring session a week to a full school day. Here's who each program is for, when it runs and what it costs. If you're not sure which one fits, give us a call."
       />
 
@@ -55,7 +57,7 @@ export default function ServicesPage() {
         <ProgramList />
       </Section>
 
-      <section className="border-t border-forest-100 bg-sand/50 py-16 sm:py-20">
+      <section className="border-t border-forest-100 bg-sand/50 py-16 sm:py-24">
         <div className="container-page">
           <SectionHeading title="What each program includes" />
           <ul className="mt-8 border-t border-forest-200">

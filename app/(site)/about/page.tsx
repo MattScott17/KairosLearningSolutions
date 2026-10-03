@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Reveal } from "@/components/ui/Reveal";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import Image from "next/image";
@@ -7,7 +8,7 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
 import { leadership, team, testimonials } from "@/lib/content";
 import { site } from "@/lib/site";
-import { pagePhotos } from "@/lib/photos";
+import { pagePhotos, photos } from "@/lib/photos";
 import { TutorAvatar, TutorCard } from "@/components/TutorCard";
 
 export const metadata: Metadata = pageMetadata({
@@ -18,12 +19,32 @@ export const metadata: Metadata = pageMetadata({
   image: pagePhotos.about,
 });
 
+type Review = (typeof testimonials)[number];
+
+function ReviewCard({ t }: { t: Review }) {
+  return (
+    <figure className="rounded-lg border border-forest-100 bg-cream p-5 sm:p-7">
+      <blockquote className="text-base leading-relaxed text-ink/85 sm:text-lg">“{t.quote}”</blockquote>
+      <figcaption className="mt-6 border-t border-forest-100 pt-4 text-sm">
+        <span className="font-semibold text-forest-800">{t.author}</span>
+        <span className="block text-ink/60">
+          {t.role}
+          {t.source && <> · {t.source} review</>}
+        </span>
+      </figcaption>
+    </figure>
+  );
+}
+
 export default function AboutPage() {
   return (
     <>
       <JsonLd data={breadcrumbJsonLd([{ name: "About", path: "/about" }])} />
       <PageHero
         title="Educators who see the whole child"
+        mark="whole child"
+        photo={pagePhotos.about}
+        variant="flip"
         intro="Most of our teachers are Salinas parents and grandparents. Between them they've taught kindergarten through 12th grade, several for more than 25 years, and one still teaches full time at New Republic Elementary."
       />
 
@@ -32,8 +53,8 @@ export default function AboutPage() {
         <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.1fr]">
           <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
             <Image
-              src={pagePhotos.about.src}
-              alt={pagePhotos.about.alt}
+              src={photos.readingTogether.src}
+              alt={photos.readingTogether.alt}
               fill
               sizes="(max-width: 1024px) 100vw, 45vw"
               className="object-cover"
@@ -58,12 +79,12 @@ export default function AboutPage() {
       </Section>
 
       {/* Leadership */}
-      <section className="border-t border-forest-100 py-16 sm:py-20">
+      <section className="border-t border-forest-100 py-16 sm:py-24">
         <div className="container-page">
           <SectionHeading title="Who runs Kairos" />
           <div className="mt-10 grid gap-10 md:grid-cols-2">
-            {leadership.map((person) => (
-              <div key={person.name} className="flex gap-5">
+            {leadership.map((person, i) => (
+              <Reveal key={person.name} delay={i * 0.08} className="flex gap-5">
                 <TutorAvatar
                   member={person}
                   sizes="80px"
@@ -74,22 +95,24 @@ export default function AboutPage() {
                   <p className="text-sm text-forest-700">{person.role}</p>
                   <p className="prose-kairos mt-3 text-sm">{person.bio}</p>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* Team */}
-      <section className="bg-sand py-16 sm:py-20">
+      <section className="bg-sand py-16 sm:py-24">
         <div className="container-page">
           <SectionHeading
             title="Our teachers and tutors"
             intro="Credentialed classroom teachers, subject specialists, and college tutors in math and science."
           />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {team.map((member) => (
-              <TutorCard key={member.name} member={member} fullBio />
+            {team.map((member, i) => (
+              <Reveal key={member.name} delay={(i % 3) * 0.06} className="h-full">
+                <TutorCard member={member} fullBio />
+              </Reveal>
             ))}
           </div>
         </div>
@@ -102,19 +125,21 @@ export default function AboutPage() {
           intro={`These are ${testimonials.length} Google reviews from Kairos parents and grandparents, quoted word for word. Names are shortened to a last initial.`}
         />
         <div className="mt-10 columns-1 gap-6 sm:columns-2 lg:columns-3 [&>*]:mb-6 [&>*]:break-inside-avoid">
-          {testimonials.map((t) => (
-            <figure key={t.id} className="rounded-lg border border-forest-100 bg-cream p-5 sm:p-7">
-              <blockquote className="text-base leading-relaxed sm:text-lg text-ink/85">“{t.quote}”</blockquote>
-              <figcaption className="mt-6 border-t border-forest-100 pt-4 text-sm">
-                <span className="font-semibold text-forest-800">{t.author}</span>
-                <span className="block text-ink/60">
-                  {t.role}
-                  {t.source && <> · {t.source} review</>}
-                </span>
-              </figcaption>
-            </figure>
+          {testimonials.slice(0, 6).map((t) => (
+            <ReviewCard key={t.id} t={t} />
           ))}
         </div>
+        <details className="group mt-2">
+          <summary className="btn-outline cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span className="group-open:hidden">Read all {testimonials.length} reviews</span>
+            <span className="hidden group-open:inline">Show fewer reviews</span>
+          </summary>
+          <div className="mt-8 columns-1 gap-6 sm:columns-2 lg:columns-3 [&>*]:mb-6 [&>*]:break-inside-avoid">
+            {testimonials.slice(6).map((t) => (
+              <ReviewCard key={t.id} t={t} />
+            ))}
+          </div>
+        </details>
       </Section>
 
       <CTASection

@@ -1,17 +1,30 @@
 import type { Metadata } from "next";
+import { Reveal } from "@/components/ui/Reveal";
 import { pageMetadata, breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Faq } from "@/components/Faq";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
-import { faqs, homeschoolPricing, registrationFees, services } from "@/lib/content";
+import { apex, earlyLearners, faqs, homeschoolPricing, registrationFees, services } from "@/lib/content";
 import { site } from "@/lib/site";
+import { FocusCards, type FocusCard } from "@/components/aceternity/FocusCards";
+import { photos, programPhotos, type Photo } from "@/lib/photos";
 
 type Params = { slug: string };
+
+const bodyPhotos: Record<string, Photo> = {
+  "private-tutoring": photos.homework,
+};
+
+const servicePhotos: Record<string, Photo> = {
+  "private-tutoring": photos.readingTogether,
+  "homeschool-support": photos.studentsLearning,
+};
 
 export function generateStaticParams(): Params[] {
   return services.map((s) => ({ slug: s.slug }));
@@ -38,6 +51,36 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
   if (!service) notFound();
 
   const others = services.filter((s) => s.slug !== slug);
+  // Homeschool lists Level A to D first; show those as cards and number the rest.
+  const levelRe = /^Level ([A-D]): /;
+  const levels = service.details
+    .filter((d) => levelRe.test(d))
+    .map((d) => {
+      const body = d.replace(levelRe, "");
+      return { name: d.match(levelRe)![1], body: body.charAt(0).toUpperCase() + body.slice(1) };
+    });
+  const steps = service.details.filter((d) => !levelRe.test(d));
+  const bodyPhoto = bodyPhotos[slug] ?? photos.homework;
+  const otherCards: FocusCard[] = [
+    ...others.map((o) => ({
+      title: o.title,
+      detail: o.short,
+      href: `/services/${o.slug}`,
+      photo: servicePhotos[o.slug] ?? photos.studentsLearning,
+    })),
+    {
+      title: earlyLearners.name,
+      detail: `Half-day program, ${earlyLearners.ageRange}`,
+      href: "/early-learners",
+      photo: programPhotos["/early-learners"],
+    },
+    {
+      title: "APEX",
+      detail: `Full-time program, ${apex.gradeRange.toLowerCase()}`,
+      href: "/apex",
+      photo: programPhotos["/apex"],
+    },
+  ];
 
   return (
     <>
@@ -54,7 +97,14 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
           }),
         ]}
       />
-      <PageHero title={service.title} intro={service.summary}>
+      <PageHero
+        title={service.title}
+        mark={service.title.split(" ").pop()}
+        intro={service.summary}
+        photo={servicePhotos[slug] ?? photos.studentsLearning}
+        variant="card"
+        tone="cream"
+      >
         <div className="flex flex-col gap-3 sm:flex-row">
           <Link href="/contact" className="btn-accent">
             {service.cta}
@@ -62,7 +112,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
           </Link>
           <a
             href={site.phoneHref}
-            className="btn-outline border-cream text-cream hover:bg-cream hover:text-forest-800"
+            className="btn-outline"
           >
             <Phone className="h-4 w-4" />
             {site.phone}
@@ -83,18 +133,61 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
       </section>
 
       {/* Details */}
-      <Section container="narrow">
-        <h2 className="text-3xl font-semibold">How it works</h2>
-        <ul className="mt-8 border-t border-forest-200">
-          {service.details.map((detail) => (
-            <li key={detail} className="border-b border-forest-100 py-4 text-ink/85">
-              {detail}
-            </li>
-          ))}
-        </ul>
+      <Section>
+        {levels.length > 0 && (
+          <div className="mb-14">
+            <h2 className="text-3xl font-semibold sm:text-4xl">Four levels, month to month</h2>
+            <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {levels.map((l, i) => (
+                <Reveal as="li" key={l.name} delay={i * 0.06} className="rounded-lg border border-forest-100 bg-cream p-6">
+                  <p className="font-display text-4xl font-semibold text-gold-500">{l.name}</p>
+                  <p className="mt-1 text-sm font-semibold text-forest-800">Level {l.name}</p>
+                  <p className="prose-kairos mt-3 text-sm">{l.body}</p>
+                </Reveal>
+              ))}
+            </ol>
+          </div>
+        )}
+
+        {steps.length >= 3 ? (
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.4fr] lg:gap-16">
+          <div>
+            <h2 className="text-3xl font-semibold sm:text-4xl">How it works</h2>
+            <div className="relative mt-8 hidden aspect-[4/5] overflow-hidden rounded-lg lg:block">
+              <Image
+                src={bodyPhoto.src}
+                alt={bodyPhoto.alt}
+                fill
+                sizes="30vw"
+                className="object-cover"
+                style={{ objectPosition: bodyPhoto.position }}
+              />
+            </div>
+          </div>
+          <ul className="border-t border-forest-200">
+            {steps.map((detail, i) => (
+              <Reveal
+                as="li"
+                key={detail}
+                delay={Math.min(i, 4) * 0.05}
+                className="flex gap-5 border-b border-forest-100 py-5"
+              >
+                <span aria-hidden className="mt-3 h-2 w-2 shrink-0 rounded-full bg-gold-500" />
+                <span className="prose-kairos text-lg">{detail}</span>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+        ) : (
+          steps.map((note) => (
+            <p key={note} className="prose-kairos max-w-2xl text-lg">
+              {note}
+            </p>
+          ))
+        )}
 
         {slug === "homeschool-support" && (
-          <div className="mt-10 overflow-x-auto rounded-lg border border-forest-100 bg-cream">
+          <div className="mt-12 overflow-x-auto rounded-lg border border-forest-100 bg-cream">
             <table className="w-full min-w-[480px] text-sm">
               <thead>
                 <tr className="border-b border-forest-100 text-left">
@@ -126,8 +219,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
           </div>
         )}
 
+
         {(slug === "homeschool-support" || slug === "private-tutoring") && (
-          <div className="mt-6 rounded-lg border border-forest-100 bg-sand/30 p-5">
+          <div className="mt-6 max-w-xl rounded-lg border border-forest-100 bg-sand/30 p-5">
             <h3 className="text-sm font-semibold text-forest-800">Registration fees</h3>
             <dl className="mt-3 space-y-2">
               {registrationFees.map((fee) => (
@@ -149,26 +243,13 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
         </Link>
       </Section>
 
-      {/* Other services */}
-      <section className="bg-sand/60 py-16">
+      {/* Other programs */}
+      <section className="bg-sand/50 py-16 sm:py-24">
         <div className="container-page">
-          <h2 className="text-2xl font-semibold">Other programs</h2>
-          <ul className="mt-6 border-t border-forest-200">
-            {others.map((other) => (
-              <li key={other.slug} className="border-b border-forest-100">
-                <Link
-                  href={`/services/${other.slug}`}
-                  className="group flex items-center gap-4 py-5 transition-colors hover:bg-forest-50/60 sm:px-2"
-                >
-                  <div>
-                    <p className="font-semibold text-forest-800">{other.title}</p>
-                    <p className="text-sm text-ink/60">{other.short}</p>
-                  </div>
-                  <ArrowRight className="ml-auto h-5 w-5 text-forest-400 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <h2 className="text-3xl font-semibold">Other programs</h2>
+          <div className="mt-8">
+            <FocusCards cards={otherCards} />
+          </div>
         </div>
       </section>
 

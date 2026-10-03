@@ -7,7 +7,7 @@ export function TestimonialCards({ items }: { items: Testimonial[] }) {
     <div className="grid gap-6 md:grid-cols-3">
       {items.map((t, i) => (
         <Reveal key={t.id} delay={i * 0.08}>
-          <figure className="flex h-full flex-col rounded-3xl bg-cream p-7 shadow-card">
+          <figure className="flex h-full flex-col rounded-lg bg-cream p-7">
             <Quote className="h-7 w-7 text-forest-300" />
             <blockquote className="mt-3 flex-1 text-base leading-relaxed text-ink/85">
               “{t.pull}”

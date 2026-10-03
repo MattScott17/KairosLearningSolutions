@@ -36,9 +36,9 @@ export function FocusCards({ cards }: { cards: FocusCard[] }) {
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-forest-950/85 via-forest-950/25 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-forest-950/95 via-forest-950/55 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 p-6 text-cream">
-            <p className="text-sm text-cream/85">{card.detail}</p>
+            <p className="text-sm font-medium text-cream">{card.detail}</p>
             <h3 className="mt-1 flex items-center justify-between gap-3 text-2xl font-semibold text-cream">
               {card.title}
               <ArrowRight className="h-5 w-5 shrink-0 transition-transform group-hover:translate-x-1" />

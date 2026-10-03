@@ -2,7 +2,7 @@
 // library in public/images/library (see docs/redesign/photo-library.md for the full list).
 // Pages reference photos by role, so swapping a picture is a one-line change here.
 
-export type Photo = { src: string; alt: string };
+export type Photo = { src: string; alt: string; /** CSS object-position, to keep faces in the crop. */ position?: string };
 
 const p = (src: string, alt: string): Photo => ({ src, alt });
 const lib = (file: string, alt: string): Photo => p(`/images/library/${file}`, alt);
@@ -39,7 +39,7 @@ export const pagePhotos = {
   about: photos.staff,
   apex: photos.threeDPrinting,
   earlyLearners: photos.circleTime,
-  summer: photos.outdoors,
+  summer: { ...photos.outdoors, position: "30% 70%" } as Photo,
   fallClasses: photos.collage,
   conceptAGuide: photos.handprints,
 };

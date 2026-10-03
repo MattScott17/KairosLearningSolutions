@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
-import { Mail, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
 import { site } from "@/lib/site";
+import { photos } from "@/lib/photos";
 
 export const metadata: Metadata = pageMetadata({
   title: "District Partnerships",
@@ -20,8 +20,24 @@ export default function DistrictPartnershipsPage() {
       <JsonLd data={breadcrumbJsonLd([{ name: "District Partnerships", path: "/district-partnerships" }])} />
       <PageHero
         title="District partnerships"
+        mark="partnerships"
+        photo={photos.studentsLearning}
         intro="Kairos works with school districts to bring our teachers and small-group approach to more students. If you work for a district or school, let's talk about what your students need."
       />
+      <section className="border-b border-forest-100">
+        <dl className="container-page grid grid-cols-1 divide-y divide-forest-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+          {[
+            { label: "Based in", value: `${site.address.city}, ${site.address.state}` },
+            { label: "Serving families since", value: String(site.foundedYear) },
+            { label: "Our teachers", value: "Credentialed classroom teachers" },
+          ].map((f) => (
+            <div key={f.label} className="py-7 sm:px-6 sm:first:pl-0">
+              <dt className="text-sm text-ink/60">{f.label}</dt>
+              <dd className="mt-1 font-display text-xl font-semibold text-forest-800">{f.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
       <Section container="narrow">
         <div className="prose-kairos space-y-5 text-lg">
           <p>
@@ -29,16 +45,6 @@ export default function DistrictPartnershipsPage() {
             students are and where they need support, and we'll work out what Kairos can offer.
           </p>
           <p>The quickest way to start is to call or email me directly.</p>
-        </div>
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a href={site.phoneHref} className="btn-primary">
-            <Phone className="h-4 w-4" />
-            {site.phone}
-          </a>
-          <a href={site.emailHref} className="btn-outline">
-            <Mail className="h-4 w-4" />
-            {site.email}
-          </a>
         </div>
       </Section>
       <CTASection

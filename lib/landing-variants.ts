@@ -17,7 +17,6 @@ export type Obstacle = { fear: string; fix: string };
 export type Faq = { q: string; a: string };
 
 export type VariantHero = {
-  eyebrow: string;
   headline: string;
   // A short phrase inside `headline` to highlight (must appear verbatim).
   highlight?: string;
@@ -150,24 +149,21 @@ export const tutoringOffer: ProgramOffer = {
   photo: { src: "/images/photo-2.jpg", alt: "A Kairos tutor working with a student" },
   heroes: {
     a: {
-      eyebrow: "Private tutoring · Salinas & online",
       headline: "Get your student unstuck with a tutor matched to how they actually learn.",
       highlight: "unstuck",
       subhead:
         "One-on-one help for every age and subject, in Salinas or online, starting with a free consultation call.",
     },
     b: {
-      eyebrow: "For parents who've tried everything",
       headline: "Grades slipping? Homework fights every night? It's usually not your kid. It's the fit.",
       highlight: "It's the fit.",
       subhead:
         "Most students who struggle don't need more hours of the same thing. They need the right person explaining it the right way. That's what we do.",
     },
     c: {
-      eyebrow: "Private tutoring in Salinas",
       headline: "A tutor who actually fits your student.",
       highlight: "actually fits",
-      subhead: "Tell us where to call and we'll set up your free consultation.",
+      subhead: "Private tutoring in Salinas and online. Tell us where to call and we'll set up your free consultation.",
     },
   },
 };
@@ -276,24 +272,21 @@ export const apexOffer: ProgramOffer = {
   photo: { src: "/images/photo-4.jpg", alt: "APEX students learning together at Kairos" },
   heroes: {
     a: {
-      eyebrow: `Now enrolling · ${apex.gradeRange}`,
       headline: "A school day built around your child, not a classroom of 30.",
       highlight: "built around your child",
       subhead:
-        "Full-time, small-group learning in Salinas. Core academics in focused sessions, then real-world skills the rest of the day.",
+        `Now enrolling ${apex.gradeRange.toLowerCase()}. Full-time, small-group learning in Salinas. Core academics in focused sessions, then real-world skills the rest of the day.`,
     },
     b: {
-      eyebrow: "For parents rethinking school",
       headline: "Is your child bored, behind, or lost in the crowd?",
       highlight: "lost in the crowd?",
       subhead:
         "Traditional school moves one speed for everyone. APEX moves at your child's, and uses the time it saves to build the skills school never gets to.",
     },
     c: {
-      eyebrow: `APEX · ${apex.gradeRange} · Salinas`,
       headline: "Full-time school, at your child's pace.",
       highlight: "your child's pace.",
-      subhead: "Tell us where to call and we'll set up a free call and tour.",
+      subhead: `APEX is full-time school in Salinas for ${apex.gradeRange.toLowerCase()}. Tell us where to call and we'll set up a free call and tour.`,
     },
   },
 };
