@@ -33,7 +33,7 @@ export function ParallaxPhoto({
   return (
     <div ref={ref} className={cn("relative overflow-hidden", className)}>
       <motion.div
-        className="absolute inset-0"
+        className={cn("absolute inset-0", active && "will-change-transform")}
         style={active ? { y, scale: 1.12 } : undefined}
       >
         <Image src={photo.src} alt={photo.alt} fill sizes={sizes} className="object-cover" />

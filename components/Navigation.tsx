@@ -43,8 +43,8 @@ export function Navigation() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        solid ? "bg-cream/95 backdrop-blur" : "bg-transparent"
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        solid ? "bg-cream" : "bg-transparent"
       }`}
     >
       <nav className="container-page flex h-16 items-center justify-between sm:h-20">
