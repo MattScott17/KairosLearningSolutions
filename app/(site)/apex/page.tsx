@@ -1,19 +1,24 @@
 import type { Metadata } from "next";
+import { pageMetadata, breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
+import { Faq } from "@/components/Faq";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
-import { apex, registrationFees } from "@/lib/content";
+import { apex, faqs, registrationFees } from "@/lib/content";
 import { pagePhotos } from "@/lib/photos";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "APEX Full-Time Program",
+export const metadata: Metadata = pageMetadata({
+  title: "APEX Full-Time School, Grades 3 to 9",
   description:
     "APEX is a full-time program for grades 3 to 9 in Salinas, CA, using the 2 Hour Learning model: personalized, mastery-based academics, then projects and life skills.",
-};
+  path: "/apex",
+  image: pagePhotos.apex,
+});
 
 const facts = [
   { label: "Grades", value: apex.gradeRange.replace("Grades ", ""), note: "" },
@@ -28,6 +33,16 @@ const facts = [
 export default function ApexPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          breadcrumbJsonLd([{ name: "APEX", path: "/apex" }]),
+          serviceJsonLd({
+            name: "APEX full-time program in Salinas",
+            description: metadata.description as string,
+            path: "/apex",
+          }),
+        ]}
+      />
       <PageHero title="APEX, full‑time school for grades 3 to 9" intro={apex.intro}>
         <div className="flex flex-col gap-3 sm:flex-row">
           <Link href="/contact" className="btn-accent">
@@ -164,6 +179,7 @@ export default function ApexPage() {
         </div>
       </Section>
 
+      <Faq items={faqs.apex} />
       <CTASection
         title="Come see APEX"
         intro="Give us a call to set up a tour. You and your student can meet the teachers and see the space before you decide."

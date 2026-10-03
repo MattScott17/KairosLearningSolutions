@@ -1,19 +1,23 @@
 import type { Metadata } from "next";
+import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import { Mail, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "District Partnerships",
   description:
     "Kairos Learning Solutions partners with school districts in and around Salinas, CA. Call Jackie to talk about what your students need.",
-};
+  path: "/district-partnerships",
+});
 
 export default function DistrictPartnershipsPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "District Partnerships", path: "/district-partnerships" }])} />
       <PageHero
         title="District partnerships"
         intro="Kairos works with school districts to bring our teachers and small-group approach to more students. If you work for a district or school, let's talk about what your students need."
