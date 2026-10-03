@@ -43,7 +43,7 @@ test("old /testimonials URL lands on the About page reviews", async ({ page }) =
 test("404 page renders for unknown route", async ({ page }) => {
   const res = await page.goto("/this-page-does-not-exist");
   expect(res?.status()).toBe(404);
-  await expect(page.locator("h1")).toContainText(/summer break/i);
+  await expect(page.locator("h1")).toContainText(/isn.t here/i);
 });
 
 test("primary navigation links work", async ({ page }) => {

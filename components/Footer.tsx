@@ -136,10 +136,13 @@ export function Footer() {
               <li>
                 <a
                   href={site.emailHref}
-                  className="flex items-center gap-3 break-all transition-colors hover:text-cream"
+                  className="flex items-start gap-3 transition-colors hover:text-cream"
                 >
-                  <Mail className="h-4 w-4 shrink-0 text-forest-300" />
-                  {site.email}
+                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-forest-300" />
+                  <span>
+                    {site.email.split("@")[0]}
+                    <wbr />@{site.email.split("@")[1]}
+                  </span>
                 </a>
               </li>
             </ul>

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { Reveal } from "@/components/ui/Reveal";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
+import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
 import { FallClassCallback } from "@/components/FallClassCallback";
-import { StickyCallBar } from "@/components/lp/StickyCallBar";
 import { pagePhotos } from "@/lib/photos";
 import { site } from "@/lib/site";
 import { fallClasses, getTestimonials, registrationFees, type FallClass } from "@/lib/content";
@@ -34,7 +35,7 @@ function registerHref(c: FallClass) {
 
 function ClassCard({ c }: { c: FallClass }) {
   return (
-    <article id={c.slug} className="flex scroll-mt-28 flex-col rounded-lg border border-forest-100 bg-cream p-6 sm:p-7">
+    <article id={c.slug} className="flex h-full scroll-mt-28 flex-col rounded-lg border border-forest-100 bg-cream p-6 sm:p-7">
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
         <h3 className="text-2xl font-semibold">{c.title}</h3>
         <p className="text-sm font-semibold text-forest-700">{c.grades}</p>
@@ -74,7 +75,7 @@ function ClassCard({ c }: { c: FallClass }) {
           Register
           <ArrowRight className="h-4 w-4" />
         </Link>
-        <a href={site.phoneHref} className="link-underline inline-flex items-center gap-1.5 text-sm">
+        <a href={site.phoneHref} className="link-underline inline-flex min-h-[44px] items-center gap-1.5 text-sm">
           <Phone className="h-4 w-4" />
           Call to ask about it
         </a>
@@ -86,44 +87,36 @@ function ClassCard({ c }: { c: FallClass }) {
 export default function FallClassesPage() {
   return (
     <>
-      <section className="bg-forest-900 pb-16 pt-32 text-cream sm:pb-20 sm:pt-40">
-        <div className="container-page grid items-start gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
-          <div>
-            <h1 className="text-4xl font-semibold text-cream sm:text-5xl">
-              Fall 2026 classes for kids in K to 7th grade
-            </h1>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-cream/85">
-              Small weekly classes in writing, speaking, art and reading, at our center on South Main
-              Street. Classes run through {endDate}. Give us a call and we&apos;ll help you pick the right class
-              and sign your student up right on the phone.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a href={site.phoneHref} className="btn-accent px-6 py-4 text-base">
-                <Phone className="h-5 w-5" />
-                Call {site.phone}
-              </a>
-              <a href="#classes" className="btn border-2 border-cream/40 px-6 py-4 text-base text-cream hover:bg-cream/10">
-                See the classes
-              </a>
-            </div>
-            <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-cream/20 pt-6 text-sm">
-              <div>
-                <dt className="text-cream/60">Days</dt>
-                <dd className="mt-1 font-semibold text-cream">Mondays and Wednesdays</dd>
-              </div>
-              <div>
-                <dt className="text-cream/60">Price</dt>
-                <dd className="mt-1 font-semibold text-cream">From $160 a month</dd>
-              </div>
-              <div>
-                <dt className="text-cream/60">Spots</dt>
-                <dd className="mt-1 font-semibold text-cream">First come, first served</dd>
-              </div>
-            </dl>
-          </div>
-          <FallClassCallback classTitles={fallClasses.map((c) => c.title)} />
+      <PageHero
+        title="Fall 2026 classes for kids in K to 7th grade"
+        mark="K to 7th grade"
+        intro={`Small weekly classes in writing, speaking, art and reading, at our center on South Main Street. Classes run through ${endDate}. Give us a call and we'll help you pick the right class and sign your student up right on the phone.`}
+        aside={<FallClassCallback classTitles={fallClasses.map((c) => c.title)} />}
+      >
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <a href={site.phoneHref} className="btn-accent px-6 py-4 text-base">
+            <Phone className="h-5 w-5" />
+            Call {site.phone}
+          </a>
+          <a href="#classes" className="btn-outline px-6 py-4 text-base">
+            See the classes
+          </a>
         </div>
-      </section>
+        <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-forest-200 pt-6 text-sm">
+          <div>
+            <dt className="text-ink/60">Days</dt>
+            <dd className="mt-1 font-semibold text-forest-900">Mondays and Wednesdays</dd>
+          </div>
+          <div>
+            <dt className="text-ink/60">Price</dt>
+            <dd className="mt-1 font-semibold text-forest-900">From $160 a month</dd>
+          </div>
+          <div>
+            <dt className="text-ink/60">Spots</dt>
+            <dd className="mt-1 font-semibold text-forest-900">First come, first served</dd>
+          </div>
+        </dl>
+      </PageHero>
 
       <Section id="classes" className="scroll-mt-20">
         <div className="max-w-2xl">
@@ -139,9 +132,11 @@ export default function FallClassesPage() {
             <h3 className="border-b-2 border-forest-800 pb-3 font-display text-xl font-semibold text-forest-900">
               {g.title}
             </h3>
-            <div className="mt-6 grid gap-6 md:grid-cols-2">
-              {g.classes.map((c) => (
-                <ClassCard key={c.slug} c={c} />
+            <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {g.classes.map((c, i) => (
+                <Reveal key={c.slug} delay={(i % 2) * 0.08} className="h-full">
+                  <ClassCard c={c} />
+                </Reveal>
               ))}
             </div>
           </div>
@@ -241,7 +236,6 @@ export default function FallClassesPage() {
         primaryHref="/fall-classes/register"
       />
 
-      <StickyCallBar />
     </>
   );
 }

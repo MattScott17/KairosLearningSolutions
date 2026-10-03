@@ -34,7 +34,7 @@ for (const path of paths) {
 
 test("every review stays reachable when the marquee can't move", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/");
+  await page.goto("/classic");
   const figure = page.locator("figure", { hasText: "Google review" }).first();
   // The marquee row must fall back to a scrollable strip wider than the screen.
   const scrollable = await figure.evaluate((el) => {

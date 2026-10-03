@@ -21,10 +21,11 @@ export default async function RegisterPage({ searchParams }: Props) {
     <>
       <PageHero
         title="Fall 2026 registration"
+        mark="registration"
         intro="Fill this out once for each family, with up to three students. It saves your student's spot, and spots are first come, first served. Rather do it on the phone? Give us a call and we'll do it together."
       />
 
-      <section className="py-14 sm:py-20">
+      <section className="py-16 sm:py-24">
         <div className="container-page grid gap-12 lg:grid-cols-[1fr_300px] lg:gap-16">
           <RegistrationForm initialClass={initialClass} />
 

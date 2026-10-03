@@ -1,5 +1,6 @@
 import { ArrowDown, Check, ChevronDown, Phone, ShieldCheck, X } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
+import { HandUnderline } from "@/components/concepts/HandDrawn";
 import { CallbackForm } from "@/components/lp/CallbackForm";
 import { TestimonialCards } from "@/components/lp/TestimonialCards";
 import { getTestimonials } from "@/lib/content";
@@ -22,11 +23,17 @@ export function Headline({ hero, className = "" }: { hero: VariantHero; classNam
       ) : (
         <>
           {headline.slice(0, at)}
-          {/* Gold band drawn shorter than the line box so it never touches the
-              lines above/below, even when the highlight wraps. */}
-          <mark className="box-decoration-clone bg-transparent bg-[linear-gradient(theme(colors.gold.500),theme(colors.gold.500))] bg-[length:100%_1em] bg-[position:0_60%] bg-no-repeat px-1.5 text-ink">
-            {highlight}
-          </mark>
+          {highlight!.length <= 14 ? (
+            <span className="relative inline-block whitespace-nowrap">
+              {highlight}
+              <HandUnderline className="absolute -bottom-1.5 left-0 h-3 w-full text-gold-500 sm:-bottom-2.5 sm:h-4" />
+            </span>
+          ) : (
+            // Too long for one line on a phone, so a plain gold underline that can wrap.
+            <span className="underline decoration-gold-500 decoration-[3px] underline-offset-[7px]">
+              {highlight}
+            </span>
+          )}
           {headline.slice(at + highlight!.length)}
         </>
       )}
@@ -67,45 +74,26 @@ export function CtaPair({
   );
 }
 
-export function SectionTitle({
-  eyebrow,
-  title,
-  dark = false,
-}: {
-  eyebrow?: string;
-  title: string;
-  dark?: boolean;
-}) {
+export function SectionTitle({ title, dark = false }: { title: string; dark?: boolean }) {
   return (
-    <div>
-      {eyebrow && (
-        <p
-          className={`text-sm font-semibold ${
-            dark ? "text-gold-400" : "text-forest-600"
-          }`}
-        >
-          {eyebrow}
-        </p>
-      )}
-      <h2
-        className={`mt-2 text-[1.75rem] font-semibold leading-tight sm:text-4xl ${
-          dark ? "text-cream" : ""
-        }`}
-      >
-        {title}
-      </h2>
-    </div>
+    <h2
+      className={`text-[1.75rem] font-semibold leading-tight sm:text-4xl ${
+        dark ? "text-cream" : ""
+      }`}
+    >
+      {title}
+    </h2>
   );
 }
 
 export function OfferStack({ offer }: { offer: ProgramOffer }) {
   return (
     <div>
-      <SectionTitle eyebrow="The offer" title={offer.stackTitle} />
+      <SectionTitle title={offer.stackTitle} />
       <ol className="mt-8 space-y-3">
         {offer.stack.map((item, i) => (
           <Reveal key={item.title} delay={Math.min(i, 3) * 0.05}>
-            <li className="flex gap-4 rounded-2xl border border-forest-100 bg-cream p-5 shadow-card">
+            <li className="flex gap-4 rounded-lg border border-forest-100 bg-cream p-5">
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-forest-800 text-sm font-bold text-cream">
                 {i + 1}
               </span>
@@ -125,7 +113,7 @@ export function OfferStack({ offer }: { offer: ProgramOffer }) {
 export function PriceLine({ offer, className = "" }: { offer: ProgramOffer; className?: string }) {
   return (
     <div
-      className={`rounded-2xl border-2 border-dashed border-forest-800 bg-forest-50 p-5 text-center ${className}`}
+      className={`rounded-lg border border-forest-100 bg-forest-50 p-5 text-center ${className}`}
     >
       <p className="text-sm font-semibold text-forest-700">
         {offer.priceLine.label}
@@ -140,7 +128,7 @@ export function PriceLine({ offer, className = "" }: { offer: ProgramOffer; clas
 
 export function RiskReversal({ offer }: { offer: ProgramOffer }) {
   return (
-    <div className="flex gap-4 rounded-3xl bg-forest-900 p-6 text-cream">
+    <div className="flex gap-4 rounded-lg bg-forest-900 p-6 text-cream">
       <ShieldCheck className="h-9 w-9 shrink-0 text-gold-400" />
       <div>
         <p className="font-display text-xl font-semibold text-cream">{offer.riskReversal.title}</p>
@@ -153,7 +141,7 @@ export function RiskReversal({ offer }: { offer: ProgramOffer }) {
 export function ForNotFor({ offer }: { offer: ProgramOffer }) {
   return (
     <div className="grid gap-4 md:grid-cols-2">
-      <div className="rounded-3xl border-2 border-forest-500 bg-cream p-6">
+      <div className="rounded-lg border-2 border-forest-500 bg-cream p-6">
         <p className="font-display text-xl font-semibold text-forest-900">This is for you if…</p>
         <ul className="mt-4 space-y-3">
           {offer.forYou.map((line) => (
@@ -164,7 +152,7 @@ export function ForNotFor({ offer }: { offer: ProgramOffer }) {
           ))}
         </ul>
       </div>
-      <div className="rounded-3xl border border-ink/10 bg-sand/60 p-6">
+      <div className="rounded-lg border border-ink/10 bg-sand/60 p-6">
         <p className="font-display text-xl font-semibold text-ink/80">This is not for you if…</p>
         <ul className="mt-4 space-y-3">
           {offer.notForYou.map((line) => (
@@ -184,8 +172,8 @@ export function ObstacleFix({ offer }: { offer: ProgramOffer }) {
     <ul className="space-y-4">
       {offer.obstacles.map((o, i) => (
         <Reveal key={o.fear} delay={Math.min(i, 3) * 0.05}>
-          <li className="overflow-hidden rounded-3xl bg-cream shadow-card">
-            <p className="bg-ink px-5 py-4 font-display text-lg font-semibold leading-snug text-cream">
+          <li className="overflow-hidden rounded-lg bg-cream">
+            <p className="bg-forest-900 px-5 py-4 font-display text-lg font-semibold leading-snug text-cream">
               {o.fear}
             </p>
             <p className="flex gap-3 px-5 py-4 text-[0.95rem] leading-relaxed text-ink/85">
@@ -201,7 +189,7 @@ export function ObstacleFix({ offer }: { offer: ProgramOffer }) {
 
 export function FaqList({ offer }: { offer: ProgramOffer }) {
   return (
-    <div className="divide-y divide-forest-100 rounded-3xl border border-forest-100 bg-cream">
+    <div className="divide-y divide-forest-100 rounded-lg border border-forest-100 bg-cream">
       {offer.faqs.map((f) => (
         <details key={f.q} className="group px-5">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-semibold text-forest-900 [&::-webkit-details-marker]:hidden">
@@ -219,7 +207,7 @@ export function Proof({ offer }: { offer: ProgramOffer }) {
   const items = getTestimonials(offer.testimonialIds);
   return (
     <div>
-      <SectionTitle eyebrow="Kairos families" title="Don't take our word for it" />
+      <SectionTitle title="Don't take our word for it" />
       <div className="mt-8">
         <TestimonialCards items={items} />
       </div>
@@ -240,7 +228,7 @@ export function FormBlock({
         <h2 className="text-[1.75rem] font-semibold leading-tight sm:text-4xl">{title}</h2>
         <p className="mt-2 text-sm text-ink/70">
           Leave your name and number. We'll call you back, or you can call us now at{" "}
-          <a href={site.phoneHref} className="link-underline">
+          <a href={site.phoneHref} className="link-underline inline-flex min-h-[44px] items-center">
             {site.phone}
           </a>
           .

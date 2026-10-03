@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { Reveal } from "@/components/ui/Reveal";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight, Check, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
 import { apex, registrationFees } from "@/lib/content";
-import { pagePhotos } from "@/lib/photos";
+import { pagePhotos, photos } from "@/lib/photos";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -28,7 +29,13 @@ const facts = [
 export default function ApexPage() {
   return (
     <>
-      <PageHero title="APEX, full‑time school for grades 3 to 9" intro={apex.intro}>
+      <PageHero
+        title="APEX, full‑time school for grades 3 to 9"
+        mark="full‑time school"
+        intro={apex.intro}
+        photo={pagePhotos.apex}
+        variant="dark"
+      >
         <div className="flex flex-col gap-3 sm:flex-row">
           <Link href="/contact" className="btn-accent">
             Book a tour
@@ -36,7 +43,7 @@ export default function ApexPage() {
           </Link>
           <a
             href={site.phoneHref}
-            className="btn-outline border-cream text-cream hover:bg-cream hover:text-forest-800"
+            className="btn-outline"
           >
             <Phone className="h-4 w-4" />
             {site.phone}
@@ -62,11 +69,11 @@ export default function ApexPage() {
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
             <Image
-              src={pagePhotos.apex.src}
-              alt={pagePhotos.apex.alt}
+              src={photos.smallGroup.src}
+              alt={photos.smallGroup.alt}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
+              className="object-cover object-[50%_30%]"
             />
           </div>
           <div>
@@ -81,19 +88,31 @@ export default function ApexPage() {
       </Section>
 
       {/* How APEX is set up: a plain list, not a card grid */}
-      <section className="border-t border-forest-100 py-16 sm:py-20">
+      <section className="border-t border-forest-100 py-16 sm:py-24">
         <div className="container-page grid gap-10 lg:grid-cols-[1fr_1.6fr]">
-          <h2 className="text-3xl font-semibold sm:text-4xl">How APEX is set up</h2>
+          <div>
+            <h2 className="text-3xl font-semibold sm:text-4xl">How APEX is set up</h2>
+            <div className="relative mt-8 hidden aspect-[4/5] overflow-hidden rounded-lg lg:block">
+              <Image
+                src={photos.presenting.src}
+                alt={photos.presenting.alt}
+                fill
+                sizes="30vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
           <div>
             <dl className="border-t border-forest-200">
-              {apex.pillars.map((pillar) => (
-                <div
+              {apex.pillars.map((pillar, i) => (
+                <Reveal
                   key={pillar.title}
+                  delay={Math.min(i, 4) * 0.05}
                   className="grid gap-1 border-b border-forest-100 py-5 sm:grid-cols-[14rem_1fr] sm:gap-6"
                 >
                   <dt className="font-semibold text-forest-900">{pillar.title}</dt>
                   <dd className="prose-kairos">{pillar.body}</dd>
-                </div>
+                </Reveal>
               ))}
             </dl>
             <p className="prose-kairos mt-6">
@@ -121,7 +140,12 @@ export default function ApexPage() {
               {apex.comparison.map((row) => (
                 <tr key={row.traditional} className="border-b border-cream/10">
                   <td className="py-4 pr-4 text-cream/70">{row.traditional}</td>
-                  <td className="py-4 font-medium text-cream">{row.apex}</td>
+                  <td className="py-4 font-medium text-cream">
+                    <span className="inline-flex items-start gap-2">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" aria-hidden />
+                      {row.apex}
+                    </span>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -167,6 +191,7 @@ export default function ApexPage() {
       <CTASection
         title="Come see APEX"
         intro="Give us a call to set up a tour. You and your student can meet the teachers and see the space before you decide."
+        photo={photos.teamwork}
         primaryLabel="Or email Jackie"
         primaryHref={site.emailHref}
       />

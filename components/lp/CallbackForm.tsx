@@ -27,12 +27,12 @@ export function CallbackForm({ copy }: { copy: LandingCopy }) {
 
   if (status === "success") {
     return (
-      <div id="callback" className="rounded-3xl border border-forest-200 bg-forest-50 p-8 text-center shadow-card">
+      <div id="callback" className="rounded-lg border border-forest-200 bg-forest-50 p-8 text-center">
         <CheckCircle2 className="mx-auto h-12 w-12 text-forest-600" />
         <h3 className="mt-4 text-2xl font-semibold">We'll call you back!</h3>
         <p className="prose-kairos mx-auto mt-2 max-w-md">
           Thanks. Someone from our team will call you shortly. Need something sooner? Call us at{" "}
-          <a href={site.phoneHref} className="link-underline">
+          <a href={site.phoneHref} className="link-underline inline-flex min-h-[44px] items-center">
             {site.phone}
           </a>
           .
@@ -42,7 +42,7 @@ export function CallbackForm({ copy }: { copy: LandingCopy }) {
   }
 
   const inputBase =
-    "w-full rounded-xl border bg-cream scroll-mt-24 px-4 py-3 text-base text-ink shadow-sm sm:text-sm outline-none transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-500/30";
+    "w-full rounded-lg border bg-cream scroll-mt-24 px-4 py-3 text-base text-ink sm:text-sm outline-none transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-500/30";
 
   const errClass = (field: string) =>
     fieldErrors[field] ? "border-red-400" : "border-forest-200";
@@ -52,7 +52,7 @@ export function CallbackForm({ copy }: { copy: LandingCopy }) {
       id="callback"
       onSubmit={handleSubmit}
       noValidate
-      className="mx-auto max-w-md space-y-5 rounded-3xl border border-forest-100 bg-cream p-7 shadow-card"
+      className="mx-auto max-w-md space-y-5 rounded-lg border border-forest-100 bg-cream p-7"
     >
       <h3 className="text-xl font-semibold">Request a callback</h3>
 
@@ -95,7 +95,7 @@ export function CallbackForm({ copy }: { copy: LandingCopy }) {
       </div>
 
       {status === "error" && errorMsg && (
-        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
           {errorMsg}
         </div>
       )}

@@ -44,6 +44,7 @@
     *::after {
       animation-duration: 0.001ms !important;
       animation-iteration-count: 1 !important;
+      animation-delay: 0s !important;
       transition-duration: 0.001ms !important;
       scroll-behavior: auto !important;
     }
@@ -53,6 +54,35 @@
       opacity: 1 !important;
       transform: none !important;
     }
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes hero-draw {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes hero-pop {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -108,6 +138,21 @@
   }
   .no-scrollbar::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Page header entrance: text rises in one piece at a time, the gold underline draws left to
+     right. Pure CSS (fill-mode both), so it needs no JS and reduced motion snaps it to the end. */
+  .hero-rise {
+    animation: hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--hero-delay, 0s);
+  }
+  .hero-draw {
+    animation: hero-draw 0.7s cubic-bezier(0.65, 0, 0.35, 1) both;
+    animation-delay: var(--hero-delay, 0.5s);
+  }
+  .hero-pop {
+    animation: hero-pop 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--hero-delay, 0.2s);
   }
 
   .link-underline {

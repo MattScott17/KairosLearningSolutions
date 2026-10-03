@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Reveal } from "@/components/ui/Reveal";
 
 type SectionProps = {
   children: ReactNode;
@@ -30,9 +31,9 @@ type SectionHeadingProps = {
 
 export function SectionHeading({ title, intro, center = false, className = "" }: SectionHeadingProps) {
   return (
-    <div className={`${center ? "mx-auto max-w-2xl text-center" : "max-w-2xl"} ${className}`}>
+    <Reveal className={`${center ? "mx-auto max-w-2xl text-center" : "max-w-2xl"} ${className}`}>
       <h2 className="text-3xl font-semibold sm:text-4xl">{title}</h2>
       {intro && <p className="prose-kairos mt-4 text-lg">{intro}</p>}
-    </div>
+    </Reveal>
   );
 }

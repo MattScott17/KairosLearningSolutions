@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Check } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
+import { NameRing } from "@/components/concepts/NameRing";
 import { CallbackForm } from "@/components/lp/CallbackForm";
 import {
   CtaPair,
@@ -37,14 +38,16 @@ const heroGrid = "container-narrow lg:grid lg:max-w-6xl lg:grid-cols-2 lg:items-
 function HeroPhoto({
   offer,
   priority = false,
+  aspect = "aspect-[4/3]",
   className = "",
 }: {
   offer: ProgramOffer;
   priority?: boolean;
+  aspect?: string;
   className?: string;
 }) {
   return (
-    <div className={`relative aspect-[4/3] overflow-hidden rounded-3xl shadow-soft ${className}`}>
+    <div className={`relative ${aspect} overflow-hidden rounded-lg ${className}`}>
       <Image
         src={offer.photo.src}
         alt={offer.photo.alt}
@@ -81,13 +84,10 @@ export function OfferVariant({ offer }: { offer: ProgramOffer }) {
   const hero = offer.heroes.a;
   return (
     <>
-      <section className="bg-forest-950 pb-14 pt-10 text-cream sm:pb-20 sm:pt-16">
+      <section className="bg-forest-900 pb-14 pt-10 text-cream sm:pb-20 sm:pt-16">
         <div className={heroGrid}>
           <div>
-            <p className="text-sm font-semibold text-gold-400">
-              {hero.eyebrow}
-            </p>
-            <Headline hero={hero} className="mt-4 text-cream" />
+            <Headline hero={hero} className="text-cream" />
             <p className="mt-5 text-lg leading-relaxed text-cream/85">{hero.subhead}</p>
             <CtaPair offer={offer} dark className="mt-7" />
             <div className="mt-9">
@@ -107,7 +107,7 @@ export function OfferVariant({ offer }: { offer: ProgramOffer }) {
 
       <section className={`bg-sand/60 ${band}`}>
         <div className="container-narrow">
-          <SectionTitle eyebrow="Be honest" title="Is this right for your family?" />
+          <SectionTitle title="Is this right for your family?" />
           <div className="mt-8">
             <ForNotFor offer={offer} />
           </div>
@@ -131,7 +131,7 @@ export function OfferVariant({ offer }: { offer: ProgramOffer }) {
 
       <section className={band}>
         <div className="container-narrow">
-          <SectionTitle eyebrow="Questions" title="Quick answers" />
+          <SectionTitle title="Quick answers" />
           <div className="mt-8">
             <FaqList offer={offer} />
           </div>
@@ -147,33 +147,44 @@ export function ProblemFixVariant({ offer }: { offer: ProgramOffer }) {
   return (
     <>
       <section className="pb-14 pt-8 sm:pb-20 sm:pt-14">
-        <div className={heroGrid}>
+        <div className="container-narrow lg:grid lg:max-w-6xl lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:gap-14">
           <div>
-            <p className="text-sm font-semibold text-forest-600">
-              {hero.eyebrow}
-            </p>
-            <Headline hero={hero} className="mt-4" />
+            <Headline hero={hero} />
             <p className="mt-5 text-lg leading-relaxed text-ink/80">{hero.subhead}</p>
             <CtaPair offer={offer} className="mt-8" />
           </div>
-          <HeroPhoto offer={offer} priority className="hidden lg:block" />
+          {/* Hidden on phones, so it must load lazily (never priority). */}
+          <div className="hidden lg:block">
+            <NameRing>
+              <div className="arch relative aspect-[4/5] overflow-hidden">
+                <Image
+                  src={offer.photo.src}
+                  alt={offer.photo.alt}
+                  fill
+                  loading="lazy"
+                  sizes="40vw"
+                  className="object-cover"
+                />
+              </div>
+            </NameRing>
+          </div>
         </div>
       </section>
 
-      <section className={`bg-ink text-cream ${band}`}>
+      <section className={band}>
         <div className="container-narrow">
-          <SectionTitle eyebrow="Sound familiar?" title="If any of this is your week…" dark />
+          <SectionTitle title="If any of this is your week…" />
           <ul className="mt-8 space-y-3">
             {offer.form.painPoints.map((p) => (
               <li
                 key={p}
-                className="rounded-2xl border border-cream/15 bg-cream/5 p-5 text-[1.05rem] leading-relaxed text-cream/90"
+                className="rounded-lg border-l-2 border-gold-500/60 bg-sand p-5 text-[1.05rem] leading-relaxed text-ink/90"
               >
                 {p}
               </li>
             ))}
           </ul>
-          <p className="mt-8 font-display text-2xl font-semibold leading-snug text-gold-400">
+          <p className="mt-8 font-display text-2xl font-semibold leading-snug text-forest-800">
             …it's not a lack of effort. It's the wrong setup. Here's how we fix it.
           </p>
         </div>
@@ -181,7 +192,7 @@ export function ProblemFixVariant({ offer }: { offer: ProgramOffer }) {
 
       <section className={`bg-sand/60 ${band}`}>
         <div className="container-narrow">
-          <SectionTitle eyebrow="Every reason it hasn't worked" title="And exactly how we fix it" />
+          <SectionTitle title="And exactly how we fix it" />
           <div className="mt-8">
             <ObstacleFix offer={offer} />
           </div>
@@ -193,11 +204,7 @@ export function ProblemFixVariant({ offer }: { offer: ProgramOffer }) {
         <div className={heroGrid}>
           <HeroPhoto offer={offer} className="mb-8 lg:mb-0" />
           <div>
-            <SectionTitle
-              eyebrow="Why Kairos"
-              title={`Helping Salinas families since ${site.foundedYear}`}
-              dark
-            />
+            <SectionTitle title={`Helping Salinas families since ${site.foundedYear}`} dark />
             <div className="mt-6">
               <CheckList items={offer.form.proofPoints} dark />
             </div>
@@ -222,7 +229,7 @@ export function ProblemFixVariant({ offer }: { offer: ProgramOffer }) {
 
       <section className={band}>
         <div className="container-narrow">
-          <SectionTitle eyebrow="Questions" title="Quick answers" />
+          <SectionTitle title="Quick answers" />
           <div className="mt-8">
             <FaqList offer={offer} />
           </div>
@@ -237,13 +244,10 @@ export function ShortVariant({ offer }: { offer: ProgramOffer }) {
   const hero = offer.heroes.c;
   return (
     <>
-      <section className="bg-forest-950 pb-12 pt-8 text-cream sm:pb-16 sm:pt-12">
+      <section className="bg-forest-900 pb-12 pt-8 text-cream sm:pb-16 sm:pt-12">
         <div className={heroGrid}>
           <div>
-            <p className="text-sm font-semibold text-gold-400">
-              {hero.eyebrow}
-            </p>
-            <Headline hero={hero} className="mt-3 text-cream" />
+            <Headline hero={hero} className="text-cream" />
             <div className="mt-5">
               <CheckList items={offer.quickBullets} dark />
             </div>
@@ -262,23 +266,28 @@ export function ShortVariant({ offer }: { offer: ProgramOffer }) {
       </section>
 
       <section className={`bg-sand/60 ${band}`}>
-        <div className="container-narrow">
-          <SectionTitle eyebrow="The offer" title="What you get" />
-          <div className="mt-6">
-            <CheckList items={offer.stack.map((s) => s.title)} />
+        <div className={heroGrid}>
+          <div>
+            <SectionTitle title="What you get" />
+            <div className="mt-6">
+              <CheckList items={offer.stack.map((s) => s.title)} />
+            </div>
+            <PriceLine offer={offer} className="mt-6" />
           </div>
-          <PriceLine offer={offer} className="mt-6" />
+          <HeroPhoto offer={offer} aspect="aspect-[4/5]" className="mt-8 lg:mt-0" />
         </div>
       </section>
 
       <section className={band}>
         <div className="container-narrow">
-          <SectionTitle eyebrow="Questions" title="Quick answers" />
+          <div className="text-center">
+            <SectionTitle title="Quick answers" />
+          </div>
           <div className="mt-8">
             <FaqList offer={offer} />
           </div>
           <Reveal>
-            <CtaPair offer={offer} className="mt-10" />
+            <CtaPair offer={offer} className="mt-10 sm:[&>div]:justify-center sm:[&>p]:text-center" />
           </Reveal>
         </div>
       </section>
