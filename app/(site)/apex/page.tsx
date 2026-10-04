@@ -28,7 +28,7 @@ const facts = [
     value: "Free call and tour",
     note: apex.tuition.term,
   },
-  { label: "Schedule", value: "Full school day", note: "Small groups" },
+  { label: "Schedule", value: "9 a.m. to 2 p.m.", note: "Monday through Thursday, Fridays off" },
 ];
 
 export default function ApexPage() {
@@ -97,10 +97,30 @@ export default function ApexPage() {
               That leaves most of the day for projects, presentations and life skills like budgeting
               and running a small business.
             </p>
-            <p className="prose-kairos mt-4 text-sm">{apex.outcomesNote}</p>
+            <p className="prose-kairos mt-4">
+              During the academic block, AI-supported adaptive learning adjusts to each student's
+              level, so the work is never too easy or too hard.
+            </p>
           </div>
         </div>
       </Section>
+
+      {/* Pilot-year results */}
+      <section className="border-t border-forest-100 py-16 sm:py-20">
+        <div className="container-page">
+          <h2 className="text-3xl font-semibold sm:text-4xl">Our first year of results</h2>
+          <p className="prose-kairos mt-3 text-sm">{apex.results.basis}</p>
+          <dl className="mt-8 grid gap-x-10 gap-y-8 sm:grid-cols-2">
+            {apex.results.stats.map((s) => (
+              <div key={s.value} className="border-t border-forest-200 pt-4">
+                <dt className="font-display text-3xl font-semibold text-forest-800">{s.value}</dt>
+                <dd className="prose-kairos mt-1 text-sm">{s.label}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="prose-kairos mt-8 max-w-2xl">{apex.results.spectrum}</p>
+        </div>
+      </section>
 
       {/* How APEX is set up: a plain list, not a card grid */}
       <section className="border-t border-forest-100 py-16 sm:py-24">
