@@ -28,7 +28,7 @@ const facts = [
     value: "Free call and tour",
     note: apex.tuition.term,
   },
-  { label: "Schedule", value: "Full school day", note: "Small groups" },
+  { label: "Schedule", value: "9 a.m. to 2 p.m.", note: "Monday through Thursday, Fridays off" },
 ];
 
 export default function ApexPage() {
@@ -96,6 +96,10 @@ export default function ApexPage() {
             <p className="prose-kairos mt-4">
               That leaves most of the day for projects, presentations and life skills like budgeting
               and running a small business.
+            </p>
+            <p className="prose-kairos mt-4">
+              During the academic block, AI-powered learning software adjusts to each student's
+              level, so the work is never too easy or too hard.
             </p>
             <p className="prose-kairos mt-4 text-sm">{apex.outcomesNote}</p>
           </div>

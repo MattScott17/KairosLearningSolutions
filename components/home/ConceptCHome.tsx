@@ -199,13 +199,18 @@ export function ConceptCHome() {
       {/* The path-finder: the core mechanic of this concept */}
       <Section id="programs" className="!pt-4 sm:!pt-6">
         <PathFinder paths={paths} />
-        <p className="mt-8 text-center text-ink/75">
-          Looking for weekly classes in writing, speaking, art and reading?{" "}
-          <Link href="/fall-classes" className="link-underline">
+        <div className="mt-10 flex flex-col items-center justify-between gap-4 rounded-lg border border-forest-200 bg-sand/50 px-6 py-6 text-center sm:flex-row sm:text-left">
+          <p className="font-display text-xl font-semibold text-forest-900 sm:text-2xl">
+            Looking for weekly classes in writing, speaking, art and reading?
+          </p>
+          <Link href="/fall-classes" className="btn-primary shrink-0">
             See our fall classes
+            <ArrowRight className="h-4 w-4" />
           </Link>
-        </p>
+        </div>
       </Section>
+
+      <GetStarted />
 
       <PhotosFromKairos />
 
@@ -256,8 +261,6 @@ export function ConceptCHome() {
           </div>
         </div>
       </section>
-
-      <GetStarted />
 
       <CTASection
         title="Not sure which program fits?"

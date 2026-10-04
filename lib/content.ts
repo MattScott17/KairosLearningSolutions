@@ -280,6 +280,10 @@ export const apex = {
       body: "Groups are small, so every teacher knows each student by name and sees their work every day.",
     },
     {
+      title: "Fills in gaps",
+      body: "If a student has a gap, say from first grade, the program finds it and fills it in before moving on.",
+    },
+    {
       title: "Short academic blocks",
       body: "Core subjects are covered in short, high-focus blocks sized to a child's attention span.",
     },
@@ -320,11 +324,6 @@ export const leadership: TeamMember[] = [
     role: "Owner & Lead Teacher",
     bio: "Jackie has taught for more than 30 years, in grades 3 to 12, in many subjects and many kinds of schools. She holds an MA in Educational Leadership and Curriculum & Instruction, and opened Kairos in 2020.",
   },
-  {
-    name: "Venessa Gilbride",
-    role: "Director",
-    bio: "Venessa runs program development and community partnerships. Her background is in community engagement, and she started the first science fair at Washington Union School District.",
-  },
 ];
 
 export const team: TeamMember[] = [
@@ -349,11 +348,6 @@ export const team: TeamMember[] = [
     bio: "B.S. in Biomedical Engineering and Mathematics from Cal Poly SLO, currently pursuing a Ph.D. in Mathematical, Computational Systems Biology at UC Irvine.",
   },
   {
-    name: "Ethan Berg",
-    role: "Online Tutor",
-    bio: "A recent college graduate tutoring elementary through high school math and science.",
-  },
-  {
     name: "Colin McCardell",
     role: "Tutor",
     bio: "Math major at CSU Monterey Bay, tutoring through Calculus 3 with a focus on applied mathematics.",
@@ -362,11 +356,6 @@ export const team: TeamMember[] = [
     name: "Saara Kriplani",
     role: "Online Tutor",
     bio: "B.S. in Bioengineering: Bioinformatics from UC San Diego, teaching math from preschool through calculus.",
-  },
-  {
-    name: "Trisha Hill",
-    role: "Subject Specialist",
-    bio: "15 years of teaching experience. She teaches full time at New Republic Elementary in Salinas and was nominated for Monterey County Teacher of the Year in 2022.",
   },
   {
     name: "Daryl Lyon",
@@ -397,8 +386,8 @@ export function getTeamMembers(names: string[]): TeamMember[] {
 
 // Who appears in the homepage-style "meet our tutors" rows.
 export const featuredTutors = {
-  home: ["Jackie Scott", "Trisha Hill", "Brady Berg", "Laura Palmer"],
-  conceptD: ["Venessa Gilbride", "Michelle Ball", "Lisa Bleicher", "Daryl Lyon"],
+  home: ["Jackie Scott", "Brady Berg"],
+  conceptD: ["Jackie Scott", "Michelle Ball", "Lisa Bleicher", "Daryl Lyon"],
 };
 
 export type Testimonial = {
@@ -682,14 +671,14 @@ export function getProgramList(): ProgramRow[] {
   ];
 }
 
-// The four ways families and schools work with Kairos. The homepage and the homepage drafts
+// The five ways families and schools work with Kairos. The homepage and the homepage drafts
 // all show this same list, so Kairos leads and APEX is one option among four.
 export type Pathway = {
   title: string;
   body: string;
   href: string;
   cta: string;
-  photo: "threeDPrinting" | "readingTogether" | "studentsLearning" | "presenting";
+  photo: "threeDPrinting" | "readingTogether" | "studentsLearning" | "presenting" | "craftProject";
 };
 
 export const pathways: Pathway[] = [
@@ -699,6 +688,13 @@ export const pathways: Pathway[] = [
     href: "/apex",
     cta: "How APEX works",
     photo: "threeDPrinting",
+  },
+  {
+    title: "Early Learners",
+    body: "A half-day program for TK through 2nd grade, grouped by skill instead of grade, Tuesday to Thursday mornings.",
+    href: "/early-learners",
+    cta: "See Early Learners",
+    photo: "craftProject",
   },
   {
     title: "Tutoring",
