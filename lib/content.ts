@@ -301,7 +301,28 @@ export const apex = {
     "Mentoring toward independence",
   ],
   outcomesNote:
-    "Our mid-year data showed APEX students growing faster than national norms, with gains from fall to winter across a wide range of learners.",
+    "In our 2025-26 pilot year, APEX students grew 3.6 times their projected growth in reading and math, and the class's average national ranking went from the 43rd to the 78th percentile.",
+  results: {
+    basis: "Based on fall-to-spring NWEA MAP Growth assessments in reading and math, 2025-26 pilot year.",
+    stats: [
+      { value: "3.6x", label: "Students achieved 3.6 times their projected academic growth." },
+      {
+        value: "83%",
+        label: "Of valid reading and math results met or exceeded twice the students' projected growth.",
+      },
+      {
+        value: "43rd to 78th",
+        label: "Increase in the class's average national achievement ranking, in percentile.",
+      },
+      {
+        value: "57%",
+        label:
+          "Of valid results ranked at or above the 90th percentile for growth among academically similar students nationwide.",
+      },
+    ],
+    spectrum:
+      "APEX helped students across the academic spectrum. Students who began below grade level made real progress, and students who began ahead kept accelerating.",
+  },
   comparison: [
     { traditional: "One pace for everyone", apex: "Each student at their own pace" },
     { traditional: "Limited flexibility", apex: "Flexible structure" },
