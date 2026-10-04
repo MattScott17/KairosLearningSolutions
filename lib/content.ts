@@ -324,6 +324,10 @@ export const leadership: TeamMember[] = [
     role: "Owner & Lead Teacher",
     bio: "Jackie has taught for more than 30 years, in grades 3 to 12, in many subjects and many kinds of schools. She holds an MA in Educational Leadership and Curriculum & Instruction, and opened Kairos in 2020.",
   },
+  {
+    name: "Alissa Scott",
+    role: "Director",
+  },
 ];
 
 export const team: TeamMember[] = [
@@ -386,8 +390,8 @@ export function getTeamMembers(names: string[]): TeamMember[] {
 
 // Who appears in the homepage-style "meet our tutors" rows.
 export const featuredTutors = {
-  home: ["Jackie Scott", "Brady Berg"],
-  conceptD: ["Jackie Scott", "Michelle Ball", "Lisa Bleicher", "Daryl Lyon"],
+  home: ["Jackie Scott", "Brady Berg", "Michelle Ball", "Lisa Bleicher"],
+  conceptD: ["Alissa Scott", "Michelle Ball", "Lisa Bleicher", "Daryl Lyon"],
 };
 
 export type Testimonial = {
