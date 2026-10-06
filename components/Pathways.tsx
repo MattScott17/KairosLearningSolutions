@@ -5,9 +5,9 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { pathways } from "@/lib/content";
 import { photos } from "@/lib/photos";
 
-/** The four ways to work with Kairos: APEX, tutoring, homeschool support and classes, districts. */
+/** The five ways to work with Kairos: APEX, Early Learners, tutoring, homeschool support and classes, districts. */
 export function Pathways({
-  title = "Four ways to work with Kairos",
+  title = "Five ways to work with Kairos",
   intro = "Every program starts with a call. Tell us about your student or your school and we'll point you to the right one.",
   className = "",
 }: {
@@ -18,7 +18,7 @@ export function Pathways({
   return (
     <Section className={className}>
       <SectionHeading title={title} intro={intro} />
-      <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {pathways.map((p) => (
           <li key={p.title}>
             <Link

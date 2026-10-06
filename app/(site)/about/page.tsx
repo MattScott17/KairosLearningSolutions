@@ -93,7 +93,7 @@ export default function AboutPage() {
                 <div>
                   <h3 className="text-xl font-semibold">{person.name}</h3>
                   <p className="text-sm text-forest-700">{person.role}</p>
-                  <p className="prose-kairos mt-3 text-sm">{person.bio}</p>
+                  {person.bio && <p className="prose-kairos mt-3 text-sm">{person.bio}</p>}
                 </div>
               </Reveal>
             ))}

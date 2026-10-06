@@ -1,4 +1,4 @@
-import { ParallaxGallery } from "@/components/ParallaxGallery";
+import Image from "next/image";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import Link from "next/link";
 import { getTestimonials, testimonials, values } from "@/lib/content";
@@ -9,10 +9,29 @@ import { conceptB } from "@/lib/storybrand";
 
 export function PhotosFromKairos() {
   return (
-    <Section className="overflow-hidden">
+    <Section className="overflow-hidden !py-12 sm:!py-16">
       <SectionHeading title="Photos from Kairos" />
-      <div className="mt-12">
-        <ParallaxGallery photos={galleryPhotos} />
+      <div
+        className="-mx-4 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6"
+        tabIndex={0}
+        role="region"
+        aria-label="Photos from Kairos, scroll sideways"
+      >
+        {galleryPhotos.map((photo, i) => (
+          <div
+            key={photo.src + i}
+            className="relative aspect-[4/3] w-[75vw] max-w-sm shrink-0 snap-start overflow-hidden rounded-lg sm:w-80"
+          >
+            <Image
+              src={photo.src}
+              alt={photo.alt}
+              fill
+              sizes="(max-width: 640px) 75vw, 20rem"
+              className="object-cover"
+              loading="lazy"
+            />
+          </div>
+        ))}
       </div>
     </Section>
   );
