@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import Link from "next/link";
 import { getTestimonials, testimonials, values } from "@/lib/content";
-import { galleryPhotos } from "@/lib/photos";
+import { galleryPhotos, photos } from "@/lib/photos";
 import { conceptB } from "@/lib/storybrand";
 
 /** Sections shared by both homepages (/ and /classic), liked from the other drafts. */
@@ -12,7 +12,7 @@ export function PhotosFromKairos() {
     <Section className="overflow-hidden !py-12 sm:!py-16">
       <SectionHeading title="Photos from Kairos" intro="Students at work in our Salinas center." />
       <div
-        className="-mx-4 mt-8 flex snap-x snap-proximity gap-4 overflow-x-auto px-4 pb-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-500 focus-visible:ring-offset-2 sm:-mx-6 sm:px-6"
+        className="-mx-5 mt-8 flex scroll-px-5 snap-x snap-proximity gap-4 overflow-x-auto px-5 pb-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-500 focus-visible:ring-offset-2 sm:mx-0 sm:scroll-px-0 sm:px-0"
         tabIndex={0}
         role="region"
         aria-label="Photos from Kairos, scroll sideways"
@@ -41,7 +41,19 @@ export function HowWeTeach() {
   return (
     <Section>
       <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
-        <h2 className="text-3xl font-semibold sm:text-4xl">How we teach</h2>
+        <div>
+          <h2 className="text-3xl font-semibold sm:text-4xl">How we teach</h2>
+          <div className="relative mt-8 hidden aspect-[4/3] overflow-hidden rounded-lg lg:block">
+            <Image
+              src={photos.homework.src}
+              alt={photos.homework.alt}
+              fill
+              sizes="(min-width: 1024px) 28rem, 0px"
+              className="object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
         <dl className="border-t border-forest-200">
           {values.map((value) => (
             <div
@@ -63,9 +75,9 @@ export function GetStarted() {
   const [spotlight] = getTestimonials(["melissa-c"]);
   return (
     <section className="bg-sand/50 py-16 sm:py-24">
-      <div className="container-narrow">
+      <div className="container-page">
         <SectionHeading title="How to get started" />
-        <ol className="mt-10 space-y-6">
+        <ol className="mt-10 max-w-2xl space-y-6">
           {conceptB.plan.map((step, i) => (
             <li key={step} className="grid grid-cols-[2.25rem_1fr] items-baseline gap-4">
               <span aria-hidden="true" className="font-display text-4xl font-semibold leading-none text-forest-700">
@@ -78,11 +90,11 @@ export function GetStarted() {
       </div>
 
       <div className="container-page mx-auto mt-20 max-w-2xl text-center">
-        <blockquote className="text-2xl leading-relaxed text-ink/85">&ldquo;{spotlight.pull}&rdquo;</blockquote>
+        <blockquote className="font-display text-2xl italic leading-relaxed text-forest-800 sm:text-3xl">&ldquo;{spotlight.pull}&rdquo;</blockquote>
         <p className="mt-5 text-sm font-semibold text-forest-800">
           {spotlight.author} · {spotlight.role}
         </p>
-        <Link href="/about#reviews" className="link-underline mt-4 inline-block text-sm">
+        <Link href="/about#reviews" className="link-underline mt-2 inline-flex min-h-11 items-center text-sm">
           Read all {testimonials.length} parent reviews
         </Link>
       </div>

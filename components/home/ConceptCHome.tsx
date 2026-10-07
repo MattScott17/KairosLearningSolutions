@@ -115,7 +115,7 @@ export function ConceptCHome() {
     <>
       {/* Hero: the decision framing, split with an arched photo */}
       <section className="relative overflow-hidden pt-24 sm:pt-28">
-        <FallClassesBanner className="mb-10 lg:mb-14" />
+        <FallClassesBanner variant="slim" className="mb-6 lg:mb-10" />
         <div className="container-page grid items-center gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
           <div className="text-center lg:text-left">
             <h1 className="mx-auto max-w-2xl text-4xl font-semibold leading-[1.1] sm:text-5xl lg:mx-0 lg:text-[3.25rem]">
@@ -130,6 +130,13 @@ export function ConceptCHome() {
               {conceptC.heroSubShort ?? conceptC.heroSub}
             </p>
             <p className="prose-kairos mt-8 hidden max-w-xl text-lg lg:block">{conceptC.heroSub}</p>
+
+            <div className="mt-6 lg:hidden">
+              <a href={site.phoneHref} className="btn-primary">
+                <Phone className="h-4 w-4" />
+                Call {site.phone}
+              </a>
+            </div>
 
             <div className="mt-8 hidden items-center gap-6 lg:flex">
               <a href={site.phoneHref} className="btn-primary">
@@ -152,7 +159,7 @@ export function ConceptCHome() {
             </figure>
           </div>
 
-          <div className="relative mx-auto w-full max-w-[20rem] sm:max-w-sm lg:max-w-none">
+          <div className="relative mx-auto w-full max-w-[13rem] sm:max-w-sm lg:max-w-none">
             <NameRing>
               <div className="arch relative aspect-[4/5] overflow-hidden">
                 <Image
@@ -160,24 +167,17 @@ export function ConceptCHome() {
                   alt={heroPhotos.main.alt}
                   fill
                   priority
-                  sizes="(max-width: 1024px) 20rem, 40vw"
+                  sizes="(max-width: 640px) 13rem, (max-width: 1024px) 24rem, 40vw"
                   className="object-cover"
                 />
               </div>
             </NameRing>
           </div>
 
-          {/* Phones: one clear call button in place of the quote */}
-          <div className="text-center lg:hidden">
-            <a href={site.phoneHref} className="btn-primary">
-              <Phone className="h-4 w-4" />
-              Call {site.phone}
-            </a>
-          </div>
         </div>
 
         {/* Quick facts, then a hand-drawn nudge down to the chooser */}
-        <div className="container-page mt-12">
+        <div className="container-page mt-8 sm:mt-12">
           <ul className="grid grid-cols-2 justify-items-center gap-x-4 gap-y-2 border-y border-forest-100 py-4 text-center text-sm text-ink/75 lg:flex lg:flex-wrap lg:items-center lg:justify-center lg:gap-0">
             {quickFacts.map((fact, i) => (
               <li key={fact.full} className={`items-center justify-center ${fact.wide ? "col-span-2 lg:col-span-1" : ""} ${fact.short ? "flex" : "hidden lg:flex"}`}>
@@ -189,7 +189,7 @@ export function ConceptCHome() {
               </li>
             ))}
           </ul>
-          <div className="mt-8 flex items-center justify-center gap-4 text-forest-700">
+          <div className="mt-6 flex items-center justify-center gap-4 text-forest-700 sm:mt-8">
             <span className="font-display text-2xl font-semibold sm:text-3xl">Start here</span>
             <HandArrow className="h-14 w-11 sm:h-16 sm:w-12" />
           </div>
@@ -223,7 +223,7 @@ export function ConceptCHome() {
             title="Who will be teaching your child"
             intro="Retired classroom teachers, a Monterey County Teacher of the Year nominee, and math and science tutors from Cal Poly, UC San Diego and CSU Monterey Bay."
           />
-          <Link href="/about" className="link-underline shrink-0">
+          <Link href="/about" className="link-underline inline-flex min-h-11 shrink-0 items-center">
             Meet the whole team
           </Link>
         </div>
