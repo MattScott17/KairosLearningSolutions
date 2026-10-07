@@ -87,9 +87,16 @@ export function GetStarted() {
             </li>
           ))}
         </ol>
+        <p className="mt-6 text-ink/80">
+          Prefer to write first?{" "}
+          <Link href="/contact" className="link-underline inline-flex min-h-11 items-center">
+            Send us a message
+          </Link>
+        </p>
       </div>
 
       <div className="container-page mt-20">
+        <h3 className="mb-8 font-display text-2xl font-semibold text-forest-900 sm:text-3xl">What parents say</h3>
         <div className="grid gap-10 md:grid-cols-3 md:gap-8">
           {spotlight.map((review) => (
             <figure key={review.id}>
