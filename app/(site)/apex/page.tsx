@@ -3,13 +3,14 @@ import { Reveal } from "@/components/ui/Reveal";
 import { pageMetadata, breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Faq } from "@/components/Faq";
+import { TutorCard } from "@/components/TutorCard";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Check, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
-import { apex, faqs, registrationFees } from "@/lib/content";
+import { apex, faqs, getTeamMembers, registrationFees } from "@/lib/content";
 import { pagePhotos, photos } from "@/lib/photos";
 import { site } from "@/lib/site";
 
@@ -23,11 +24,7 @@ export const metadata: Metadata = pageMetadata({
 
 const facts = [
   { label: "Grades", value: apex.gradeRange.replace("Grades ", ""), note: "" },
-  {
-    label: "First step",
-    value: "Free call and tour",
-    note: apex.tuition.term,
-  },
+  { label: "Start with", value: "Free call and tour", note: "" },
   { label: "Schedule", value: "9 a.m. to 2 p.m.", note: "Monday through Thursday, Fridays off" },
 ];
 
@@ -71,9 +68,9 @@ export default function ApexPage() {
         <dl className="container-page grid grid-cols-1 divide-y divide-forest-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           {facts.map((f) => (
             <div key={f.label} className="py-7 sm:px-6 sm:first:pl-0">
-              <dt className="text-sm text-ink/60">{f.label}</dt>
+              <dt className="text-sm text-ink/75">{f.label}</dt>
               <dd className="mt-1 font-display text-2xl font-semibold text-forest-800">{f.value}</dd>
-              {f.note && <dd className="mt-1 text-sm text-ink/60">{f.note}</dd>}
+              {f.note && <dd className="mt-1 text-sm text-ink/75">{f.note}</dd>}
             </div>
           ))}
         </dl>
@@ -93,6 +90,12 @@ export default function ApexPage() {
           </div>
           <div>
             <SectionHeading title="How the day works" intro={apex.model} />
+            <p className="prose-kairos mt-4">
+              In plain words: mastery-based means a student moves on to the next topic once they have
+              understood the current one, not when the calendar says it is time. 2 Hour Learning is the
+              name of the model, with focused academics first and projects and life skills for the rest
+              of the day.
+            </p>
             <p className="prose-kairos mt-4">
               That leaves most of the day for projects, presentations and life skills like budgeting
               and running a small business.
@@ -214,7 +217,7 @@ export default function ApexPage() {
         <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
           <SectionHeading
             title="Ways to enroll"
-            intro="You can enroll in the full program, or in the academics or the workshops on their own. Call us and we'll go over tuition when you come in for a tour."
+            intro={`You can enroll in the full program, or in the academics or the workshops on their own. The full program is ${apex.tuition.monthly.replace(" / ", " a ")} for a ${apex.tuition.term.toLowerCase()}, which comes to ${apex.tuition.annual.replace(" / ", " a ")}. Come in for a tour and we'll go over it with you.`}
           />
           <div>
             <ul className="border-t border-forest-200">
@@ -227,6 +230,9 @@ export default function ApexPage() {
                     <p className="font-semibold text-forest-900">{tier.name}</p>
                     <p className="text-sm text-ink/70">{tier.description}</p>
                   </div>
+                  <p className="font-display text-xl font-semibold text-forest-800 sm:whitespace-nowrap">
+                    {tier.price.replace(" / ", " a ")}
+                  </p>
                 </li>
               ))}
             </ul>
@@ -235,12 +241,25 @@ export default function ApexPage() {
             <dl className="mt-3 space-y-2">
               {registrationFees.map((fee) => (
                 <div key={fee.label} className="flex justify-between gap-4 text-sm">
-                  <dt className="text-ink/60">{fee.label}</dt>
+                  <dt className="text-ink/75">{fee.label}</dt>
                   <dd className="whitespace-nowrap text-right font-medium text-forest-800">{fee.value}</dd>
                 </div>
               ))}
             </dl>
           </div>
+        </div>
+      </Section>
+
+      {/* The people behind it */}
+      <Section>
+        <SectionHeading
+          title="Meet Jackie and Alissa"
+          intro="Jackie opened Kairos in 2020, and her daughter Alissa is now the Executive Director."
+        />
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          {getTeamMembers(["Jackie Scott", "Alissa Scott"]).map((member) => (
+            <TutorCard key={member.name} member={member} compact fullBio />
+          ))}
         </div>
       </Section>
 
