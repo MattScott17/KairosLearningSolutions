@@ -45,6 +45,16 @@ export function gradeNumber(grade: string): number | null {
  */
 export const confirmationTimeframe = "";
 
+export const charterNote = "Let your ES know. Nothing is due until the charter approves it.";
+
+/** Which registration fee line each choice falls under, going by the labels in registrationFees. */
+export function feeLineFor(id: string): "Homeschool Support / APEX" | "Tutor / enrichment" | null {
+  if (id === "apex" || id === "leadership-year" || id === "homeschool-support") return "Homeschool Support / APEX";
+  if (id === "tutoring") return "Tutor / enrichment";
+  const group = registrationGroups.find((g) => g.options.some((o) => o.id === id));
+  return group?.title === "Fall classes" ? "Tutor / enrichment" : null;
+}
+
 export type RegistrationGroup = {
   title: string;
   /** One plain line that says what the group is, shown above its options. */
