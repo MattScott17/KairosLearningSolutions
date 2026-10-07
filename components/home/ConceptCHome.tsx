@@ -131,11 +131,14 @@ export function ConceptCHome() {
             </p>
             <p className="prose-kairos mt-8 hidden max-w-xl text-lg lg:block">{conceptC.heroSub}</p>
 
-            <div className="mt-6 lg:hidden">
+            <div className="mt-6 flex flex-col items-center gap-1 lg:hidden">
               <a href={site.phoneHref} className="btn-primary">
                 <Phone className="h-4 w-4" />
                 Call {site.phone}
               </a>
+              <Link href="/contact" className="link-underline inline-flex min-h-11 items-center text-sm">
+                Or send a message
+              </Link>
             </div>
 
             <div className="mt-8 hidden items-center gap-6 lg:flex">
@@ -143,7 +146,7 @@ export function ConceptCHome() {
                 <Phone className="h-4 w-4" />
                 Call {site.phone}
               </a>
-              <a href="#programs" className="link-underline inline-flex items-center gap-1.5">
+              <a href="#programs" className="link-underline inline-flex min-h-11 items-center gap-1.5">
                 Find your program
                 <ArrowRight className="h-4 w-4" />
               </a>
@@ -212,30 +215,30 @@ export function ConceptCHome() {
 
       <GetStarted />
 
-      <PhotosFromKairos />
+      <PhotosFromKairos exclude={[heroPhotos.main, ...paths.map((p) => p.photo)]} />
 
       <HowWeTeach />
 
       {/* Who teaches */}
       <Section className="bg-sand/50">
-        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+        <div>
           <SectionHeading
             title="Who will be teaching your child"
             intro="Retired classroom teachers, a Monterey County Teacher of the Year nominee, and math and science tutors from Cal Poly, UC San Diego and CSU Monterey Bay."
           />
-          <Link href="/about" className="link-underline inline-flex min-h-11 shrink-0 items-center">
+          <Link href="/about" className="link-underline mt-2 inline-flex min-h-11 items-center">
             Meet the whole team
           </Link>
         </div>
         <div className="mt-10">
-          <TutorRow members={getTeamMembers(featuredTutors.home)} />
+          <TutorRow compact members={getTeamMembers(featuredTutors.home)} />
         </div>
       </Section>
 
       <div className="container-page py-10 text-center sm:py-12">
         <p className="text-ink/80">
           Run a school or district?{" "}
-          <Link href="/district-partnerships" className="link-underline">
+          <Link href="/district-partnerships" className="link-underline inline-flex min-h-11 items-center">
             See how we partner with schools
           </Link>
         </p>

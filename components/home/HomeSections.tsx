@@ -2,12 +2,12 @@ import Image from "next/image";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import Link from "next/link";
 import { getTestimonials, testimonials, values } from "@/lib/content";
-import { galleryPhotos, photos } from "@/lib/photos";
+import { galleryPhotos, photos, type Photo } from "@/lib/photos";
 import { conceptB } from "@/lib/storybrand";
 
 /** Sections shared by both homepages (/ and /classic), liked from the other drafts. */
 
-export function PhotosFromKairos() {
+export function PhotosFromKairos({ exclude = [] }: { exclude?: Photo[] }) {
   return (
     <Section className="overflow-hidden !py-12 sm:!py-16">
       <SectionHeading title="Photos from Kairos" intro="Students at work in our Salinas center." />
@@ -17,7 +17,7 @@ export function PhotosFromKairos() {
         role="region"
         aria-label="Photos from Kairos, scroll sideways"
       >
-        {galleryPhotos.map((photo, i) => (
+        {galleryPhotos.filter((p) => !exclude.some((e) => e.src === p.src)).map((photo, i) => (
           <div
             key={photo.src + i}
             className="relative aspect-[4/3] w-[75vw] max-w-sm shrink-0 snap-start overflow-hidden rounded-lg sm:w-80"
@@ -72,7 +72,7 @@ export function HowWeTeach() {
 
 /** Three simple steps that flow into a parent quote. */
 export function GetStarted() {
-  const [spotlight] = getTestimonials(["melissa-c"]);
+  const spotlight = getTestimonials(["melissa-c", "jocelyn-w", "molly-b"]);
   return (
     <section className="bg-sand/50 py-16 sm:py-24">
       <div className="container-page">
@@ -87,16 +87,33 @@ export function GetStarted() {
             </li>
           ))}
         </ol>
+        <p className="mt-6 text-ink/80">
+          Prefer to write first?{" "}
+          <Link href="/contact" className="link-underline inline-flex min-h-11 items-center">
+            Send us a message
+          </Link>
+        </p>
       </div>
 
-      <div className="container-page mx-auto mt-20 max-w-2xl text-center">
-        <blockquote className="font-display text-2xl italic leading-relaxed text-forest-800 sm:text-3xl">&ldquo;{spotlight.pull}&rdquo;</blockquote>
-        <p className="mt-5 text-sm font-semibold text-forest-800">
-          {spotlight.author} · {spotlight.role}
-        </p>
-        <Link href="/about#reviews" className="link-underline mt-2 inline-flex min-h-11 items-center text-sm">
-          Read all {testimonials.length} parent reviews
-        </Link>
+      <div className="container-page mt-20">
+        <h3 className="mb-8 font-display text-2xl font-semibold text-forest-900 sm:text-3xl">What parents say</h3>
+        <div className="grid gap-10 md:grid-cols-3 md:gap-8">
+          {spotlight.map((review) => (
+            <figure key={review.id}>
+              <blockquote className="font-display text-xl italic leading-relaxed text-forest-800">
+                &ldquo;{review.pull}&rdquo;
+              </blockquote>
+              <figcaption className="mt-4 text-sm font-semibold text-forest-800">
+                {review.author} · {review.role}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+        <div className="mt-8 text-center md:text-left">
+          <Link href="/about#reviews" className="link-underline inline-flex min-h-11 items-center text-sm">
+            Read all {testimonials.length} parent reviews
+          </Link>
+        </div>
       </div>
     </section>
   );

@@ -41,13 +41,34 @@ export function TutorAvatar({
 export function TutorCard({
   member,
   fullBio = false,
+  compact = false,
   className,
 }: {
   member: TeamMember;
   /** Show the whole bio instead of clamping it (used on /about). */
   fullBio?: boolean;
+  /** Small square headshot (or initials) beside the name, so every card in a row looks alike. */
+  compact?: boolean;
   className?: string;
 }) {
+  if (compact) {
+    return (
+      <article className={cn("flex h-full flex-col rounded-lg border border-forest-100 bg-white p-5", className)}>
+        <div className="flex items-center gap-4">
+          <TutorAvatar member={member} sizes="64px" className="h-16 w-16 shrink-0 rounded-lg" />
+          <div>
+            <h3 className="text-lg font-semibold leading-snug">{member.name}</h3>
+            <p className="text-sm text-forest-700">{member.role}</p>
+          </div>
+        </div>
+        {member.bio && (
+          <p className={cn("mt-4 text-sm leading-relaxed text-ink/75", !fullBio && "line-clamp-5")}>
+            {member.bio}
+          </p>
+        )}
+      </article>
+    );
+  }
   return (
     <article className={cn("flex h-full flex-col rounded-lg border border-forest-100 bg-white", className)}>
       {member.image && (
@@ -75,12 +96,12 @@ export function TutorCard({
 }
 
 /** A swipeable row of tutor cards on phones that becomes a 4-up grid on desktop. */
-export function TutorRow({ members }: { members: TeamMember[] }) {
+export function TutorRow({ members, compact = false }: { members: TeamMember[]; compact?: boolean }) {
   return (
     <div className="-mx-5 flex snap-x snap-mandatory scroll-pl-5 gap-4 overflow-x-auto px-5 pb-4 sm:-mx-8 sm:scroll-pl-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0">
       {members.map((member) => (
         <div key={member.name} className="w-[72%] shrink-0 snap-start sm:w-[45%] lg:w-auto">
-          <TutorCard member={member} />
+          <TutorCard member={member} compact={compact} />
         </div>
       ))}
     </div>
