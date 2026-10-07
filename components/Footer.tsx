@@ -29,7 +29,7 @@ export function Footer() {
                 href={site.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-forest-800 text-cream transition-colors hover:bg-forest-700"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-forest-800 text-cream transition-colors hover:bg-forest-700"
                 aria-label="Kairos on Instagram"
               >
                 <Instagram className="h-5 w-5" />
@@ -38,7 +38,7 @@ export function Footer() {
                 href={site.social.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-forest-800 text-cream transition-colors hover:bg-forest-700"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-forest-800 text-cream transition-colors hover:bg-forest-700"
                 aria-label="Kairos on Facebook"
               >
                 <Facebook className="h-5 w-5" />
@@ -49,10 +49,10 @@ export function Footer() {
           {/* Explore */}
           <div>
             <h3 className="font-semibold text-cream">Explore</h3>
-            <ul className="mt-3 space-y-0.5 text-sm">
+            <ul className="mt-3 text-sm">
               {footerNav.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="inline-block py-1.5 transition-colors hover:text-cream">
+                  <Link href={item.href} className="inline-flex min-h-11 items-center transition-colors hover:text-cream">
                     {item.label}
                   </Link>
                 </li>
@@ -63,42 +63,42 @@ export function Footer() {
           {/* Services */}
           <div>
             <h3 className="font-semibold text-cream">Programs</h3>
-            <ul className="mt-3 space-y-0.5 text-sm">
+            <ul className="mt-3 text-sm">
               <li>
-                <Link href="/apex" className="inline-block py-1.5 transition-colors hover:text-cream">
+                <Link href="/apex" className="inline-flex min-h-11 items-center transition-colors hover:text-cream">
                   APEX Full-Time Program
                 </Link>
               </li>
               <li>
-                <Link href="/early-learners" className="inline-block py-1.5 transition-colors hover:text-cream">
+                <Link href="/early-learners" className="inline-flex min-h-11 items-center transition-colors hover:text-cream">
                   Early Learners
                 </Link>
               </li>
               <li>
-                <Link href="/services/private-tutoring" className="inline-block py-1.5 transition-colors hover:text-cream">
+                <Link href="/services/private-tutoring" className="inline-flex min-h-11 items-center transition-colors hover:text-cream">
                   Private Tutoring
                 </Link>
               </li>
               <li>
                 <Link
                   href="/services/homeschool-support"
-                  className="inline-block py-1.5 transition-colors hover:text-cream"
+                  className="inline-flex min-h-11 items-center transition-colors hover:text-cream"
                 >
                   Homeschool Support
                 </Link>
               </li>
               <li>
-                <Link href="/district-partnerships" className="inline-block py-1.5 transition-colors hover:text-cream">
+                <Link href="/district-partnerships" className="inline-flex min-h-11 items-center transition-colors hover:text-cream">
                   District Partnerships
                 </Link>
               </li>
               <li>
-                <Link href="/fall-classes" className="inline-block py-1.5 transition-colors hover:text-cream">
+                <Link href="/fall-classes" className="inline-flex min-h-11 items-center transition-colors hover:text-cream">
                   Enrichment Classes
                 </Link>
               </li>
               <li>
-                <Link href="/summer" className="inline-block py-1.5 transition-colors hover:text-cream">
+                <Link href="/summer" className="inline-flex min-h-11 items-center transition-colors hover:text-cream">
                   Summer
                 </Link>
               </li>
@@ -114,9 +114,9 @@ export function Footer() {
                   href={site.address.mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-3 transition-colors hover:text-cream"
+                  className="flex min-h-11 items-center gap-3 transition-colors hover:text-cream"
                 >
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-forest-300" />
+                  <MapPin className=" h-4 w-4 shrink-0 text-forest-300" />
                   <span>
                     {site.address.street}
                     <br />
@@ -127,7 +127,7 @@ export function Footer() {
               <li>
                 <a
                   href={site.phoneHref}
-                  className="flex items-center gap-3 transition-colors hover:text-cream"
+                  className="flex min-h-11 items-center gap-3 transition-colors hover:text-cream"
                 >
                   <Phone className="h-4 w-4 shrink-0 text-forest-300" />
                   {site.phone}
@@ -136,9 +136,9 @@ export function Footer() {
               <li>
                 <a
                   href={site.emailHref}
-                  className="flex items-start gap-3 transition-colors hover:text-cream"
+                  className="flex min-h-11 items-center gap-3 transition-colors hover:text-cream"
                 >
-                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-forest-300" />
+                  <Mail className=" h-4 w-4 shrink-0 text-forest-300" />
                   <span>
                     {site.email.split("@")[0]}
                     <wbr />@{site.email.split("@")[1]}

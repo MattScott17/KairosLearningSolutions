@@ -143,7 +143,7 @@ export function ConceptCHome() {
                 <Phone className="h-4 w-4" />
                 Call {site.phone}
               </a>
-              <a href="#programs" className="link-underline inline-flex items-center gap-1.5">
+              <a href="#programs" className="link-underline inline-flex min-h-11 items-center gap-1.5">
                 Find your program
                 <ArrowRight className="h-4 w-4" />
               </a>
@@ -212,7 +212,7 @@ export function ConceptCHome() {
 
       <GetStarted />
 
-      <PhotosFromKairos />
+      <PhotosFromKairos exclude={[heroPhotos.main]} />
 
       <HowWeTeach />
 
@@ -228,14 +228,14 @@ export function ConceptCHome() {
           </Link>
         </div>
         <div className="mt-10">
-          <TutorRow members={getTeamMembers(featuredTutors.home)} />
+          <TutorRow compact members={getTeamMembers(featuredTutors.home)} />
         </div>
       </Section>
 
       <div className="container-page py-10 text-center sm:py-12">
         <p className="text-ink/80">
           Run a school or district?{" "}
-          <Link href="/district-partnerships" className="link-underline">
+          <Link href="/district-partnerships" className="link-underline inline-flex min-h-11 items-center">
             See how we partner with schools
           </Link>
         </p>
