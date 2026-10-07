@@ -3,11 +3,12 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { isExternalHref, type BannerSettings } from "@/lib/banner-schema";
 
-export type BannerVariant = "dark" | "light";
+export type BannerVariant = "dark" | "light" | "slim";
 
 /**
  * The announcement card itself; the whole card is the link. Pure, so the /landingpages editor
- * can preview it. `light` is a smaller white card for sitting on top of a photo hero.
+ * can preview it. `light` is a smaller white card for sitting on top of a photo hero; `slim` is a
+ * one-line pale green strip for pages where the headline should come first.
  */
 export function BannerCard({
   banner,
@@ -19,6 +20,8 @@ export function BannerCard({
   className?: string;
 }) {
   const light = variant === "light";
+  const slim = variant === "slim";
+  const compact = light || slim;
   const external = isExternalHref(banner.href);
   return (
     <div className={cn("container-page", className)}>
@@ -29,13 +32,15 @@ export function BannerCard({
           "group flex rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-500 focus-visible:ring-offset-2",
           light
             ? "items-center justify-between gap-4 bg-cream/95 px-4 py-3 text-forest-900 backdrop-blur hover:bg-cream sm:px-5"
+            : slim
+            ? "items-center justify-between gap-4 border border-forest-200 bg-forest-50 px-4 py-3 text-forest-900 hover:bg-forest-100 sm:px-5"
             : "flex-col gap-4 bg-forest-900 px-6 py-6 text-cream hover:bg-forest-800 sm:flex-row sm:items-center sm:justify-between sm:px-8"
         )}
       >
         <p
           className={cn(
             "font-display font-semibold leading-tight",
-            light ? "text-base sm:text-xl" : "text-2xl sm:text-3xl"
+            compact ? "text-base sm:text-xl" : "text-2xl sm:text-3xl"
           )}
         >
           {banner.headline}
@@ -43,13 +48,13 @@ export function BannerCard({
         <span
           className={cn(
             "shrink-0",
-            light
+            compact
               ? "inline-flex items-center gap-1.5 text-sm font-semibold text-forest-700"
               : "btn-accent self-start py-2.5 sm:self-auto"
           )}
         >
           {/* On phones the light card is just the headline and an arrow. */}
-          <span className={cn(light && "hidden sm:inline")}>{banner.buttonText}</span>
+          <span className={cn(compact && "hidden sm:inline")}>{banner.buttonText}</span>
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
         </span>
       </Link>
