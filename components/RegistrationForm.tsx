@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { AlertCircle, CheckCircle2, Loader2, Plus, X } from "lucide-react";
 import {
@@ -41,6 +41,31 @@ const fieldNames: Record<string, string> = {
 
 type ChildState = { grade: string; picked: string[]; open: boolean; otherOpen: boolean };
 
+// A draft lives in sessionStorage only: it clears when the tab closes, which matters because the
+// form can hold a child's name and health notes. Reading it is explicit, never silent.
+const DRAFT_KEY = "kairos-registration-draft";
+type Draft = { fields: Record<string, string>; kids: { grade: string; picked: string[] }[] };
+let draftAtLoad: Draft | null | undefined;
+function readDraftOnce(): Draft | null {
+  if (draftAtLoad === undefined) {
+    try {
+      const raw = sessionStorage.getItem(DRAFT_KEY);
+      draftAtLoad = raw ? (JSON.parse(raw) as Draft) : null;
+    } catch {
+      draftAtLoad = null;
+    }
+  }
+  return draftAtLoad ?? null;
+}
+const noSubscribe = () => () => {};
+function clearDraft() {
+  try {
+    sessionStorage.removeItem(DRAFT_KEY);
+  } catch {
+    /* storage can be blocked; the form still works without it */
+  }
+}
+
 export function RegistrationForm({
   initialClass,
   fees,
@@ -63,6 +88,101 @@ export function RegistrationForm({
   const serverErrorRef = useRef<HTMLDivElement>(null);
   const successRef = useRef<HTMLDivElement>(null);
   const addButtonRef = useRef<HTMLButtonElement>(null);
+  const keysRef = useRef(childKeys);
+  const childRef = useRef(child);
+  const pendingFields = useRef<Record<string, string> | null>(null);
+  const prefill = useRef<{ lastName: string; school: string } | null>(null);
+  const [prefilled, setPrefilled] = useState<number[]>([]);
+  const [restoreTick, setRestoreTick] = useState(0);
+  const [bannerDismissed, setBannerDismissed] = useState(false);
+  const savedDraft = useSyncExternalStore(noSubscribe, readDraftOnce, () => null);
+
+  function saveDraft() {
+    const form = formRef.current;
+    if (!form) return;
+    const fields: Record<string, string> = {};
+    let any = false;
+    new FormData(form).forEach((v, k) => {
+      if (k === "company" || k.endsWith(".classes")) return;
+      const text = String(v);
+      fields[k] = text;
+      if (text.trim()) any = true;
+    });
+    const kids = keysRef.current.map((k) => ({
+      grade: childRef.current[k]?.grade ?? "",
+      picked: childRef.current[k]?.picked ?? [],
+    }));
+    if (kids.some((k) => k.grade || k.picked.length)) any = true;
+    // Never clear here: an untouched form must not wipe a draft the visitor has not restored yet.
+    if (!any) return;
+    try {
+      sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ fields, kids } satisfies Draft));
+    } catch {
+      /* storage can be blocked; the form still works without it */
+    }
+  }
+
+  function restoreDraft(draft: Draft) {
+    const count = Math.min(Math.max(draft.kids.length, 1), MAX_CHILDREN);
+    const keys = Array.from({ length: count }, (_, i) => i);
+    const known = new Set(registrationOptions.map((o) => o.id));
+    nextKey.current = count;
+    setChildKeys(keys);
+    setChild(
+      Object.fromEntries(
+        keys.map((k) => {
+          const kid = draft.kids[k];
+          const picked = (kid?.picked ?? []).filter((id) => known.has(id));
+          return [k, { grade: kid?.grade ?? "", picked, open: picked.length === 0 || k === count - 1, otherOpen: false }];
+        })
+      )
+    );
+    pendingFields.current = draft.fields;
+    setErrors({});
+    setPrefilled([]);
+    setBannerDismissed(true);
+    setRestoreTick((t) => t + 1);
+  }
+
+  // Keep the draft fresh when the picked classes, grades or number of students change.
+  useEffect(() => {
+    keysRef.current = childKeys;
+    childRef.current = child;
+    saveDraft();
+  }, [childKeys, child]);
+
+  // Forget the cached draft on the way out so coming back later reads storage again.
+  useEffect(
+    () => () => {
+      draftAtLoad = undefined;
+    },
+    []
+  );
+
+  // Fill the typed answers back in once the restored students have rendered.
+  useEffect(() => {
+    const fields = pendingFields.current;
+    const form = formRef.current;
+    if (!fields || !form) return;
+    pendingFields.current = null;
+    for (const [name, value] of Object.entries(fields)) {
+      const el = form.elements.namedItem(name);
+      if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) el.value = value;
+    }
+  }, [restoreTick]);
+
+  // A new student starts with the last name and school already typed for the first one.
+  useEffect(() => {
+    const copy = prefill.current;
+    const form = formRef.current;
+    if (!copy || !form) return;
+    prefill.current = null;
+    const last = form.elements.namedItem(`children.${childKeys.length - 1}.lastName`);
+    const school = form.elements.namedItem(`children.${childKeys.length - 1}.school`);
+    if (last instanceof HTMLInputElement && copy.lastName && !last.value) last.value = copy.lastName;
+    if (school instanceof HTMLInputElement && copy.school && !school.value) school.value = copy.school;
+    saveDraft();
+  }, [childKeys]);
   const [removedTick, setRemovedTick] = useState(0);
 
   // Move focus to whatever just explained what happened, so keyboard and screen reader users land on it.
@@ -84,6 +204,16 @@ export function RegistrationForm({
 
   function addChild() {
     const key = nextKey.current++;
+    const form = formRef.current;
+    const read = (name: string) => {
+      const el = form?.elements.namedItem(name);
+      return el instanceof HTMLInputElement ? el.value.trim() : "";
+    };
+    const copy = { lastName: read("children.0.lastName"), school: read("children.0.school") };
+    if (copy.lastName || copy.school) {
+      prefill.current = copy;
+      setPrefilled((p) => [...p, key]);
+    }
     setChild((c) => {
       const next = { ...c, [key]: { grade: "", picked: [], open: true, otherOpen: false } };
       // Fold away students who already have a class picked so the form stays short.
@@ -186,6 +316,7 @@ export function RegistrationForm({
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.ok) {
+        clearDraft();
         setSubmitted(parsed.data);
         setStatus("success");
         return;
@@ -370,6 +501,7 @@ export function RegistrationForm({
       ref={formRef}
       onSubmit={handleSubmit}
       onChange={(e) => {
+        saveDraft();
         // A message goes away as soon as that answer changes.
         const name = (e.target as unknown as HTMLInputElement).name;
         if (name && errors[name]) {
@@ -424,6 +556,30 @@ export function RegistrationForm({
                 </ul>
               </div>
             ))}
+          </div>
+        </div>
+      )}
+
+      {savedDraft && !bannerDismissed && (
+        <div role="region" aria-label="Saved answers" className="rounded-lg border border-forest-300 bg-forest-50 p-5">
+          <h2 className="text-lg font-semibold text-forest-900">We saved your answers from earlier</h2>
+          <p className="mt-1 text-base text-ink/80">
+            They are kept only in this browser tab, and are cleared when you close it or send the form.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-3">
+            <button type="button" onClick={() => restoreDraft(savedDraft)} className="btn-primary">
+              Put them back
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                clearDraft();
+                setBannerDismissed(true);
+              }}
+              className="btn-outline"
+            >
+              Start fresh
+            </button>
           </div>
         </div>
       )}
@@ -491,6 +647,12 @@ export function RegistrationForm({
               )}
             </div>
 
+            {prefilled.includes(key) && (
+              <p className="mt-3 text-sm text-ink/70">
+                We copied the last name and school from Student 1 to save you typing. Change them if they are
+                different.
+              </p>
+            )}
             <div className="mt-6 grid gap-5 sm:grid-cols-2">
               {textField(`${p}.firstName`, "First name", { required: true })}
               {textField(`${p}.lastName`, "Last name", { required: true })}
