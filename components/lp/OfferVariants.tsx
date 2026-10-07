@@ -111,9 +111,6 @@ export function OfferVariant({ offer }: { offer: ProgramOffer }) {
           <div className="mt-8">
             <ForNotFor offer={offer} />
           </div>
-          <div className="mt-6">
-            <RiskReversal offer={offer} />
-          </div>
         </div>
       </section>
 

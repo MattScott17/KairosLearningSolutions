@@ -57,24 +57,12 @@ export const tutoringOffer: ProgramOffer = {
       body: "We start by learning exactly where your student is stuck, before anyone books a session.",
     },
     {
-      title: "A tutor matched to your student",
-      body: "Matched on subject, learning style, and personality, not just whoever's free.",
+      title: "A tutor matched to your student, one-on-one",
+      body: "Matched on subject, learning style, and personality, then true one-on-one sessions at your student's pace.",
     },
     {
-      title: "True one-on-one sessions",
-      body: "Your student's pace, your student's questions. No group to keep up with.",
-    },
-    {
-      title: "In person or online",
-      body: `At our Salinas center on South Main Street, or online, whatever fits your family.`,
-    },
-    {
-      title: "Every subject, every level",
-      body: "Early literacy, math, writing, world languages, test prep, and AP coursework.",
-    },
-    {
-      title: "Progress you can actually see",
-      body: "Flexible scheduling, with progress you can see, not just hours logged.",
+      title: "In person or online, every subject",
+      body: "At our Salinas center on South Main Street, or online. Early literacy, math, writing, world languages, test prep, and AP coursework.",
     },
     {
       title: "A team led by a 30-year teacher",
@@ -124,14 +112,6 @@ export const tutoringOffer: ProgramOffer = {
       a: "It depends on the subject and schedule your student needs. We'll walk you through options on your free consultation call, with no commitment.",
     },
     {
-      q: "Is it in person or online?",
-      a: `Both. Come to our center at ${site.address.full}, or meet online.`,
-    },
-    {
-      q: "What ages and subjects do you cover?",
-      a: "All ages, from early reading to AP science. Math, writing, world languages, test prep, and more.",
-    },
-    {
       q: "How do you pick the tutor?",
       a: "We match each student with a tutor based on subject, learning style, and personality.",
     },
@@ -145,7 +125,7 @@ export const tutoringOffer: ProgramOffer = {
     "Tutor matched to how your student learns",
     "In person in Salinas or online",
   ],
-  testimonialIds: ["jamie-s", "maria-r", "melissa-c"],
+  testimonialIds: ["jamie-s", "kristine-a", "angelina-d"],
   photo: { src: "/images/photo-2.jpg", alt: "A Kairos tutor working with a student" },
   heroes: {
     a: {
@@ -175,7 +155,7 @@ export const apexOffer: ProgramOffer = {
   stack: [
     {
       title: "Focused, mastery-based academics",
-      body: "Core subjects mastered in efficient, high-focus blocks using the 2 Hour Learning model, the same approach used at Alpha Schools.",
+      body: "Core subjects mastered in efficient, high-focus blocks using the 2 Hour Learning model.",
     },
     {
       title: "Your child's pace, not the class's",
@@ -186,20 +166,8 @@ export const apexOffer: ProgramOffer = {
       body: "A close community where every student is seen and supported day to day.",
     },
     {
-      title: "Real-world skills for the rest of the day",
-      body: "Life skills and hands-on, project-based learning once core academics are done.",
-    },
-    {
-      title: "Structure and accountability",
-      body: "Built-in structure that helps students become capable, self-directed learners.",
-    },
-    {
-      title: "Mentorship that builds confidence",
-      body: "Educators who develop confidence and independence, not just test scores.",
-    },
-    {
-      title: "A free consultation call & tour",
-      body: "Talk it through with our team and see the space before you decide anything.",
+      title: "Real-world skills and mentorship",
+      body: "Life skills and hands-on, project-based learning once core academics are done, with educators who build confidence and independence.",
     },
   ],
   priceLine: {
@@ -221,7 +189,6 @@ export const apexOffer: ProgramOffer = {
   notForYou: [
     "You want a traditional lecture-style classroom.",
     "You're looking for part-time help. Private tutoring or homeschool support fits better.",
-    "You want your child to move at the class's pace instead of their own.",
   ],
   obstacles: [
     {
@@ -247,20 +214,12 @@ export const apexOffer: ProgramOffer = {
       a: apex.model,
     },
     {
-      q: "What grades is APEX for?",
-      a: `${apex.gradeRange}.`,
-    },
-    {
       q: "How much does APEX cost?",
       a: "It depends on whether your student does the full program or just part of it. Call us or book a free tour and we'll go over it with you.",
     },
     {
       q: "What does the rest of the day look like?",
       a: "Once core academics are mastered, students spend the day on life skills, hands-on project-based learning, and mentorship.",
-    },
-    {
-      q: "Where is it?",
-      a: `At our Salinas center: ${site.address.full}.`,
     },
   ],
   quickBullets: [

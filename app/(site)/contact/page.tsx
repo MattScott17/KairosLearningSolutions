@@ -28,11 +28,6 @@ export default function ContactPage() {
             <span className="mt-2 block font-display text-3xl font-semibold text-cream sm:text-4xl">
               {site.phone}
             </span>
-            <span className="mt-6 block border-t border-cream/15 pt-4 text-sm text-cream/80">
-              {site.address.street}, {site.address.city}
-              <br />
-              {site.hours[0].day.replace(" – ", " to ")}, {site.hours[0].time.replace(" – ", " to ")}
-            </span>
           </a>
         }
         intro={`The quickest way to reach me is by phone at ${site.phone}. You can also email, use the form below, or stop by ${site.address.street} during open hours.`}
@@ -50,7 +45,7 @@ export default function ContactPage() {
                 className="flex items-center gap-4 rounded-lg border border-forest-100 bg-cream p-5 transition-colors hover:border-forest-300"
               >
                 <span>
-                  <span className="block text-sm text-ink/60">Phone</span>
+                  <span className="block text-sm text-ink/75">Phone</span>
                   <span className="text-lg font-semibold text-forest-800">{site.phone}</span>
                 </span>
               </a>
@@ -60,7 +55,7 @@ export default function ContactPage() {
                 className="flex items-center gap-4 rounded-lg border border-forest-100 bg-cream p-5 transition-colors hover:border-forest-300"
               >
                 <span className="min-w-0">
-                  <span className="block text-sm text-ink/60">Email</span>
+                  <span className="block text-sm text-ink/75">Email</span>
                   <span className="block truncate text-lg font-semibold text-forest-800">
                     {site.email}
                   </span>
@@ -74,7 +69,7 @@ export default function ContactPage() {
                 className="flex items-center gap-4 rounded-lg border border-forest-100 bg-cream p-5 transition-colors hover:border-forest-300"
               >
                 <span>
-                  <span className="block text-sm text-ink/60">Address</span>
+                  <span className="block text-sm text-ink/75">Address</span>
                   <span className="text-base font-semibold text-forest-800">
                     {site.address.street}, {site.address.city}, {site.address.state}{" "}
                     {site.address.zip}
@@ -127,7 +122,6 @@ export default function ContactPage() {
             />
           </div>
           <p className="mt-4 text-sm text-ink/70">
-            {site.address.street}, {site.address.city}, {site.address.state} {site.address.zip}.{" "}
             <a
               href={site.address.mapUrl}
               target="_blank"
