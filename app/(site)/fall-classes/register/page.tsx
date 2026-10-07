@@ -43,9 +43,9 @@ export default async function RegisterPage({ searchParams }: Props) {
         <div className="container-page grid gap-12 lg:grid-cols-[1fr_300px] lg:gap-16">
           <div>
             <p className="mb-8 rounded-lg bg-sand px-5 py-4 text-sm text-ink/80 lg:hidden">
-              Registration fees and charter school details are just below the form.
+              Registration fees are listed above the Submit button. Charter school details are below the form.
             </p>
-            <RegistrationForm initialClass={initialClass} />
+            <RegistrationForm initialClass={initialClass} fees={registrationFees} />
           </div>
 
           <aside>
@@ -55,18 +55,16 @@ export default async function RegisterPage({ searchParams }: Props) {
                 <div>
                   <dt className="font-semibold text-forest-900">Questions?</dt>
                   <dd className="mt-1 text-ink/80">
-                    Call{" "}
-                    <a href={site.phoneHref} className="link-underline inline-block py-2 -my-2">
-                      {site.phone}
-                    </a>{" "}
-                    or{" "}
-                    <a href={site.emailHref} className="link-underline inline-block py-2 -my-2">
-                      send us an email
+                    <a href={site.phoneHref} className="link-underline inline-flex min-h-11 items-center">
+                      Call {site.phone}
                     </a>
-                    .
+                    <br />
+                    <a href={site.emailHref} className="link-underline inline-flex min-h-11 items-center">
+                      Send us an email
+                    </a>
                   </dd>
                 </div>
-                <div>
+                <div className="hidden lg:block">
                   <dt className="font-semibold text-forest-900">Registration fees</dt>
                   <dd className="mt-1 space-y-1 text-ink/80">
                     {registrationFees.map((f) => (

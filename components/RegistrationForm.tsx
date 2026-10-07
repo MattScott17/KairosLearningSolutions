@@ -10,6 +10,9 @@ import {
   gradeOptions,
   optionLabel,
   registrationGroups,
+  registrationOptions,
+  type RegistrationGroup,
+  type RegistrationOption,
   registrationSchema,
   type RegistrationInput,
 } from "@/lib/registration";
@@ -36,13 +39,19 @@ const fieldNames: Record<string, string> = {
   health: "health notes",
 };
 
-type ChildState = { grade: string; picked: string[]; open: boolean };
+type ChildState = { grade: string; picked: string[]; open: boolean; otherOpen: boolean };
 
-export function RegistrationForm({ initialClass }: { initialClass?: string }) {
+export function RegistrationForm({
+  initialClass,
+  fees,
+}: {
+  initialClass?: string;
+  fees: { label: string; value: string }[];
+}) {
   const [childKeys, setChildKeys] = useState([0]);
   const nextKey = useRef(1);
   const [child, setChild] = useState<Record<number, ChildState>>({
-    0: { grade: "", picked: initialClass ? [initialClass] : [], open: true },
+    0: { grade: "", picked: initialClass ? [initialClass] : [], open: true, otherOpen: false },
   });
   const [status, setStatus] = useState<Status>("idle");
   const [serverError, setServerError] = useState("");
@@ -53,11 +62,17 @@ export function RegistrationForm({ initialClass }: { initialClass?: string }) {
   const summaryRef = useRef<HTMLDivElement>(null);
   const serverErrorRef = useRef<HTMLDivElement>(null);
   const successRef = useRef<HTMLDivElement>(null);
+  const addButtonRef = useRef<HTMLButtonElement>(null);
+  const [removedTick, setRemovedTick] = useState(0);
 
   // Move focus to whatever just explained what happened, so keyboard and screen reader users land on it.
   useEffect(() => {
     if (attempt > 0) summaryRef.current?.focus();
   }, [attempt]);
+  // After removing a student the Remove button is gone, so hand focus to the summary or the add button.
+  useEffect(() => {
+    if (removedTick > 0) (summaryRef.current ?? addButtonRef.current)?.focus();
+  }, [removedTick]);
   useEffect(() => {
     if (status === "success") successRef.current?.focus();
     if (status === "error" && serverError) serverErrorRef.current?.focus();
@@ -70,7 +85,7 @@ export function RegistrationForm({ initialClass }: { initialClass?: string }) {
   function addChild() {
     const key = nextKey.current++;
     setChild((c) => {
-      const next = { ...c, [key]: { grade: "", picked: [], open: true } };
+      const next = { ...c, [key]: { grade: "", picked: [], open: true, otherOpen: false } };
       // Fold away students who already have a class picked so the form stays short.
       for (const k of childKeys) if (c[k].picked.length > 0) next[k] = { ...c[k], open: false };
       return next;
@@ -81,6 +96,7 @@ export function RegistrationForm({ initialClass }: { initialClass?: string }) {
   function removeChild(key: number) {
     const index = childKeys.indexOf(key);
     setChildKeys((keys) => keys.filter((k) => k !== key));
+    setRemovedTick((t) => t + 1);
     // Keep the other students' messages, shifted to their new positions.
     setErrors((prev) => {
       const next: Record<string, string> = {};
@@ -102,12 +118,20 @@ export function RegistrationForm({ initialClass }: { initialClass?: string }) {
     return childKeys.length > 1 ? `Student ${i + 1}` : "Your student";
   }
 
-  function errorLabel(name: string) {
+  function errorLabel(name: string, short = false) {
     const parent = name.match(/^parent\.(.+)$/);
     if (parent) return `Your ${fieldNames[parent[1]] ?? parent[1]}`;
     const kid = name.match(/^children\.(\d+)\.(.+)$/);
-    if (kid) return `${studentName(Number(kid[1]))}: ${fieldNames[kid[2]] ?? kid[2]}`;
+    if (kid) {
+      const field = fieldNames[kid[2]] ?? kid[2];
+      return short ? `Their ${field}` : `${studentName(Number(kid[1]))}: ${field}`;
+    }
     return name;
+  }
+
+  function sectionTitle(name: string) {
+    const kid = name.match(/^children\.(\d+)\./);
+    return kid ? studentName(Number(kid[1])) : "Parent or guardian";
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -214,6 +238,10 @@ export function RegistrationForm({ initialClass }: { initialClass?: string }) {
   }
 
   const errorEntries = Object.entries(errors);
+  const summarySections = Array.from(new Set(errorEntries.map(([name]) => sectionTitle(name)))).map((title) => ({
+    title,
+    items: errorEntries.filter(([name]) => sectionTitle(name) === title),
+  }));
   const errId = (name: string) => `${name}-error`;
   const hintId = (name: string) => `${name}-hint`;
   const describedBy = (name: string, hasHint = false) =>
@@ -244,7 +272,7 @@ export function RegistrationForm({ initialClass }: { initialClass?: string }) {
   const textField = (
     name: string,
     label: string,
-    opts: { type?: string; required?: boolean; autoComplete?: string; hint?: string; inputMode?: "numeric" } = {}
+    opts: { type?: string; required?: boolean; autoComplete?: string; hint?: string; inputMode?: "numeric" | "tel" } = {}
   ) => (
     <div data-field={name}>
       <label htmlFor={name} className="mb-1.5 block text-sm font-medium text-ink/80">
@@ -287,6 +315,56 @@ export function RegistrationForm({ initialClass }: { initialClass?: string }) {
     </div>
   );
 
+  const renderGroups = (groups: RegistrationGroup[], key: number, p: string, state: ChildState) =>
+    groups.map((group) => (
+      <div key={group.title}>
+        <p className="text-sm font-semibold text-forest-800">{group.title}</p>
+        <p className="mt-0.5 text-sm text-ink/70">
+          {group.blurb}
+          {group.links?.map((l) => (
+            <span key={l.href}>
+              {" "}
+              <a
+                href={l.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-underline inline-block py-2 -my-2"
+              >
+                {l.label}
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+              .
+            </span>
+          ))}
+        </p>
+        <div className="mt-2 grid gap-2 sm:grid-cols-2">
+          {group.options.map((o) => (
+            <label
+              key={o.id}
+              className="flex min-h-11 cursor-pointer items-start gap-3 rounded-lg border border-forest-300 p-3 transition-colors hover:border-forest-600 has-[:checked]:border-forest-700 has-[:checked]:bg-forest-50"
+            >
+              <input
+                type="checkbox"
+                name={`${p}.classes`}
+                value={o.id}
+                checked={state.picked.includes(o.id)}
+                onChange={(e) =>
+                  patchChild(key, {
+                    picked: e.target.checked ? [...state.picked, o.id] : state.picked.filter((id) => id !== o.id),
+                  })
+                }
+                className="mt-0.5 h-5 w-5 shrink-0 accent-forest-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700"
+              />
+              <span>
+                <span className="block text-sm font-medium text-ink">{o.label}</span>
+                <span className="block text-sm text-ink/70">{o.detail}</span>
+              </span>
+            </label>
+          ))}
+        </div>
+      </div>
+    ));
+
   return (
     <form
       ref={formRef}
@@ -317,24 +395,36 @@ export function RegistrationForm({ initialClass }: { initialClass?: string }) {
             <AlertCircle className="h-5 w-5 shrink-0" aria-hidden="true" />
             {errorEntries.length === 1 ? "1 answer needs fixing" : `${errorEntries.length} answers need fixing`}
           </h2>
-          <ul className="mt-3 space-y-0.5 text-base">
-            {errorEntries.map(([name]) => (
-              <li key={name}>
-                <a
-                  href={`#${name}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const target = document.getElementById(name) ?? formRef.current?.querySelector<HTMLElement>(`[data-field="${name}"]`);
-                    target?.scrollIntoView({ block: "center" });
-                    (target?.matches("input, select, textarea") ? target : target?.querySelector<HTMLElement>("input"))?.focus();
-                  }}
-                  className="inline-flex min-h-11 items-center text-red-800 underline underline-offset-4"
-                >
-                  {errorLabel(name)}
-                </a>
-              </li>
+          <div className="mt-3 space-y-3">
+            {summarySections.map((section) => (
+              <div key={section.title}>
+                <p className="text-sm font-semibold text-red-900">{section.title}</p>
+                <ul className="mt-0.5 text-base">
+                  {section.items.map(([name]) => (
+                    <li key={name}>
+                      <a
+                        href={`#${name}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          const target =
+                            document.getElementById(name) ??
+                            formRef.current?.querySelector<HTMLElement>(`[data-field="${name}"]`);
+                          target?.scrollIntoView({ block: "center" });
+                          const focusable = target?.matches("input, select, textarea, [tabindex]")
+                            ? target
+                            : target?.querySelector<HTMLElement>("input, select, textarea");
+                          focusable?.focus();
+                        }}
+                        className="inline-flex min-h-11 items-center text-red-800 underline underline-offset-4"
+                      >
+                        {errorLabel(name, true)}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       )}
 
@@ -360,7 +450,13 @@ export function RegistrationForm({ initialClass }: { initialClass?: string }) {
           {textField("parent.firstName", "First name", { required: true, autoComplete: "given-name" })}
           {textField("parent.lastName", "Last name", { required: true, autoComplete: "family-name" })}
           {textField("parent.email", "Email", { required: true, type: "email", autoComplete: "email" })}
-          {textField("parent.phone", "Cell phone", { required: true, type: "tel", autoComplete: "tel" })}
+          {textField("parent.phone", "Cell phone", {
+            required: true,
+            type: "tel",
+            autoComplete: "tel",
+            inputMode: "tel",
+            hint: "10 digits, like 831-555-0123.",
+          })}
         </div>
       </fieldset>
 
@@ -369,6 +465,15 @@ export function RegistrationForm({ initialClass }: { initialClass?: string }) {
         const state = child[key];
         const gradeNo = gradeNumber(state.grade);
         const pickedLabels = state.picked.map(optionLabel);
+        const fits = (o: RegistrationOption) =>
+          gradeNo === null || !o.grades || (gradeNo >= o.grades[0] && gradeNo <= o.grades[1]);
+        const split = (keep: boolean) =>
+          registrationGroups
+            .map((g) => ({ ...g, options: g.options.filter((o) => fits(o) === keep) }))
+            .filter((g) => g.options.length > 0);
+        const fitting = split(true);
+        const other = gradeNo === null ? [] : split(false);
+        const otherPicked = other.reduce((n, g) => n + g.options.filter((o) => state.picked.includes(o.id)).length, 0);
         return (
           <fieldset key={key} className="border-t-2 border-forest-800 pt-6">
             <legend className="sr-only">{studentName(i)}</legend>
@@ -389,7 +494,7 @@ export function RegistrationForm({ initialClass }: { initialClass?: string }) {
             <div className="mt-6 grid gap-5 sm:grid-cols-2">
               {textField(`${p}.firstName`, "First name", { required: true })}
               {textField(`${p}.lastName`, "Last name", { required: true })}
-              {textField(`${p}.age`, "Age", { required: true, inputMode: "numeric" })}
+              {textField(`${p}.age`, "Age", { required: true, inputMode: "numeric", hint: "A number, like 8." })}
               <div data-field={`${p}.grade`}>
                 <label htmlFor={`${p}.grade`} className="mb-1.5 block text-sm font-medium text-ink/80">
                   Grade this fall {tag(true)}
@@ -398,7 +503,14 @@ export function RegistrationForm({ initialClass }: { initialClass?: string }) {
                   id={`${p}.grade`}
                   name={`${p}.grade`}
                   value={state.grade}
-                  onChange={(e) => patchChild(key, { grade: e.target.value })}
+                  onChange={(e) => {
+                    const n = gradeNumber(e.target.value);
+                    const outside = state.picked.some((id) => {
+                      const g = registrationOptions.find((o) => o.id === id)?.grades;
+                      return n !== null && g !== undefined && (n < g[0] || n > g[1]);
+                    });
+                    patchChild(key, { grade: e.target.value, otherOpen: state.otherOpen || outside });
+                  }}
                   required
                   aria-invalid={errors[`${p}.grade`] ? true : undefined}
                   aria-describedby={describedBy(`${p}.grade`)}
@@ -421,7 +533,7 @@ export function RegistrationForm({ initialClass }: { initialClass?: string }) {
                   hint: "If you homeschool, write home, OGCS, YV or Kairos.",
                 })}
               </div>
-              {textField(`${p}.phone`, "Student's cell phone", { type: "tel" })}
+              {textField(`${p}.phone`, "Student's cell phone", { type: "tel", inputMode: "tel" })}
               {textField(`${p}.email`, "Student's email", { type: "email" })}
             </div>
 
@@ -453,51 +565,31 @@ export function RegistrationForm({ initialClass }: { initialClass?: string }) {
                 <div id={`${p}.classes`} tabIndex={-1} className="outline-none">
                   {err(`${p}.classes`)}
                 </div>
-                <div className="mt-2 space-y-6">
-                  {registrationGroups.map((group) => (
-                    <div key={group.title}>
-                      <p className="text-sm font-semibold text-forest-800">{group.title}</p>
-                      <div className="mt-2 grid gap-2 sm:grid-cols-2">
-                        {group.options.map((o) => {
-                          const mismatch =
-                            gradeNo !== null && o.grades !== undefined && (gradeNo < o.grades[0] || gradeNo > o.grades[1]);
-                          return (
-                            <label
-                              key={o.id}
-                              className={`flex min-h-11 cursor-pointer items-start gap-3 rounded-lg border p-3 transition-colors hover:border-forest-600 has-[:checked]:border-forest-700 has-[:checked]:bg-forest-50 ${
-                                mismatch ? "border-forest-200 bg-sand" : "border-forest-300"
-                              }`}
-                            >
-                              <input
-                                type="checkbox"
-                                name={`${p}.classes`}
-                                value={o.id}
-                                checked={state.picked.includes(o.id)}
-                                onChange={(e) =>
-                                  patchChild(key, {
-                                    picked: e.target.checked
-                                      ? [...state.picked, o.id]
-                                      : state.picked.filter((id) => id !== o.id),
-                                  })
-                                }
-                                className="mt-0.5 h-5 w-5 shrink-0 accent-forest-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700"
-                              />
-                              <span>
-                                <span className="block text-sm font-medium text-ink">{o.label}</span>
-                                <span className="block text-sm text-ink/70">{o.detail}</span>
-                                {mismatch && (
-                                  <span className="mt-1 block text-sm font-medium text-forest-800">
-                                    Meant for different grades than {state.grade}
-                                  </span>
-                                )}
-                              </span>
-                            </label>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                {gradeNo === null && (
+                  <p className="mt-2 text-sm text-ink/70">
+                    Choose a grade above and the classes that fit come first.
+                  </p>
+                )}
+                {gradeNo !== null && (
+                  <p className="mt-2 text-sm font-medium text-forest-900">Classes and programs for {state.grade}</p>
+                )}
+                <div className="mt-2 space-y-6">{renderGroups(fitting, key, p, state)}</div>
+                {other.length > 0 && (
+                  <details
+                    open={state.otherOpen}
+                    onToggle={(e) => {
+                      const open = (e.currentTarget as HTMLDetailsElement).open;
+                      if (open !== state.otherOpen) patchChild(key, { otherOpen: open });
+                    }}
+                    className="mt-6 rounded-lg border border-forest-300"
+                  >
+                    <summary className="flex min-h-11 cursor-pointer items-center rounded-lg px-4 text-base font-semibold text-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-600">
+                      Other classes, meant for different grades
+                      {otherPicked > 0 ? ` (${otherPicked} chosen)` : ""}
+                    </summary>
+                    <div className="space-y-6 px-4 pb-4 pt-2">{renderGroups(other, key, p, state)}</div>
+                  </details>
+                )}
               </div>
             </details>
 
@@ -520,7 +612,7 @@ export function RegistrationForm({ initialClass }: { initialClass?: string }) {
       })}
 
       {childKeys.length < MAX_CHILDREN && (
-        <button type="button" onClick={addChild} className="btn-outline w-full sm:w-auto">
+        <button ref={addButtonRef} type="button" onClick={addChild} className="btn-outline w-full sm:w-auto">
           <Plus className="h-4 w-4" aria-hidden="true" />
           Add another child (up to {MAX_CHILDREN})
         </button>
@@ -532,12 +624,22 @@ export function RegistrationForm({ initialClass }: { initialClass?: string }) {
           <p className="mt-2">
             Sending this form does not charge you or hold a spot yet. We&apos;ll be in touch to confirm your spot and
             the registration fee
-            {confirmationTimeframe ? `, usually within ${confirmationTimeframe}` : ""}. Prefer to talk it through?
-            Call{" "}
-            <a href={site.phoneHref} className="link-underline inline-block py-2 -my-2">
-              {site.phone}
+            {confirmationTimeframe ? `, usually within ${confirmationTimeframe}` : ""}.
+          </p>
+          <p className="mt-4 text-sm font-semibold text-forest-900">Registration fees</p>
+          <ul className="mt-1 space-y-1 text-sm">
+            {fees.map((f) => (
+              <li key={f.label} className="flex justify-between gap-4">
+                <span>{f.label}</span>
+                <span className="shrink-0 font-semibold text-forest-800">{f.value}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4">
+            Prefer to talk it through?{" "}
+            <a href={site.phoneHref} className="link-underline inline-flex min-h-11 items-center">
+              Call {site.phone}
             </a>
-            .
           </p>
         </div>
         {status === "error" && serverError && (

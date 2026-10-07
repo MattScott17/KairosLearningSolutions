@@ -45,9 +45,25 @@ export function gradeNumber(grade: string): number | null {
  */
 export const confirmationTimeframe = "";
 
-export const registrationGroups: { title: string; options: RegistrationOption[] }[] = [
+export type RegistrationGroup = {
+  title: string;
+  /** One plain line that says what the group is, shown above its options. */
+  blurb: string;
+  /** Pages that explain the group. They open in a new tab so a half-finished form is never lost. */
+  links?: { label: string; href: string }[];
+  options: RegistrationOption[];
+};
+
+export const registrationGroups: RegistrationGroup[] = [
   {
     title: "Programs",
+    blurb:
+      "APEX is our full-time school, Homeschool Support is a flexible membership you plan with us, and Tutoring is one-on-one.",
+    links: [
+      { label: "About APEX", href: "/apex" },
+      { label: "About Homeschool Support", href: "/services/homeschool-support" },
+      { label: "About Tutoring", href: "/services/private-tutoring" },
+    ],
     options: [
       {
         id: "apex",
@@ -79,6 +95,8 @@ export const registrationGroups: { title: string; options: RegistrationOption[] 
   },
   {
     title: "Early learners",
+    blurb: "Half-day programs for TK through 2nd grade.",
+    links: [{ label: "About Early Learners", href: "/early-learners" }],
     options: [
       {
         id: "tk-kinder",
@@ -105,6 +123,8 @@ export const registrationGroups: { title: string; options: RegistrationOption[] 
   },
   {
     title: "Fall classes",
+    blurb: "Weekly classes in writing, speaking, art and reading.",
+    links: [{ label: "About the fall classes", href: "/fall-classes" }],
     options: [
       {
         id: "k2-bundle",
@@ -206,7 +226,7 @@ export const childSchema = z.object({
     .string()
     .trim()
     .min(1, "Enter an age")
-    .regex(/^\d{1,2}$/, "Enter the age as a number, like 8")
+    .regex(/^\d+$/, "Enter the age as a number, like 8")
     .refine((v) => Number(v) >= 2 && Number(v) <= 25, "Enter an age between 2 and 25"),
   grade: z.enum(gradeOptions, { message: "Pick a grade" }),
   school: z.string().trim().min(1, "Enter a school, or home if you homeschool").max(120),
