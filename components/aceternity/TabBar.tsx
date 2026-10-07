@@ -1,7 +1,7 @@
 "use client";
 
-// Sliding-pill tab bar adapted from Aceternity UI "Tabs" (https://ui.aceternity.com/components/tabs),
-// free tier. Only the animated pill (shared layoutId) is kept; the stacked absolutely-positioned
+// Sliding tab bar adapted from Aceternity UI "Tabs" (https://ui.aceternity.com/components/tabs),
+// free tier. Only the animated highlight (shared layoutId) is kept; the stacked absolutely-positioned
 // panels were dropped because they overlap content on phones. Adds proper tablist semantics,
 // arrow-key navigation and a row that wraps so every tab is visible on small screens.
 
@@ -76,7 +76,7 @@ export function TabBar({
             onClick={() => onChange(tab.id)}
             onKeyDown={(e) => onKeyDown(e, i)}
             className={cn(
-              "relative min-h-11 rounded-full border px-4 py-2.5 sm:px-5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-500 focus-visible:ring-offset-2 focus-visible:ring-offset-cream",
+              "relative min-h-11 rounded-md border px-4 py-2.5 sm:px-5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-500 focus-visible:ring-offset-2 focus-visible:ring-offset-cream",
               selected
                 ? "border-transparent text-cream"
                 : "border-forest-200 bg-cream text-forest-800 hover:bg-forest-50"
@@ -86,7 +86,7 @@ export function TabBar({
               <motion.span
                 layoutId={pillId}
                 aria-hidden
-                className="absolute inset-0 rounded-full bg-forest-800"
+                className="absolute inset-0 rounded-md bg-forest-800"
                 transition={reduce ? { duration: 0 } : { type: "spring", bounce: 0.25, duration: 0.5 }}
               />
             )}

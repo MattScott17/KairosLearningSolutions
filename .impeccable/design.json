@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-07T00:00:00Z",
+  "title": "Design System: Kairos Learning Solutions",
+  "extensions": {
+    "colorMeta": {
+      "forest-700": { "role": "primary", "displayName": "Logo Wordmark Green", "canonical": "#4a700a", "tonalRamp": ["#1a2804", "#2c4306", "#3b5a08", "#4a700a", "#6a8c1f", "#88a838", "#b5cc7c", "#e9f0d9"] },
+      "forest-800": { "role": "primary", "displayName": "Deep Forest", "canonical": "#3b5a08", "tonalRamp": ["#1a2804", "#2c4306", "#3b5a08", "#4a700a", "#6a8c1f", "#88a838", "#b5cc7c", "#e9f0d9"] },
+      "gold-500": { "role": "secondary", "displayName": "Sunlit Gold", "canonical": "#e0a23c", "tonalRamp": ["#7a4d12", "#9a6420", "#c4842a", "#e0a23c", "#e6b64c", "#eec878", "#f4dca4", "#faf0d6"] },
+      "cream": { "role": "neutral", "displayName": "Page White", "canonical": "#ffffff", "tonalRamp": ["#ffffff"] },
+      "sand": { "role": "neutral", "displayName": "Quiet Sand", "canonical": "#f4f5f0", "tonalRamp": ["#f4f5f0"] },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#1f2319", "tonalRamp": ["#1f2319"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Page hero titles and headings, Source Serif 4." },
+      "body": { "displayName": "Body", "purpose": "Paragraphs and UI text, Public Sans." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "hero-rise", "value": "0.7s cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Hero text rising into place." },
+      { "name": "hero-draw", "value": "0.7s cubic-bezier(0.65, 0, 0.35, 1)", "purpose": "Gold underline drawing left to right." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main action. Deep Forest fill.",
+      "html": "<button class=\"ds-btn-primary\">Call Jackie</button>",
+      "css": ".ds-btn-primary { background: #3b5a08; color: #fff; padding: 12px 20px; border: 0; border-radius: 6px; font: 600 14px 'Public Sans', system-ui, sans-serif; cursor: pointer; transition: all .2s; } .ds-btn-primary:hover { background: #4a700a; } .ds-btn-primary:focus-visible { outline: 2px solid #88a838; outline-offset: 2px; } .ds-btn-primary:active { transform: translateY(1px); }"
+    },
+    {
+      "name": "Accent Button",
+      "kind": "button",
+      "refersTo": "button-accent",
+      "description": "The single most important action on a page.",
+      "html": "<button class=\"ds-btn-accent\">Register</button>",
+      "css": ".ds-btn-accent { background: #e0a23c; color: #1f2319; padding: 12px 20px; border: 0; border-radius: 6px; font: 600 14px 'Public Sans', system-ui, sans-serif; cursor: pointer; transition: all .2s; } .ds-btn-accent:hover { background: #e6b64c; } .ds-btn-accent:focus-visible { outline: 2px solid #88a838; outline-offset: 2px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary action.",
+      "html": "<button class=\"ds-btn-outline\">See programs</button>",
+      "css": ".ds-btn-outline { background: transparent; color: #3b5a08; padding: 10px 18px; border: 2px solid #3b5a08; border-radius: 6px; font: 600 14px 'Public Sans', system-ui, sans-serif; cursor: pointer; transition: all .2s; } .ds-btn-outline:hover { background: #3b5a08; color: #fff; } .ds-btn-outline:focus-visible { outline: 2px solid #88a838; outline-offset: 2px; }"
+    },
+    {
+      "name": "Arch Photo",
+      "kind": "custom",
+      "description": "Signature doorway crop for hero photos.",
+      "html": "<div class=\"ds-arch\"></div>",
+      "css": ".ds-arch { width: 160px; aspect-ratio: 4/5; background: #d3e1b0; border-radius: 50% 50% 1.75rem 1.75rem / 40% 40% 1.75rem 1.75rem; }"
+    },
+    {
+      "name": "Hero Title",
+      "kind": "custom",
+      "description": "Serif headline with the hand-drawn gold underline.",
+      "html": "<h1 class=\"ds-title\">Learning that <span class=\"ds-mark\">fits your family</span></h1>",
+      "css": ".ds-title { font: 600 32px/1.1 'Source Serif 4', Georgia, serif; color: #2c4306; margin: 0; } .ds-mark { position: relative; display: inline-block; } .ds-mark::after { content: ''; position: absolute; left: 0; bottom: -6px; width: 100%; height: 4px; background: #e0a23c; border-radius: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Open Doorway",
+    "overview": "The site is an invitation to step in. Its one recurring shape is the arch, a doorway and tree-canopy silhouette that frames photos in page headers. Around it sits a white page, greens sampled straight from the logo, and a serif voice that feels written by a person rather than generated.",
+    "keyCharacteristics": [
+      "White page, logo greens, a single warm gold accent",
+      "Serif headings (Source Serif 4), sans body (Public Sans)",
+      "Arch-framed photography as the signature shape",
+      "Flat surfaces: tonal bands, no drop shadows",
+      "Hand-drawn gold underline as the one decorative flourish",
+      "Reveal and hero-rise motion that never leaves content hidden"
+    ],
+    "rules": [
+      { "name": "The Logo-Green Rule", "body": "Every green comes from the forest scale sampled from the logo.", "section": "colors" },
+      { "name": "The One Warm Note Rule", "body": "Gold is the only warm color and marks one thing per view.", "section": "colors" },
+      { "name": "The Sentence-Case Rule", "body": "No uppercase labels or letter-spaced eyebrow text.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Surfaces are flat at rest; separate them with a band color or hairline border.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do take every green from the forest scale and keep gold for one emphasis per view.",
+      "Do frame the main page photo in the arch.",
+      "Do write in Jackie's plain first-person voice with real facts (prices, hours, credentials).",
+      "Do keep scroll reveal content visible without JS and under reduced motion.",
+      "Do keep a visible 2px green focus ring on every interactive element."
+    ],
+    "donts": [
+      "Don't use drop shadows, pill badges, or uppercase letter-spaced eyebrow labels.",
+      "Don't use em dashes in site copy.",
+      "Don't introduce new accent colors, gradients, or glassy effects.",
+      "Don't hardcode hex values in components; use the Tailwind tokens.",
+      "Don't invent testimonials, results, or enrollment counts."
+    ]
+  }
+}

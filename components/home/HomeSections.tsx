@@ -10,9 +10,9 @@ import { conceptB } from "@/lib/storybrand";
 export function PhotosFromKairos() {
   return (
     <Section className="overflow-hidden !py-12 sm:!py-16">
-      <SectionHeading title="Photos from Kairos" />
+      <SectionHeading title="Photos from Kairos" intro="Students at work in our Salinas center." />
       <div
-        className="-mx-4 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6"
+        className="-mx-4 mt-8 flex snap-x snap-proximity gap-4 overflow-x-auto px-4 pb-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-500 focus-visible:ring-offset-2 sm:-mx-6 sm:px-6"
         tabIndex={0}
         role="region"
         aria-label="Photos from Kairos, scroll sideways"
@@ -65,16 +65,16 @@ export function GetStarted() {
     <section className="bg-sand/50 py-16 sm:py-24">
       <div className="container-narrow">
         <SectionHeading title="How to get started" />
-        <div className="mt-10 space-y-8 border-l-2 border-forest-200 pl-8">
+        <ol className="mt-10 space-y-6">
           {conceptB.plan.map((step, i) => (
-            <div key={step} className="relative">
-              <span className="absolute -left-12 flex h-8 w-8 items-center justify-center rounded-full bg-forest-800 font-display text-sm font-semibold text-cream">
+            <li key={step} className="grid grid-cols-[2.25rem_1fr] items-baseline gap-4">
+              <span aria-hidden="true" className="font-display text-4xl font-semibold leading-none text-forest-700">
                 {i + 1}
               </span>
               <p className="prose-kairos text-lg">{step}</p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
 
       <div className="container-page mx-auto mt-20 max-w-2xl text-center">
