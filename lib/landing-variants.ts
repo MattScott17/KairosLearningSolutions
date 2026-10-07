@@ -5,7 +5,7 @@
 // Deliberately absent until real ones exist: guarantees, scarcity counts,
 // dollar "values" on stack items, and named student results.
 
-import { apex, leadership } from "@/lib/content";
+import { apex, leadership, services } from "@/lib/content";
 import { site } from "@/lib/site";
 import { apexLanding, tutoringLanding, type LandingCopy } from "@/lib/landing-content";
 
@@ -42,6 +42,9 @@ export type ProgramOffer = {
 };
 
 const lead = leadership[0];
+const tutoringHighlights = services.find((s) => s.slug === "private-tutoring")!.highlights;
+const tutoringPrice = tutoringHighlights.find((h) => h.label === "Pricing")!.value;
+const money = (v: string) => v.replace(" / ", " a ");
 const hoursLine = site.hours
   .filter((h) => h.time !== "Closed")
   .map((h) => `${h.day}: ${h.time}`)
@@ -109,7 +112,7 @@ export const tutoringOffer: ProgramOffer = {
   faqs: [
     {
       q: "How much does tutoring cost?",
-      a: "It depends on the subject and schedule your student needs. We'll walk you through options on your free consultation call, with no commitment.",
+      a: `Sessions are ${tutoringPrice}, depending on the subject and tutor. For a standing weekly session, the monthly plan is $360 for one session a week. Your free consultation call comes first, with no commitment.`,
     },
     {
       q: "How do you pick the tutor?",
@@ -215,7 +218,7 @@ export const apexOffer: ProgramOffer = {
     },
     {
       q: "How much does APEX cost?",
-      a: "It depends on whether your student does the full program or just part of it. Call us or book a free tour and we'll go over it with you.",
+      a: `The full program is ${money(apex.tiers[0].price)} for a ${apex.tuition.term.toLowerCase()}, or ${money(apex.tuition.annual)}. Academics only is ${money(apex.tiers[1].price)}, and workshops only is ${money(apex.tiers[2].price)}. Call us or book a free tour and we'll go over it with you.`,
     },
     {
       q: "What does the rest of the day look like?",
