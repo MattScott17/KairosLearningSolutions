@@ -5,7 +5,9 @@ import Link from "next/link";
 import { AlertCircle, CheckCircle2, Loader2, Plus, X } from "lucide-react";
 import {
   MAX_CHILDREN,
+  charterNote,
   confirmationTimeframe,
+  feeLineFor,
   gradeNumber,
   gradeOptions,
   optionLabel,
@@ -95,7 +97,20 @@ export function RegistrationForm({
   const [prefilled, setPrefilled] = useState<number[]>([]);
   const [restoreTick, setRestoreTick] = useState(0);
   const [bannerDismissed, setBannerDismissed] = useState(false);
+  // What has been typed, mirrored from the form so the recap above Submit can show it.
+  const [fields, setFields] = useState<Record<string, string>>({});
+  const focusNewStudent = useRef(false);
   const savedDraft = useSyncExternalStore(noSubscribe, readDraftOnce, () => null);
+
+  function readFields() {
+    const out: Record<string, string> = {};
+    const form = formRef.current;
+    if (!form) return out;
+    new FormData(form).forEach((v, k) => {
+      if (k !== "company" && !k.endsWith(".classes")) out[k] = String(v);
+    });
+    return out;
+  }
 
   function saveDraft() {
     const form = formRef.current;
@@ -138,10 +153,12 @@ export function RegistrationForm({
       )
     );
     pendingFields.current = draft.fields;
+    setFields(draft.fields);
     setErrors({});
     setPrefilled([]);
     setBannerDismissed(true);
     setRestoreTick((t) => t + 1);
+    document.getElementById("parent.firstName")?.focus();
   }
 
   // Keep the draft fresh when the picked classes, grades or number of students change.
@@ -175,6 +192,11 @@ export function RegistrationForm({
   useEffect(() => {
     const copy = prefill.current;
     const form = formRef.current;
+    if (focusNewStudent.current && form) {
+      focusNewStudent.current = false;
+      const first = form.elements.namedItem(`children.${childKeys.length - 1}.firstName`);
+      if (first instanceof HTMLInputElement) first.focus();
+    }
     if (!copy || !form) return;
     prefill.current = null;
     const last = form.elements.namedItem(`children.${childKeys.length - 1}.lastName`);
@@ -213,7 +235,10 @@ export function RegistrationForm({
     if (copy.lastName || copy.school) {
       prefill.current = copy;
       setPrefilled((p) => [...p, key]);
+      const n = childKeys.length;
+      setFields((f) => ({ ...f, [`children.${n}.lastName`]: copy.lastName, [`children.${n}.school`]: copy.school }));
     }
+    focusNewStudent.current = true;
     setChild((c) => {
       const next = { ...c, [key]: { grade: "", picked: [], open: true, otherOpen: false } };
       // Fold away students who already have a class picked so the form stays short.
@@ -227,6 +252,17 @@ export function RegistrationForm({
     const index = childKeys.indexOf(key);
     setChildKeys((keys) => keys.filter((k) => k !== key));
     setRemovedTick((t) => t + 1);
+    // The recap mirrors typed answers by position, so shift them down like the errors below.
+    setFields((prev) => {
+      const next: Record<string, string> = {};
+      for (const [name, value] of Object.entries(prev)) {
+        const m = name.match(/^children\.(\d+)\.(.+)$/);
+        if (!m) next[name] = value;
+        else if (Number(m[1]) < index) next[name] = value;
+        else if (Number(m[1]) > index) next[`children.${Number(m[1]) - 1}.${m[2]}`] = value;
+      }
+      return next;
+    });
     // Keep the other students' messages, shifted to their new positions.
     setErrors((prev) => {
       const next: Record<string, string> = {};
@@ -501,6 +537,7 @@ export function RegistrationForm({
       ref={formRef}
       onSubmit={handleSubmit}
       onChange={(e) => {
+        setFields(readFields());
         saveDraft();
         // A message goes away as soon as that answer changes.
         const name = (e.target as unknown as HTMLInputElement).name;
@@ -549,7 +586,7 @@ export function RegistrationForm({
                         }}
                         className="inline-flex min-h-11 items-center text-red-800 underline underline-offset-4"
                       >
-                        {errorLabel(name, true)}
+                        {errorLabel(name, true)}: {errors[name]}
                       </a>
                     </li>
                   ))}
@@ -575,6 +612,7 @@ export function RegistrationForm({
               onClick={() => {
                 clearDraft();
                 setBannerDismissed(true);
+                document.getElementById("parent.firstName")?.focus();
               }}
               className="btn-outline"
             >
@@ -594,8 +632,8 @@ export function RegistrationForm({
 
       <div>
         <p className="text-base text-ink/80">
-          Required questions are marked with a red star. This takes about 5 minutes for one student, and a couple
-          more for each extra student.
+          Questions marked * are required. This takes about 5 minutes for one student, and a couple more for each
+          extra student.
         </p>
       </div>
 
@@ -634,7 +672,7 @@ export function RegistrationForm({
           <fieldset key={key} className="border-t-2 border-forest-800 pt-6">
             <legend className="sr-only">{studentName(i)}</legend>
             <div className="flex items-baseline justify-between gap-4">
-              <h2 className="text-2xl font-semibold">{studentName(i)}</h2>
+              <h2 id={`student-${i}`} tabIndex={-1} className="text-2xl font-semibold outline-none">{studentName(i)}</h2>
               {i > 0 && (
                 <button
                   type="button"
@@ -656,7 +694,6 @@ export function RegistrationForm({
             <div className="mt-6 grid gap-5 sm:grid-cols-2">
               {textField(`${p}.firstName`, "First name", { required: true })}
               {textField(`${p}.lastName`, "Last name", { required: true })}
-              {textField(`${p}.age`, "Age", { required: true, inputMode: "numeric", hint: "A number, like 8." })}
               <div data-field={`${p}.grade`}>
                 <label htmlFor={`${p}.grade`} className="mb-1.5 block text-sm font-medium text-ink/80">
                   Grade this fall {tag(true)}
@@ -689,6 +726,7 @@ export function RegistrationForm({
                 </select>
                 {err(`${p}.grade`)}
               </div>
+              {textField(`${p}.age`, "Age", { required: true, inputMode: "numeric", hint: "A number, like 8." })}
               <div className="sm:col-span-2">
                 {textField(`${p}.school`, "School this fall", {
                   required: true,
@@ -728,8 +766,9 @@ export function RegistrationForm({
                   {err(`${p}.classes`)}
                 </div>
                 {gradeNo === null && (
-                  <p className="mt-2 text-sm text-ink/70">
-                    Choose a grade above and the classes that fit come first.
+                  <p className="mt-2 rounded-lg bg-sand px-4 py-3 text-base text-ink/80">
+                    Choose {childKeys.length > 1 ? "this student's" : "your student's"} grade above and the classes that fit
+                    come first.
                   </p>
                 )}
                 {gradeNo !== null && (
@@ -781,6 +820,67 @@ export function RegistrationForm({
       )}
 
       <div className="border-t border-forest-100 pt-8">
+        <div className="mb-6 rounded-lg border border-forest-300 p-5" aria-labelledby="recap-title" role="region">
+          <h2 id="recap-title" className="text-lg font-semibold text-forest-900">
+            Check before you send
+          </h2>
+          <dl className="mt-3 space-y-4 text-base text-ink/80">
+            <div>
+              <dt className="font-semibold text-forest-900">Parent or guardian</dt>
+              <dd>
+                {[fields["parent.firstName"], fields["parent.lastName"]].filter(Boolean).join(" ") || (
+                  <span className="text-ink/70">Name not filled in yet</span>
+                )}
+                <br />
+                {[fields["parent.email"], fields["parent.phone"]].filter(Boolean).join(", ") || (
+                  <span className="text-ink/70">Email and phone not filled in yet</span>
+                )}
+              </dd>
+            </div>
+            {childKeys.map((key, i) => {
+              const state = child[key];
+              const name =
+                [fields[`children.${i}.firstName`], fields[`children.${i}.lastName`]].filter(Boolean).join(" ") ||
+                studentName(i);
+              const lines = Array.from(new Set(state.picked.map(feeLineFor).filter(Boolean)));
+              return (
+                <div key={key}>
+                  <dt className="flex items-center justify-between gap-3 font-semibold text-forest-900">
+                    <span>
+                      {name}
+                      {state.grade ? `, ${state.grade === "Kinder" || state.grade === "Other" ? state.grade : `${state.grade} grade`}` : ""}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        patchChild(key, { open: true });
+                        const heading = document.getElementById(`student-${i}`);
+                        heading?.scrollIntoView({ block: "start" });
+                        heading?.focus();
+                      }}
+                      className="link-underline inline-flex min-h-11 items-center text-sm font-medium"
+                    >
+                      Edit<span className="sr-only"> {name}</span>
+                    </button>
+                  </dt>
+                  <dd>
+                    {state.picked.length > 0 ? (
+                      state.picked.map(optionLabel).join(", ")
+                    ) : (
+                      <span className="text-ink/70">No classes or programs chosen yet</span>
+                    )}
+                    {lines.length > 0 && (
+                      <span className="mt-1 block text-sm text-ink/70">
+                        Registration fee line: {lines.join(" and ")}
+                      </span>
+                    )}
+                  </dd>
+                </div>
+              );
+            })}
+          </dl>
+        </div>
+
         <div className="mb-6 rounded-lg bg-sand p-5 text-base text-ink/80">
           <h2 className="text-lg font-semibold text-forest-900">What happens next</h2>
           <p className="mt-2">
@@ -788,15 +888,19 @@ export function RegistrationForm({
             the registration fee
             {confirmationTimeframe ? `, usually within ${confirmationTimeframe}` : ""}.
           </p>
-          <p className="mt-4 text-sm font-semibold text-forest-900">Registration fees</p>
-          <ul className="mt-1 space-y-1 text-sm">
-            {fees.map((f) => (
-              <li key={f.label} className="flex justify-between gap-4">
-                <span>{f.label}</span>
-                <span className="shrink-0 font-semibold text-forest-800">{f.value}</span>
-              </li>
-            ))}
-          </ul>
+          <div className="lg:hidden">
+            <p className="mt-4 text-sm font-semibold text-forest-900">Registration fees</p>
+            <ul className="mt-1 space-y-1 text-sm">
+              {fees.map((f) => (
+                <li key={f.label} className="flex justify-between gap-4">
+                  <span>{f.label}</span>
+                  <span className="shrink-0 font-semibold text-forest-800">{f.value}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-sm font-semibold text-forest-900">Charter school funds</p>
+            <p className="mt-1 text-sm">{charterNote}</p>
+          </div>
           <p className="mt-4">
             Prefer to talk it through?{" "}
             <a href={site.phoneHref} className="link-underline inline-flex min-h-11 items-center">

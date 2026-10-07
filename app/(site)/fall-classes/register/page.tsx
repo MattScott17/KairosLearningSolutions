@@ -3,7 +3,7 @@ import { pageMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/ui/PageHero";
 import { RegistrationForm } from "@/components/RegistrationForm";
 import { registrationFees } from "@/lib/content";
-import { registrationOptions } from "@/lib/registration";
+import { charterNote, registrationOptions } from "@/lib/registration";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -39,12 +39,9 @@ export default async function RegisterPage({ searchParams }: Props) {
         }
       />
 
-      <section className="py-16 sm:py-24">
+      <section className="py-10 sm:py-14">
         <div className="container-page grid gap-12 lg:grid-cols-[1fr_300px] lg:gap-16">
           <div>
-            <p className="mb-8 rounded-lg bg-sand px-5 py-4 text-sm text-ink/80 lg:hidden">
-              Registration fees are listed above the Submit button. Charter school details are below the form.
-            </p>
             <RegistrationForm initialClass={initialClass} fees={registrationFees} />
           </div>
 
@@ -75,9 +72,9 @@ export default async function RegisterPage({ searchParams }: Props) {
                     ))}
                   </dd>
                 </div>
-                <div>
+                <div className="hidden lg:block">
                   <dt className="font-semibold text-forest-900">Charter school funds</dt>
-                  <dd className="mt-1 text-ink/80">Let your ES know. Nothing is due until the charter approves it.</dd>
+                  <dd className="mt-1 text-ink/80">{charterNote}</dd>
                 </div>
                 <div>
                   <dt className="font-semibold text-forest-900">Class sizes</dt>
