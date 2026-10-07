@@ -187,4 +187,8 @@ test("fall registration form flags missing answers and supports more students", 
   await page.getByRole("button", { name: "Submit registration" }).click();
   await expect(page.getByText("Enter your first name")).toBeVisible();
   await expect(page.getByText("Pick at least one class or program")).toBeVisible();
+  // The summary at the top takes focus and links to the first problem.
+  await expect(page.getByRole("heading", { name: /answers need fixing/ })).toBeVisible();
+  await expect(page.locator("#error-summary-title")).toBeVisible();
+  await expect(page.getByLabel("First name").first()).toHaveAttribute("aria-invalid", "true");
 });

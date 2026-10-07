@@ -27,17 +27,45 @@ export default async function RegisterPage({ searchParams }: Props) {
       <PageHero
         title="Fall 2026 registration"
         mark="registration"
-        intro="Fill this out once for each family, with up to three students. It saves your student's spot, and spots are first come, first served. Rather do it on the phone? Give us a call and we'll do it together."
+        intro={
+          <>
+            Fill this out once for each family, with up to three students. Spots are first come, first served.
+            Rather do it on the phone? Call{" "}
+            <a href={site.phoneHref} className="link-underline inline-block py-2 -my-2">
+              {site.phone}
+            </a>{" "}
+            and we&apos;ll do it together.
+          </>
+        }
       />
 
       <section className="py-16 sm:py-24">
         <div className="container-page grid gap-12 lg:grid-cols-[1fr_300px] lg:gap-16">
-          <RegistrationForm initialClass={initialClass} />
+          <div>
+            <p className="mb-8 rounded-lg bg-sand px-5 py-4 text-sm text-ink/80 lg:hidden">
+              Registration fees and charter school details are just below the form.
+            </p>
+            <RegistrationForm initialClass={initialClass} />
+          </div>
 
-          <aside className="order-first lg:order-none">
+          <aside>
             <div className="rounded-lg bg-sand p-6 lg:sticky lg:top-28">
               <h2 className="text-lg font-semibold">Good to know</h2>
               <dl className="mt-4 space-y-4 text-sm">
+                <div>
+                  <dt className="font-semibold text-forest-900">Questions?</dt>
+                  <dd className="mt-1 text-ink/80">
+                    Call{" "}
+                    <a href={site.phoneHref} className="link-underline inline-block py-2 -my-2">
+                      {site.phone}
+                    </a>{" "}
+                    or{" "}
+                    <a href={site.emailHref} className="link-underline inline-block py-2 -my-2">
+                      send us an email
+                    </a>
+                    .
+                  </dd>
+                </div>
                 <div>
                   <dt className="font-semibold text-forest-900">Registration fees</dt>
                   <dd className="mt-1 space-y-1 text-ink/80">
@@ -56,20 +84,6 @@ export default async function RegisterPage({ searchParams }: Props) {
                 <div>
                   <dt className="font-semibold text-forest-900">Class sizes</dt>
                   <dd className="mt-1 text-ink/80">Each class needs a minimum number of students to run.</dd>
-                </div>
-                <div>
-                  <dt className="font-semibold text-forest-900">Questions?</dt>
-                  <dd className="mt-1 text-ink/80">
-                    Call{" "}
-                    <a href={site.phoneHref} className="link-underline">
-                      {site.phone}
-                    </a>{" "}
-                    or{" "}
-                    <a href={site.emailHref} className="link-underline">
-                      send us an email
-                    </a>
-                    .
-                  </dd>
                 </div>
               </dl>
             </div>
