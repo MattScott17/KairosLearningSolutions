@@ -390,20 +390,24 @@ export type TeamMember = {
 export const leadership: TeamMember[] = [
   {
     name: "Jackie Scott",
-    role: "Owner & Lead Teacher",
-    bio: "Jackie has taught for more than 30 years, in grades 3 to 12, in many subjects and many kinds of schools. She holds an MA in Educational Leadership and Curriculum & Instruction, and opened Kairos in 2020.",
+    role: "Owner, Teacher",
+    bio: "Jackie has been an educator for more than 30 years, teaching everything from 3rd grade to high school, English to math, public to private and even homeschool. That background prepared her for everything we do at Kairos. She holds an MA in Educational Leadership and Curriculum & Instruction, opened Kairos in 2020, and loves helping students fall in love with learning. She is also a mom to three young-adult kids and volunteers in the community.",
+    image: "/images/team/jackie-scott.jpg",
   },
   {
     name: "Alissa Scott",
-    role: "Director",
+    role: "Executive Director",
+    bio: "Alissa earned her BA in Elementary Education and a Multiple Subject Teaching Credential from Grand Canyon University. After a year of tutoring and teaching, she became Executive Director in 2026 and took over daily operations from her mother, Jackie. She grew up at Kairos as a student, tutor and teacher, and wants every student to fall in love with learning and feel the same sense of belonging she found here.",
+    image: "/images/team/alissa-scott.jpg",
   },
 ];
 
 export const team: TeamMember[] = [
   {
     name: "Michelle Ball",
-    role: "Teacher",
-    bio: "Multiple Subject Credential with a Child Development emphasis from CSU Chico, and 17 years of classroom experience.",
+    role: "Director of Homeschool",
+    bio: "Michelle earned her Multiple Subject Credential with an emphasis in Child Development from CSU Chico. She taught for 17 years at Spreckels School before staying home with her three children. Teaching is a passion of hers. She loves connecting with her students and helping them grow academically, socially and emotionally.",
+    image: "/images/team/michelle-ball.jpg",
   },
   {
     name: "Lisa Bleicher",
@@ -412,8 +416,9 @@ export const team: TeamMember[] = [
   },
   {
     name: "Lori Grainger",
-    role: "Teacher",
-    bio: "27 years of teaching experience, mostly in 2nd grade, before retiring from the classroom.",
+    role: "Teacher/Tutor",
+    bio: "Lori is a retired teacher with 27 years of experience, most of it with 2nd graders. She is thrilled to be part of the Kairos family and enjoys using her knowledge to support our students. She is married to Joe, a mother of two daughters and a Gramma to four grandchildren.",
+    image: "/images/team/lori-grainger.jpg",
   },
   {
     name: "Brady Berg",
@@ -427,8 +432,9 @@ export const team: TeamMember[] = [
   },
   {
     name: "Saara Kriplani",
-    role: "Online Tutor",
-    bio: "B.S. in Bioengineering: Bioinformatics from UC San Diego, teaching math from preschool through calculus.",
+    role: "Tutor (Online)",
+    bio: "Saara holds a B.S. in Bioengineering: Bioinformatics from UC San Diego. She has tutored since middle school and loves helping and teaching others. She has worked at every level of math, from preschool basics to advanced calculus, and is a valuable mentor to students at every stage.",
+    image: "/images/team/saara-kriplani.jpg",
   },
   {
     name: "Daryl Lyon",
@@ -437,13 +443,15 @@ export const team: TeamMember[] = [
   },
   {
     name: "Laura Palmer",
-    role: "Subject Specialist",
-    bio: "Certified Bilingual Teacher with a BA in Spanish and 28 years of experience, including Dual Immersion and bilingual fine arts instruction.",
+    role: "Spanish Teacher/Tutor",
+    bio: "Laura (Maestra Palmer) is a certified Bilingual Teacher with a BA in Spanish and 28 years of experience in education. She was a Dual Immersion teacher, then a bilingual fine arts teacher of art, music, dance and drama. Since 2009 she has taught Spanish to children of all ages and tutored children and adults privately through Learn with Laura, Education for Enrichment.",
+    image: "/images/team/laura-palmer.jpg",
   },
   {
     name: "Mendy Amaral",
-    role: "Operations",
-    bio: "A lifelong Salinas resident and community volunteer for more than 20 years. She runs day-to-day operations at Kairos.",
+    role: "Director of Tutoring",
+    bio: "Mendy is a lifelong Salinas resident from a many-generation Salinas family. She has spent the last 20+ years raising three children and volunteering extensively in the community. She brings countless skills and talent to Kairos, not the least of which is her ability to do anything and everything that needs to be done.",
+    image: "/images/team/mendy-amaral.jpg",
   },
 ];
 
