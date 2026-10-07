@@ -187,4 +187,23 @@ test("fall registration form flags missing answers and supports more students", 
   await page.getByRole("button", { name: "Submit registration" }).click();
   await expect(page.getByText("Enter your first name")).toBeVisible();
   await expect(page.getByText("Pick at least one class or program")).toBeVisible();
+  // The summary at the top takes focus and links to the first problem.
+  await expect(page.getByRole("heading", { name: /answers need fixing/ })).toBeVisible();
+  await expect(page.locator("#error-summary-title")).toBeVisible();
+  await expect(page.getByLabel("First name").first()).toHaveAttribute("aria-invalid", "true");
+});
+
+test("fall registration keeps a draft for this tab and copies last name and school to the next student", async ({ page }) => {
+  await page.goto("/fall-classes/register");
+  await page.getByLabel("First name").first().fill("Test");
+  await page.locator('[id="children.0.lastName"]').fill("Tester");
+  await page.locator('[id="children.0.school"]').fill("Home");
+  await page.getByRole("button", { name: /Add another child/ }).click();
+  await expect(page.locator('[id="children.1.lastName"]')).toHaveValue("Tester");
+  await expect(page.locator('[id="children.1.school"]')).toHaveValue("Home");
+  await page.reload();
+  await expect(page.getByRole("region", { name: "Saved answers" })).toBeVisible();
+  await page.getByRole("button", { name: "Put them back" }).click();
+  await expect(page.locator('[id="parent.firstName"]')).toHaveValue("Test");
+  await expect(page.getByRole("heading", { name: "Student 2" })).toBeVisible();
 });

@@ -28,17 +28,49 @@ export type RegistrationOption = {
   detail: string;
   // Start of the matching checkbox text on the Google Form.
   googleKey: string;
+  // Grades the class is meant for (Kinder = 0). Used only to flag a mismatch, never to block.
+  grades?: [number, number];
 };
 
-export const registrationGroups: { title: string; options: RegistrationOption[] }[] = [
+/** Grade select value to a number (Kinder = 0); null for "Other" or nothing chosen. */
+export function gradeNumber(grade: string): number | null {
+  if (grade === "Kinder") return 0;
+  const n = parseInt(grade, 10);
+  return Number.isFinite(n) ? n : null;
+}
+
+/**
+ * How long Jackie usually takes to confirm a spot, for the "What happens next" note, for example
+ * "two business days". Left empty on purpose: the note then makes no promise about timing.
+ */
+export const confirmationTimeframe = "";
+
+export type RegistrationGroup = {
+  title: string;
+  /** One plain line that says what the group is, shown above its options. */
+  blurb: string;
+  /** Pages that explain the group. They open in a new tab so a half-finished form is never lost. */
+  links?: { label: string; href: string }[];
+  options: RegistrationOption[];
+};
+
+export const registrationGroups: RegistrationGroup[] = [
   {
     title: "Programs",
+    blurb:
+      "APEX is our full-time school, Homeschool Support is a flexible membership you plan with us, and Tutoring is one-on-one.",
+    links: [
+      { label: "About APEX", href: "/apex" },
+      { label: "About Homeschool Support", href: "/services/homeschool-support" },
+      { label: "About Tutoring", href: "/services/private-tutoring" },
+    ],
     options: [
       {
         id: "apex",
         label: "APEX, powered by 2 Hour Learning",
         detail: "Grades 3 to 8, Monday to Thursday, 9:00 AM to 2:00 PM",
         googleKey: "APEX",
+        grades: [3, 8],
       },
       {
         id: "leadership-year",
@@ -51,6 +83,7 @@ export const registrationGroups: { title: string; options: RegistrationOption[] 
         label: "Homeschool Support",
         detail: "Grades 3 to 12, Monday to Thursday, 9:00 AM to 2:00 PM, you pick the days and times",
         googleKey: "Homeschool Support",
+        grades: [3, 12],
       },
       {
         id: "tutoring",
@@ -62,101 +95,120 @@ export const registrationGroups: { title: string; options: RegistrationOption[] 
   },
   {
     title: "Early learners",
+    blurb: "Half-day programs for TK through 2nd grade.",
+    links: [{ label: "About Early Learners", href: "/early-learners" }],
     options: [
       {
         id: "tk-kinder",
         label: "Kairos TK and Kinder",
         detail: "Tuesday, Wednesday and Thursday, 9:00 AM to 12:00 PM",
         googleKey: "Kairos TK/Kinder",
+        grades: [0, 0],
       },
       {
         id: "first-grade",
         label: "Kairos First Grade",
         detail: "Tuesday, Wednesday and Thursday, 9:00 AM to 12:00 PM",
         googleKey: "Kairos First Grade",
+        grades: [1, 1],
       },
       {
         id: "second-grade",
         label: "Kairos Second Grade",
         detail: "Tuesday and Thursday, 10:00 AM to 12:00 PM",
         googleKey: "Kairos Second Grade",
+        grades: [2, 2],
       },
     ],
   },
   {
     title: "Fall classes",
+    blurb: "Weekly classes in writing, speaking, art and reading.",
+    links: [{ label: "About the fall classes", href: "/fall-classes" }],
     options: [
       {
         id: "k2-bundle",
         label: "K to 2 Learning Lab, all three classes",
         detail: "Monday, 9:00 AM to 12:00 PM",
         googleKey: "K-2 Learning Lab Bundle",
+        grades: [0, 2],
       },
       {
         id: "k2-reading-writing",
         label: "K to 2 Learning Lab: Reading and writing",
         detail: "Monday, 9:00 to 10:00 AM",
         googleKey: "K-2 Learning Lab, Reading",
+        grades: [0, 2],
       },
       {
         id: "k2-math-science",
         label: "K to 2 Learning Lab: Math and science",
         detail: "Monday, 10:00 to 11:00 AM",
         googleKey: "K-2 Learning Lab, Math",
+        grades: [0, 2],
       },
       {
         id: "k2-art-music",
         label: "K to 2 Learning Lab: Art, music and enrichment",
         detail: "Monday, 11:00 AM to 12:00 PM",
         googleKey: "K-2 Learning Lab, Art",
+        grades: [0, 2],
       },
       {
         id: "imagination-lab",
         label: "Imagination Lab",
         detail: "Grades K to 3, Wednesday, 10:30 to 11:30 AM",
         googleKey: "Imagination Lab",
+        grades: [0, 3],
       },
       {
         id: "book-to-life-charlottes-web",
         label: "Book to Life: Charlotte's Web",
         detail: "Grades 1 to 3, Wednesday, 12:30 to 2:00 PM, Sep 30 to Oct 28",
         googleKey: "Book to Life: Charlotte",
+        grades: [1, 3],
       },
       {
         id: "book-to-life-winnie-the-pooh",
         label: "Book to Life: Winnie the Pooh",
         detail: "Grades 1 to 3, Wednesday, 12:30 to 2:00 PM, Nov 4 to Dec 16",
         googleKey: "Book to Life: Winnie",
+        grades: [1, 3],
       },
       {
         id: "writing-lab-a",
         label: "Writing Lab A",
         detail: "Grades 3 and 4, Wednesday, 10:00 to 11:00 AM",
         googleKey: "Writing Lab A",
+        grades: [3, 4],
       },
       {
         id: "writing-lab-b",
         label: "Writing Lab B",
         detail: "Grades 5 to 7, Wednesday, 11:00 AM to 12:00 PM",
         googleKey: "Writing Lab B",
+        grades: [5, 7],
       },
       {
         id: "express-and-connect-lab",
         label: "Express & Connect Lab",
         detail: "Grades 3 to 6, Wednesday, 1:00 to 2:00 PM",
         googleKey: "Express & Connect",
+        grades: [3, 6],
       },
       {
         id: "nature-journaling",
         label: "Nature Journaling (Mini Makers)",
         detail: "Grades 3 to 6, Monday, 11:00 AM to 12:00 PM, Sep 14 to Oct 19",
         googleKey: "Nature Journaling",
+        grades: [3, 6],
       },
       {
         id: "visual-arts",
         label: "Visual Arts (Mini Makers)",
         detail: "Grades 3 to 6, Monday, 11:00 AM to 12:00 PM, Oct 26 to Nov 30",
         googleKey: "Visual Arts",
+        grades: [3, 6],
       },
     ],
   },
@@ -170,7 +222,12 @@ const optionalText = (max: number) => z.string().trim().max(max).optional().or(z
 export const childSchema = z.object({
   firstName: z.string().trim().min(1, "Enter a first name").max(60),
   lastName: z.string().trim().min(1, "Enter a last name").max(60),
-  age: z.string().trim().min(1, "Enter an age").max(10),
+  age: z
+    .string()
+    .trim()
+    .min(1, "Enter an age")
+    .regex(/^\d+$/, "Enter the age as a number, like 8")
+    .refine((v) => Number(v) >= 2 && Number(v) <= 25, "Enter an age between 2 and 25"),
   grade: z.enum(gradeOptions, { message: "Pick a grade" }),
   school: z.string().trim().min(1, "Enter a school, or home if you homeschool").max(120),
   phone: optionalText(30),
@@ -186,7 +243,11 @@ export const registrationSchema = z.object({
     firstName: z.string().trim().min(1, "Enter your first name").max(60),
     lastName: z.string().trim().min(1, "Enter your last name").max(60),
     email: z.string().trim().email("Enter a valid email"),
-    phone: z.string().trim().min(7, "Enter a phone number").max(30),
+    phone: z
+      .string()
+      .trim()
+      .max(30)
+      .refine((v) => v.replace(/\D/g, "").length >= 10, "Enter a 10-digit phone number"),
   }),
   children: z.array(childSchema).min(1).max(MAX_CHILDREN),
   // Honeypot: must stay empty (bots fill it in).
