@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useSyncExternalStore } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { TabBar } from "@/components/aceternity/TabBar";
@@ -22,10 +22,33 @@ export type Path = {
   photo: Photo;
 };
 
+const listeners = new Set<() => void>();
+function subscribe(fn: () => void) {
+  listeners.add(fn);
+  window.addEventListener("popstate", fn);
+  return () => {
+    listeners.delete(fn);
+    window.removeEventListener("popstate", fn);
+  };
+}
+function readPathParam() {
+  return new URLSearchParams(window.location.search).get("path");
+}
+
 /** "My student needs…" → the matching program, one tab at a time. */
 export function PathFinder({ paths }: { paths: Path[] }) {
-  const [active, setActive] = useState(paths[0].id);
   const reduce = useReducedMotion();
+
+  // The chosen tab lives in the URL (?path=) so a refresh or a shared link lands on the same program.
+  const urlId = useSyncExternalStore(subscribe, readPathParam, () => null);
+  const active = urlId && paths.some((p) => p.id === urlId) ? urlId : paths[0].id;
+
+  const choose = (id: string) => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("path", id);
+    window.history.replaceState(null, "", url);
+    listeners.forEach((fn) => fn());
+  };
   const path = paths.find((p) => p.id === active) ?? paths[0];
   const panelId = "path-finder-panel";
 
@@ -37,7 +60,7 @@ export function PathFinder({ paths }: { paths: Path[] }) {
       <TabBar
         tabs={paths.map((p) => ({ id: p.id, label: p.need, shortLabel: p.needShort }))}
         active={active}
-        onChange={setActive}
+        onChange={choose}
         panelId={panelId}
         label="What does your student need?"
         className="mt-6"

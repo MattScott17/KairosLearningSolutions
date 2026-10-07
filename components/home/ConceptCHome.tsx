@@ -5,7 +5,6 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
 import { ParallaxPhoto } from "@/components/home/ParallaxPhoto";
 import { StickyCallBar } from "@/components/lp/StickyCallBar";
-import { Pathways } from "@/components/Pathways";
 import { PhotosFromKairos, HowWeTeach, GetStarted } from "@/components/home/HomeSections";
 import { TutorRow } from "@/components/TutorCard";
 import { FallClassesBanner } from "@/components/home/FallClassesBanner";
@@ -16,6 +15,7 @@ import {
   services,
   apex,
   earlyLearners,
+  homeschoolPricing,
   leadership,
   featuredTutors,
   getTeamMembers,
@@ -51,7 +51,11 @@ const paths: Path[] = [
     needShort: "homeschool help",
     program: homeschool.title,
     summary: homeschool.summary,
-    facts: homeschool.highlights,
+    facts: [
+      homeschool.highlights[0],
+      { label: "Pricing", value: `From $${homeschoolPricing.levels.A[0]} a month` },
+      homeschool.highlights[2],
+    ],
     href: `/services/${homeschool.slug}`,
     cta: homeschool.cta,
     photo: servicePhoto[homeschool.slug],
@@ -80,7 +84,7 @@ const paths: Path[] = [
     facts: [
       { label: "Grades", value: apex.gradeRange },
       { label: "First step", value: "Free call and tour" },
-      { label: "Format", value: "Full-time" },
+      { label: "Tuition", value: apex.tuition.monthly.replace(" / ", " a ") },
     ],
     href: "/apex",
     cta: "Explore APEX",
@@ -99,10 +103,10 @@ const jackie = leadership[0];
 const weekdayHours = site.hours[0].time.replace(" – ", " to ").replace(/:00 AM/, " AM");
 
 // `short` is the phone version; facts without one are desktop only.
-const quickFacts: { full: string; short?: string }[] = [
+const quickFacts: { full: string; short?: string; wide?: boolean }[] = [
   { full: "TK to 9th grade", short: "TK to 9th grade" },
   { full: `${site.address.street}, ${site.address.city}`, short: site.address.city },
-  { full: `Mon to Thu, ${weekdayHours}` },
+  { full: `Mon to Thu, ${weekdayHours}`, short: `Mon to Thu, ${weekdayHours}`, wide: true },
   { full: `Open since ${site.foundedYear}`, short: `Since ${site.foundedYear}` },
 ];
 
@@ -114,7 +118,7 @@ export function ConceptCHome() {
         <FallClassesBanner className="mb-10 lg:mb-14" />
         <div className="container-page grid items-center gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
           <div className="text-center lg:text-left">
-            <h1 className="mx-auto max-w-2xl text-4xl font-semibold leading-[1.1] sm:text-5xl lg:mx-0 lg:text-[3.5rem]">
+            <h1 className="mx-auto max-w-2xl text-4xl font-semibold leading-[1.1] sm:text-5xl lg:mx-0 lg:text-[3.25rem]">
               {headlineLead}
               <span className="relative inline-block whitespace-nowrap">
                 {headlineMark}
@@ -127,29 +131,25 @@ export function ConceptCHome() {
             </p>
             <p className="prose-kairos mt-8 hidden max-w-xl text-lg lg:block">{conceptC.heroSub}</p>
 
-            <div className="mt-8 hidden gap-3 lg:flex">
+            <div className="mt-8 hidden items-center gap-6 lg:flex">
               <a href={site.phoneHref} className="btn-primary">
                 <Phone className="h-4 w-4" />
                 Call {site.phone}
               </a>
-              <a href="#programs" className="btn-outline">
+              <a href="#programs" className="link-underline inline-flex items-center gap-1.5">
                 Find your program
+                <ArrowRight className="h-4 w-4" />
               </a>
             </div>
 
-            <div className="mt-8 hidden max-w-xl gap-4 border-l-2 border-gold-500/60 pl-5 lg:flex">
-              <div>
-                <p className="font-display text-lg italic text-forest-800">
-                  &ldquo;Tell me about your student and I&rsquo;ll tell you where I&rsquo;d start.&rdquo;
-                </p>
-                <p className="mt-2 text-sm text-ink/70">
-                  {jackie.name}, {jackie.role.toLowerCase()} ·{" "}
-                  <a href={site.phoneHref} className="link-underline whitespace-nowrap">
-                    {site.phone}
-                  </a>
-                </p>
-              </div>
-            </div>
+            <figure className="mt-8 hidden max-w-xl lg:block">
+              <blockquote className="font-display text-lg italic text-forest-800">
+                &ldquo;Tell me about your student and I&rsquo;ll tell you where I&rsquo;d start.&rdquo;
+              </blockquote>
+              <figcaption className="mt-2 text-sm text-ink/70">
+                {jackie.name}, {jackie.role.toLowerCase()}
+              </figcaption>
+            </figure>
           </div>
 
           <div className="relative mx-auto w-full max-w-[20rem] sm:max-w-sm lg:max-w-none">
@@ -178,11 +178,11 @@ export function ConceptCHome() {
 
         {/* Quick facts, then a hand-drawn nudge down to the chooser */}
         <div className="container-page mt-12">
-          <ul className="flex flex-wrap items-center justify-center border-y border-forest-100 py-4 text-sm text-ink/75">
+          <ul className="grid grid-cols-2 justify-items-center gap-x-4 gap-y-2 border-y border-forest-100 py-4 text-center text-sm text-ink/75 lg:flex lg:flex-wrap lg:items-center lg:justify-center lg:gap-0">
             {quickFacts.map((fact, i) => (
-              <li key={fact.full} className={`items-center ${fact.short ? "flex" : "hidden lg:flex"}`}>
+              <li key={fact.full} className={`items-center justify-center ${fact.wide ? "col-span-2 lg:col-span-1" : ""} ${fact.short ? "flex" : "hidden lg:flex"}`}>
                 {i > 0 && (
-                  <span aria-hidden="true" className="mx-3 inline-block h-1 w-1 rounded-full bg-gold-500 lg:mx-5" />
+                  <span aria-hidden="true" className="mx-5 hidden h-1 w-1 rounded-full bg-gold-500 lg:inline-block" />
                 )}
                 <span className="lg:hidden">{fact.short}</span>
                 <span className="hidden lg:inline">{fact.full}</span>
@@ -190,7 +190,7 @@ export function ConceptCHome() {
             ))}
           </ul>
           <div className="mt-8 flex items-center justify-center gap-4 text-forest-700">
-            <span className="font-display text-3xl italic sm:text-4xl">Start here</span>
+            <span className="font-display text-2xl font-semibold sm:text-3xl">Start here</span>
             <HandArrow className="h-14 w-11 sm:h-16 sm:w-12" />
           </div>
         </div>
@@ -232,7 +232,14 @@ export function ConceptCHome() {
         </div>
       </Section>
 
-      <Pathways />
+      <div className="container-page py-10 text-center sm:py-12">
+        <p className="text-ink/80">
+          Run a school or district?{" "}
+          <Link href="/district-partnerships" className="link-underline">
+            See how we partner with schools
+          </Link>
+        </p>
+      </div>
 
       {/* APEX: how it works, for parents weighing a full-time option */}
       <section className="bg-forest-900 text-cream">
@@ -248,7 +255,7 @@ export function ConceptCHome() {
             <dl className="mt-6 divide-y divide-cream/15 border-y border-cream/15">
               {apex.comparison.map((row) => (
                 <div key={row.traditional} className="grid gap-1 py-3 sm:grid-cols-2 sm:gap-6">
-                  <dt className="text-cream/60 line-through decoration-cream/30">{row.traditional}</dt>
+                  <dt className="text-cream/75 line-through decoration-cream/50">{row.traditional}</dt>
                   <dd className="font-semibold text-cream">{row.apex}</dd>
                 </div>
               ))}
