@@ -302,6 +302,54 @@ export const apex = {
   ],
   outcomesNote:
     "In our 2025-26 pilot year, APEX students grew 3.6 times their projected growth in reading and math, and the class's average national ranking went from the 43rd to the 78th percentile.",
+  workshops: {
+    intro:
+      "Workshops fill the rest of the day, Monday through Thursday. Here is what is on the 2026-27 calendar.",
+    list: [
+      {
+        name: "Manage Yourself",
+        body: "Managing time and routine, plus working in Google Docs, Sheets, Slides and Gmail.",
+      },
+      {
+        name: "Budgeting with Purpose",
+        body: "Students build a personal budget, then plan a vacation budget.",
+      },
+      {
+        name: "Better Together",
+        body: "Team projects, like producing a podcast and building a game board.",
+      },
+      {
+        name: "Young Entrepreneur Lab",
+        body: "Students plan and run a small business, including our Holiday Craft Fair.",
+      },
+      {
+        name: "Around the World Cultural Explorers",
+        body: "A country at a time: Japan, Brazil, Morocco, India and New Zealand.",
+      },
+      {
+        name: "Employment and Leadership",
+        body: "Skills for working with others, finished with a mock interview with a guest.",
+      },
+      {
+        name: "AI as Your Assistant, Not Your Replacement",
+        body: "How to use AI tools well and still do your own thinking.",
+      },
+      {
+        name: "Government Studies",
+        body: "How government works, ending with a mock trial.",
+      },
+      {
+        name: "Health and Safety",
+        body: "Everyday health and safety skills.",
+      },
+      {
+        name: "Community Service and Personal Goals",
+        body: "Giving back, and setting and checking in on goals through the year.",
+      },
+    ],
+    events:
+      "The year also includes a Grandparent's Day celebration, a Halloween party, Thanksgiving Around the Table, the Holiday Craft Fair, The Polar Express, a Valentine's Day community experience, a Multi Cultural Fair and a Mother's Day tea.",
+  },
   results: {
     basis: "Based on fall-to-spring NWEA MAP Growth assessments in reading and math, 2025-26 pilot year.",
     stats: [

@@ -158,6 +158,27 @@ export default function ApexPage() {
         </div>
       </section>
 
+      {/* What the workshops are */}
+      <Section>
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
+          <SectionHeading title="What the workshops look like" intro={apex.workshops.intro} />
+          <div>
+            <dl className="border-t border-forest-200">
+              {apex.workshops.list.map((w) => (
+                <div
+                  key={w.name}
+                  className="grid gap-1 border-b border-forest-100 py-4 sm:grid-cols-[15rem_1fr] sm:gap-6"
+                >
+                  <dt className="font-semibold text-forest-900">{w.name}</dt>
+                  <dd className="prose-kairos text-sm">{w.body}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="prose-kairos mt-6">{apex.workshops.events}</p>
+          </div>
+        </div>
+      </Section>
+
       {/* Traditional school vs. APEX */}
       <section className="bg-forest-800 py-16 text-cream sm:py-20">
         <div className="container-page grid gap-10 lg:grid-cols-[1fr_1.6fr]">
