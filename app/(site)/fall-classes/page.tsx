@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ExpandableText } from "@/components/ExpandableText";
 import { FallClassFinder } from "@/components/FallClassFinder";
+import { CollapsibleOnMobile } from "@/components/CollapsibleOnMobile";
 import { Reveal } from "@/components/ui/Reveal";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
@@ -95,7 +96,11 @@ export default function FallClassesPage() {
         mark="K to 7th grade"
         intro={`Small weekly classes in writing, speaking, art and reading, running through ${endDate}. Call and we'll sign your student up on the phone.`}
         tone="forest"
-        aside={<FallClassCallback classTitles={fallClasses.map((c) => c.title)} />}
+        aside={
+          <CollapsibleOnMobile label="Rather get a call? Request a call back">
+            <FallClassCallback classTitles={fallClasses.map((c) => c.title)} />
+          </CollapsibleOnMobile>
+        }
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <a href={site.phoneHref} className="btn-accent px-6 py-4 text-base">

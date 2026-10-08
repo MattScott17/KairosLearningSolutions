@@ -404,6 +404,9 @@ export function RegistrationForm({
     );
   }
 
+  // The recap above Submit appears once there is something to show, so an empty form is not full of "not filled in yet".
+  const recapStarted =
+    Object.values(fields).some((v) => v.trim() !== "") || childKeys.some((k) => child[k].picked.length > 0);
   const errorEntries = Object.entries(errors);
   const summarySections = Array.from(new Set(errorEntries.map(([name]) => sectionTitle(name)))).map((title) => ({
     title,
@@ -745,8 +748,19 @@ export function RegistrationForm({
                   hint: "If you homeschool, write home, OGCS, YV or Kairos.",
                 })}
               </div>
-              {textField(`${p}.phone`, "Student's cell phone", { type: "tel", inputMode: "tel" })}
-              {textField(`${p}.email`, "Student's email", { type: "email" })}
+              <details
+                className="sm:col-span-2"
+                open={Boolean(errors[`${p}.phone`] || errors[`${p}.email`]) || undefined}
+              >
+                <summary className="flex min-h-11 cursor-pointer items-center rounded-lg text-base font-semibold text-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-600">
+                  The student&apos;s own phone and email{" "}
+                  <span className="ml-2 text-sm font-normal text-ink/65">(optional)</span>
+                </summary>
+                <div className="mt-4 grid gap-5 sm:grid-cols-2">
+                  {textField(`${p}.phone`, "Student's cell phone", { type: "tel", inputMode: "tel" })}
+                  {textField(`${p}.email`, "Student's email", { type: "email" })}
+                </div>
+              </details>
             </div>
 
             {canCopyClasses && (
@@ -857,6 +871,7 @@ export function RegistrationForm({
       )}
 
       <div className="border-t border-forest-100 pt-8">
+        {recapStarted && (
         <div className="mb-6 rounded-lg border border-forest-300 p-5" aria-labelledby="recap-title" role="region">
           <h2 id="recap-title" className="text-lg font-semibold text-forest-900">
             Check before you send
@@ -895,7 +910,7 @@ export function RegistrationForm({
                         heading?.scrollIntoView({ block: "start" });
                         heading?.focus();
                       }}
-                      className="link-underline inline-flex min-h-11 items-center text-sm font-medium"
+                      className="link-underline inline-flex min-h-11 min-w-11 items-center justify-center text-sm font-medium"
                     >
                       Edit<span className="sr-only"> {name}</span>
                     </button>
@@ -917,6 +932,7 @@ export function RegistrationForm({
             })}
           </dl>
         </div>
+        )}
 
         <div className="mb-6 rounded-lg bg-sand p-5 text-base text-ink/80">
           <h2 className="text-lg font-semibold text-forest-900">What happens next</h2>

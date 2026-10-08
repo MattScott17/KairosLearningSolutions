@@ -8,6 +8,8 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
 import { leadership, team, testimonials } from "@/lib/content";
 import { site } from "@/lib/site";
+import Link from "next/link";
+import { Phone } from "lucide-react";
 import { pagePhotos, photos } from "@/lib/photos";
 import { TutorCard } from "@/components/TutorCard";
 import { ExpandableText } from "@/components/ExpandableText";
@@ -57,7 +59,17 @@ export default function AboutPage() {
         photo={pagePhotos.about}
         variant="flip"
         intro="Most of our teachers are Salinas parents and grandparents. Between them they've taught kindergarten through 12th grade, several for more than 25 years, and one still teaches full time at New Republic Elementary."
-      />
+      >
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <a href={site.phoneHref} className="btn-primary">
+            <Phone className="h-4 w-4" aria-hidden="true" />
+            Call {site.phone}
+          </a>
+          <Link href="/contact" className="btn-outline">
+            Send a message
+          </Link>
+        </div>
+      </PageHero>
 
       {/* Jackie, in her own words */}
       <Section>

@@ -126,15 +126,13 @@ export function FallClassFinder({ classes }: { classes: FinderClass[] }) {
                       href={`#${c.slug}`}
                       className="block rounded-md py-3 hover:bg-cream/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400"
                     >
-                      <span className="block text-sm font-semibold text-gold-400">
-                        {c.time}
-                        {c.dates ? <span className="font-normal text-cream"> · {c.dates}</span> : null}
-                      </span>
+                      <span className="block text-sm font-semibold text-gold-400">{c.time}</span>
                       <span className="mt-0.5 block text-base text-cream">
                         <span className="font-semibold underline decoration-cream/40 underline-offset-4">{c.title}</span>
                         <span> · {c.grades}</span>
                         <span className="sr-only">. Go to the class details</span>
                       </span>
+                      {c.dates ? <span className="mt-0.5 block text-sm text-cream/85">{c.dates}</span> : null}
                     </a>
                   </li>
                 ))}

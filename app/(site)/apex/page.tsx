@@ -82,7 +82,7 @@ export default function ApexPage() {
       <section className="border-b border-forest-100 bg-cream">
         <dl className="container-page grid grid-cols-1 divide-y divide-forest-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           {facts.map((f) => (
-            <div key={f.label} className="py-7 sm:px-6 sm:first:pl-0">
+            <div key={f.label} className="py-4 sm:px-6 sm:py-7 sm:first:pl-0">
               <dt className="text-sm text-ink/75">{f.label}</dt>
               <dd className="mt-1 font-display text-2xl font-semibold text-forest-800">{f.value}</dd>
               {f.note && <dd className="mt-1 text-sm text-ink/75">{f.note}</dd>}

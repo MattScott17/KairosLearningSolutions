@@ -31,24 +31,25 @@ export default function SummerPage() {
         photo={pagePhotos.summer}
         variant="wide"
         intro="We are still planning next summer. Dates, times and prices will be posted here as soon as they are set."
-      />
+      >
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <a href={site.phoneHref} className="btn-primary">
+            <Phone className="h-4 w-4" aria-hidden="true" />
+            Call {site.phone}
+          </a>
+          <Link href="/contact" className="btn-outline">
+            Send a message
+          </Link>
+        </div>
+      </PageHero>
 
-      <Section container="narrow">
+      <Section container="narrow" className="!pt-14">
         <h2 className="text-3xl font-semibold sm:text-4xl">Details coming soon</h2>
         <p className="prose-kairos mt-4 text-lg">
           Last summer we ran a Back-to-School Boot Camp for reading, math and language arts, and hosted a
           music camp. If you would like to hear when summer 2027 is ready, call us or send a message with
           your student&apos;s age and we will let you know.
         </p>
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a href={site.phoneHref} className="btn-primary">
-            <Phone className="h-4 w-4" />
-            {site.phone}
-          </a>
-          <Link href="/contact" className="btn-outline">
-            Send a message
-          </Link>
-        </div>
       </Section>
 
       <CTASection

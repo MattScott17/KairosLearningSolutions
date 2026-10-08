@@ -55,7 +55,7 @@ export function TabBar({
       role="tablist"
       aria-label={label}
       className={cn(
-        "flex flex-wrap justify-center gap-2",
+        "grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-center",
         className
       )}
     >
@@ -76,7 +76,7 @@ export function TabBar({
             onClick={() => onChange(tab.id)}
             onKeyDown={(e) => onKeyDown(e, i)}
             className={cn(
-              "relative min-h-11 rounded-md border px-4 py-2.5 sm:px-5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-500 focus-visible:ring-offset-2 focus-visible:ring-offset-cream",
+              "relative min-h-11 rounded-md border px-3 py-2.5 sm:px-5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-500 focus-visible:ring-offset-2 focus-visible:ring-offset-cream",
               selected
                 ? "border-transparent text-cream"
                 : "border-forest-200 bg-cream text-forest-800 hover:bg-forest-50"

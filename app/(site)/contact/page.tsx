@@ -115,10 +115,10 @@ export default function ContactPage() {
               title="Map to Kairos Learning Solutions"
               src={site.address.embedUrl}
               width="100%"
-              height="420"
+              height="320"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="block min-h-[420px] w-full"
+              className="block min-h-[260px] w-full sm:min-h-[420px]"
             />
           </div>
           <p className="mt-4 text-sm text-ink/70">
@@ -126,7 +126,7 @@ export default function ContactPage() {
               href={site.address.mapUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="link-underline inline-flex min-h-[44px] items-center"
+              className="btn-outline w-full sm:w-auto"
             >
               Open in Google Maps
             </a>
