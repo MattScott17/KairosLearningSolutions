@@ -125,7 +125,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
         <dl className="container-page grid grid-cols-1 divide-y divide-forest-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           {service.highlights.map((h) => (
             <div key={h.label} className="py-7 sm:px-6 sm:first:pl-0">
-              <dt className="text-sm text-ink/60">{h.label}</dt>
+              <dt className="text-sm text-ink/75">{h.label}</dt>
               <dd className="mt-1 font-display text-xl font-semibold text-forest-800">{h.value}</dd>
             </div>
           ))}
@@ -136,7 +136,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
       <Section>
         {levels.length > 0 && (
           <div className="mb-14">
-            <h2 className="text-3xl font-semibold sm:text-4xl">Four levels, month to month</h2>
+            <h2 className="text-3xl font-semibold sm:text-4xl">Four levels</h2>
             <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {levels.map((l, i) => (
                 <Reveal as="li" key={l.name} delay={i * 0.06} className="rounded-lg border border-forest-100 bg-cream p-6">
@@ -224,9 +224,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
           <div className="mt-6 max-w-xl rounded-lg border border-forest-100 bg-sand/30 p-5">
             <h3 className="text-sm font-semibold text-forest-800">Registration fees</h3>
             <dl className="mt-3 space-y-2">
-              {registrationFees.map((fee) => (
+              {registrationFees
+                .filter((fee) => slug === "homeschool-support" || fee.label.startsWith("Tutor"))
+                .map((fee) => (
                 <div key={fee.label} className="flex justify-between gap-4 text-sm">
-                  <dt className="text-ink/60">{fee.label}</dt>
+                  <dt className="text-ink/75">{fee.label}</dt>
                   <dd className="whitespace-nowrap text-right font-medium text-forest-800">{fee.value}</dd>
                 </div>
               ))}

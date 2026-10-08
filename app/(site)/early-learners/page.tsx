@@ -9,7 +9,7 @@ import { ArrowRight, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
-import { earlyLearners, faqs, registrationFees } from "@/lib/content";
+import { earlyLearners, faqs } from "@/lib/content";
 import { pagePhotos, photos } from "@/lib/photos";
 import { site } from "@/lib/site";
 
@@ -70,10 +70,6 @@ export default function EarlyLearnersPage() {
           </div>
           <div>
             <h2 className="text-3xl font-semibold sm:text-4xl">Three groups, by skill</h2>
-            <p className="prose-kairos mt-4 text-lg">
-              Each child starts in the group that matches what they can already do, and moves up
-              when they&apos;re ready, whatever their age.
-            </p>
             <dl className="mt-8 border-t border-forest-200">
               {earlyLearners.groups.map((group, i) => (
                 <Reveal key={group.name} delay={i * 0.06} className="border-b border-forest-100 py-5">
@@ -113,16 +109,6 @@ export default function EarlyLearnersPage() {
                   <dd className="font-medium text-forest-800 sm:text-right">
                     {earlyLearners.pricing.find((p) => p.label === s.label)?.value.replace(" / ", " a ")}
                   </dd>
-                </div>
-              ))}
-            </dl>
-
-            <h3 className="mt-10 text-sm font-semibold text-forest-800">Registration fees</h3>
-            <dl className="mt-3 space-y-2">
-              {registrationFees.map((fee) => (
-                <div key={fee.label} className="flex justify-between gap-4 text-sm">
-                  <dt className="text-ink/60">{fee.label}</dt>
-                  <dd className="whitespace-nowrap text-right font-medium text-forest-800">{fee.value}</dd>
                 </div>
               ))}
             </dl>

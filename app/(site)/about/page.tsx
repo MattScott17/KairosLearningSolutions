@@ -9,7 +9,8 @@ import { CTASection } from "@/components/CTASection";
 import { leadership, team, testimonials } from "@/lib/content";
 import { site } from "@/lib/site";
 import { pagePhotos, photos } from "@/lib/photos";
-import { TutorAvatar, TutorCard } from "@/components/TutorCard";
+import { TutorCard } from "@/components/TutorCard";
+import { ExpandableText } from "@/components/ExpandableText";
 
 export const metadata: Metadata = pageMetadata({
   title: "About Our Teachers",
@@ -24,10 +25,17 @@ type Review = (typeof testimonials)[number];
 function ReviewCard({ t }: { t: Review }) {
   return (
     <figure className="rounded-lg border border-forest-100 bg-cream p-5 sm:p-7">
-      <blockquote className="text-base leading-relaxed text-ink/85 sm:text-lg">“{t.quote}”</blockquote>
-      <figcaption className="mt-6 border-t border-forest-100 pt-4 text-sm">
+      <blockquote className="font-display text-xl italic leading-relaxed text-forest-800">“{t.pull}”</blockquote>
+      <details className="group mt-3">
+        <summary className="link-underline inline-flex min-h-11 cursor-pointer list-none items-center text-sm [&::-webkit-details-marker]:hidden">
+          <span className="group-open:hidden">Read the full review</span>
+          <span className="hidden group-open:inline">Hide the full review</span>
+        </summary>
+        <blockquote className="mt-2 text-base leading-relaxed text-ink/80">“{t.quote}”</blockquote>
+      </details>
+      <figcaption className="mt-4 border-t border-forest-100 pt-4 text-sm">
         <span className="font-semibold text-forest-800">{t.author}</span>
-        <span className="block text-ink/60">
+        <span className="block text-ink/75">
           {t.role}
           {t.source && <> · {t.source} review</>}
         </span>
@@ -84,16 +92,22 @@ export default function AboutPage() {
           <SectionHeading title="Who runs Kairos" />
           <div className="mt-10 grid gap-10 md:grid-cols-2">
             {leadership.map((person, i) => (
-              <Reveal key={person.name} delay={i * 0.08} className="flex gap-5">
-                <TutorAvatar
-                  member={person}
-                  sizes="80px"
-                  className="h-20 w-20 shrink-0 rounded-lg"
-                />
+              <Reveal key={person.name} delay={i * 0.08} className="flex gap-5 sm:gap-6">
+                <div className="relative aspect-[4/5] w-28 shrink-0 overflow-hidden rounded-lg bg-forest-50 sm:w-40">
+                  {person.image && (
+                    <Image
+                      src={person.image}
+                      alt={person.name}
+                      fill
+                      sizes="(max-width: 640px) 7rem, 10rem"
+                      className="object-cover"
+                    />
+                  )}
+                </div>
                 <div>
                   <h3 className="text-xl font-semibold">{person.name}</h3>
                   <p className="text-sm text-forest-700">{person.role}</p>
-                  {person.bio && <p className="prose-kairos mt-3 text-sm">{person.bio}</p>}
+                  {person.bio && <ExpandableText text={person.bio} lines={3} className="mt-3 text-base" />}
                 </div>
               </Reveal>
             ))}
@@ -108,10 +122,10 @@ export default function AboutPage() {
             title="Our teachers and tutors"
             intro="Credentialed classroom teachers, subject specialists, and college tutors in math and science."
           />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid items-start gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {team.map((member, i) => (
-              <Reveal key={member.name} delay={(i % 3) * 0.06} className="h-full">
-                <TutorCard member={member} fullBio />
+              <Reveal key={member.name} delay={(i % 3) * 0.06}>
+                <TutorCard member={member} compact expandable />
               </Reveal>
             ))}
           </div>
@@ -122,7 +136,7 @@ export default function AboutPage() {
       <Section id="reviews" className="scroll-mt-20">
         <SectionHeading
           title="What families say"
-          intro={`These are ${testimonials.length} Google reviews from Kairos parents and grandparents, quoted word for word. Names are shortened to a last initial.`}
+          intro={`${testimonials.length} Google reviews from Kairos parents and grandparents. Open one to read it word for word.`}
         />
         <div className="mt-10 columns-1 gap-6 sm:columns-2 lg:columns-3 [&>*]:mb-6 [&>*]:break-inside-avoid">
           {testimonials.slice(0, 6).map((t) => (

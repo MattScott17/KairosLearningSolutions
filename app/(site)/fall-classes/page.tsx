@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ExpandableText } from "@/components/ExpandableText";
 import { Reveal } from "@/components/ui/Reveal";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
@@ -47,21 +48,21 @@ function ClassCard({ c }: { c: FallClass }) {
       {c.partner && <p className="mt-1 text-sm text-ink/60">Taught by {c.partner}</p>}
 
       <dl className="mt-4 grid gap-x-6 gap-y-1 border-y border-forest-100 py-3 text-sm sm:grid-cols-[auto_1fr]">
-        <dt className="font-medium text-ink/60">When</dt>
+        <dt className="font-medium text-ink/75">When</dt>
         <dd className="text-ink">
           {c.day}s, {c.time}
         </dd>
         {c.dates && (
           <>
-            <dt className="font-medium text-ink/60">Dates</dt>
+            <dt className="font-medium text-ink/75">Dates</dt>
             <dd className="text-ink">{c.dates}</dd>
           </>
         )}
-        <dt className="font-medium text-ink/60">Price</dt>
+        <dt className="font-medium text-ink/75">Price</dt>
         <dd className="font-semibold text-forest-800">{c.price}</dd>
       </dl>
 
-      <p className="prose-kairos mt-4">{c.description}</p>
+      <ExpandableText text={c.description} lines={3} className="mt-4 text-base" />
 
       {c.blocks && (
         <ul className="mt-4 space-y-1.5 text-sm">
@@ -79,10 +80,6 @@ function ClassCard({ c }: { c: FallClass }) {
           Register
           <ArrowRight className="h-4 w-4" />
         </Link>
-        <a href={site.phoneHref} className="link-underline inline-flex min-h-[44px] items-center gap-1.5 text-sm">
-          <Phone className="h-4 w-4" />
-          Call to ask about it
-        </a>
       </div>
     </article>
   );
@@ -95,7 +92,7 @@ export default function FallClassesPage() {
       <PageHero
         title="Fall 2026 classes for kids in K to 7th grade"
         mark="K to 7th grade"
-        intro={`Small weekly classes in writing, speaking, art and reading, at our center on South Main Street. Classes run through ${endDate}. Give us a call and we'll help you pick the right class and sign your student up right on the phone.`}
+        intro={`Small weekly classes in writing, speaking, art and reading, running through ${endDate}. Call and we'll sign your student up on the phone.`}
         aside={<FallClassCallback classTitles={fallClasses.map((c) => c.title)} />}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
@@ -127,8 +124,7 @@ export default function FallClassesPage() {
         <div className="max-w-2xl">
           <h2 className="text-3xl font-semibold sm:text-4xl">This fall&apos;s classes</h2>
           <p className="prose-kairos mt-4 text-lg">
-            Each class meets once a week in a small group. There&apos;s a {classFee} registration fee on
-            top of the class price. Not sure which one fits? Give us a call and tell us about your student.
+            Each class meets once a week in a small group, plus a {classFee} registration fee.
           </p>
         </div>
 
@@ -186,7 +182,7 @@ export default function FallClassesPage() {
             <h2 className="text-3xl font-semibold sm:text-4xl">Signing up</h2>
             <dl className="mt-6 border-t border-forest-200">
               <div className="border-b border-forest-200 py-5">
-                <dt className="font-semibold text-forest-900">How do I sign up?</dt>
+                <dt className="font-semibold text-forest-900">How do I sign up, and what does it cost?</dt>
                 <dd className="prose-kairos mt-1">
                   Call{" "}
                   <a href={site.phoneHref} className="link-underline">
@@ -196,14 +192,8 @@ export default function FallClassesPage() {
                   <Link href="/fall-classes/register" className="link-underline">
                     registration form
                   </Link>
-                  .
-                </dd>
-              </div>
-              <div className="border-b border-forest-200 py-5">
-                <dt className="font-semibold text-forest-900">What does it cost?</dt>
-                <dd className="prose-kairos mt-1">
-                  The class price is listed with each class, plus a {classFee} registration fee. It
-                  covers materials and saves your student&apos;s place.
+                  . The class price is listed with each class, plus a {classFee} registration fee that covers
+                  materials and saves your student&apos;s place.
                 </dd>
               </div>
               <div className="border-b border-forest-200 py-5">
