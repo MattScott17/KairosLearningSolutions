@@ -5,6 +5,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { landingPageGroups } from "@/lib/landing-pages";
 import { BannerEditor } from "@/components/concepts/BannerEditor";
+import { CopyLinkButton } from "@/components/concepts/CopyLinkButton";
 import { getBanner } from "@/lib/banner";
 
 export const metadata: Metadata = {
@@ -18,7 +19,15 @@ export default async function LandingPagesIndex() {
     <>
       <PageHero
         title="Landing pages"
-        intro="Everything in one place: every ad landing page, every homepage option, and the announcement banner editor. Open them on your phone, since that's where most ad traffic lands."
+        intro={
+          <>
+            Open any page to look at it, tap Copy link to share it, or{" "}
+            <a href="#banner" className="link-underline">
+              edit the banner at the top of the site
+            </a>
+            . Try them on your phone, since that is where most ad traffic lands.
+          </>
+        }
       />
       {landingPageGroups.map((group, gi) => (
         <Section key={group.program} className={gi % 2 ? "bg-sand/50" : ""}>
@@ -28,20 +37,22 @@ export default async function LandingPagesIndex() {
           </div>
           <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {group.pages.map((page, i) => (
-              <div key={page.href}>
-                <Link
-                  href={page.href}
-                  className="group flex h-full flex-col rounded-lg border border-forest-100 bg-cream p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-forest-300"
-                >
-                  <span className="font-semibold text-forest-900">{page.label}</span>
-                  <span className="mt-1 font-mono text-xs text-forest-600">{page.href}</span>
-                  <span className="prose-kairos mt-3 flex-1 text-sm">{page.description}</span>
-                  <span className="mt-4 text-xs text-ink/75">{page.tags.join(" · ")}</span>
-                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-forest-800">
+              <div key={page.href} className="flex h-full flex-col rounded-lg border border-forest-100 bg-cream p-6">
+                <span className="font-semibold text-forest-900">{page.label}</span>
+                <span className="mt-1 break-all font-mono text-sm text-forest-700">{page.href}</span>
+                <span className="prose-kairos mt-3 flex-1 text-sm">{page.description}</span>
+                <span className="mt-4 text-sm text-ink/75">{page.tags.join(" · ")}</span>
+                <div className="mt-3 flex flex-wrap items-center gap-x-6">
+                  <Link
+                    href={page.href}
+                    className="group inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-forest-800"
+                  >
                     Open page
+                    <span className="sr-only"> {page.label}</span>
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </Link>
+                  </Link>
+                  <CopyLinkButton href={page.href} name={page.label} />
+                </div>
               </div>
             ))}
           </div>

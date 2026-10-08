@@ -6,7 +6,6 @@ import { ReviewMarquee } from "@/components/ReviewMarquee";
 import { TutorRow } from "@/components/TutorCard";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { ProgramList } from "@/components/ProgramList";
-import { Pathways } from "@/components/Pathways";
 import { PhotosFromKairos, HowWeTeach, GetStarted } from "@/components/home/HomeSections";
 import { CTASection } from "@/components/CTASection";
 import { featuredTutors, getTeamMembers, testimonials } from "@/lib/content";
@@ -18,8 +17,6 @@ export function ClassicHome() {
 
       <StatsBar />
 
-      <Pathways />
-
       {/* Every program at a glance, with prices */}
       <Section id="services" className="border-t border-forest-100 bg-sand/50">
         <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
@@ -27,7 +24,7 @@ export function ClassicHome() {
             title="What we offer, and what it costs"
             intro="Pick one subject once a week, or the whole school day. Each program has its own page with the details."
           />
-          <Link href="/services" className="link-underline shrink-0">
+          <Link href="/services" className="link-underline inline-flex min-h-11 shrink-0 items-center">
             Compare programs
           </Link>
         </div>
@@ -44,7 +41,7 @@ export function ClassicHome() {
       <section className="overflow-hidden border-t border-forest-100 bg-sand py-16 sm:py-20">
         <div className="container-page flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
           <SectionHeading title="What parents say on Google" />
-          <Link href="/about#reviews" className="link-underline shrink-0">
+          <Link href="/about#reviews" className="link-underline inline-flex min-h-11 shrink-0 items-center">
             Read all {testimonials.length} reviews in full
           </Link>
         </div>
@@ -63,7 +60,7 @@ export function ClassicHome() {
           </Link>
         </div>
         <div className="mt-10">
-          <TutorRow members={getTeamMembers(featuredTutors.home)} />
+          <TutorRow compact expandable members={getTeamMembers(featuredTutors.home)} />
         </div>
       </Section>
 

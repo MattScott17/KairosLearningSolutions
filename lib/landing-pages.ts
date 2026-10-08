@@ -20,7 +20,7 @@ export type LandingPageGroup = {
 function offerVariants(program: ProgramSlug): LandingPageEntry[] {
   return variantSlugs.map((v) => ({
     href: `/lp/${program}/${v}`,
-    label: variantMeta[v].label,
+    label: `${program === "apex" ? "APEX" : "Tutoring"}, ${variantMeta[v].label}`,
     description: variantMeta[v].pitch,
     tags: ["Offer-first", "No nav", "Mobile-first"],
   }));
@@ -60,7 +60,7 @@ export const landingPageGroups: LandingPageGroup[] = [
     pages: [
       {
         href: "/",
-        label: "Main homepage (Concept C)",
+        label: "Live homepage",
         description: "The live homepage. Parents pick what their student needs and see the matching program.",
         tags: ["Homepage", "Site nav"],
       },
@@ -70,7 +70,8 @@ export const landingPageGroups: LandingPageGroup[] = [
         description: "The first homepage, kept as an alternate. Same content, laid out with the full program list and APEX up front.",
         tags: ["Homepage alternate", "Site nav"],
       },
-      ...concepts.map((c) => ({
+      // Concept C is the live homepage above, so it gets no card of its own.
+      ...concepts.filter((c) => c.slug !== "c").map((c) => ({
         href: `/concepts/${c.slug}`,
         label: c.label,
         description: c.pitch,
