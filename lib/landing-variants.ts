@@ -36,6 +36,10 @@ export type ProgramOffer = {
   obstacles: Obstacle[];
   faqs: Faq[];
   quickBullets: string[];
+  /** One plain price sentence for the first screen, so nobody has to open the FAQ. */
+  priceSentence: string;
+  /** A short "who this is not for" line for the short layout, which has no for/not-for block. */
+  qualifier?: string;
   testimonialIds: string[];
   photo: { src: string; alt: string };
   heroes: Record<VariantSlug, VariantHero>;
@@ -123,6 +127,7 @@ export const tutoringOffer: ProgramOffer = {
       a: `${hoursLine}.`,
     },
   ],
+  priceSentence: `Sessions are ${tutoringPrice}, depending on the subject and tutor.`,
   quickBullets: [
     "One-on-one, every subject, every age",
     "Tutor matched to how your student learns",
@@ -225,6 +230,8 @@ export const apexOffer: ProgramOffer = {
       a: "Once core academics are mastered, students spend the day on life skills, hands-on project-based learning, and mentorship.",
     },
   ],
+  priceSentence: `Full program: ${money(apex.tiers[0].price)} for a ${apex.tuition.term.toLowerCase()}.`,
+  qualifier: "APEX is full-time. For part-time help, see private tutoring or homeschool support.",
   quickBullets: [
     `Full-time, small-group · ${apex.gradeRange}`,
     "Mastery-based academics at your child's pace",

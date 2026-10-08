@@ -27,7 +27,7 @@ export function CTASection({
           <p className="prose-kairos mt-4 max-w-xl text-lg">{intro}</p>
           <a
             href={site.phoneHref}
-            className="mt-6 inline-block font-display text-4xl font-semibold text-forest-700 underline decoration-forest-300 decoration-2 underline-offset-8 hover:decoration-forest-700 sm:text-5xl"
+            className="mt-6 inline-block py-1.5 font-display text-4xl font-semibold text-forest-700 underline decoration-forest-300 decoration-2 underline-offset-8 hover:decoration-forest-700 sm:text-5xl"
           >
             {site.phone}
           </a>
@@ -54,7 +54,7 @@ export function CTASection({
           <div>
             <dt className="font-semibold text-forest-900">Find us</dt>
             <dd className="mt-1">
-              <a href={site.address.mapUrl} className="hover:underline">
+              <a href={site.address.mapUrl} className="block py-2 hover:underline">
                 {site.address.street}
                 <br />
                 {site.address.city}, {site.address.state} {site.address.zip}

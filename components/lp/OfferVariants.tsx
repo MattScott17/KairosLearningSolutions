@@ -90,6 +90,7 @@ export function OfferVariant({ offer }: { offer: ProgramOffer }) {
             <Headline hero={hero} className="text-cream" />
             <p className="mt-5 text-lg leading-relaxed text-cream/85">{hero.subhead}</p>
             <CtaPair offer={offer} dark className="mt-7" />
+            <p className="mt-4 text-sm text-cream/80">{offer.priceSentence}</p>
             <div className="mt-9">
               <CheckList items={offer.quickBullets} dark />
             </div>
@@ -149,6 +150,7 @@ export function ProblemFixVariant({ offer }: { offer: ProgramOffer }) {
             <Headline hero={hero} />
             <p className="mt-5 text-lg leading-relaxed text-ink/80">{hero.subhead}</p>
             <CtaPair offer={offer} className="mt-8" />
+            <p className="mt-4 text-sm text-ink/75">{offer.priceSentence}</p>
           </div>
           {/* Hidden on phones, so it must load lazily (never priority). */}
           <div className="hidden lg:block">
@@ -175,7 +177,7 @@ export function ProblemFixVariant({ offer }: { offer: ProgramOffer }) {
             {offer.form.painPoints.map((p) => (
               <li
                 key={p}
-                className="rounded-lg border-l-2 border-gold-500/60 bg-sand p-5 text-[1.05rem] leading-relaxed text-ink/90"
+                className="rounded-lg bg-sand p-5 text-[1.05rem] leading-relaxed text-ink/90"
               >
                 {p}
               </li>
@@ -249,9 +251,17 @@ export function ShortVariant({ offer }: { offer: ProgramOffer }) {
               <CheckList items={offer.quickBullets} dark />
             </div>
             <p className="mt-6 text-sm text-cream/75">{hero.subhead}</p>
+            <p className="mt-3 text-sm text-cream/80">{offer.priceSentence}</p>
+            {offer.qualifier && <p className="mt-2 text-sm text-cream/80">{offer.qualifier}</p>}
           </div>
           <div className="mt-4 lg:mt-0">
             <CallbackForm copy={offer.form} />
+            <p className="mt-3 text-center text-sm text-cream/80 lg:text-left">
+              Or call{" "}
+              <a href={site.phoneHref} className="inline-flex min-h-11 items-center font-semibold underline underline-offset-4">
+                {site.phone}
+              </a>
+            </p>
           </div>
         </div>
       </section>

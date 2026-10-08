@@ -231,7 +231,7 @@ export function ConceptCHome() {
           </Link>
         </div>
         <div className="mt-10">
-          <TutorRow compact members={getTeamMembers(featuredTutors.home)} />
+          <TutorRow compact expandable members={getTeamMembers(featuredTutors.home)} />
         </div>
       </Section>
 

@@ -41,7 +41,6 @@ export const pagePhotos = {
   earlyLearners: photos.circleTime,
   summer: { ...photos.outdoors, position: "30% 70%" } as Photo,
   fallClasses: photos.collage,
-  conceptAGuide: photos.handprints,
 };
 
 /** Photo strip and the photo-led concepts (B and D). */
@@ -62,8 +61,6 @@ export const galleryPhotos: Photo[] = [
 
 export type HeroVideo = { mp4: string; webm?: string };
 
-/** Concept D's looping hero clip. Undefined until the encoded files are in /public/video. */
-export const heroVideo: HeroVideo | undefined = undefined;
 
 /** Photo shown beside each row of the programs-and-prices list, keyed by the row's link. */
 export const programPhotos: Record<string, Photo> = {

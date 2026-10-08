@@ -57,7 +57,7 @@ export function Navigation() {
               <li key={item.href} className="group relative">
                 <Link
                   href={item.href}
-                  className={`flex items-center gap-1 rounded-md px-3.5 py-2 text-sm font-medium transition-colors ${
+                  className={`flex min-h-11 items-center gap-1 rounded-md px-3.5 text-sm font-medium transition-colors ${
                     isActive(item.href)
                       ? "text-forest-800"
                       : "text-ink/75 hover:text-forest-800"
@@ -78,7 +78,7 @@ export function Navigation() {
                           {child.label}
                         </span>
                         {child.description && (
-                          <span className="mt-0.5 block text-xs text-ink/60">
+                          <span className="mt-0.5 block text-xs text-ink/75">
                             {child.description}
                           </span>
                         )}
@@ -91,7 +91,7 @@ export function Navigation() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className={`rounded-md px-3.5 py-2 text-sm font-medium transition-colors ${
+                  className={`inline-flex min-h-11 items-center rounded-md px-3.5 text-sm font-medium transition-colors ${
                     isActive(item.href)
                       ? "text-forest-800"
                       : "text-ink/75 hover:text-forest-800"

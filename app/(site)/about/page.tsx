@@ -81,7 +81,7 @@ export default function AboutPage() {
                 learning.
               </p>
             </div>
-            <p className="mt-6 text-sm text-ink/60">Jackie Scott, owner and lead teacher</p>
+            <p className="mt-6 text-sm text-ink/75">Jackie Scott, owner and lead teacher</p>
           </div>
         </div>
       </Section>

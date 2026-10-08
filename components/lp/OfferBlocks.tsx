@@ -67,7 +67,7 @@ export function CtaPair({
           Call {site.phone}
         </a>
       </div>
-      <p className={`mt-3 text-xs ${dark ? "text-cream/70" : "text-ink/60"}`}>
+      <p className={`mt-3 text-xs ${dark ? "text-cream/70" : "text-ink/75"}`}>
         Free · No commitment · Just your name and number
       </p>
     </div>
@@ -157,7 +157,7 @@ export function ForNotFor({ offer }: { offer: ProgramOffer }) {
         <ul className="mt-4 space-y-3">
           {offer.notForYou.map((line) => (
             <li key={line} className="flex gap-3 text-[0.95rem] text-ink/70">
-              <X className="mt-0.5 h-5 w-5 shrink-0 text-ink/40" strokeWidth={3} />
+              <X className="mt-0.5 h-5 w-5 shrink-0 text-ink/65" strokeWidth={3} />
               {line}
             </li>
           ))}

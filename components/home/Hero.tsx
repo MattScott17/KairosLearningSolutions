@@ -46,7 +46,7 @@ export function Hero({ banner }: { banner?: ReactNode }) {
             </a>
           </div>
 
-          <p className="mt-6 text-sm text-ink/60">
+          <p className="mt-6 text-sm text-ink/75">
             {site.address.street}, {site.address.city} · In person or online
           </p>
         </div>

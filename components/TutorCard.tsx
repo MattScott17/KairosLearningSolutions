@@ -103,12 +103,20 @@ export function TutorCard({
 }
 
 /** A swipeable row of tutor cards on phones that becomes a 4-up grid on desktop. */
-export function TutorRow({ members, compact = false }: { members: TeamMember[]; compact?: boolean }) {
+export function TutorRow({
+  members,
+  compact = false,
+  expandable = false,
+}: {
+  members: TeamMember[];
+  compact?: boolean;
+  expandable?: boolean;
+}) {
   return (
     <div className="-mx-5 flex snap-x snap-mandatory scroll-pl-5 gap-4 overflow-x-auto px-5 pb-4 sm:-mx-8 sm:scroll-pl-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0">
       {members.map((member) => (
         <div key={member.name} className="w-[72%] shrink-0 snap-start sm:w-[45%] lg:w-auto">
-          <TutorCard member={member} compact={compact} />
+          <TutorCard member={member} compact={compact} expandable={expandable} />
         </div>
       ))}
     </div>

@@ -41,6 +41,38 @@ typography:
     fontSize: "0.875rem"
     fontWeight: 600
     lineHeight: 1.25
+  ring-label:
+    fontFamily: "Source Serif 4, Georgia, serif"
+    fontSize: "13px"
+    fontWeight: 600
+    letterSpacing: "0.12em"
+  ring-label-compact:
+    fontFamily: "Source Serif 4, Georgia, serif"
+    fontSize: "10.5px"
+    fontWeight: 600
+    letterSpacing: "0.12em"
+  offer-display:
+    fontFamily: "Source Serif 4, Georgia, serif"
+    fontSize: "2.15rem"
+    fontWeight: 600
+    lineHeight: 1.15
+  offer-title:
+    fontFamily: "Source Serif 4, Georgia, serif"
+    fontSize: "1.75rem"
+    fontWeight: 600
+  offer-lead:
+    fontFamily: "Public Sans, system-ui, sans-serif"
+    fontSize: "1.05rem"
+    fontWeight: 400
+  offer-small:
+    fontFamily: "Public Sans, system-ui, sans-serif"
+    fontSize: "0.95rem"
+    fontWeight: 500
+  classic-hero:
+    fontFamily: "Source Serif 4, Georgia, serif"
+    fontSize: "2.6rem"
+    fontWeight: 600
+    lineHeight: 1.08
 rounded:
   md: "6px"
   lg: "8px"
@@ -137,6 +169,11 @@ A white page with one family of greens pulled from the logo and a single gold ac
 - **Body** (400, 1rem, 1.625, Ink at 80%): paragraphs, capped near 65 to 75ch.
 - **Lead** (400, 1.125rem): hero intro text.
 - **Label** (600, 0.875rem): buttons and small controls. Sentence case.
+
+### Special sizes
+- **Ring label** (13px, 10.5px on phones): the curved KAIROS text around hero photos. Decorative, set in the serif with wide letter spacing, and hidden from screen readers.
+- **Offer sizes** (2.15rem, 1.75rem, 1.05rem, 0.95rem): the ad landing pages in `components/lp/` use tighter phone-first sizes between the standard steps. They apply only to those pages.
+- **Classic hero** (2.6rem): the headline on the original homepage at `/classic`.
 
 ### Named Rules
 **The Sentence-Case Rule.** No uppercase labels, no letter-spaced eyebrow text. The legacy `.eyebrow` class exists in `globals.css` but must not be used in new work.

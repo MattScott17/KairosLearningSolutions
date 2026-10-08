@@ -41,7 +41,7 @@ const fieldNames: Record<string, string> = {
   health: "health notes",
 };
 
-type ChildState = { grade: string; picked: string[]; open: boolean; otherOpen: boolean };
+type ChildState = { grade: string; picked: string[]; open: boolean; otherOpen: boolean; browse: boolean };
 
 // A draft lives in sessionStorage only: it clears when the tab closes, which matters because the
 // form can hold a child's name and health notes. Reading it is explicit, never silent.
@@ -78,7 +78,7 @@ export function RegistrationForm({
   const [childKeys, setChildKeys] = useState([0]);
   const nextKey = useRef(1);
   const [child, setChild] = useState<Record<number, ChildState>>({
-    0: { grade: "", picked: initialClass ? [initialClass] : [], open: true, otherOpen: false },
+    0: { grade: "", picked: initialClass ? [initialClass] : [], open: true, otherOpen: false, browse: Boolean(initialClass) },
   });
   const [status, setStatus] = useState<Status>("idle");
   const [serverError, setServerError] = useState("");
@@ -148,7 +148,7 @@ export function RegistrationForm({
         keys.map((k) => {
           const kid = draft.kids[k];
           const picked = (kid?.picked ?? []).filter((id) => known.has(id));
-          return [k, { grade: kid?.grade ?? "", picked, open: picked.length === 0 || k === count - 1, otherOpen: false }];
+          return [k, { grade: kid?.grade ?? "", picked, open: picked.length === 0 || k === count - 1, otherOpen: false, browse: picked.length > 0 }];
         })
       )
     );
@@ -240,7 +240,7 @@ export function RegistrationForm({
     }
     focusNewStudent.current = true;
     setChild((c) => {
-      const next = { ...c, [key]: { grade: "", picked: [], open: true, otherOpen: false } };
+      const next = { ...c, [key]: { grade: "", picked: [], open: true, otherOpen: false, browse: false } };
       // Fold away students who already have a class picked so the form stays short.
       for (const k of childKeys) if (c[k].picked.length > 0) next[k] = { ...c[k], open: false };
       return next;
@@ -518,6 +518,7 @@ export function RegistrationForm({
                 onChange={(e) =>
                   patchChild(key, {
                     picked: e.target.checked ? [...state.picked, o.id] : state.picked.filter((id) => id !== o.id),
+                    browse: true,
                   })
                 }
                 className="mt-0.5 h-5 w-5 shrink-0 accent-forest-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700"
@@ -668,11 +669,22 @@ export function RegistrationForm({
         const fitting = split(true);
         const other = gradeNo === null ? [] : split(false);
         const otherPicked = other.reduce((n, g) => n + g.options.filter((o) => state.picked.includes(o.id)).length, 0);
+        const first = child[childKeys[0]];
+        const canCopyClasses =
+          i > 0 && first.picked.length > 0 && first.picked.join() !== state.picked.join();
+        const showList =
+          gradeNo !== null || state.grade === "Other" || state.picked.length > 0 || state.browse || Boolean(errors[`${p}.classes`]);
         return (
           <fieldset key={key} className="border-t-2 border-forest-800 pt-6">
             <legend className="sr-only">{studentName(i)}</legend>
             <div className="flex items-baseline justify-between gap-4">
-              <h2 id={`student-${i}`} tabIndex={-1} className="text-2xl font-semibold outline-none">{studentName(i)}</h2>
+              <h2 id={`student-${i}`} tabIndex={-1} className="text-2xl font-semibold outline-none">
+                {studentName(i)}
+                {childKeys.length > 1 && " "}
+                {childKeys.length > 1 && (
+                  <span className="ml-1 text-base font-normal text-ink/75">of {childKeys.length}</span>
+                )}
+              </h2>
               {i > 0 && (
                 <button
                   type="button"
@@ -737,6 +749,22 @@ export function RegistrationForm({
               {textField(`${p}.email`, "Student's email", { type: "email" })}
             </div>
 
+            {canCopyClasses && (
+              <button
+                type="button"
+                onClick={() => {
+                  const outside = first.picked.some((id) => {
+                    const g = registrationOptions.find((o) => o.id === id)?.grades;
+                    const n = gradeNumber(state.grade);
+                    return n !== null && g !== undefined && (n < g[0] || n > g[1]);
+                  });
+                  patchChild(key, { picked: [...first.picked], browse: true, otherOpen: state.otherOpen || outside });
+                }}
+                className="btn-outline mt-8 w-full sm:w-auto"
+              >
+                Pick the same classes as Student 1
+              </button>
+            )}
             <details
               open={state.open}
               onToggle={(e) => {
@@ -765,17 +793,26 @@ export function RegistrationForm({
                 <div id={`${p}.classes`} tabIndex={-1} className="outline-none">
                   {err(`${p}.classes`)}
                 </div>
-                {gradeNo === null && (
-                  <p className="mt-2 rounded-lg bg-sand px-4 py-3 text-base text-ink/80">
-                    Choose {childKeys.length > 1 ? "this student's" : "your student's"} grade above and the classes that fit
-                    come first.
-                  </p>
+                {!showList && (
+                  <div className="mt-2 rounded-lg bg-sand px-4 py-3 text-base text-ink/80">
+                    <p>
+                      Choose {childKeys.length > 1 ? "this student's" : "your student's"} grade above and the classes that
+                      fit come first.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => patchChild(key, { browse: true })}
+                      className="link-underline mt-1 inline-flex min-h-11 items-center text-sm"
+                    >
+                      Or browse every class
+                    </button>
+                  </div>
                 )}
-                {gradeNo !== null && (
+                {showList && gradeNo !== null && (
                   <p className="mt-2 text-sm font-medium text-forest-900">Classes and programs for {state.grade}</p>
                 )}
-                <div className="mt-2 space-y-6">{renderGroups(fitting, key, p, state)}</div>
-                {other.length > 0 && (
+                {showList && <div className="mt-2 space-y-6">{renderGroups(fitting, key, p, state)}</div>}
+                {showList && other.length > 0 && (
                   <details
                     open={state.otherOpen}
                     onToggle={(e) => {

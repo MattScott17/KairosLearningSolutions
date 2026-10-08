@@ -14,7 +14,7 @@ export function TestimonialCards({ items }: { items: Testimonial[] }) {
             </blockquote>
             <figcaption className="mt-5 border-t border-forest-100 pt-4 text-sm">
               <span className="font-semibold text-forest-800">{t.author}</span>
-              <span className="block text-ink/60">
+              <span className="block text-ink/75">
                 {t.role}
                 {t.source && <> · {t.source} review</>}
               </span>

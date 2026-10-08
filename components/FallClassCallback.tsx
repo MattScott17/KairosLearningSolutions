@@ -58,7 +58,7 @@ export function FallClassCallback({ classTitles }: { classTitles: string[] }) {
 
       <div>
         <label htmlFor="cb-name" className="mb-1.5 block text-sm font-medium text-ink/80">
-          Your name <span className="text-red-500">*</span>
+          Your name <span className="text-red-700">*</span>
         </label>
         <input id="cb-name" name="name" type="text" autoComplete="name" className={`${inputBase} ${border("name")}`} />
         {fieldErrors.name && <p className="mt-1 text-xs text-red-600">{fieldErrors.name}</p>}
@@ -66,7 +66,7 @@ export function FallClassCallback({ classTitles }: { classTitles: string[] }) {
 
       <div>
         <label htmlFor="cb-phone" className="mb-1.5 block text-sm font-medium text-ink/80">
-          Phone <span className="text-red-500">*</span>
+          Phone <span className="text-red-700">*</span>
         </label>
         <input id="cb-phone" name="phone" type="tel" autoComplete="tel" className={`${inputBase} ${border("phone")}`} />
         {fieldErrors.phone && <p className="mt-1 text-xs text-red-600">{fieldErrors.phone}</p>}
@@ -111,7 +111,7 @@ export function FallClassCallback({ classTitles }: { classTitles: string[] }) {
           </>
         )}
       </button>
-      <p className="text-center text-xs text-ink/50">
+      <p className="text-center text-xs text-ink/70">
         Or call now:{" "}
         <a href={site.phoneHref} className="font-semibold text-forest-700 hover:underline">
           {site.phone}

@@ -29,13 +29,13 @@ export function BannerEditor({ initial }: { initial: BannerSettings }) {
       className="grid gap-10 lg:grid-cols-[1fr_1.1fr]"
     >
       <div className="space-y-5">
-        <label className="flex items-center gap-3">
+        <label className="flex min-h-11 items-center gap-3">
           <input type="hidden" name="enabled" value={draft.enabled ? "on" : "off"} />
           <input
             type="checkbox"
             checked={draft.enabled}
             onChange={(e) => set("enabled", e.target.checked)}
-            className="h-5 w-5 rounded border-forest-300 accent-forest-800"
+            className="h-6 w-6 rounded border-forest-300 accent-forest-800"
           />
           <span className="font-medium text-forest-900">Show the banner on the site</span>
         </label>
@@ -85,7 +85,7 @@ export function BannerEditor({ initial }: { initial: BannerSettings }) {
             />
           </div>
         </div>
-        <p className="-mt-2 text-xs text-ink/60">
+        <p className="-mt-2 text-sm text-ink/75">
           Link to a page here, like /fall-classes or /summer, or paste a full https:// address.
         </p>
 
@@ -111,24 +111,30 @@ export function BannerEditor({ initial }: { initial: BannerSettings }) {
             {pending && <Loader2 className="h-4 w-4 animate-spin" />}
             Save changes
           </button>
+          {state && (
+            <p role="status" className={cn("basis-full text-sm font-medium", state.ok ? "text-forest-700" : "text-red-700")}>
+              {state.message}
+            </p>
+          )}
         </div>
-
-        {state && (
-          <p role="status" className={cn("text-sm", state.ok ? "text-forest-700" : "text-red-600")}>
-            {state.message}
-          </p>
-        )}
+        <p className="-mt-2 text-sm text-ink/75">
+          The PIN is four digits. Ask whoever set up the banner if you do not have it.
+        </p>
       </div>
 
       <div>
         <p className={labelBase}>Preview</p>
-        <div className={cn("rounded-lg border border-forest-100 py-6", !draft.enabled && "opacity-40")}>
-          <BannerCard banner={draft} className="px-4 sm:px-6" />
-          <div className="relative mt-6 overflow-hidden bg-forest-900/80 py-8">
-            <BannerCard banner={draft} variant="light" className="px-4 sm:px-6" />
+        <div className={cn("space-y-6 rounded-lg border border-forest-100 py-6", !draft.enabled && "opacity-40")}>
+          <div>
+            <p className="px-4 pb-2 text-sm font-medium text-ink/75 sm:px-6">On the live homepage</p>
+            <BannerCard banner={draft} variant="slim" className="px-4 sm:px-6" />
+          </div>
+          <div>
+            <p className="px-4 pb-2 text-sm font-medium text-ink/75 sm:px-6">On the older homepage drafts</p>
+            <BannerCard banner={draft} className="px-4 sm:px-6" />
           </div>
         </div>
-        {!draft.enabled && <p className="mt-2 text-sm text-ink/60">Hidden: the banner won&apos;t show anywhere.</p>}
+        {!draft.enabled && <p className="mt-2 text-sm text-ink/75">Hidden: the banner won&apos;t show anywhere.</p>}
       </div>
     </form>
   );

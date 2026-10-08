@@ -91,7 +91,7 @@ export function PathFinder({ paths }: { paths: Path[] }) {
               />
             </div>
             <div className="md:pr-4">
-              <h3 className="text-3xl font-semibold">{path.program}</h3>
+              <h2 className="text-3xl font-semibold">{path.program}</h2>
               <p className="prose-kairos mt-3">{path.summary}</p>
               <dl className="mt-6 grid gap-3 border-t border-forest-300/70 pt-5 sm:grid-cols-3 sm:gap-4">
                 {path.facts.map((f) => (

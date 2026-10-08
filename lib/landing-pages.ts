@@ -2,7 +2,6 @@
 // landing page, add one entry here so the team can find it.
 
 import { variantMeta, variantSlugs, type ProgramSlug } from "@/lib/landing-variants";
-import { concepts } from "@/lib/storybrand";
 
 export type LandingPageEntry = {
   href: string;
@@ -20,7 +19,7 @@ export type LandingPageGroup = {
 function offerVariants(program: ProgramSlug): LandingPageEntry[] {
   return variantSlugs.map((v) => ({
     href: `/lp/${program}/${v}`,
-    label: variantMeta[v].label,
+    label: `${program === "apex" ? "APEX" : "Tutoring"}, ${variantMeta[v].label}`,
     description: variantMeta[v].pitch,
     tags: ["Offer-first", "No nav", "Mobile-first"],
   }));
@@ -56,11 +55,11 @@ export const landingPageGroups: LandingPageGroup[] = [
   },
   {
     program: "Homepage options",
-    intro: "The live homepage, the original one kept as a backup, and four drafts that each tell the Kairos story a different way.",
+    intro: "The live homepage and the original one, kept as a backup.",
     pages: [
       {
         href: "/",
-        label: "Main homepage (Concept C)",
+        label: "Live homepage",
         description: "The live homepage. Parents pick what their student needs and see the matching program.",
         tags: ["Homepage", "Site nav"],
       },
@@ -70,12 +69,6 @@ export const landingPageGroups: LandingPageGroup[] = [
         description: "The first homepage, kept as an alternate. Same content, laid out with the full program list and APEX up front.",
         tags: ["Homepage alternate", "Site nav"],
       },
-      ...concepts.map((c) => ({
-        href: `/concepts/${c.slug}`,
-        label: c.label,
-        description: c.pitch,
-        tags: ["Homepage draft", "Site nav", ...(c.explores ?? []).slice(0, 1)],
-      })),
     ],
   },
 ];

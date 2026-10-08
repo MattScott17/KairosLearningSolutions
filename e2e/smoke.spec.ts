@@ -92,7 +92,7 @@ test("home exposes JSON-LD organization structured data", async ({ page }) => {
 });
 
 // Homepage concepts are noindex previews; each still needs one h1 and the shared chrome.
-for (const slug of ["a", "b", "c", "d"]) {
+for (const slug of ["c"]) {
   test(`concept ${slug} loads with a single h1`, async ({ page }) => {
     const response = await page.goto(`/concepts/${slug}`);
     expect(response?.status()).toBeLessThan(400);
@@ -124,10 +124,7 @@ for (const path of [
   "/services/private-tutoring",
   "/summer",
   "/classic",
-  "/concepts/a",
-  "/concepts/b",
   "/concepts/c",
-  "/concepts/d",
 ]) {
   test(`no horizontal scroll at 360px on ${path}`, async ({ page }) => {
     await page.setViewportSize({ width: 360, height: 780 });
@@ -157,19 +154,6 @@ test("path-finder tabs switch the recommended program", async ({ page }) => {
   // Arrow keys move between tabs
   await tab.press("ArrowLeft");
   await expect(page.getByRole("tab", { name: /TK–2nd/i })).toHaveAttribute("aria-selected", "true");
-});
-
-test("gallery photo opens and closes with Escape", async ({ page }) => {
-  await page.goto("/concepts/d");
-  const photo = page.getByRole("button", { name: /open photo/i }).first();
-  await photo.scrollIntoViewIfNeeded();
-  await photo.click();
-  await expect(page.getByRole("dialog")).toBeVisible();
-  // Focus stays inside the dialog
-  await page.keyboard.press("Tab");
-  await expect(page.getByRole("button", { name: "Close photo" })).toBeFocused();
-  await page.keyboard.press("Escape");
-  await expect(page.getByRole("dialog")).toHaveCount(0);
 });
 
 test("landing pages hub has the banner editor behind a PIN", async ({ page }) => {
@@ -206,4 +190,20 @@ test("fall registration keeps a draft for this tab and copies last name and scho
   await page.getByRole("button", { name: "Put them back" }).click();
   await expect(page.locator('[id="parent.firstName"]')).toHaveValue("Test");
   await expect(page.getByRole("heading", { name: "Student 2" })).toBeVisible();
+});
+
+test("retired homepage drafts redirect to the live homepage", async ({ page }) => {
+  for (const slug of ["a", "b", "d"]) {
+    await page.goto(`/concepts/${slug}`);
+    await expect(page).toHaveURL(/\/$/);
+  }
+});
+
+test("fall class finder shows only the classes that fit the chosen grade", async ({ page }) => {
+  await page.goto("/fall-classes");
+  await page.getByLabel("My student is in").selectOption({ label: "4th grade" });
+  await expect(page.getByText("4 classes fit 4th grade")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Writing Lab A", exact: true }).first()).toBeVisible();
+  await page.getByLabel("My student is in").selectOption({ label: "Kindergarten" });
+  await expect(page.getByText("2 classes fit Kindergarten")).toBeVisible();
 });
