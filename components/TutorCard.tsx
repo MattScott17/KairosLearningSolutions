@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { TeamMember } from "@/lib/content";
 import { initials } from "@/lib/initials";
 import { cn } from "@/lib/utils";
+import { ExpandableText } from "@/components/ExpandableText";
 
 /** Headshot, or the person's initials until the headshot exists. Fills its (sized) parent. */
 export function TutorAvatar({
@@ -42,6 +43,7 @@ export function TutorCard({
   member,
   fullBio = false,
   compact = false,
+  expandable = false,
   className,
 }: {
   member: TeamMember;
@@ -49,6 +51,8 @@ export function TutorCard({
   fullBio?: boolean;
   /** Small square headshot (or initials) beside the name, so every card in a row looks alike. */
   compact?: boolean;
+  /** With `compact`: a three-line preview and a Read more button instead of the clamped bio. */
+  expandable?: boolean;
   className?: string;
 }) {
   if (compact) {
@@ -61,11 +65,14 @@ export function TutorCard({
             <p className="text-sm text-forest-700">{member.role}</p>
           </div>
         </div>
-        {member.bio && (
-          <p className={cn("mt-4 text-sm leading-relaxed text-ink/75", !fullBio && "line-clamp-5")}>
-            {member.bio}
-          </p>
-        )}
+        {member.bio &&
+          (expandable ? (
+            <ExpandableText text={member.bio} lines={3} className="mt-4 text-sm" />
+          ) : (
+            <p className={cn("mt-4 text-sm leading-relaxed text-ink/75", !fullBio && "line-clamp-5")}>
+              {member.bio}
+            </p>
+          ))}
       </article>
     );
   }

@@ -50,7 +50,7 @@ export default function ServicesPage() {
         title="Programs and prices"
         mark="prices"
         variant="centered"
-        intro="We run everything from one tutoring session a week to a full school day. Here's who each program is for, when it runs and what it costs. If you're not sure which one fits, give us a call."
+        intro="From one tutoring session a week to a full school day, here is who each program is for and what it costs. Not sure which fits? Give us a call."
       />
 
       <Section>
@@ -62,7 +62,7 @@ export default function ServicesPage() {
           <SectionHeading title="What each program includes" />
           <ul className="mt-8 border-t border-forest-200">
             {rows.map((row) => (
-              <ServiceCard key={row.href} {...row} />
+              <ServiceCard key={row.href} {...row} summary={row.summary.split(/(?<=\.)\s/)[0]} />
             ))}
           </ul>
         </div>

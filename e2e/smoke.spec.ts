@@ -13,7 +13,7 @@ const pages = [
   { path: "/services/homeschool-support", heading: /Homeschool Support/, title: /Homeschool Support/ },
   { path: "/fall-classes", heading: /Fall 2026 classes/i, title: /Classes/ },
   { path: "/fall-classes/register", heading: /Fall 2026 registration/i, title: /Registration/ },
-  { path: "/summer", heading: /Summer 2026 at Kairos/i, title: /Summer/ },
+  { path: "/summer", heading: /Summer 2027 at Kairos/i, title: /Summer/ },
   { path: "/contact", heading: /Call, email or visit/i, title: /Contact/ },
 ];
 

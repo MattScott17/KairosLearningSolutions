@@ -35,11 +35,9 @@ export const services: Service[] = [
     summary:
       "Our tutors work one-on-one with students of every age, from early reading to AP science. We start with a short consultation call so we can match your student with the right tutor.",
     details: [
-      "Sessions are at our center on South Main Street in Salinas, or online.",
       "Subjects include early literacy, math, writing, world languages, test prep and AP coursework.",
       "We match each student with a tutor by subject, learning style and personality.",
-      "Sessions are $70 to $120 an hour, depending on the subject and tutor. Jackie sets the rate during your consultation.",
-      "For a standing weekly session, the monthly plan is $360 for one session a week.",
+      "Jackie sets the hourly rate during your consultation. For a standing weekly session, the monthly plan is $360 for one session a week.",
     ],
     highlights: [
       { label: "Format", value: "In person or online" },
@@ -60,7 +58,7 @@ export const services: Service[] = [
       "Level B: we assess your student, plan the work and teach it at Kairos, with time and space to finish assignments.",
       "Level C: everything in Level B, plus private tutoring.",
       "Level D: every Kairos service, built into a custom program for your student.",
-      "Memberships are month to month, with small student-to-teacher ratios and hourly packages. There's no long-term contract.",
+      "Small student-to-teacher ratios, hourly packages and no long-term contract.",
     ],
     highlights: [
       { label: "Structure", value: "Levels A to D" },
