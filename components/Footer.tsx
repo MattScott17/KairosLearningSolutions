@@ -52,7 +52,7 @@ export function Footer() {
             <ul className="mt-3 text-sm">
               {footerNav.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="inline-flex min-h-11 items-center transition-colors hover:text-cream">
+                  <Link href={item.href} className="inline-flex min-h-11 min-w-11 items-center transition-colors hover:text-cream">
                     {item.label}
                   </Link>
                 </li>

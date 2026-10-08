@@ -22,7 +22,7 @@ export function ServiceCard({ href, title, short, summary }: ServiceRowProps) {
             {title}
             <ArrowRight className="h-4 w-4 text-forest-700 transition-transform group-hover:translate-x-1" />
           </h3>
-          <p className="mt-1 text-sm text-ink/60">{short}</p>
+          <p className="mt-1 text-sm text-ink/75">{short}</p>
         </div>
         <p className="prose-kairos">{summary}</p>
       </Link>

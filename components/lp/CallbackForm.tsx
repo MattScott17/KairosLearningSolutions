@@ -66,7 +66,7 @@ export function CallbackForm({ copy }: { copy: LandingCopy }) {
 
       <div>
         <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-ink/80">
-          Name <span className="text-red-500">*</span>
+          Name <span className="text-red-700">*</span>
         </label>
         <input
           id="name"
@@ -81,7 +81,7 @@ export function CallbackForm({ copy }: { copy: LandingCopy }) {
 
       <div>
         <label htmlFor="phone" className="mb-1.5 block text-sm font-medium text-ink/80">
-          Phone <span className="text-red-500">*</span>
+          Phone <span className="text-red-700">*</span>
         </label>
         <input
           id="phone"
@@ -114,7 +114,7 @@ export function CallbackForm({ copy }: { copy: LandingCopy }) {
         )}
       </button>
 
-      <p className="text-xs text-ink/50">We'll only use your information to call you back.</p>
+      <p className="text-xs text-ink/70">We'll only use your information to call you back.</p>
     </form>
   );
 }

@@ -34,7 +34,7 @@ export function Logo({
   return (
     <Link
       href="/"
-      className={`inline-flex items-center ${className}`}
+      className={`inline-flex min-h-11 items-center ${className}`}
       aria-label={`${site.name} — home`}
     >
       {image}

@@ -45,7 +45,7 @@ function ClassCard({ c }: { c: FallClass }) {
         <h3 className="text-2xl font-semibold">{c.title}</h3>
         <p className="text-sm font-semibold text-forest-700">{c.grades}</p>
       </div>
-      {c.partner && <p className="mt-1 text-sm text-ink/60">Taught by {c.partner}</p>}
+      {c.partner && <p className="mt-1 text-sm text-ink/75">Taught by {c.partner}</p>}
 
       <dl className="mt-4 grid gap-x-6 gap-y-1 border-y border-forest-100 py-3 text-sm sm:grid-cols-[auto_1fr]">
         <dt className="font-medium text-ink/75">When</dt>
@@ -106,15 +106,15 @@ export default function FallClassesPage() {
         </div>
         <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-forest-200 pt-6 text-sm">
           <div>
-            <dt className="text-ink/60">Days</dt>
+            <dt className="text-ink/75">Days</dt>
             <dd className="mt-1 font-semibold text-forest-900">Mondays and Wednesdays</dd>
           </div>
           <div>
-            <dt className="text-ink/60">Price</dt>
+            <dt className="text-ink/75">Price</dt>
             <dd className="mt-1 font-semibold text-forest-900">From $160 a month</dd>
           </div>
           <div>
-            <dt className="text-ink/60">Spots</dt>
+            <dt className="text-ink/75">Spots</dt>
             <dd className="mt-1 font-semibold text-forest-900">First come, first served</dd>
           </div>
         </dl>
@@ -172,7 +172,7 @@ export default function FallClassesPage() {
               <blockquote className="font-display text-xl leading-snug text-forest-900 sm:text-2xl">
                 &ldquo;{review.pull}&rdquo;
               </blockquote>
-              <figcaption className="mt-3 text-sm text-ink/60">
+              <figcaption className="mt-3 text-sm text-ink/75">
                 {review.author}, {review.role.toLowerCase()} · Google review
               </figcaption>
             </figure>

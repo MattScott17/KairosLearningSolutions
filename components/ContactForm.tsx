@@ -53,7 +53,7 @@ export function ContactForm() {
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-ink/80">
-            Name <span className="text-red-500">*</span>
+            Name <span className="text-red-700">*</span>
           </label>
           <input
             id="name"
@@ -67,7 +67,7 @@ export function ContactForm() {
         </div>
         <div>
           <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-ink/80">
-            Email <span className="text-red-500">*</span>
+            Email <span className="text-red-700">*</span>
           </label>
           <input
             id="email"
@@ -84,7 +84,7 @@ export function ContactForm() {
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="phone" className="mb-1.5 block text-sm font-medium text-ink/80">
-            Phone <span className="text-ink/40">(optional)</span>
+            Phone <span className="text-ink/65">(optional)</span>
           </label>
           <input
             id="phone"
@@ -114,7 +114,7 @@ export function ContactForm() {
 
       <div className="rounded-xl border border-forest-100 bg-sand/30 p-4 sm:p-5">
         <p className="text-sm font-medium text-ink/80">
-          About your student <span className="text-ink/40">(optional, helps us match you faster)</span>
+          About your student <span className="text-ink/65">(optional, helps us match you faster)</span>
         </p>
         <div className="mt-3 grid gap-4 sm:grid-cols-2">
           <div>
@@ -170,7 +170,7 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-ink/80">
-          Message <span className="text-red-500">*</span>
+          Message <span className="text-red-700">*</span>
         </label>
         <textarea
           id="message"
@@ -211,7 +211,7 @@ export function ContactForm() {
         )}
       </button>
 
-      <p className="text-xs text-ink/50">
+      <p className="text-xs text-ink/70">
         We'll only use your information to respond to your inquiry.
       </p>
     </form>

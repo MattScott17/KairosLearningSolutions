@@ -36,7 +36,7 @@ export default async function LandingPagesIndex() {
                   <span className="font-semibold text-forest-900">{page.label}</span>
                   <span className="mt-1 font-mono text-xs text-forest-600">{page.href}</span>
                   <span className="prose-kairos mt-3 flex-1 text-sm">{page.description}</span>
-                  <span className="mt-4 text-xs text-ink/60">{page.tags.join(" · ")}</span>
+                  <span className="mt-4 text-xs text-ink/75">{page.tags.join(" · ")}</span>
                   <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-forest-800">
                     Open page
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

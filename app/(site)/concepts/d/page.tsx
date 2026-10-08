@@ -50,7 +50,7 @@ export default function ConceptDPage() {
             title="A look around"
             intro={conceptD.problem.philosophical}
           />
-          <p className="text-sm text-ink/60">Tap a photo to see it larger.</p>
+          <p className="text-sm text-ink/75">Tap a photo to see it larger.</p>
         </div>
         <div className="mt-10">
           <LayoutGrid photos={galleryPhotos} />

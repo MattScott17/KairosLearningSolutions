@@ -15,7 +15,7 @@ function ReviewCard({ t }: { t: Testimonial }) {
       </blockquote>
       <figcaption className="mt-5 text-sm">
         <span className="font-semibold text-forest-800">{t.author}</span>
-        <span className="text-ink/60">
+        <span className="text-ink/75">
           {" "}
           · {t.role}
           {t.source && <> · {t.source} review</>}

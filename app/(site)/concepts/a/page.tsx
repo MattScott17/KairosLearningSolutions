@@ -49,7 +49,7 @@ const planSteps: TimelineItem[] = [
     content: (
       <>
         <p className="prose-kairos max-w-xl text-lg">{conceptA.plan[1]}</p>
-        <p className="mt-3 text-sm text-ink/60">
+        <p className="mt-3 text-sm text-ink/75">
           {[...services.map((s) => s.title), "Early Learners", "APEX", "District Partnerships"].join(", ")}
         </p>
         <StepPhoto photo={photos.readingTogether} />

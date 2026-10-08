@@ -85,7 +85,7 @@ export function BannerEditor({ initial }: { initial: BannerSettings }) {
             />
           </div>
         </div>
-        <p className="-mt-2 text-xs text-ink/60">
+        <p className="-mt-2 text-xs text-ink/75">
           Link to a page here, like /fall-classes or /summer, or paste a full https:// address.
         </p>
 
@@ -128,7 +128,7 @@ export function BannerEditor({ initial }: { initial: BannerSettings }) {
             <BannerCard banner={draft} variant="light" className="px-4 sm:px-6" />
           </div>
         </div>
-        {!draft.enabled && <p className="mt-2 text-sm text-ink/60">Hidden: the banner won&apos;t show anywhere.</p>}
+        {!draft.enabled && <p className="mt-2 text-sm text-ink/75">Hidden: the banner won&apos;t show anywhere.</p>}
       </div>
     </form>
   );
