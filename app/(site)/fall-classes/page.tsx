@@ -145,7 +145,7 @@ export default function FallClassesPage() {
 
         {groups.map((g) => (
           <div key={g.title} className="mt-14">
-            <h3 className="rounded-lg bg-forest-800 px-5 py-3 font-display text-xl font-semibold text-cream">
+            <h3 className="rounded-md bg-forest-800 px-4 py-2 font-display text-lg font-semibold text-cream">
               {g.title}
             </h3>
             <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
