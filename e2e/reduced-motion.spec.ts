@@ -5,7 +5,7 @@ import { test, expect, type Page } from "@playwright/test";
 // opacity (element × every ancestor) directly.
 test.use({ reducedMotion: "reduce" });
 
-const paths = ["/", "/about", "/concepts/a", "/concepts/b", "/concepts/c", "/concepts/d"];
+const paths = ["/", "/about", "/concepts/c"];
 
 async function hiddenCount(page: Page) {
   return page.evaluate(() => {

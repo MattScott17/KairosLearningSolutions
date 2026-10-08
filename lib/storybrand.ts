@@ -1,5 +1,5 @@
 // StoryBrand-framework copy for the homepage concept comps at
-// /concepts/a–d. Each concept tells the same true story — a struggling
+// the homepage and the ad landing pages. Each concept tells the same true story — a struggling
 // student, Kairos as the guide, a clear plan, a confident kid on the other
 // side — with a different structural emphasis. Facts here (grade ranges,
 // program names, tuition) come from `lib/content.ts` / `lib/site.ts`; this
@@ -27,30 +27,6 @@ export type ConceptCopy = {
   planTitles?: string[];
   successVision: string;
   failureStakes: string;
-};
-
-export const conceptA: ConceptCopy = {
-  slug: "a",
-  explores: ["Scroll-progress timeline", "Count-up stats", "Phone call bar"],
-  label: "Concept A: Direct",
-  pitch:
-    "A direct-response homepage. It names the problem, introduces Jackie and Kairos, lays out three steps, and repeats one call to action.",
-  heroHeadline: "Kairos Learning Solutions: tutoring, homeschool support, classes and APEX in Salinas, planned around your child.",
-  heroSub:
-    "I'm Jackie Scott. I've taught for more than 30 years, and in 2020 I opened Kairos on South Main Street. Tell us about your student and we'll suggest a tutor, a class, homeschool support, or APEX, our full-time program for grades 3 to 9. We also partner with school districts.",
-  problem: {
-    external: "Your student is behind, or bored, in a class that moves at one speed.",
-    internal: "You've tried helping at home and it isn't working.",
-    philosophical: "School should move at your child's pace.",
-  },
-  plan: [
-    "Call or send a message and tell us what your student is struggling with.",
-    "We match your student with a tutor or program.",
-    "Your student starts at their own level and moves on when they're ready.",
-  ],
-  planTitles: ["Call us", "Get matched", "Start"],
-  successVision: "A student who knows the material and walks into class ready.",
-  failureStakes: "Gaps in reading and math are easier to close early.",
 };
 
 export const conceptB: ConceptCopy = {
@@ -101,31 +77,6 @@ export const conceptC: ConceptCopy = {
   failureStakes: "Picking the wrong program can cost a semester.",
 };
 
-export const conceptD: ConceptCopy = {
-  slug: "d",
-  explores: ["Looping classroom video hero", "Tap-to-open photo gallery", "Review marquee & tutor cards"],
-  label: "Concept D: See it first",
-  pitch:
-    "A looping classroom video, a photo gallery, Google reviews and tutor cards come first. The pitch comes last.",
-  heroHeadline: "Inside Kairos, on South Main Street in Salinas.",
-  heroSub:
-    "Tutoring, homeschool support, classes and APEX, our full-time program for grades 3 to 9. This is a real class at Kairos.",
-  problem: {
-    external: "It's hard to judge a program from a brochure.",
-    internal: "You want to picture your child here before you sign up.",
-    philosophical: "Photos from ordinary days at Kairos.",
-  },
-  plan: [
-    "Call and tell us about your student.",
-    "Visit to see the space and meet the teachers.",
-    "Start with the tutor or program that fits.",
-  ],
-  planTitles: ["Call", "Visit", "Start"],
-  successVision: "Your student comes home wanting to tell you what they learned.",
-  failureStakes: "A semester in the wrong setting is hard to get back.",
-};
-
-export const concepts: ConceptCopy[] = [conceptA, conceptB, conceptC, conceptD];
 
 // Concept B's "a day at Kairos" walk-through. Every detail comes from lib/content.ts
 // (APEX's 2 Hour Learning model, Early Learners' Tue–Thu mornings, the center's

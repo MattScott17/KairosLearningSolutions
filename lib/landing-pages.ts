@@ -2,7 +2,6 @@
 // landing page, add one entry here so the team can find it.
 
 import { variantMeta, variantSlugs, type ProgramSlug } from "@/lib/landing-variants";
-import { concepts } from "@/lib/storybrand";
 
 export type LandingPageEntry = {
   href: string;
@@ -56,7 +55,7 @@ export const landingPageGroups: LandingPageGroup[] = [
   },
   {
     program: "Homepage options",
-    intro: "The live homepage, the original one kept as a backup, and four drafts that each tell the Kairos story a different way.",
+    intro: "The live homepage and the original one, kept as a backup.",
     pages: [
       {
         href: "/",
@@ -70,13 +69,6 @@ export const landingPageGroups: LandingPageGroup[] = [
         description: "The first homepage, kept as an alternate. Same content, laid out with the full program list and APEX up front.",
         tags: ["Homepage alternate", "Site nav"],
       },
-      // Concept C is the live homepage above, so it gets no card of its own.
-      ...concepts.filter((c) => c.slug !== "c").map((c) => ({
-        href: `/concepts/${c.slug}`,
-        label: c.label,
-        description: c.pitch,
-        tags: ["Homepage draft", "Site nav", ...(c.explores ?? []).slice(0, 1)],
-      })),
     ],
   },
 ];

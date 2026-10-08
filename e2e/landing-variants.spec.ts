@@ -42,7 +42,7 @@ test("/landingpages directory links every landing page", async ({ page }) => {
   await expect(page.locator("h1")).toContainText(/landing pages/i);
   const originals = ["/lp/tutoring", "/lp/tutoring-site", "/lp/apex", "/lp/apex-site"];
   // /concepts/c is the live homepage, so the hub lists it once, as "/".
-  const concepts = ["/", "/classic", "/concepts/a", "/concepts/b", "/concepts/d"];
+  const concepts = ["/", "/classic"];
   for (const path of [...variants, ...originals, ...concepts]) {
     await expect(page.locator(`main a[href="${path}"]`)).toBeVisible();
   }

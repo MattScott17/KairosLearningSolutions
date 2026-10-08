@@ -466,7 +466,6 @@ export function getTeamMembers(names: string[]): TeamMember[] {
 // Who appears in the homepage-style "meet our tutors" rows.
 export const featuredTutors = {
   home: ["Jackie Scott", "Brady Berg", "Michelle Ball", "Lisa Bleicher"],
-  conceptD: ["Alissa Scott", "Michelle Ball", "Lisa Bleicher", "Daryl Lyon"],
 };
 
 export type Testimonial = {
