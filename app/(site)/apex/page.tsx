@@ -188,7 +188,19 @@ export default function ApexPage() {
       {/* What the workshops are */}
       <Section>
         <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
-          <SectionHeading title="What the workshops look like" intro={apex.workshops.intro} />
+          <div>
+            <SectionHeading title="What the workshops look like" intro={apex.workshops.intro} />
+            <div className="relative mt-8 hidden aspect-[4/5] overflow-hidden rounded-lg lg:block">
+              <Image
+                src={photos.rollerCoaster.src}
+                alt={photos.rollerCoaster.alt}
+                fill
+                sizes="(min-width: 1024px) 30vw, 0px"
+                className="object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
           <div>
             <dl className="border-t border-forest-200">
               {apex.workshops.list.map((w) => (

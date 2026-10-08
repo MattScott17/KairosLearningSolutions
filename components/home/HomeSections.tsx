@@ -4,6 +4,8 @@ import Link from "next/link";
 import { getTestimonials, testimonials, values } from "@/lib/content";
 import { galleryPhotos, photos, type Photo } from "@/lib/photos";
 import { conceptB } from "@/lib/storybrand";
+import { Phone } from "lucide-react";
+import { site } from "@/lib/site";
 
 /** Sections shared by both homepages (/ and /classic), liked from the other drafts. */
 
@@ -77,7 +79,9 @@ export function GetStarted() {
     <section className="bg-sand/50 py-16 sm:py-24">
       <div className="container-page">
         <SectionHeading title="How to get started" />
-        <ol className="mt-10 max-w-2xl space-y-6">
+        <div className="mt-10 grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+          <div>
+        <ol className="max-w-2xl space-y-6">
           {conceptB.plan.map((step, i) => (
             <li key={step} className="grid grid-cols-[2.25rem_1fr] items-baseline gap-4">
               <span aria-hidden="true" className="font-display text-4xl font-semibold leading-none text-forest-700">
@@ -93,6 +97,18 @@ export function GetStarted() {
             Send us a message
           </Link>
         </p>
+          </div>
+          <div className="relative hidden aspect-[4/3] overflow-hidden rounded-lg lg:block">
+            <Image
+              src={photos.presenting.src}
+              alt={photos.presenting.alt}
+              fill
+              sizes="(min-width: 1024px) 40vw, 0px"
+              className="object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
       </div>
 
       <div className="container-page mt-20">
@@ -109,7 +125,11 @@ export function GetStarted() {
             </figure>
           ))}
         </div>
-        <div className="mt-8 text-center md:text-left">
+        <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row md:justify-start">
+          <a href={site.phoneHref} className="btn-primary w-full sm:w-auto">
+            <Phone className="h-4 w-4" aria-hidden="true" />
+            Call {site.phone}
+          </a>
           <Link href="/about#reviews" className="link-underline inline-flex min-h-11 items-center text-sm">
             Read all {testimonials.length} parent reviews
           </Link>

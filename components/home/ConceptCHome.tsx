@@ -19,6 +19,7 @@ import {
   leadership,
   featuredTutors,
   getTeamMembers,
+  getTestimonials,
 } from "@/lib/content";
 import { site } from "@/lib/site";
 import { conceptC } from "@/lib/storybrand";
@@ -100,6 +101,7 @@ const headlineMark = markAt >= 0 ? headlineMarkText : "";
 const headlineTail = markAt >= 0 ? conceptC.heroHeadline.slice(markAt + headlineMarkText.length) : "";
 
 const jackie = leadership[0];
+const [featuredReview] = getTestimonials(["melissa-d"]);
 const weekdayHours = site.hours[0].time.replace(" – ", " to ").replace(/:00 AM/, " AM");
 
 // `short` is the phone version; facts without one are desktop only.
@@ -202,6 +204,14 @@ export function ConceptCHome() {
       {/* The path-finder: the core mechanic of this concept */}
       <Section id="programs" className="!pt-4 sm:!pt-6">
         <PathFinder paths={paths} />
+        <figure className="mx-auto mt-12 max-w-3xl text-center">
+          <blockquote className="font-display text-2xl italic leading-relaxed text-forest-800 sm:text-3xl">
+            &ldquo;{featuredReview.pull}&rdquo;
+          </blockquote>
+          <figcaption className="mt-4 text-sm font-semibold text-forest-800">
+            {featuredReview.author} · {featuredReview.role}
+          </figcaption>
+        </figure>
         <div className="mt-10 flex flex-col items-center justify-between gap-4 rounded-lg border border-forest-200 bg-sand/50 px-6 py-6 text-center sm:flex-row sm:text-left">
           <p className="font-display text-xl font-semibold text-forest-900 sm:text-2xl">
             Looking for weekly classes in writing, speaking, art and reading?
