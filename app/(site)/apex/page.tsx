@@ -91,6 +91,31 @@ export default function ApexPage() {
         </dl>
       </section>
 
+      {/* Pilot-year results: the strongest proof, right under the facts */}
+      <section className="bg-sand py-14 sm:py-20">
+        <div className="container-page">
+          <h2 className="text-3xl font-semibold sm:text-4xl">Our first year of results</h2>
+          <p className="prose-kairos mt-3 max-w-2xl">{apex.results.basis}</p>
+          <div className="mt-10 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-16">
+            <div>
+              <p className="font-display text-7xl font-semibold leading-none text-forest-800 sm:text-8xl">
+                {apex.results.stats[0].value}
+              </p>
+              <p className="mt-4 max-w-md text-xl leading-snug text-forest-900">{apex.results.stats[0].label}</p>
+            </div>
+            <dl className="space-y-6">
+              {apex.results.stats.slice(1).map((st) => (
+                <div key={st.value} className="border-t border-forest-300 pt-4">
+                  <dt className="font-display text-3xl font-semibold text-forest-800">{st.value}</dt>
+                  <dd className="prose-kairos mt-1 text-base">{st.label}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          <p className="prose-kairos mt-10 max-w-2xl">{apex.results.spectrum}</p>
+        </div>
+      </section>
+
       {/* The model */}
       <Section>
         <div className="grid items-center gap-12 lg:grid-cols-2">
@@ -123,23 +148,6 @@ export default function ApexPage() {
           </div>
         </div>
       </Section>
-
-      {/* Pilot-year results */}
-      <section className="border-t border-forest-100 py-16 sm:py-20">
-        <div className="container-page">
-          <h2 className="text-3xl font-semibold sm:text-4xl">Our first year of results</h2>
-          <p className="prose-kairos mt-3 text-sm">{apex.results.basis}</p>
-          <dl className="mt-8 grid gap-x-10 gap-y-8 sm:grid-cols-2">
-            {apex.results.stats.map((s) => (
-              <div key={s.value} className="border-t border-forest-200 pt-4">
-                <dt className="font-display text-3xl font-semibold text-forest-800">{s.value}</dt>
-                <dd className="prose-kairos mt-1 text-sm">{s.label}</dd>
-              </div>
-            ))}
-          </dl>
-          <p className="prose-kairos mt-8 max-w-2xl">{apex.results.spectrum}</p>
-        </div>
-      </section>
 
       {/* How APEX is set up: a plain list, not a card grid */}
       <section className="border-t border-forest-100 py-16 sm:py-24">
@@ -225,6 +233,17 @@ export default function ApexPage() {
                 </li>
               ))}
             </ul>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <Link href="/contact" className="btn-primary">
+                Book a tour
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <a href={site.phoneHref} className="btn-outline">
+                <Phone className="h-4 w-4" />
+                {site.phone}
+              </a>
+            </div>
 
             <h3 className="mt-10 text-sm font-semibold text-forest-800">Registration fees</h3>
             <dl className="mt-3 space-y-2">
