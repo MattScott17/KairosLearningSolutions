@@ -86,6 +86,30 @@ export default function AboutPage() {
         </div>
       </Section>
 
+      {/* Google reviews: three up front, the rest on request */}
+      <Section id="reviews" className="scroll-mt-20">
+        <SectionHeading
+          title="What families say"
+          intro={`${testimonials.length} Google reviews from Kairos parents and grandparents. Open one to read it word for word.`}
+        />
+        <div className="mt-10 columns-1 gap-6 sm:columns-2 lg:columns-3 [&>*]:mb-6 [&>*]:break-inside-avoid">
+          {testimonials.slice(0, 3).map((t) => (
+            <ReviewCard key={t.id} t={t} />
+          ))}
+        </div>
+        <details className="group mt-2">
+          <summary className="btn-outline cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span className="group-open:hidden">Read all {testimonials.length} reviews</span>
+            <span className="hidden group-open:inline">Show fewer reviews</span>
+          </summary>
+          <div className="mt-8 columns-1 gap-6 sm:columns-2 lg:columns-3 [&>*]:mb-6 [&>*]:break-inside-avoid">
+            {testimonials.slice(3).map((t) => (
+              <ReviewCard key={t.id} t={t} />
+            ))}
+          </div>
+        </details>
+      </Section>
+
       {/* Leadership */}
       <section className="border-t border-forest-100 py-16 sm:py-24">
         <div className="container-page">
@@ -131,30 +155,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      {/* Google reviews, quoted in full */}
-      <Section id="reviews" className="scroll-mt-20">
-        <SectionHeading
-          title="What families say"
-          intro={`${testimonials.length} Google reviews from Kairos parents and grandparents. Open one to read it word for word.`}
-        />
-        <div className="mt-10 columns-1 gap-6 sm:columns-2 lg:columns-3 [&>*]:mb-6 [&>*]:break-inside-avoid">
-          {testimonials.slice(0, 6).map((t) => (
-            <ReviewCard key={t.id} t={t} />
-          ))}
-        </div>
-        <details className="group mt-2">
-          <summary className="btn-outline cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span className="group-open:hidden">Read all {testimonials.length} reviews</span>
-            <span className="hidden group-open:inline">Show fewer reviews</span>
-          </summary>
-          <div className="mt-8 columns-1 gap-6 sm:columns-2 lg:columns-3 [&>*]:mb-6 [&>*]:break-inside-avoid">
-            {testimonials.slice(6).map((t) => (
-              <ReviewCard key={t.id} t={t} />
-            ))}
-          </div>
-        </details>
-      </Section>
 
       <CTASection
         title="Come visit"

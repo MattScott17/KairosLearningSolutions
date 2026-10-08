@@ -15,7 +15,7 @@ import type { Photo } from "@/lib/photos";
  *  plain    text only, left aligned (also used when `aside` replaces the photo)
  */
 export type HeroVariant = "arch" | "flip" | "card" | "wide" | "dark" | "centered" | "plain";
-export type HeroTone = "green" | "sand" | "cream";
+export type HeroTone = "green" | "sand" | "cream" | "forest";
 
 type PageHeroProps = {
   /** Plain text so `mark` can find its phrase. */
@@ -35,6 +35,8 @@ const tones: Record<HeroTone, string> = {
   green: "bg-forest-50/60",
   sand: "bg-sand",
   cream: "bg-cream border-b border-forest-100",
+  // Medium forest green with white text, for pages that want a stronger band.
+  forest: "bg-forest-800",
 };
 
 function Title({ title, mark }: { title: string; mark?: string }) {
@@ -105,6 +107,8 @@ export function PageHero({
 }: PageHeroProps) {
   const v: HeroVariant = variant ?? (photo ? "arch" : "plain");
   const dark = v === "dark";
+  // Any dark band (the dark layout or the forest tone) sets its text and buttons in white.
+  const onDark = dark || tone === "forest";
   const centered = v === "centered";
   const split = (v === "arch" || v === "flip" || v === "card" || v === "dark") && photo;
   const hasAside = Boolean(aside);
@@ -113,7 +117,7 @@ export function PageHero({
     <div className={centered ? "mx-auto max-w-3xl text-center" : hasAside || split ? "" : "max-w-3xl"}>
       <h1
         className={`hero-rise text-balance text-4xl font-semibold leading-[1.1] sm:text-5xl lg:text-[3.25rem] ${
-          dark ? "text-cream" : ""
+          onDark ? "text-cream" : ""
         }`}
       >
         <Title title={title} mark={mark} />
@@ -122,7 +126,7 @@ export function PageHero({
         <p
           style={{ "--hero-delay": "0.12s" } as CSSProperties}
           className={`hero-rise mt-7 text-lg ${centered ? "mx-auto max-w-2xl" : "max-w-xl"} ${
-            dark ? "leading-relaxed text-cream/85" : "prose-kairos"
+            onDark ? "leading-relaxed text-cream/85" : "prose-kairos"
           }`}
         >
           {intro}
@@ -131,7 +135,7 @@ export function PageHero({
       {children && (
         <div
           style={{ "--hero-delay": "0.24s" } as CSSProperties}
-          className={`hero-rise mt-8 ${centered ? "flex justify-center" : ""} ${dark ? darkButtons : ""}`}
+          className={`hero-rise mt-8 ${centered ? "flex justify-center" : ""} ${onDark ? darkButtons : ""}`}
         >
           {children}
         </div>
