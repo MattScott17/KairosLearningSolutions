@@ -54,17 +54,17 @@ export function FallClassFinder({ classes }: { classes: FinderClass[] }) {
     .filter((d) => d.items.length > 0);
 
   return (
-    <div className="mt-8 rounded-lg border border-forest-300 p-5 sm:p-6">
-      <h3 className="text-xl font-semibold text-forest-900">Find a class for your student</h3>
+    <div className="mt-8 rounded-lg bg-forest-900 p-6 text-cream sm:p-8">
+      <h3 className="text-2xl font-semibold text-cream">Find a class for your student</h3>
       <div className="mt-4 max-w-xs">
-        <label htmlFor={selectId} className="mb-1.5 block text-sm font-medium text-ink/80">
+        <label htmlFor={selectId} className="mb-1.5 block text-sm font-medium text-cream/85">
           My student is in
         </label>
         <select
           id={selectId}
           value={grade}
           onChange={(e) => setGrade(e.target.value)}
-          className="w-full rounded-lg border border-forest-600 bg-cream px-4 py-3 text-base text-ink focus:border-forest-800 focus:outline-none focus:ring-2 focus:ring-forest-600 sm:text-sm"
+          className="w-full rounded-lg border border-cream/40 bg-cream px-4 py-3 text-base text-ink focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-400 sm:text-sm"
         >
           <option value="">Show every class</option>
           {gradeChoices.map((g) => (
@@ -76,7 +76,7 @@ export function FallClassFinder({ classes }: { classes: FinderClass[] }) {
       </div>
 
       <div aria-live="polite" className="mt-5">
-        <p className="text-sm font-medium text-ink/75">
+        <p className="text-sm font-medium text-cream/85">
           {chosen === null
             ? `${classes.length} classes, by day`
             : shown.length > 0
@@ -86,25 +86,28 @@ export function FallClassFinder({ classes }: { classes: FinderClass[] }) {
         <div className="mt-3 grid gap-6 sm:grid-cols-2">
           {days.map(({ day, items }) => (
             <div key={day}>
-              <h4 className="border-b-2 border-forest-800 pb-2 font-display text-lg font-semibold text-forest-900">
+              <h4 className="border-b-2 border-gold-500 pb-2 font-display text-xl font-semibold text-cream">
                 {day}s
               </h4>
               <ul>
                 {items.map((c) => (
-                  <li key={c.slug} className="border-b border-forest-100 py-3">
-                    <p className="text-sm font-semibold text-forest-800">
+                  <li key={c.slug} className="border-b border-cream/20 py-3">
+                    <p className="text-sm font-semibold text-gold-400">
                       {c.time}
-                      {c.dates ? <span className="font-normal text-ink/75"> · {c.dates}</span> : null}
+                      {c.dates ? <span className="font-normal text-cream/80"> · {c.dates}</span> : null}
                     </p>
-                    <p className="mt-0.5 text-base text-ink">
-                      <a href={`#${c.slug}`} className="link-underline inline-flex min-h-11 items-center font-medium">
+                    <p className="mt-0.5 text-base text-cream">
+                      <a
+                        href={`#${c.slug}`}
+                        className="inline-flex min-h-11 items-center rounded-md font-semibold text-cream underline decoration-cream/40 underline-offset-4 hover:decoration-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400"
+                      >
                         {c.title}
                       </a>
-                      <span className="text-ink/75"> · {c.grades}</span>
+                      <span className="text-cream/80"> · {c.grades}</span>
                     </p>
                     <Link
                       href={c.href}
-                      className="inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-forest-800 hover:text-forest-600"
+                      className="inline-flex min-h-11 items-center gap-1 rounded-md text-sm font-semibold text-cream hover:text-gold-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400"
                     >
                       Register
                       <span className="sr-only"> for {c.title}</span>
