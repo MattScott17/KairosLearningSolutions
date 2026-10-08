@@ -5,11 +5,11 @@ import { JsonLd } from "@/components/JsonLd";
 import { Faq } from "@/components/Faq";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Check, Phone } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
-import { apex, faqs, registrationFees } from "@/lib/content";
+import { apex, faqs, getTeamMembers, registrationFees } from "@/lib/content";
 import { pagePhotos, photos } from "@/lib/photos";
 import { site } from "@/lib/site";
 
@@ -23,12 +23,24 @@ export const metadata: Metadata = pageMetadata({
 
 const facts = [
   { label: "Grades", value: apex.gradeRange.replace("Grades ", ""), note: "" },
-  {
-    label: "First step",
-    value: "Free call and tour",
-    note: apex.tuition.term,
-  },
+  { label: "Start with", value: "Free call and tour", note: "" },
   { label: "Schedule", value: "9 a.m. to 2 p.m.", note: "Monday through Thursday, Fridays off" },
+];
+
+const [jackie, alissa] = getTeamMembers(["Jackie Scott", "Alissa Scott"]);
+const people = [
+  {
+    name: jackie.name,
+    role: jackie.role,
+    image: jackie.image!,
+    line: "Jackie has been an educator for more than 30 years, from 3rd grade to high school.",
+  },
+  {
+    name: alissa.name,
+    role: alissa.role,
+    image: alissa.image!,
+    line: "Alissa holds a Multiple Subject Teaching Credential. She grew up at Kairos as a student, tutor and teacher.",
+  },
 ];
 
 export default function ApexPage() {
@@ -71,9 +83,9 @@ export default function ApexPage() {
         <dl className="container-page grid grid-cols-1 divide-y divide-forest-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           {facts.map((f) => (
             <div key={f.label} className="py-7 sm:px-6 sm:first:pl-0">
-              <dt className="text-sm text-ink/60">{f.label}</dt>
+              <dt className="text-sm text-ink/75">{f.label}</dt>
               <dd className="mt-1 font-display text-2xl font-semibold text-forest-800">{f.value}</dd>
-              {f.note && <dd className="mt-1 text-sm text-ink/60">{f.note}</dd>}
+              {f.note && <dd className="mt-1 text-sm text-ink/75">{f.note}</dd>}
             </div>
           ))}
         </dl>
@@ -94,8 +106,15 @@ export default function ApexPage() {
           <div>
             <SectionHeading title="How the day works" intro={apex.model} />
             <p className="prose-kairos mt-4">
+              In plain words: mastery-based means a student moves on to the next topic once they have
+              understood the current one, not when the calendar says it is time. 2 Hour Learning is the
+              name of the model, with focused academics first and projects and life skills for the rest
+              of the day.
+            </p>
+            <p className="prose-kairos mt-4">
               That leaves most of the day for projects, presentations and life skills like budgeting
-              and running a small business.
+              and running a small business. Compared with a classroom that moves at one pace, each student
+              works at their own pace, and teachers know each student well.
             </p>
             <p className="prose-kairos mt-4">
               During the academic block, AI-supported adaptive learning adjusts to each student's
@@ -178,55 +197,31 @@ export default function ApexPage() {
           </div>
         </div>
       </Section>
-
-      {/* Traditional school vs. APEX */}
-      <section className="bg-forest-800 py-16 text-cream sm:py-20">
-        <div className="container-page grid gap-10 lg:grid-cols-[1fr_1.6fr]">
-          <h2 className="text-3xl font-semibold text-cream sm:text-4xl">
-            Compared with a traditional classroom
-          </h2>
-          <table className="w-full text-left text-sm">
-            <thead>
-              <tr className="border-b border-cream/20 text-cream/70">
-                <th className="py-3 pr-4 font-semibold">Traditional school</th>
-                <th className="py-3 font-semibold">APEX</th>
-              </tr>
-            </thead>
-            <tbody>
-              {apex.comparison.map((row) => (
-                <tr key={row.traditional} className="border-b border-cream/10">
-                  <td className="py-4 pr-4 text-cream/70">{row.traditional}</td>
-                  <td className="py-4 font-medium text-cream">
-                    <span className="inline-flex items-start gap-2">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" aria-hidden />
-                      {row.apex}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
       {/* Pricing */}
       <Section className="bg-sand/50">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
           <SectionHeading
             title="Ways to enroll"
-            intro="You can enroll in the full program, or in the academics or the workshops on their own. Call us and we'll go over tuition when you come in for a tour."
+            intro={`The full program is ${apex.tuition.monthly.replace(" / ", " a ")} for 10 months, or ${apex.tuition.annual.replace(" / ", " a ")}. Come in for a tour and we'll go over it with you.`}
           />
           <div>
             <ul className="border-t border-forest-200">
-              {apex.tiers.map((tier) => (
+              {apex.tiers.map((tier, i) => (
                 <li
                   key={tier.name}
-                  className="flex flex-col gap-1 border-b border-forest-100 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+                  className={`flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 ${
+                    i === 0
+                      ? "my-3 rounded-lg border border-forest-300 bg-forest-50 px-5 py-6"
+                      : "border-b border-forest-100 px-5 py-5"
+                  }`}
                 >
                   <div>
                     <p className="font-semibold text-forest-900">{tier.name}</p>
                     <p className="text-sm text-ink/70">{tier.description}</p>
                   </div>
+                  <p className="font-display text-xl font-semibold text-forest-800 sm:whitespace-nowrap sm:text-2xl">
+                    {tier.price.replace(" / ", " a ")}
+                  </p>
                 </li>
               ))}
             </ul>
@@ -235,12 +230,43 @@ export default function ApexPage() {
             <dl className="mt-3 space-y-2">
               {registrationFees.map((fee) => (
                 <div key={fee.label} className="flex justify-between gap-4 text-sm">
-                  <dt className="text-ink/60">{fee.label}</dt>
+                  <dt className="text-ink/75">{fee.label}</dt>
                   <dd className="whitespace-nowrap text-right font-medium text-forest-800">{fee.value}</dd>
                 </div>
               ))}
             </dl>
           </div>
+        </div>
+      </Section>
+
+      {/* The people behind it */}
+      <Section>
+        <SectionHeading
+          title="Meet Jackie and Alissa"
+          intro="Jackie opened Kairos in 2020, and her daughter Alissa is now the Executive Director."
+        />
+        <div className="mt-10 grid gap-10 md:grid-cols-2">
+          {people.map((person) => (
+            <div key={person.name} className="flex gap-5 sm:gap-6">
+              <div className="relative aspect-[4/5] w-28 shrink-0 overflow-hidden rounded-lg sm:w-40">
+                <Image
+                  src={person.image}
+                  alt={person.name}
+                  fill
+                  sizes="(max-width: 640px) 7rem, 10rem"
+                  className="object-cover"
+                />
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold">{person.name}</h3>
+                <p className="text-sm text-forest-700">{person.role}</p>
+                <p className="prose-kairos mt-3">{person.line}</p>
+                <Link href="/about" className="link-underline mt-1 inline-flex min-h-11 items-center text-sm">
+                  More about {person.name.split(" ")[0]}
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
       </Section>
 

@@ -149,7 +149,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-forest-800 pt-6 text-xs text-cream/50 sm:flex-row">
+        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-forest-800 pt-6 text-xs text-cream/70 sm:flex-row">
           <p>
             © {year} {site.name}. All rights reserved.
           </p>
