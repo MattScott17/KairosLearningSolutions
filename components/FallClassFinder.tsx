@@ -54,7 +54,7 @@ export function FallClassFinder({ classes }: { classes: FinderClass[] }) {
     .filter((d) => d.items.length > 0);
 
   return (
-    <div className="mt-8 rounded-lg bg-forest-900 p-6 text-cream sm:p-8">
+    <div className="mt-8 rounded-lg bg-forest-800 p-6 text-cream sm:p-8">
       <h3 className="text-2xl font-semibold text-cream">Find a class for your student</h3>
       <div className="mt-4 max-w-xs">
         <label htmlFor={selectId} className="mb-1.5 block text-sm font-medium text-cream/85">
