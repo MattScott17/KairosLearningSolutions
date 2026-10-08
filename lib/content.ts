@@ -90,6 +90,8 @@ export type FallClass = {
   slug: string;
   title: string;
   grades: string;
+  // The same range as numbers (Kinder = 0), so a parent can ask which classes fit their student.
+  gradeRange: [number, number];
   // Which list the class appears in on /fall-classes.
   group: "younger" | "older";
   day: string;
@@ -111,6 +113,7 @@ export const fallClasses: FallClass[] = [
     slug: "k2-learning-lab",
     title: "K to 2 Learning Lab",
     grades: "Kindergarten to 2nd",
+    gradeRange: [0, 2],
     group: "younger",
     day: "Monday",
     time: "9:00 AM to 12:00 PM",
@@ -127,6 +130,7 @@ export const fallClasses: FallClass[] = [
     slug: "imagination-lab",
     title: "Imagination Lab",
     grades: "Kindergarten to 3rd",
+    gradeRange: [0, 3],
     group: "younger",
     day: "Wednesday",
     time: "10:30 to 11:30 AM",
@@ -139,6 +143,7 @@ export const fallClasses: FallClass[] = [
     slug: "book-to-life",
     title: "Book to Life",
     grades: "1st to 3rd",
+    gradeRange: [1, 3],
     group: "younger",
     day: "Wednesday",
     time: "12:30 to 2:00 PM",
@@ -151,6 +156,7 @@ export const fallClasses: FallClass[] = [
     slug: "writing-lab-a",
     title: "Writing Lab A",
     grades: "3rd and 4th",
+    gradeRange: [3, 4],
     group: "older",
     day: "Wednesday",
     time: "10:00 to 11:00 AM",
@@ -162,6 +168,7 @@ export const fallClasses: FallClass[] = [
     slug: "writing-lab-b",
     title: "Writing Lab B",
     grades: "5th to 7th",
+    gradeRange: [5, 7],
     group: "older",
     day: "Wednesday",
     time: "11:00 AM to 12:00 PM",
@@ -173,6 +180,7 @@ export const fallClasses: FallClass[] = [
     slug: "express-and-connect-lab",
     title: "Express & Connect Lab",
     grades: "3rd to 6th",
+    gradeRange: [3, 6],
     group: "older",
     day: "Wednesday",
     time: "1:00 to 2:00 PM",
@@ -184,6 +192,7 @@ export const fallClasses: FallClass[] = [
     slug: "nature-journaling",
     title: "Nature Journaling",
     grades: "3rd to 6th",
+    gradeRange: [3, 6],
     group: "older",
     day: "Monday",
     time: "11:00 AM to 12:00 PM",
@@ -197,6 +206,7 @@ export const fallClasses: FallClass[] = [
     slug: "visual-arts",
     title: "Visual Arts",
     grades: "3rd to 6th",
+    gradeRange: [3, 6],
     group: "older",
     day: "Monday",
     time: "11:00 AM to 12:00 PM",

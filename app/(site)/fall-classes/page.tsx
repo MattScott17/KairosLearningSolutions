@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ExpandableText } from "@/components/ExpandableText";
+import { FallClassFinder } from "@/components/FallClassFinder";
 import { Reveal } from "@/components/ui/Reveal";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
@@ -127,6 +128,19 @@ export default function FallClassesPage() {
             Each class meets once a week in a small group, plus a {classFee} registration fee.
           </p>
         </div>
+
+        <FallClassFinder
+          classes={fallClasses.map((c) => ({
+            slug: c.slug,
+            title: c.title,
+            grades: c.grades,
+            gradeRange: c.gradeRange,
+            day: c.day,
+            time: c.time,
+            dates: c.dates,
+            href: registerHref(c),
+          }))}
+        />
 
         {groups.map((g) => (
           <div key={g.title} className="mt-14">

@@ -198,3 +198,12 @@ test("retired homepage drafts redirect to the live homepage", async ({ page }) =
     await expect(page).toHaveURL(/\/$/);
   }
 });
+
+test("fall class finder shows only the classes that fit the chosen grade", async ({ page }) => {
+  await page.goto("/fall-classes");
+  await page.getByLabel("My student is in").selectOption({ label: "4th grade" });
+  await expect(page.getByText("4 classes fit 4th grade")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Writing Lab A", exact: true }).first()).toBeVisible();
+  await page.getByLabel("My student is in").selectOption({ label: "Kindergarten" });
+  await expect(page.getByText("2 classes fit Kindergarten")).toBeVisible();
+});
