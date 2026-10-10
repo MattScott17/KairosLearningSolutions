@@ -77,7 +77,7 @@ export const registrationGroups: RegistrationGroup[] = [
     options: [
       {
         id: "apex",
-        label: "APEX, powered by 2 Hour Learning",
+        label: "APEX, powered by Human Programming",
         detail: "Grades 3 to 8, Monday to Thursday, 9:00 AM to 2:00 PM",
         googleKey: "APEX",
         grades: [3, 8],

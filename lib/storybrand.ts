@@ -79,7 +79,7 @@ export const conceptC: ConceptCopy = {
 
 
 // Concept B's "a day at Kairos" walk-through. Every detail comes from lib/content.ts
-// (APEX's 2 Hour Learning model, Early Learners' Tue–Thu mornings, the center's
+// (APEX's Human Programming model, Early Learners' Tue–Thu mornings, the center's
 // Monday to Thursday hours) — no invented schedule times.
 export type DayMoment = {
   when: string;
@@ -92,7 +92,7 @@ export const dayAtKairos: DayMoment[] = [
   {
     when: "Morning",
     title: "Core academics",
-    body: "APEX students work through core subjects in focused, personalized sessions using the 2 Hour Learning model, each at their own level.",
+    body: "APEX students work through core subjects in focused, personalized sessions using the Human Programming model, each at their own level.",
     photo: "studentsLearning",
   },
   {

@@ -16,7 +16,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = pageMetadata({
   title: "APEX Full-Time School, Grades 3 to 9",
   description:
-    "APEX is a full-time program for grades 3 to 9 in Salinas, CA, using the 2 Hour Learning model: personalized, mastery-based academics, then projects and life skills.",
+    "APEX is a full-time program for grades 3 to 9 in Salinas, CA, using the Human Programming model: personalized, mastery-based academics, then projects and life skills.",
   path: "/apex",
   image: pagePhotos.apex,
 });
@@ -132,7 +132,7 @@ export default function ApexPage() {
             <SectionHeading title="How the day works" intro={apex.model} />
             <p className="prose-kairos mt-4">
               In plain words: mastery-based means a student moves on to the next topic once they have
-              understood the current one, not when the calendar says it is time. 2 Hour Learning is the
+              understood the current one, not when the calendar says it is time. Human Programming is the
               name of the model, with focused academics first and projects and life skills for the rest
               of the day.
             </p>

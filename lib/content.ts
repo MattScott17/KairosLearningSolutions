@@ -277,7 +277,7 @@ export const apex = {
     },
   ],
   model:
-    "APEX uses the 2 Hour Learning model. Students do two hours of focused core academics each day, then spend the rest of the day on workshops and real-world skills.",
+    "APEX uses the Human Programming model. Students do two hours of focused core academics each day, then spend the rest of the day on workshops and real-world skills.",
   pillars: [
     {
       title: "Each student's own pace",
@@ -879,7 +879,7 @@ export const faqs: Record<"apex" | "earlyLearners" | "tutoring" | "homeschool", 
       answer: `The full program is ${apex.tuition.monthly} (${apex.tuition.annual}) over a ${apex.tuition.term}. Academics only is ${apex.tiers[1].price}, and workshops only is ${apex.tiers[2].price}. There is also a registration fee of ${newFee} for a new student or ${returningFee} for a returning one.`,
     },
     {
-      question: "What is the 2 Hour Learning model?",
+      question: "What is the Human Programming model?",
       answer: apex.model,
     },
     {

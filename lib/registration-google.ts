@@ -69,6 +69,8 @@ const CHILDREN: ChildEntries[] = [
 
 // The checkbox wording differs slightly between the three child sections on the Google Form,
 // and Google only accepts an exact match, so each section's options are copied verbatim.
+// The first option must match the Google Form's wording exactly. It still says 2 Hour Learning, so edit
+// the option on the Google Form itself, then change it here to match.
 const COMMON_OPTIONS = [
   "APEX: Powered by 2 Hour Learning (Grades 3 - 9, M - Th, 9:00 am - 2:00 pm)",
   "8th Grade Leadership",
