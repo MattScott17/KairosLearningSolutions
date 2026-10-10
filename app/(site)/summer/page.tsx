@@ -16,7 +16,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = pageMetadata({
   title: "Summer Programs",
   description:
-    "Summer 2027 at Kairos in Salinas, CA: details are coming soon. Call or send a message and we'll let you know when dates, times and prices are set.",
+    "Summer 2027 at Kairos in Salinas, CA: a Back-to-School Boot Camp runs July 19 to 23 and July 26 to 30. Call or send a message for details.",
   path: "/summer",
   image: pagePhotos.summer,
 });
@@ -30,7 +30,7 @@ export default function SummerPage() {
         mark="Kairos"
         photo={pagePhotos.summer}
         variant="wide"
-        intro="We are still planning next summer. Dates, times and prices will be posted here as soon as they are set."
+        intro="Our Back-to-School Boot Camp is planned in two July sessions. Times and prices will be posted here as soon as they are set."
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <a href={site.phoneHref} className="btn-primary">
@@ -44,18 +44,18 @@ export default function SummerPage() {
       </PageHero>
 
       <Section container="narrow" className="!pt-14">
-        <h2 className="text-3xl font-semibold sm:text-4xl">Details coming soon</h2>
+        <h2 className="text-3xl font-semibold sm:text-4xl">Back-to-School Boot Camp</h2>
         <p className="prose-kairos mt-4 text-lg">
-          Last summer we ran a Back-to-School Boot Camp for reading, math and language arts, and hosted a
-          music camp. If you would like to hear when summer 2027 is ready, call us or send a message with
-          your student&apos;s age and we will let you know.
+          Two weeks to choose from: July 19 to 23, and July 26 to 30. Last summer the Boot Camp covered
+          reading, math and language arts. Times and prices are still being set, so call us or send a
+          message with your student&apos;s age and we will let you know as soon as they are ready.
         </p>
       </Section>
 
       <CTASection
         photo={photos.cooking}
         title="Questions about summer?"
-        intro="Give us a call with your student's age and we'll tell you as soon as summer 2027 is planned."
+        intro="Give us a call with your student's age and we'll tell you as soon as the details are set."
       />
     </>
   );

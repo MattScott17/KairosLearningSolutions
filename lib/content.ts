@@ -58,7 +58,7 @@ export const services: Service[] = [
       "Level B: we assess your student, plan the work and teach it at Kairos, with time and space to finish assignments.",
       "Level C: everything in Level B, plus private tutoring.",
       "Level D: every Kairos service, built into a custom program for your student.",
-      "Small student-to-teacher ratios, hourly packages and no long-term contract.",
+      "Small student-to-teacher ratios and hourly packages, month to month.",
     ],
     highlights: [
       { label: "Structure", value: "Levels A to D" },
@@ -226,7 +226,7 @@ export type EnrichmentNote = {
 
 export const enrichment: EnrichmentNote = {
   title: "Enrichment Classes",
-  body: "Small weekly classes for grades K to 7 in writing, speaking, art and reading. They fill up fast, so call to save a spot.",
+  body: "Small weekly enrichment classes for grades K to 7 in writing, speaking, art and reading. They fill up fast, so call to save a spot.",
   icon: Sparkles,
 };
 
@@ -277,7 +277,7 @@ export const apex = {
     },
   ],
   model:
-    "APEX uses the 2 Hour Learning model, the same approach Alpha Schools use. Students work through core academics in focused, personalized sessions, then spend the rest of the day on real-world skills.",
+    "APEX uses the 2 Hour Learning model. Students do two hours of focused core academics each day, then spend the rest of the day on workshops and real-world skills.",
   pillars: [
     {
       title: "Each student's own pace",
@@ -310,6 +310,19 @@ export const apex = {
   ],
   outcomesNote:
     "In our 2025-26 pilot year, APEX students grew 3.6 times their projected growth in reading and math, and the class's average national ranking went from the 43rd to the 78th percentile.",
+  day: [
+    { time: "9:00", what: "Launch: a group activity tied to the workshop" },
+    { time: "9:20", what: "Academics" },
+    { time: "10:20", what: "Physical challenge toward a monthly goal each student chooses" },
+    { time: "10:25", what: "Break and snack" },
+    { time: "10:40", what: "Life skills discussion" },
+    { time: "10:55", what: "Journaling, with an optional prompt from life skills" },
+    { time: "11:05", what: "Academics" },
+    { time: "12:05", what: "Lunch" },
+    { time: "12:30", what: "Silent reading, a book of their choice" },
+    { time: "12:45", what: "Workshops, then cleanup" },
+    { time: "2:00", what: "Dismissal" },
+  ],
   workshops: {
     intro:
       "Workshops fill the rest of the day, Monday through Thursday. Here is what is on the 2026-27 calendar.",
@@ -434,7 +447,7 @@ export const leadership: TeamMember[] = [
   {
     name: "Alissa Scott",
     role: "Executive Director",
-    bio: "Alissa earned her BA in Elementary Education and a Multiple Subject Teaching Credential from Grand Canyon University. After a year of tutoring and teaching, she became Executive Director in 2026 and took over daily operations from her mother, Jackie. She grew up at Kairos as a student, tutor and teacher, and wants every student to fall in love with learning and feel the same sense of belonging she found here.",
+    bio: "Alissa earned her BA in Elementary Education from Grand Canyon University. After a year of tutoring and teaching, she became Executive Director in 2026 and took over daily operations from Jackie. She grew up at Kairos as a student, tutor and teacher, and wants every student to fall in love with learning and feel the same sense of belonging she found here.",
     image: "/images/team/alissa-scott.jpg",
   },
 ];
@@ -792,7 +805,7 @@ export function getProgramList(): ProgramRow[] {
       blurb: firstSentence(apex.intro),
     },
     {
-      name: "Classes and enrichment",
+      name: "Enrichment classes",
       href: "/fall-classes",
       who: "Grades K to 7",
       when: "Weekly: writing, speaking, art and reading",

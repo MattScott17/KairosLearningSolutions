@@ -39,7 +39,7 @@ const people = [
     name: alissa.name,
     role: alissa.role,
     image: alissa.image!,
-    line: "Alissa holds a Multiple Subject Teaching Credential. She grew up at Kairos as a student, tutor and teacher.",
+    line: "Alissa grew up at Kairos as a student, tutor and teacher.",
   },
 ];
 
@@ -142,10 +142,25 @@ export default function ApexPage() {
               works at their own pace, and teachers know each student well.
             </p>
             <p className="prose-kairos mt-4">
-              During the academic block, AI-supported adaptive learning adjusts to each student's
-              level, so the work is never too easy or too hard.
+              During the academic blocks, AI checks what each student already knows. The lessons
+              are already written, and any gaps get retaught. The AI does not teach your child, and
+              adults are in the room with the students.
             </p>
           </div>
+        </div>
+        <div className="mt-12 border-t border-forest-200 pt-8">
+          <h3 className="text-2xl font-semibold">A typical day, 9:00 to 2:00</h3>
+          <ol className="mt-5 grid gap-x-12 sm:grid-cols-2">
+            {apex.day.map((item) => (
+              <li
+                key={item.time}
+                className="flex gap-4 border-b border-forest-100 py-2.5 text-base"
+              >
+                <span className="w-14 shrink-0 font-semibold text-forest-800">{item.time}</span>
+                <span className="text-ink/85">{item.what}</span>
+              </li>
+            ))}
+          </ol>
         </div>
       </Section>
 
@@ -235,24 +250,20 @@ export default function ApexPage() {
         <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
           <SectionHeading
             title="Ways to enroll"
-            intro={`The full program is ${apex.tuition.monthly.replace(" / ", " a ")} for 10 months, or ${apex.tuition.annual.replace(" / ", " a ")}. Come in for a tour and we'll go over it with you.`}
+            intro="Come in for a tour and we'll go over what fits your student and what it costs."
           />
           <div>
             <ul className="border-t border-forest-200">
-              {apex.tiers.map((tier, i) => (
+              {apex.tiers.map((tier) => (
                 <li
                   key={tier.name}
-                  className={`flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 ${
-                    i === 0
-                      ? "my-3 rounded-lg border border-forest-300 bg-forest-50 px-5 py-6"
-                      : "border-b border-forest-100 px-5 py-5"
-                  }`}
+                  className="flex flex-col gap-1 border-b border-forest-100 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
                 >
                   <div>
                     <p className="font-semibold text-forest-900">{tier.name}</p>
                     <p className="text-sm text-ink/70">{tier.description}</p>
                   </div>
-                  <p className="font-display text-xl font-semibold text-forest-800 sm:whitespace-nowrap sm:text-2xl">
+                  <p className="text-sm text-ink/75 sm:whitespace-nowrap">
                     {tier.price.replace(" / ", " a ")}
                   </p>
                 </li>
@@ -260,25 +271,22 @@ export default function ApexPage() {
             </ul>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link href="/contact" className="btn-primary">
+              <a href={site.phoneHref} className="btn-primary">
+                <Phone className="h-4 w-4" />
+                Call {site.phone}
+              </a>
+              <Link href="/contact" className="btn-outline">
                 Book a tour
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <a href={site.phoneHref} className="btn-outline">
-                <Phone className="h-4 w-4" />
-                {site.phone}
-              </a>
             </div>
-
-            <h3 className="mt-10 text-sm font-semibold text-forest-800">Registration fees</h3>
-            <dl className="mt-3 space-y-2">
-              {registrationFees.map((fee) => (
-                <div key={fee.label} className="flex justify-between gap-4 text-sm">
-                  <dt className="text-ink/75">{fee.label}</dt>
-                  <dd className="whitespace-nowrap text-right font-medium text-forest-800">{fee.value}</dd>
-                </div>
-              ))}
-            </dl>
+            <p className="mt-4 text-sm text-ink/75">
+              Returning families can{" "}
+              <Link href="/fall-classes/register" className="link-underline">
+                register here
+              </Link>
+              .
+            </p>
           </div>
         </div>
       </Section>
@@ -287,7 +295,7 @@ export default function ApexPage() {
       <Section>
         <SectionHeading
           title="Meet Jackie and Alissa"
-          intro="Jackie opened Kairos in 2020, and her daughter Alissa is now the Executive Director."
+          intro="Jackie opened Kairos in 2020, and Alissa is now the Executive Director."
         />
         <div className="mt-10 grid gap-10 md:grid-cols-2">
           {people.map((person) => (
