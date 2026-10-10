@@ -20,7 +20,7 @@ export const photos = {
   handprints: lib("img-0929.jpg", "A young student pressing an orange handprint onto paper"),
   circleTime: lib("img-3593.jpg", "Young children holding up colored blocks during a Spanish colors lesson"),
   teamwork: lib("pxl-20250912-161414960.jpg", "Students passing a hula hoop around a circle in a team-building game"),
-  staff: lib("img-3341.jpg", "Kairos staff together at the front desk"),
+  staff: lib("img-3526.jpg", "Kairos teachers together in the library, dressed in red and pink"),
   craftTable: lib("img-9490.jpg", "Students gluing paper shapes at a table in front of the rainbow mural"),
   rollerCoaster: lib("img-3343.jpg", "A student holding up her paper roller-coaster project"),
   planting: lib("img-3527.jpg", "Planting seeds in a labeled seedling tray"),
@@ -36,7 +36,7 @@ export const heroPhotos = {
 
 /** The one feature photo on each interior page. */
 export const pagePhotos = {
-  about: photos.staff,
+  about: { ...photos.staff, position: "50% 25%" } as Photo,
   apex: photos.threeDPrinting,
   earlyLearners: photos.circleTime,
   summer: { ...photos.outdoors, position: "30% 70%" } as Photo,
