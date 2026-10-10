@@ -41,7 +41,11 @@ const paths: Path[] = [
     needShort: "extra help",
     program: tutoring.title,
     summary: tutoring.summary,
-    facts: tutoring.highlights,
+    facts: [
+      tutoring.highlights[0],
+      tutoring.highlights[1],
+      { label: "Schedule", value: "Weekly or as needed" },
+    ],
     href: `/services/${tutoring.slug}`,
     cta: tutoring.cta,
     photo: servicePhoto[tutoring.slug],
@@ -54,7 +58,7 @@ const paths: Path[] = [
     summary: homeschool.summary,
     facts: [
       homeschool.highlights[0],
-      { label: "Pricing", value: `From $${homeschoolPricing.levels.A[0]} a month` },
+      homeschool.highlights[1],
       homeschool.highlights[2],
     ],
     href: `/services/${homeschool.slug}`,
@@ -70,7 +74,7 @@ const paths: Path[] = [
     facts: [
       { label: "Grades", value: earlyLearners.ageRange },
       { label: "Days", value: "Tue to Thu" },
-      { label: "Pricing", value: earlyLearners.pricing[0].value },
+      { label: "Hours", value: "9 AM to noon" },
     ],
     href: "/early-learners",
     cta: "Explore Early Learners",
@@ -85,7 +89,7 @@ const paths: Path[] = [
     facts: [
       { label: "Grades", value: apex.gradeRange },
       { label: "First step", value: "Free call and tour" },
-      { label: "Tuition", value: apex.tuition.monthly.replace(" / ", " a ") },
+      { label: "Schedule", value: "Mon to Thu, 9 to 2" },
     ],
     href: "/apex",
     cta: "Explore APEX",

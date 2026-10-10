@@ -277,7 +277,7 @@ export const apex = {
     },
   ],
   model:
-    "APEX uses the 2 Hour Learning model. Students do two hours of focused core academics each day, then spend the rest of the day on workshops and real-world skills.",
+    "APEX uses the Human Programming model. Students do two hours of focused core academics each day, then spend the rest of the day on workshops and real-world skills.",
   pillars: [
     {
       title: "Each student's own pace",
@@ -447,7 +447,7 @@ export const leadership: TeamMember[] = [
   {
     name: "Alissa Scott",
     role: "Executive Director",
-    bio: "Alissa earned her BA in Elementary Education from Grand Canyon University. After a year of tutoring and teaching, she became Executive Director in 2026 and took over daily operations from Jackie. She grew up at Kairos as a student, tutor and teacher, and wants every student to fall in love with learning and feel the same sense of belonging she found here.",
+    bio: "Alissa earned her BA in Elementary Education and a Multiple Subject Teaching Credential from Grand Canyon University. After a year of tutoring and teaching, she became Executive Director in 2026 and took over daily operations from Jackie. She grew up at Kairos as a student, tutor and teacher, and wants every student to fall in love with learning and feel the same sense of belonging she found here.",
     image: "/images/team/alissa-scott.jpg",
   },
 ];
@@ -879,7 +879,7 @@ export const faqs: Record<"apex" | "earlyLearners" | "tutoring" | "homeschool", 
       answer: `The full program is ${apex.tuition.monthly} (${apex.tuition.annual}) over a ${apex.tuition.term}. Academics only is ${apex.tiers[1].price}, and workshops only is ${apex.tiers[2].price}. There is also a registration fee of ${newFee} for a new student or ${returningFee} for a returning one.`,
     },
     {
-      question: "What is the 2 Hour Learning model?",
+      question: "What is the Human Programming model?",
       answer: apex.model,
     },
     {

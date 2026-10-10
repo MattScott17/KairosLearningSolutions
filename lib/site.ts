@@ -30,10 +30,10 @@ export const site = {
   hoursSpec: {
     days: ["Monday", "Tuesday", "Wednesday", "Thursday"],
     opens: "09:00",
-    closes: "17:15",
+    closes: "18:00",
   },
   hours: [
-    { day: "Monday – Thursday", time: "9:00 AM – 5:15 PM" },
+    { day: "Monday – Thursday", time: "9:00 AM – 6:00 PM" },
     { day: "Friday", time: "By appointment" },
     { day: "Saturday – Sunday", time: "Closed" },
   ],

@@ -163,7 +163,7 @@ export const apexOffer: ProgramOffer = {
   stack: [
     {
       title: "Focused, mastery-based academics",
-      body: "Core subjects mastered in efficient, high-focus blocks using the 2 Hour Learning model.",
+      body: "Core subjects mastered in efficient, high-focus blocks using the Human Programming model.",
     },
     {
       title: "Your child's pace, not the class's",
@@ -218,7 +218,7 @@ export const apexOffer: ProgramOffer = {
   ],
   faqs: [
     {
-      q: "What is the 2 Hour Learning model?",
+      q: "What is the Human Programming model?",
       a: apex.model,
     },
     {
