@@ -39,7 +39,7 @@ const people = [
     name: alissa.name,
     role: alissa.role,
     image: alissa.image!,
-    line: "Alissa grew up at Kairos as a student, tutor and teacher.",
+    line: "Alissa holds a Multiple Subject Teaching Credential. She grew up at Kairos as a student, tutor and teacher.",
   },
 ];
 

@@ -447,7 +447,7 @@ export const leadership: TeamMember[] = [
   {
     name: "Alissa Scott",
     role: "Executive Director",
-    bio: "Alissa earned her BA in Elementary Education from Grand Canyon University. After a year of tutoring and teaching, she became Executive Director in 2026 and took over daily operations from Jackie. She grew up at Kairos as a student, tutor and teacher, and wants every student to fall in love with learning and feel the same sense of belonging she found here.",
+    bio: "Alissa earned her BA in Elementary Education and a Multiple Subject Teaching Credential from Grand Canyon University. After a year of tutoring and teaching, she became Executive Director in 2026 and took over daily operations from Jackie. She grew up at Kairos as a student, tutor and teacher, and wants every student to fall in love with learning and feel the same sense of belonging she found here.",
     image: "/images/team/alissa-scott.jpg",
   },
 ];
