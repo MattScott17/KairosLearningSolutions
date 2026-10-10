@@ -150,23 +150,23 @@ export default function ApexPage() {
       </Section>
 
       {/* How APEX is set up: a green band, photo on the right */}
-      <section className="bg-forest-800 py-16 text-cream sm:py-24">
+      <section className="bg-forest-800 py-12 text-cream sm:py-24">
         <div className="container-page grid items-center gap-10 lg:grid-cols-[1.5fr_1fr] lg:gap-16">
           <div>
             <h2 className="text-3xl font-semibold text-cream sm:text-4xl">How APEX is set up</h2>
-            <p className="mt-4 max-w-xl text-lg text-cream/85">
+            <p className="mt-3 max-w-xl text-base text-cream/85 sm:mt-4 sm:text-lg">
               Every APEX student also gets hands-on projects, life-skills workshops and mentoring
               from our teachers.
             </p>
-            <dl className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2">
+            <dl className="mt-6 grid gap-x-10 gap-y-3 sm:mt-10 sm:gap-y-8 sm:grid-cols-2">
               {apex.pillars.map((pillar, i) => (
                 <Reveal
                   key={pillar.title}
                   delay={Math.min(i, 4) * 0.05}
-                  className="border-t border-cream/25 pt-4"
+                  className="border-t border-cream/25 pt-3 sm:pt-4"
                 >
-                  <dt className="font-display text-xl font-semibold text-cream">{pillar.title}</dt>
-                  <dd className="mt-2 text-base text-cream/85">{pillar.body}</dd>
+                  <dt className="font-display text-lg font-semibold text-cream sm:text-xl">{pillar.title}</dt>
+                  <dd className="mt-2 hidden text-base text-cream/85 sm:block">{pillar.body}</dd>
                 </Reveal>
               ))}
             </dl>
@@ -186,24 +186,24 @@ export default function ApexPage() {
       {/* What the workshops are: four themes across, then the year's events beside a photo */}
       <Section>
         <SectionHeading title="What the workshops look like" intro={apex.workshops.intro} />
-        <div className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-x-8 gap-y-6 sm:mt-10 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
           {apex.workshops.groups.map((group) => (
             <div key={group.title}>
               <h3 className="border-b-2 border-forest-700 pb-2 font-display text-xl font-semibold text-forest-900">
                 {group.title}
               </h3>
-              <ul className="mt-4 space-y-4">
+              <ul className="mt-3 space-y-1 sm:mt-4 sm:space-y-4">
                 {group.items.map((w) => (
                   <li key={w.name}>
                     <span className="block font-semibold text-forest-900">{w.name}</span>
-                    <span className="prose-kairos mt-0.5 block text-sm">{w.body}</span>
+                    <span className="prose-kairos mt-0.5 hidden text-sm sm:block">{w.body}</span>
                   </li>
                 ))}
               </ul>
             </div>
           ))}
         </div>
-        <div className="mt-14 grid items-center gap-8 rounded-lg bg-sand p-6 sm:p-8 lg:grid-cols-[16rem_1fr]">
+        <div className="mt-10 grid items-center gap-8 rounded-lg bg-sand p-5 sm:mt-14 sm:p-8 lg:grid-cols-[16rem_1fr]">
           <div className="relative hidden aspect-[4/3] overflow-hidden rounded-lg lg:block">
             <Image
               src={photos.rollerCoaster.src}
@@ -218,7 +218,8 @@ export default function ApexPage() {
             <h3 className="font-display text-2xl font-semibold text-forest-900">
               {apex.workshops.eventsIntro}
             </h3>
-            <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-base text-ink/85">
+            <p className="mt-2 text-base text-ink/85 sm:hidden">{apex.workshops.events.join(", ")}.</p>
+            <ul className="mt-4 hidden flex-wrap gap-x-6 gap-y-2 text-base text-ink/85 sm:flex">
               {apex.workshops.events.map((e) => (
                 <li key={e} className="flex items-center gap-2">
                   <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-gold-500" />
