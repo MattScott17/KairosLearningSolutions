@@ -42,7 +42,7 @@ export function ProgramList() {
                   className="group grid grid-cols-[4rem_1fr] gap-x-4 gap-y-1 py-5 transition-colors hover:bg-forest-50/70 md:grid-cols-[1.2fr_1fr_1.4fr_1fr_auto] md:items-center md:gap-6 md:px-2"
                 >
                   {thumb && (
-                    <span className="relative row-span-4 h-16 w-16 overflow-hidden rounded-md md:hidden">
+                    <span className="relative row-span-5 h-16 w-16 overflow-hidden rounded-md md:hidden">
                       <Image src={thumb.src} alt="" fill sizes="64px" className="object-cover" />
                     </span>
                   )}
@@ -53,6 +53,7 @@ export function ProgramList() {
                   <span className="text-sm text-ink/75">{row.when}</span>
                   <span className="text-sm font-semibold text-forest-800">{row.price}</span>
                   <ArrowRight className="hidden h-4 w-4 text-forest-700 transition-transform group-hover:translate-x-1 md:block" />
+                  <span className="mt-1 text-sm text-ink/70 md:col-span-5 md:mt-0">{row.blurb}</span>
                 </Link>
               </li>
             );

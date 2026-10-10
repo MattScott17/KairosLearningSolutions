@@ -21,8 +21,6 @@ export const site = {
     full: "836 South Main Street, Salinas, CA 93901",
     mapUrl:
       "https://www.google.com/maps/search/?api=1&query=836+South+Main+Street+Salinas+CA+93901",
-    embedUrl:
-      "https://www.google.com/maps?q=836+South+Main+Street+Salinas+CA+93901&output=embed",
   },
   // Used for schema.org markup only. Double-check against the pin on Google Maps.
   geo: { latitude: 36.6694, longitude: -121.6553 },

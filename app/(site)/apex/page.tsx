@@ -165,15 +165,17 @@ export default function ApexPage() {
             </div>
           </div>
           <div>
-            <dl className="border-t border-forest-200">
+            <dl className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
               {apex.pillars.map((pillar, i) => (
                 <Reveal
                   key={pillar.title}
                   delay={Math.min(i, 4) * 0.05}
-                  className="grid gap-1 border-b border-forest-100 py-5 sm:grid-cols-[14rem_1fr] sm:gap-6"
+                  className="border-t border-forest-200 pt-4"
                 >
-                  <dt className="font-semibold text-forest-900">{pillar.title}</dt>
-                  <dd className="prose-kairos">{pillar.body}</dd>
+                  <dt className="font-display text-lg font-semibold text-forest-900">
+                    {pillar.title}
+                  </dt>
+                  <dd className="prose-kairos mt-1 text-sm">{pillar.body}</dd>
                 </Reveal>
               ))}
             </dl>
@@ -202,18 +204,32 @@ export default function ApexPage() {
             </div>
           </div>
           <div>
-            <dl className="border-t border-forest-200">
-              {apex.workshops.list.map((w) => (
-                <div
-                  key={w.name}
-                  className="grid gap-1 border-b border-forest-100 py-4 sm:grid-cols-[15rem_1fr] sm:gap-6"
-                >
-                  <dt className="font-semibold text-forest-900">{w.name}</dt>
-                  <dd className="prose-kairos text-sm">{w.body}</dd>
+            <div className="space-y-8">
+              {apex.workshops.groups.map((group) => (
+                <div key={group.title} className="border-t border-forest-200 pt-4">
+                  <h3 className="font-display text-xl font-semibold text-forest-900">
+                    {group.title}
+                  </h3>
+                  <ul className="mt-3 space-y-2">
+                    {group.items.map((w) => (
+                      <li key={w.name} className="prose-kairos text-sm">
+                        <span className="font-semibold text-forest-900">{w.name}.</span> {w.body}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ))}
-            </dl>
-            <p className="prose-kairos mt-6">{apex.workshops.events}</p>
+              <div className="border-t border-forest-200 pt-4">
+                <h3 className="font-display text-xl font-semibold text-forest-900">
+                  {apex.workshops.eventsIntro}
+                </h3>
+                <ul className="prose-kairos mt-3 grid gap-x-6 gap-y-1 text-sm sm:grid-cols-2">
+                  {apex.workshops.events.map((e) => (
+                    <li key={e}>{e}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </Section>
