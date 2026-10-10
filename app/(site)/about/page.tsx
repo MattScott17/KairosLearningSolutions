@@ -8,6 +8,8 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
 import { leadership, team, testimonials } from "@/lib/content";
 import { site } from "@/lib/site";
+import Link from "next/link";
+import { Phone } from "lucide-react";
 import { pagePhotos, photos } from "@/lib/photos";
 import { TutorCard } from "@/components/TutorCard";
 import { ExpandableText } from "@/components/ExpandableText";
@@ -26,23 +28,26 @@ function ReviewCard({ t }: { t: Review }) {
   return (
     <figure className="rounded-lg border border-forest-100 bg-cream p-5 sm:p-7">
       <blockquote className="font-display text-xl italic leading-relaxed text-forest-800">“{t.pull}”</blockquote>
-      <details className="group mt-3">
+      <figcaption className="mt-3 text-sm">
+        <span className="font-semibold text-forest-800">{t.author}</span>
+        <span className="text-ink/75">
+          {" "}
+          · {t.role}
+          {t.source && <> · {t.source} review</>}
+        </span>
+      </figcaption>
+      <details className="group mt-1">
         <summary className="link-underline inline-flex min-h-11 cursor-pointer list-none items-center text-sm [&::-webkit-details-marker]:hidden">
           <span className="group-open:hidden">Read the full review</span>
           <span className="hidden group-open:inline">Hide the full review</span>
         </summary>
         <blockquote className="mt-2 text-base leading-relaxed text-ink/80">“{t.quote}”</blockquote>
       </details>
-      <figcaption className="mt-4 border-t border-forest-100 pt-4 text-sm">
-        <span className="font-semibold text-forest-800">{t.author}</span>
-        <span className="block text-ink/75">
-          {t.role}
-          {t.source && <> · {t.source} review</>}
-        </span>
-      </figcaption>
     </figure>
   );
 }
+
+const alissa = leadership.find((p) => p.name === "Alissa Scott")!;
 
 export default function AboutPage() {
   return (
@@ -54,7 +59,17 @@ export default function AboutPage() {
         photo={pagePhotos.about}
         variant="flip"
         intro="Most of our teachers are Salinas parents and grandparents. Between them they've taught kindergarten through 12th grade, several for more than 25 years, and one still teaches full time at New Republic Elementary."
-      />
+      >
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <a href={site.phoneHref} className="btn-primary">
+            <Phone className="h-4 w-4" aria-hidden="true" />
+            Call {site.phone}
+          </a>
+          <Link href="/contact" className="btn-outline">
+            Send a message
+          </Link>
+        </div>
+      </PageHero>
 
       {/* Jackie, in her own words */}
       <Section>
@@ -81,65 +96,41 @@ export default function AboutPage() {
                 learning.
               </p>
             </div>
-            <p className="mt-6 text-sm text-ink/75">Jackie Scott, owner and lead teacher</p>
+            <p className="mt-6 text-sm text-ink/75">
+              Jackie Scott, owner and lead teacher. MA in Educational Leadership and Curriculum &amp; Instruction.
+            </p>
+
+            {/* Alissa, who runs day to day, is part of the same story, not a separate section */}
+            <div className="mt-8 flex gap-5 border-t border-forest-100 pt-8">
+              <div className="relative aspect-[4/5] w-24 shrink-0 overflow-hidden rounded-lg bg-forest-50 sm:w-32">
+                {alissa.image && (
+                  <Image
+                    src={alissa.image}
+                    alt={alissa.name}
+                    fill
+                    sizes="(max-width: 640px) 6rem, 8rem"
+                    className="object-cover"
+                  />
+                )}
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold">{alissa.name}</h3>
+                <p className="text-sm text-forest-700">{alissa.role}</p>
+                {alissa.bio && <ExpandableText text={alissa.bio} lines={3} className="mt-3 text-base" />}
+              </div>
+            </div>
           </div>
         </div>
       </Section>
 
-      {/* Leadership */}
-      <section className="border-t border-forest-100 py-16 sm:py-24">
-        <div className="container-page">
-          <SectionHeading title="Who runs Kairos" />
-          <div className="mt-10 grid gap-10 md:grid-cols-2">
-            {leadership.map((person, i) => (
-              <Reveal key={person.name} delay={i * 0.08} className="flex gap-5 sm:gap-6">
-                <div className="relative aspect-[4/5] w-28 shrink-0 overflow-hidden rounded-lg bg-forest-50 sm:w-40">
-                  {person.image && (
-                    <Image
-                      src={person.image}
-                      alt={person.name}
-                      fill
-                      sizes="(max-width: 640px) 7rem, 10rem"
-                      className="object-cover"
-                    />
-                  )}
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold">{person.name}</h3>
-                  <p className="text-sm text-forest-700">{person.role}</p>
-                  {person.bio && <ExpandableText text={person.bio} lines={3} className="mt-3 text-base" />}
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team */}
-      <section className="bg-sand py-16 sm:py-24">
-        <div className="container-page">
-          <SectionHeading
-            title="Our teachers and tutors"
-            intro="Credentialed classroom teachers, subject specialists, and college tutors in math and science."
-          />
-          <div className="mt-10 grid items-start gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {team.map((member, i) => (
-              <Reveal key={member.name} delay={(i % 3) * 0.06}>
-                <TutorCard member={member} compact expandable />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Google reviews, quoted in full */}
+      {/* Google reviews: three up front, the rest on request */}
       <Section id="reviews" className="scroll-mt-20">
         <SectionHeading
           title="What families say"
           intro={`${testimonials.length} Google reviews from Kairos parents and grandparents. Open one to read it word for word.`}
         />
         <div className="mt-10 columns-1 gap-6 sm:columns-2 lg:columns-3 [&>*]:mb-6 [&>*]:break-inside-avoid">
-          {testimonials.slice(0, 6).map((t) => (
+          {testimonials.slice(0, 3).map((t) => (
             <ReviewCard key={t.id} t={t} />
           ))}
         </div>
@@ -149,12 +140,29 @@ export default function AboutPage() {
             <span className="hidden group-open:inline">Show fewer reviews</span>
           </summary>
           <div className="mt-8 columns-1 gap-6 sm:columns-2 lg:columns-3 [&>*]:mb-6 [&>*]:break-inside-avoid">
-            {testimonials.slice(6).map((t) => (
+            {testimonials.slice(3).map((t) => (
               <ReviewCard key={t.id} t={t} />
             ))}
           </div>
         </details>
       </Section>
+
+      {/* Team */}
+      <section className="bg-sand py-16 sm:py-24">
+        <div className="container-page">
+          <SectionHeading
+            title="Our teachers and tutors"
+            intro="Credentialed classroom teachers, subject specialists, and college tutors in math and science."
+          />
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {team.map((member, i) => (
+              <Reveal key={member.name} delay={(i % 3) * 0.06} className="h-full">
+                <TutorCard member={member} compact expandable />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <CTASection
         title="Come visit"

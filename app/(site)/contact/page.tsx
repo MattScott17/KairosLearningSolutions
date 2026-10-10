@@ -69,7 +69,7 @@ export default function ContactPage() {
                 className="flex items-center gap-4 rounded-lg border border-forest-100 bg-cream p-5 transition-colors hover:border-forest-300"
               >
                 <span>
-                  <span className="block text-sm text-ink/75">Address</span>
+                  <span className="block text-sm text-ink/75">Address (opens directions)</span>
                   <span className="text-base font-semibold text-forest-800">
                     {site.address.street}, {site.address.city}, {site.address.state}{" "}
                     {site.address.zip}
@@ -104,33 +104,6 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Map: the embed can be blocked or slow, so the link below always works */}
-      <section aria-label="Map to Kairos Learning Solutions" className="pb-16 sm:pb-24">
-        <div className="container-page">
-          <div className="overflow-hidden rounded-lg border border-forest-100 bg-sand">
-            <iframe
-              title="Map to Kairos Learning Solutions"
-              src={site.address.embedUrl}
-              width="100%"
-              height="420"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="block min-h-[420px] w-full"
-            />
-          </div>
-          <p className="mt-4 text-sm text-ink/70">
-            <a
-              href={site.address.mapUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link-underline inline-flex min-h-[44px] items-center"
-            >
-              Open in Google Maps
-            </a>
-          </p>
         </div>
       </section>
     </>

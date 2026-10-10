@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ExpandableText } from "@/components/ExpandableText";
 import { FallClassFinder } from "@/components/FallClassFinder";
+import { CollapsibleOnMobile } from "@/components/CollapsibleOnMobile";
 import { Reveal } from "@/components/ui/Reveal";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
@@ -94,7 +95,12 @@ export default function FallClassesPage() {
         title="Fall 2026 classes for kids in K to 7th grade"
         mark="K to 7th grade"
         intro={`Small weekly classes in writing, speaking, art and reading, running through ${endDate}. Call and we'll sign your student up on the phone.`}
-        aside={<FallClassCallback classTitles={fallClasses.map((c) => c.title)} />}
+        tone="forest"
+        aside={
+          <CollapsibleOnMobile label="Rather get a call? Request a call back">
+            <FallClassCallback classTitles={fallClasses.map((c) => c.title)} />
+          </CollapsibleOnMobile>
+        }
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <a href={site.phoneHref} className="btn-accent px-6 py-4 text-base">
@@ -105,18 +111,18 @@ export default function FallClassesPage() {
             See the classes
           </a>
         </div>
-        <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-forest-200 pt-6 text-sm">
+        <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-cream/25 pt-6 text-sm">
           <div>
-            <dt className="text-ink/75">Days</dt>
-            <dd className="mt-1 font-semibold text-forest-900">Mondays and Wednesdays</dd>
+            <dt className="text-cream/80">Days</dt>
+            <dd className="mt-1 font-semibold text-cream">Mondays and Wednesdays</dd>
           </div>
           <div>
-            <dt className="text-ink/75">Price</dt>
-            <dd className="mt-1 font-semibold text-forest-900">From $160 a month</dd>
+            <dt className="text-cream/80">Price</dt>
+            <dd className="mt-1 font-semibold text-cream">From $160 a month</dd>
           </div>
           <div>
-            <dt className="text-ink/75">Spots</dt>
-            <dd className="mt-1 font-semibold text-forest-900">First come, first served</dd>
+            <dt className="text-cream/80">Spots</dt>
+            <dd className="mt-1 font-semibold text-cream">First come, first served</dd>
           </div>
         </dl>
       </PageHero>
@@ -144,7 +150,7 @@ export default function FallClassesPage() {
 
         {groups.map((g) => (
           <div key={g.title} className="mt-14">
-            <h3 className="border-b-2 border-forest-800 pb-3 font-display text-xl font-semibold text-forest-900">
+            <h3 className="rounded-md bg-forest-800 px-4 py-2 font-display text-lg font-semibold text-cream">
               {g.title}
             </h3>
             <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">

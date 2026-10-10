@@ -313,50 +313,79 @@ export const apex = {
   workshops: {
     intro:
       "Workshops fill the rest of the day, Monday through Thursday. Here is what is on the 2026-27 calendar.",
-    list: [
+    groups: [
       {
-        name: "Manage Yourself",
-        body: "Managing time and routine, plus working in Google Docs, Sheets, Slides and Gmail.",
+        title: "Money and business",
+        items: [
+          {
+            name: "Budgeting with Purpose",
+            body: "Students build a personal budget, then plan a vacation budget.",
+          },
+          {
+            name: "Young Entrepreneur Lab",
+            body: "Students plan and run a small business, including our Holiday Craft Fair.",
+          },
+        ],
       },
       {
-        name: "Budgeting with Purpose",
-        body: "Students build a personal budget, then plan a vacation budget.",
+        title: "Work and leadership",
+        items: [
+          {
+            name: "Manage Yourself",
+            body: "Managing time and routine, plus working in Google Docs, Sheets, Slides and Gmail.",
+          },
+          {
+            name: "Better Together",
+            body: "Team projects, like producing a podcast and building a game board.",
+          },
+          {
+            name: "Employment and Leadership",
+            body: "Skills for working with others, finished with a mock interview with a guest.",
+          },
+        ],
       },
       {
-        name: "Better Together",
-        body: "Team projects, like producing a podcast and building a game board.",
+        title: "The world and community",
+        items: [
+          {
+            name: "Around the World Cultural Explorers",
+            body: "A country at a time: Japan, Brazil, Morocco, India and New Zealand.",
+          },
+          {
+            name: "Government Studies",
+            body: "How government works, ending with a mock trial.",
+          },
+          {
+            name: "Community Service and Personal Goals",
+            body: "Giving back, and setting and checking in on goals through the year.",
+          },
+        ],
       },
       {
-        name: "Young Entrepreneur Lab",
-        body: "Students plan and run a small business, including our Holiday Craft Fair.",
-      },
-      {
-        name: "Around the World Cultural Explorers",
-        body: "A country at a time: Japan, Brazil, Morocco, India and New Zealand.",
-      },
-      {
-        name: "Employment and Leadership",
-        body: "Skills for working with others, finished with a mock interview with a guest.",
-      },
-      {
-        name: "AI as Your Assistant, Not Your Replacement",
-        body: "How to use AI tools well and still do your own thinking.",
-      },
-      {
-        name: "Government Studies",
-        body: "How government works, ending with a mock trial.",
-      },
-      {
-        name: "Health and Safety",
-        body: "Everyday health and safety skills.",
-      },
-      {
-        name: "Community Service and Personal Goals",
-        body: "Giving back, and setting and checking in on goals through the year.",
+        title: "Life skills",
+        items: [
+          {
+            name: "AI as Your Assistant, Not Your Replacement",
+            body: "How to use AI tools well and still do your own thinking.",
+          },
+          {
+            name: "Health and Safety",
+            body: "Everyday health and safety skills.",
+          },
+        ],
       },
     ],
-    events:
-      "The year also includes a Grandparent's Day celebration, a Halloween party, Thanksgiving Around the Table, the Holiday Craft Fair, The Polar Express, a Valentine's Day community experience, a Multi Cultural Fair and a Mother's Day tea.",
+    eventsIntro: "Through the year we also hold",
+    events: [
+      "Grandparent's Day celebration",
+      "Halloween party",
+      "Thanksgiving Around the Table",
+      "Holiday Craft Fair",
+      "The Polar Express",
+      "Valentine's Day community experience",
+      "Multi Cultural Fair",
+      "Mother's Day tea",
+    ],
   },
   results: {
     basis: "Based on fall-to-spring NWEA MAP Growth assessments in reading and math, 2025-26 pilot year.",
@@ -716,7 +745,16 @@ export const earlyLearners = {
 
 // One line per program, for the at-a-glance price list on the homepage and /services.
 // Built from the data above so prices and hours only live in one place.
-export type ProgramRow = { name: string; href: string; who: string; when: string; price: string };
+export type ProgramRow = {
+  name: string;
+  href: string;
+  who: string;
+  when: string;
+  price: string;
+  blurb: string;
+};
+
+const firstSentence = (text: string) => text.split(/(?<=\.)\s/)[0];
 
 export function getProgramList(): ProgramRow[] {
   const [tutoring, homeschool] = services;
@@ -727,6 +765,7 @@ export function getProgramList(): ProgramRow[] {
       who: "Any age, any subject",
       when: "Weekly or as needed, in person or online",
       price: "$70 to $120 an hour",
+      blurb: firstSentence(tutoring.summary),
     },
     {
       name: homeschool.title,
@@ -734,6 +773,7 @@ export function getProgramList(): ProgramRow[] {
       who: "Homeschool families",
       when: `Month to month, ${homeschoolPricing.hoursPerMonth[0]} to ${homeschoolPricing.hoursPerMonth[homeschoolPricing.hoursPerMonth.length - 1]} hours`,
       price: `From $${homeschoolPricing.levels.A[0]} a month`,
+      blurb: firstSentence(homeschool.summary),
     },
     {
       name: earlyLearners.name,
@@ -741,6 +781,7 @@ export function getProgramList(): ProgramRow[] {
       who: "TK to 2nd grade",
       when: "Tuesday to Thursday, 9 AM to noon",
       price: earlyLearners.pricing[0].value.replace(" / ", " a "),
+      blurb: firstSentence(earlyLearners.intro),
     },
     {
       name: "APEX",
@@ -748,6 +789,7 @@ export function getProgramList(): ProgramRow[] {
       who: "Grades 3 to 9",
       when: `Full school day, ${apex.tuition.term.toLowerCase()}`,
       price: "Call for a tour",
+      blurb: firstSentence(apex.intro),
     },
     {
       name: "Classes and enrichment",
@@ -755,6 +797,7 @@ export function getProgramList(): ProgramRow[] {
       who: "Grades K to 7",
       when: "Weekly: writing, speaking, art and reading",
       price: "From $160 a month",
+      blurb: firstSentence(enrichment.body),
     },
   ];
 }

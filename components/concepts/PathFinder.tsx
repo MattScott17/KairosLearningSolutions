@@ -57,6 +57,10 @@ export function PathFinder({ paths }: { paths: Path[] }) {
       <p className="text-center font-display text-2xl font-semibold text-forest-900 sm:text-3xl">
         My student needs…
       </p>
+      <p className="mx-auto mt-2 max-w-xl text-center text-base text-ink/75">
+        Four ways to learn here: private tutoring, homeschool support, Early Learners (TK to 2nd grade) and APEX,
+        our full-time school.
+      </p>
       <TabBar
         tabs={paths.map((p) => ({ id: p.id, label: p.need, shortLabel: p.needShort }))}
         active={active}

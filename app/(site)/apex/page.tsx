@@ -82,13 +82,38 @@ export default function ApexPage() {
       <section className="border-b border-forest-100 bg-cream">
         <dl className="container-page grid grid-cols-1 divide-y divide-forest-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           {facts.map((f) => (
-            <div key={f.label} className="py-7 sm:px-6 sm:first:pl-0">
+            <div key={f.label} className="py-4 sm:px-6 sm:py-7 sm:first:pl-0">
               <dt className="text-sm text-ink/75">{f.label}</dt>
               <dd className="mt-1 font-display text-2xl font-semibold text-forest-800">{f.value}</dd>
               {f.note && <dd className="mt-1 text-sm text-ink/75">{f.note}</dd>}
             </div>
           ))}
         </dl>
+      </section>
+
+      {/* Pilot-year results: the strongest proof, right under the facts */}
+      <section className="bg-sand py-14 sm:py-20">
+        <div className="container-page">
+          <h2 className="text-3xl font-semibold sm:text-4xl">Our first year of results</h2>
+          <p className="prose-kairos mt-3 max-w-2xl">{apex.results.basis}</p>
+          <div className="mt-10 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-16">
+            <div>
+              <p className="font-display text-7xl font-semibold leading-none text-forest-800 sm:text-8xl">
+                {apex.results.stats[0].value}
+              </p>
+              <p className="mt-4 max-w-md text-xl leading-snug text-forest-900">{apex.results.stats[0].label}</p>
+            </div>
+            <dl className="space-y-6">
+              {apex.results.stats.slice(1).map((st) => (
+                <div key={st.value} className="border-t border-forest-300 pt-4">
+                  <dt className="font-display text-3xl font-semibold text-forest-800">{st.value}</dt>
+                  <dd className="prose-kairos mt-1 text-base">{st.label}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          <p className="prose-kairos mt-10 max-w-2xl">{apex.results.spectrum}</p>
+        </div>
       </section>
 
       {/* The model */}
@@ -124,23 +149,6 @@ export default function ApexPage() {
         </div>
       </Section>
 
-      {/* Pilot-year results */}
-      <section className="border-t border-forest-100 py-16 sm:py-20">
-        <div className="container-page">
-          <h2 className="text-3xl font-semibold sm:text-4xl">Our first year of results</h2>
-          <p className="prose-kairos mt-3 text-sm">{apex.results.basis}</p>
-          <dl className="mt-8 grid gap-x-10 gap-y-8 sm:grid-cols-2">
-            {apex.results.stats.map((s) => (
-              <div key={s.value} className="border-t border-forest-200 pt-4">
-                <dt className="font-display text-3xl font-semibold text-forest-800">{s.value}</dt>
-                <dd className="prose-kairos mt-1 text-sm">{s.label}</dd>
-              </div>
-            ))}
-          </dl>
-          <p className="prose-kairos mt-8 max-w-2xl">{apex.results.spectrum}</p>
-        </div>
-      </section>
-
       {/* How APEX is set up: a plain list, not a card grid */}
       <section className="border-t border-forest-100 py-16 sm:py-24">
         <div className="container-page grid gap-10 lg:grid-cols-[1fr_1.6fr]">
@@ -157,15 +165,17 @@ export default function ApexPage() {
             </div>
           </div>
           <div>
-            <dl className="border-t border-forest-200">
+            <dl className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
               {apex.pillars.map((pillar, i) => (
                 <Reveal
                   key={pillar.title}
                   delay={Math.min(i, 4) * 0.05}
-                  className="grid gap-1 border-b border-forest-100 py-5 sm:grid-cols-[14rem_1fr] sm:gap-6"
+                  className="border-t border-forest-200 pt-4"
                 >
-                  <dt className="font-semibold text-forest-900">{pillar.title}</dt>
-                  <dd className="prose-kairos">{pillar.body}</dd>
+                  <dt className="font-display text-lg font-semibold text-forest-900">
+                    {pillar.title}
+                  </dt>
+                  <dd className="prose-kairos mt-1 text-sm">{pillar.body}</dd>
                 </Reveal>
               ))}
             </dl>
@@ -180,20 +190,46 @@ export default function ApexPage() {
       {/* What the workshops are */}
       <Section>
         <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
-          <SectionHeading title="What the workshops look like" intro={apex.workshops.intro} />
           <div>
-            <dl className="border-t border-forest-200">
-              {apex.workshops.list.map((w) => (
-                <div
-                  key={w.name}
-                  className="grid gap-1 border-b border-forest-100 py-4 sm:grid-cols-[15rem_1fr] sm:gap-6"
-                >
-                  <dt className="font-semibold text-forest-900">{w.name}</dt>
-                  <dd className="prose-kairos text-sm">{w.body}</dd>
+            <SectionHeading title="What the workshops look like" intro={apex.workshops.intro} />
+            <div className="relative mt-8 hidden aspect-[4/5] overflow-hidden rounded-lg lg:block">
+              <Image
+                src={photos.rollerCoaster.src}
+                alt={photos.rollerCoaster.alt}
+                fill
+                sizes="(min-width: 1024px) 30vw, 0px"
+                className="object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <div>
+            <div className="space-y-8">
+              {apex.workshops.groups.map((group) => (
+                <div key={group.title} className="border-t border-forest-200 pt-4">
+                  <h3 className="font-display text-xl font-semibold text-forest-900">
+                    {group.title}
+                  </h3>
+                  <ul className="mt-3 space-y-2">
+                    {group.items.map((w) => (
+                      <li key={w.name} className="prose-kairos text-sm">
+                        <span className="font-semibold text-forest-900">{w.name}.</span> {w.body}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ))}
-            </dl>
-            <p className="prose-kairos mt-6">{apex.workshops.events}</p>
+              <div className="border-t border-forest-200 pt-4">
+                <h3 className="font-display text-xl font-semibold text-forest-900">
+                  {apex.workshops.eventsIntro}
+                </h3>
+                <ul className="prose-kairos mt-3 grid gap-x-6 gap-y-1 text-sm sm:grid-cols-2">
+                  {apex.workshops.events.map((e) => (
+                    <li key={e}>{e}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </Section>
@@ -225,6 +261,17 @@ export default function ApexPage() {
                 </li>
               ))}
             </ul>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <Link href="/contact" className="btn-primary">
+                Book a tour
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <a href={site.phoneHref} className="btn-outline">
+                <Phone className="h-4 w-4" />
+                {site.phone}
+              </a>
+            </div>
 
             <h3 className="mt-10 text-sm font-semibold text-forest-800">Registration fees</h3>
             <dl className="mt-3 space-y-2">

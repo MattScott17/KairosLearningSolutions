@@ -54,6 +54,9 @@ export default function EarlyLearnersPage() {
             {site.phone}
           </a>
         </div>
+        <p className="mt-4 text-base text-ink/80">
+          {earlyLearners.pricing[0].value.replace(" / ", " a ")}, {earlyLearners.schedule[0].value}.
+        </p>
       </PageHero>
 
       {/* The three groups */}

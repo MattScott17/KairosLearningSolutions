@@ -140,7 +140,6 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
             <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {levels.map((l, i) => (
                 <Reveal as="li" key={l.name} delay={i * 0.06} className="rounded-lg border border-forest-100 bg-cream p-6">
-                  <p className="font-display text-4xl font-semibold text-gold-500">{l.name}</p>
                   <p className="mt-1 text-sm font-semibold text-forest-800">Level {l.name}</p>
                   <p className="prose-kairos mt-3 text-sm">{l.body}</p>
                 </Reveal>
@@ -187,7 +186,28 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
         )}
 
         {slug === "homeschool-support" && (
-          <div className="mt-12 overflow-x-auto rounded-lg border border-forest-100 bg-cream">
+          <div className="mt-12 space-y-4 sm:hidden">
+            <h3 className="font-display text-2xl font-semibold text-forest-900">Monthly price by level</h3>
+            {(Object.keys(homeschoolPricing.levels) as (keyof typeof homeschoolPricing.levels)[]).map((level) => (
+              <div key={level} className="rounded-lg border border-forest-200 bg-cream p-5">
+                <p className="font-semibold text-forest-900">Level {level}</p>
+                <dl className="mt-3 divide-y divide-forest-100 text-base">
+                  {homeschoolPricing.hoursPerMonth.map((hours, i) => (
+                    <div key={hours} className="flex justify-between gap-4 py-2">
+                      <dt className="text-ink/75">{hours} hours a month</dt>
+                      <dd className="font-semibold text-forest-800">
+                        ${homeschoolPricing.levels[level][i].toLocaleString()}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {slug === "homeschool-support" && (
+          <div className="mt-12 hidden overflow-x-auto rounded-lg border border-forest-100 bg-cream sm:block">
             <table className="w-full min-w-[480px] text-sm">
               <thead>
                 <tr className="border-b border-forest-100 text-left">
@@ -238,7 +258,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
 
         <Link
           href="/services"
-          className="mt-10 inline-flex items-center gap-2 text-sm font-semibold text-forest-700"
+          className="mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-forest-700"
         >
           <ArrowLeft className="h-4 w-4" />
           All programs and prices

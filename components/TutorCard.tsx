@@ -17,14 +17,14 @@ export function TutorAvatar({
   textClassName?: string;
 }) {
   return (
-    <div className={cn("relative overflow-hidden bg-forest-50", className)}>
+    <div className={cn("relative overflow-hidden", member.image ? "bg-forest-50" : "bg-forest-800", className)}>
       {member.image ? (
         <Image src={member.image} alt={member.name} fill sizes={sizes} className="object-cover" />
       ) : (
         <span
           aria-hidden
           className={cn(
-            "flex h-full w-full items-center justify-center font-display font-semibold text-forest-700",
+            "flex h-full w-full items-center justify-center font-display font-semibold text-cream",
             textClassName
           )}
         >

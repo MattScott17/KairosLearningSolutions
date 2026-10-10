@@ -203,7 +203,11 @@ test("fall class finder shows only the classes that fit the chosen grade", async
   await page.goto("/fall-classes");
   await page.getByLabel("My student is in").selectOption({ label: "4th grade" });
   await expect(page.getByText("4 classes fit 4th grade")).toBeVisible();
-  await expect(page.getByRole("link", { name: "Writing Lab A", exact: true }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: /Writing Lab A/ }).first()).toBeVisible();
   await page.getByLabel("My student is in").selectOption({ label: "Kindergarten" });
   await expect(page.getByText("2 classes fit Kindergarten")).toBeVisible();
+  // Two students: the classes that fit either grade.
+  await page.getByRole("button", { name: "Add a second student" }).click();
+  await page.getByLabel("My other student is in").selectOption({ label: "7th grade" });
+  await expect(page.getByText("3 classes fit Kindergarten or 7th grade")).toBeVisible();
 });

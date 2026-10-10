@@ -55,7 +55,7 @@ export function ClassicHome() {
             title="Who will be teaching your child"
             intro="Retired classroom teachers, a Monterey County Teacher of the Year nominee, and math and science tutors from Cal Poly, UC San Diego and CSU Monterey Bay."
           />
-          <Link href="/about" className="link-underline shrink-0">
+          <Link href="/about" className="link-underline inline-flex min-h-11 shrink-0 items-center">
             Meet the whole team
           </Link>
         </div>

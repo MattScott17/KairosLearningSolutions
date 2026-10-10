@@ -90,7 +90,7 @@ export function OfferVariant({ offer }: { offer: ProgramOffer }) {
             <Headline hero={hero} className="text-cream" />
             <p className="mt-5 text-lg leading-relaxed text-cream/85">{hero.subhead}</p>
             <CtaPair offer={offer} dark className="mt-7" />
-            <p className="mt-4 text-sm text-cream/80">{offer.priceSentence}</p>
+            <p className="mt-4 text-base font-medium text-cream">{offer.priceSentence}</p>
             <div className="mt-9">
               <CheckList items={offer.quickBullets} dark />
             </div>
@@ -133,6 +133,7 @@ export function OfferVariant({ offer }: { offer: ProgramOffer }) {
           <div className="mt-8">
             <FaqList offer={offer} />
           </div>
+          <CtaPair offer={offer} className="mt-10" />
         </div>
       </section>
     </>
@@ -243,16 +244,14 @@ export function ShortVariant({ offer }: { offer: ProgramOffer }) {
   const hero = offer.heroes.c;
   return (
     <>
-      <section className="bg-forest-900 pb-12 pt-8 text-cream sm:pb-16 sm:pt-12">
+      <section className="bg-forest-900 pb-8 pt-6 text-cream sm:pb-16 sm:pt-12">
         <div className={heroGrid}>
           <div>
             <Headline hero={hero} className="text-cream" />
             <div className="mt-5">
               <CheckList items={offer.quickBullets} dark />
             </div>
-            <p className="mt-6 text-sm text-cream/75">{hero.subhead}</p>
-            <p className="mt-3 text-sm text-cream/80">{offer.priceSentence}</p>
-            {offer.qualifier && <p className="mt-2 text-sm text-cream/80">{offer.qualifier}</p>}
+            <p className="mt-5 text-base font-medium text-cream">{offer.priceSentence}</p>
           </div>
           <div className="mt-4 lg:mt-0">
             <CallbackForm copy={offer.form} />
@@ -280,6 +279,7 @@ export function ShortVariant({ offer }: { offer: ProgramOffer }) {
               <CheckList items={offer.stack.map((s) => s.title)} />
             </div>
             <PriceLine offer={offer} className="mt-6" />
+            {offer.qualifier && <p className="mt-4 text-base text-ink/80">{offer.qualifier}</p>}
           </div>
           <HeroPhoto offer={offer} aspect="aspect-[4/5]" className="mt-8 lg:mt-0" />
         </div>

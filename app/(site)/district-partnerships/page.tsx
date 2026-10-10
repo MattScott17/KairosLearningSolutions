@@ -5,6 +5,9 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
 import { photos } from "@/lib/photos";
+import { site } from "@/lib/site";
+import Link from "next/link";
+import { Phone } from "lucide-react";
 
 export const metadata: Metadata = pageMetadata({
   title: "District Partnerships",
@@ -22,7 +25,17 @@ export default function DistrictPartnershipsPage() {
         mark="partnerships"
         photo={photos.studentsLearning}
         intro="Kairos works with school districts to bring our teachers and small-group approach to more students. If you work for a district or school, let's talk about what your students need."
-      />
+      >
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <a href={site.phoneHref} className="btn-primary">
+            <Phone className="h-4 w-4" aria-hidden="true" />
+            Call {site.phone}
+          </a>
+          <Link href="/contact" className="btn-outline">
+            Send a message
+          </Link>
+        </div>
+      </PageHero>
       <Section container="narrow">
         <p className="prose-kairos text-lg">
           Every partnership looks different, so we start with a conversation. Tell us who your students

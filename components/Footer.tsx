@@ -46,7 +46,8 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Explore */}
+          {/* Explore and Programs share a row on phones, so the footer is not one long column */}
+          <div className="grid grid-cols-2 gap-6 md:contents">
           <div>
             <h3 className="font-semibold text-cream">Explore</h3>
             <ul className="mt-3 text-sm">
@@ -103,6 +104,8 @@ export function Footer() {
                 </Link>
               </li>
             </ul>
+          </div>
+
           </div>
 
           {/* Contact */}
