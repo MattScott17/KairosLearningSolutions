@@ -196,3 +196,8 @@ successfully.
 - Every file was re-oriented, downscaled to a 2000px long edge, and re-saved by Pillow with no EXIF
   block (`optimize=True`, no `exif=` argument passed) — GPS and all other metadata is gone. Spot-checked
   with `Image.open(path).getexif()` on 3 samples, all returned `{}`.
+
+## Removed (no photo permission)
+
+`public/images/photo-1.jpg`, `public/images/library/img-3514.jpg` and `public/images/library/img-3641.jpg`
+were deleted on 2026-10-10. Do not re-add them. More photos may follow once the remaining ones are checked.

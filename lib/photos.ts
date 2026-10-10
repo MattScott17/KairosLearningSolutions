@@ -26,7 +26,6 @@ export const photos = {
   planting: lib("img-3527.jpg", "Planting seeds in a labeled seedling tray"),
   gym: lib("img-4731.jpg", "A student hanging from gymnastic rings at the gym"),
   candles: lib("img-5443.jpg", "A student holding the candles he dipped himself"),
-  collage: lib("img-3641.jpg", "Students making torn-paper tree collages around a craft table"),
 };
 
 export const heroPhotos = {
@@ -40,7 +39,7 @@ export const pagePhotos = {
   apex: photos.threeDPrinting,
   earlyLearners: photos.circleTime,
   summer: { ...photos.outdoors, position: "30% 70%" } as Photo,
-  fallClasses: photos.collage,
+  fallClasses: photos.craftTable,
 };
 
 /** Photo strip and the photo-led concepts (B and D). */
@@ -56,7 +55,6 @@ export const galleryPhotos: Photo[] = [
   photos.planting,
   photos.gym,
   photos.candles,
-  photos.collage,
 ];
 
 export type HeroVideo = { mp4: string; webm?: string };
@@ -68,5 +66,5 @@ export const programPhotos: Record<string, Photo> = {
   "/services/homeschool-support": photos.studentsLearning,
   "/early-learners": photos.craftProject,
   "/apex": photos.threeDPrinting,
-  "/fall-classes": photos.collage,
+  "/fall-classes": photos.craftTable,
 };
