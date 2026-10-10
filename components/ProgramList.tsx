@@ -23,13 +23,6 @@ export function ProgramList() {
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_19rem]">
       <div className="border-t border-forest-200">
-        <div className="hidden grid-cols-[1.2fr_1fr_1.4fr_1fr_auto] gap-6 border-b border-forest-100 px-2 py-3 text-xs font-semibold text-ink/55 md:grid">
-          <span>Program</span>
-          <span>For</span>
-          <span>When</span>
-          <span>Price</span>
-          <span className="w-4" />
-        </div>
         <ul>
           {rows.map((row) => {
             const thumb = programPhotos[row.href];
@@ -39,21 +32,28 @@ export function ProgramList() {
                   href={row.href}
                   onMouseEnter={() => setActive(row.href)}
                   onFocus={() => setActive(row.href)}
-                  className="group grid grid-cols-[4rem_1fr] gap-x-4 gap-y-1 py-5 transition-colors hover:bg-forest-50/70 md:grid-cols-[1.2fr_1fr_1.4fr_1fr_auto] md:items-center md:gap-6 md:px-2"
+                  className="group flex gap-4 py-7 transition-colors hover:bg-forest-50/70 sm:gap-6 md:px-3"
                 >
                   {thumb && (
-                    <span className="relative row-span-5 h-16 w-16 overflow-hidden rounded-md md:hidden">
-                      <Image src={thumb.src} alt="" fill sizes="64px" className="object-cover" />
+                    <span className="relative h-20 w-20 shrink-0 overflow-hidden rounded-md md:hidden">
+                      <Image src={thumb.src} alt="" fill sizes="80px" className="object-cover" />
                     </span>
                   )}
-                  <span className="font-display text-xl font-semibold text-forest-900 transition-colors group-hover:text-forest-700">
-                    {row.name}
+                  <span className="min-w-0 flex-1">
+                    <span className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                      <span className="font-display text-2xl font-semibold text-forest-900 transition-colors group-hover:text-forest-700">
+                        {row.name}
+                      </span>
+                      <span className="text-base font-semibold text-forest-800">{row.price}</span>
+                    </span>
+                    <span className="mt-2 block text-base text-ink/85">{row.blurb}</span>
+                    <span className="mt-3 block text-sm text-ink/75">
+                      <span className="font-semibold text-forest-900">For:</span> {row.who}
+                      <span aria-hidden="true" className="mx-2 text-forest-300">|</span>
+                      <span className="font-semibold text-forest-900">When:</span> {row.when}
+                    </span>
                   </span>
-                  <span className="text-sm text-ink/75">{row.who}</span>
-                  <span className="text-sm text-ink/75">{row.when}</span>
-                  <span className="text-sm font-semibold text-forest-800">{row.price}</span>
-                  <ArrowRight className="hidden h-4 w-4 text-forest-700 transition-transform group-hover:translate-x-1 md:block" />
-                  <span className="mt-1 text-sm text-ink/70 md:col-span-5 md:mt-0">{row.blurb}</span>
+                  <ArrowRight className="mt-2 hidden h-5 w-5 shrink-0 text-forest-700 transition-transform group-hover:translate-x-1 md:block" />
                 </Link>
               </li>
             );
