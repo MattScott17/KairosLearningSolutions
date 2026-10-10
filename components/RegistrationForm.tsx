@@ -376,8 +376,7 @@ export function RegistrationForm({
         <CheckCircle2 className="h-10 w-10 text-forest-600" aria-hidden="true" />
         <h2 className="mt-4 text-3xl font-semibold">We got your registration. Thank you!</h2>
         <p className="prose-kairos mt-3 max-w-xl text-lg">
-          No one loves forms, so thank you for filling this one out. Your spot is not held until we
-          confirm it. We&apos;ll be in touch at {submitted.parent.email} or {submitted.parent.phone} to confirm
+          No one loves forms, so thank you for filling this one out. We&apos;ll be in touch at {submitted.parent.email} or {submitted.parent.phone} to confirm
           your spot and the registration fee
           {confirmationTimeframe ? `, usually within ${confirmationTimeframe}` : ""}.
         </p>
@@ -636,8 +635,7 @@ export function RegistrationForm({
 
       <div>
         <p className="text-base text-ink/80">
-          Questions marked * are required. This takes about 5 minutes for one student, and a couple more for each
-          extra student.
+          Questions marked * are required.
         </p>
       </div>
 
@@ -937,7 +935,7 @@ export function RegistrationForm({
         <div className="mb-6 rounded-lg bg-sand p-5 text-base text-ink/80">
           <h2 className="text-lg font-semibold text-forest-900">What happens next</h2>
           <p className="mt-2">
-            Sending this form does not charge you or hold a spot yet. We&apos;ll be in touch to confirm your spot and
+            We&apos;ll be in touch to confirm your spot and
             the registration fee
             {confirmationTimeframe ? `, usually within ${confirmationTimeframe}` : ""}.
           </p>

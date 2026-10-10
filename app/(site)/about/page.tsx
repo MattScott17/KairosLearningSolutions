@@ -57,7 +57,7 @@ export default function AboutPage() {
         title="Educators who see the whole child"
         mark="whole child"
         photo={pagePhotos.about}
-        variant="flip"
+        variant="wide"
         intro="Most of our teachers are Salinas parents and grandparents. Between them they've taught kindergarten through 12th grade, several for more than 25 years, and one still teaches full time at New Republic Elementary."
       >
         <div className="flex flex-col gap-3 sm:flex-row">

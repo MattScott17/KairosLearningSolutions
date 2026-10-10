@@ -154,14 +154,9 @@ export function ConceptCHome() {
               </a>
             </div>
 
-            <figure className="mt-8 hidden max-w-xl lg:block">
-              <blockquote className="font-display text-lg italic text-forest-800">
-                &ldquo;Tell me about your student and I&rsquo;ll tell you where I&rsquo;d start.&rdquo;
-              </blockquote>
-              <figcaption className="mt-2 text-sm text-ink/70">
-                {jackie.name}, {jackie.role.toLowerCase()}
-              </figcaption>
-            </figure>
+            <p className="mt-8 hidden max-w-xl font-display text-lg text-forest-800 lg:block">
+              Tell us about your student and we will help you find where to start.
+            </p>
           </div>
 
           <div className="relative mx-auto w-full max-w-[13rem] sm:max-w-sm lg:max-w-none">

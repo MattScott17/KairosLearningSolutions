@@ -133,7 +133,7 @@ export const registrationGroups: RegistrationGroup[] = [
   },
   {
     title: "Fall classes",
-    blurb: "Weekly classes in writing, speaking, art and reading.",
+    blurb: "Weekly enrichment classes in writing, speaking, art and reading.",
     links: [{ label: "About the fall classes", href: "/fall-classes" }],
     options: [
       {

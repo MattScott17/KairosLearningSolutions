@@ -39,7 +39,7 @@ const people = [
     name: alissa.name,
     role: alissa.role,
     image: alissa.image!,
-    line: "Alissa holds a Multiple Subject Teaching Credential. She grew up at Kairos as a student, tutor and teacher.",
+    line: "Alissa grew up at Kairos as a student, tutor and teacher.",
   },
 ];
 
@@ -142,94 +142,106 @@ export default function ApexPage() {
               works at their own pace, and teachers know each student well.
             </p>
             <p className="prose-kairos mt-4">
-              During the academic block, AI-supported adaptive learning adjusts to each student's
-              level, so the work is never too easy or too hard.
+              During the academic blocks, AI checks what each student already knows. The lessons
+              are already written, and any gaps get retaught. The AI does not teach your child, and
+              adults are in the room with the students.
             </p>
           </div>
         </div>
+        <div className="mt-12 border-t border-forest-200 pt-8">
+          <h3 className="text-2xl font-semibold">A typical day, 9:00 to 2:00</h3>
+          <ol className="mt-5 grid gap-x-12 sm:grid-cols-2">
+            {apex.day.map((item) => (
+              <li
+                key={item.time}
+                className="flex gap-4 border-b border-forest-100 py-2.5 text-base"
+              >
+                <span className="w-14 shrink-0 font-semibold text-forest-800">{item.time}</span>
+                <span className="text-ink/85">{item.what}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
       </Section>
 
-      {/* How APEX is set up: a plain list, not a card grid */}
-      <section className="border-t border-forest-100 py-16 sm:py-24">
-        <div className="container-page grid gap-10 lg:grid-cols-[1fr_1.6fr]">
+      {/* How APEX is set up: a green band, photo on the right */}
+      <section className="bg-forest-800 py-12 text-cream sm:py-24">
+        <div className="container-page grid items-center gap-10 lg:grid-cols-[1.5fr_1fr] lg:gap-16">
           <div>
-            <h2 className="text-3xl font-semibold sm:text-4xl">How APEX is set up</h2>
-            <div className="relative mt-8 hidden aspect-[4/5] overflow-hidden rounded-lg lg:block">
-              <Image
-                src={photos.presenting.src}
-                alt={photos.presenting.alt}
-                fill
-                sizes="30vw"
-                className="object-cover"
-              />
-            </div>
-          </div>
-          <div>
-            <dl className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
+            <h2 className="text-3xl font-semibold text-cream sm:text-4xl">How APEX is set up</h2>
+            <p className="mt-3 max-w-xl text-base text-cream/85 sm:mt-4 sm:text-lg">
+              Every APEX student also gets hands-on projects, life-skills workshops and mentoring
+              from our teachers.
+            </p>
+            <dl className="mt-6 grid gap-x-10 gap-y-3 sm:mt-10 sm:gap-y-8 sm:grid-cols-2">
               {apex.pillars.map((pillar, i) => (
                 <Reveal
                   key={pillar.title}
                   delay={Math.min(i, 4) * 0.05}
-                  className="border-t border-forest-200 pt-4"
+                  className="border-t border-cream/25 pt-3 sm:pt-4"
                 >
-                  <dt className="font-display text-lg font-semibold text-forest-900">
-                    {pillar.title}
-                  </dt>
-                  <dd className="prose-kairos mt-1 text-sm">{pillar.body}</dd>
+                  <dt className="font-display text-lg font-semibold text-cream sm:text-xl">{pillar.title}</dt>
+                  <dd className="mt-2 hidden text-base text-cream/85 sm:block">{pillar.body}</dd>
                 </Reveal>
               ))}
             </dl>
-            <p className="prose-kairos mt-6">
-              Every APEX student also gets hands-on projects, life-skills workshops and mentoring
-              from our teachers.
-            </p>
+          </div>
+          <div className="relative hidden aspect-[4/5] overflow-hidden rounded-lg lg:block">
+            <Image
+              src={photos.presenting.src}
+              alt={photos.presenting.alt}
+              fill
+              sizes="30vw"
+              className="object-cover"
+            />
           </div>
         </div>
       </section>
 
-      {/* What the workshops are */}
+      {/* What the workshops are: four themes across, then the year's events beside a photo */}
       <Section>
-        <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
-          <div>
-            <SectionHeading title="What the workshops look like" intro={apex.workshops.intro} />
-            <div className="relative mt-8 hidden aspect-[4/5] overflow-hidden rounded-lg lg:block">
-              <Image
-                src={photos.rollerCoaster.src}
-                alt={photos.rollerCoaster.alt}
-                fill
-                sizes="(min-width: 1024px) 30vw, 0px"
-                className="object-cover"
-                loading="lazy"
-              />
+        <SectionHeading title="What the workshops look like" intro={apex.workshops.intro} />
+        <div className="mt-8 grid gap-x-8 gap-y-6 sm:mt-10 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
+          {apex.workshops.groups.map((group) => (
+            <div key={group.title}>
+              <h3 className="border-b-2 border-forest-700 pb-2 font-display text-xl font-semibold text-forest-900">
+                {group.title}
+              </h3>
+              <ul className="mt-3 space-y-1 sm:mt-4 sm:space-y-4">
+                {group.items.map((w) => (
+                  <li key={w.name}>
+                    <span className="block font-semibold text-forest-900">{w.name}</span>
+                    <span className="prose-kairos mt-0.5 hidden text-sm sm:block">{w.body}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
+          ))}
+        </div>
+        <div className="mt-10 grid items-center gap-8 rounded-lg bg-sand p-5 sm:mt-14 sm:p-8 lg:grid-cols-[16rem_1fr]">
+          <div className="relative hidden aspect-[4/3] overflow-hidden rounded-lg lg:block">
+            <Image
+              src={photos.rollerCoaster.src}
+              alt={photos.rollerCoaster.alt}
+              fill
+              sizes="256px"
+              className="object-cover object-[50%_40%]"
+              loading="lazy"
+            />
           </div>
           <div>
-            <div className="space-y-8">
-              {apex.workshops.groups.map((group) => (
-                <div key={group.title} className="border-t border-forest-200 pt-4">
-                  <h3 className="font-display text-xl font-semibold text-forest-900">
-                    {group.title}
-                  </h3>
-                  <ul className="mt-3 space-y-2">
-                    {group.items.map((w) => (
-                      <li key={w.name} className="prose-kairos text-sm">
-                        <span className="font-semibold text-forest-900">{w.name}.</span> {w.body}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+            <h3 className="font-display text-2xl font-semibold text-forest-900">
+              {apex.workshops.eventsIntro}
+            </h3>
+            <p className="mt-2 text-base text-ink/85 sm:hidden">{apex.workshops.events.join(", ")}.</p>
+            <ul className="mt-4 hidden flex-wrap gap-x-6 gap-y-2 text-base text-ink/85 sm:flex">
+              {apex.workshops.events.map((e) => (
+                <li key={e} className="flex items-center gap-2">
+                  <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-gold-500" />
+                  {e}
+                </li>
               ))}
-              <div className="border-t border-forest-200 pt-4">
-                <h3 className="font-display text-xl font-semibold text-forest-900">
-                  {apex.workshops.eventsIntro}
-                </h3>
-                <ul className="prose-kairos mt-3 grid gap-x-6 gap-y-1 text-sm sm:grid-cols-2">
-                  {apex.workshops.events.map((e) => (
-                    <li key={e}>{e}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            </ul>
           </div>
         </div>
       </Section>
@@ -238,24 +250,20 @@ export default function ApexPage() {
         <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
           <SectionHeading
             title="Ways to enroll"
-            intro={`The full program is ${apex.tuition.monthly.replace(" / ", " a ")} for 10 months, or ${apex.tuition.annual.replace(" / ", " a ")}. Come in for a tour and we'll go over it with you.`}
+            intro="Come in for a tour and we'll go over what fits your student and what it costs."
           />
           <div>
             <ul className="border-t border-forest-200">
-              {apex.tiers.map((tier, i) => (
+              {apex.tiers.map((tier) => (
                 <li
                   key={tier.name}
-                  className={`flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 ${
-                    i === 0
-                      ? "my-3 rounded-lg border border-forest-300 bg-forest-50 px-5 py-6"
-                      : "border-b border-forest-100 px-5 py-5"
-                  }`}
+                  className="flex flex-col gap-1 border-b border-forest-100 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
                 >
                   <div>
                     <p className="font-semibold text-forest-900">{tier.name}</p>
                     <p className="text-sm text-ink/70">{tier.description}</p>
                   </div>
-                  <p className="font-display text-xl font-semibold text-forest-800 sm:whitespace-nowrap sm:text-2xl">
+                  <p className="text-sm text-ink/75 sm:whitespace-nowrap">
                     {tier.price.replace(" / ", " a ")}
                   </p>
                 </li>
@@ -263,25 +271,22 @@ export default function ApexPage() {
             </ul>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link href="/contact" className="btn-primary">
+              <a href={site.phoneHref} className="btn-primary">
+                <Phone className="h-4 w-4" />
+                Call {site.phone}
+              </a>
+              <Link href="/contact" className="btn-outline">
                 Book a tour
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <a href={site.phoneHref} className="btn-outline">
-                <Phone className="h-4 w-4" />
-                {site.phone}
-              </a>
             </div>
-
-            <h3 className="mt-10 text-sm font-semibold text-forest-800">Registration fees</h3>
-            <dl className="mt-3 space-y-2">
-              {registrationFees.map((fee) => (
-                <div key={fee.label} className="flex justify-between gap-4 text-sm">
-                  <dt className="text-ink/75">{fee.label}</dt>
-                  <dd className="whitespace-nowrap text-right font-medium text-forest-800">{fee.value}</dd>
-                </div>
-              ))}
-            </dl>
+            <p className="mt-4 text-sm text-ink/75">
+              Returning families can{" "}
+              <Link href="/fall-classes/register" className="link-underline">
+                register here
+              </Link>
+              .
+            </p>
           </div>
         </div>
       </Section>
@@ -290,7 +295,7 @@ export default function ApexPage() {
       <Section>
         <SectionHeading
           title="Meet Jackie and Alissa"
-          intro="Jackie opened Kairos in 2020, and her daughter Alissa is now the Executive Director."
+          intro="Jackie opened Kairos in 2020, and Alissa is now the Executive Director."
         />
         <div className="mt-10 grid gap-10 md:grid-cols-2">
           {people.map((person) => (

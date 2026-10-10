@@ -20,13 +20,19 @@ export const photos = {
   handprints: lib("img-0929.jpg", "A young student pressing an orange handprint onto paper"),
   circleTime: lib("img-3593.jpg", "Young children holding up colored blocks during a Spanish colors lesson"),
   teamwork: lib("pxl-20250912-161414960.jpg", "Students passing a hula hoop around a circle in a team-building game"),
-  staff: lib("img-3341.jpg", "Kairos staff together at the front desk"),
+  staff: lib("img-3526.jpg", "Kairos teachers together in the library, dressed in red and pink"),
   craftTable: lib("img-9490.jpg", "Students gluing paper shapes at a table in front of the rainbow mural"),
   rollerCoaster: lib("img-3343.jpg", "A student holding up her paper roller-coaster project"),
   planting: lib("img-3527.jpg", "Planting seeds in a labeled seedling tray"),
   gym: lib("img-4731.jpg", "A student hanging from gymnastic rings at the gym"),
+  smilingGirl: lib("img-0216.jpg", "A young student smiling up from her seat at the table"),
+  worksheets: lib("img-0206.jpg", "Students tracing and coloring worksheets together at a table"),
+  blockPlay: lib("img-0197.jpg", "Students building with colorful blocks on the alphabet rug"),
+  playDough: lib("img-0299.jpg", "Young students playing with play-doh and small animals at a table"),
+  teacherGirl: lib("img-9251.jpg", "A teacher helping a young student write at a desk"),
+  smallTable: lib("img-0304.jpg", "A teacher with a small group of young students at a low table"),
+  movement: lib("img-0215.jpg", "Students taking a movement break at the walking desk"),
   candles: lib("img-5443.jpg", "A student holding the candles he dipped himself"),
-  collage: lib("img-3641.jpg", "Students making torn-paper tree collages around a craft table"),
 };
 
 export const heroPhotos = {
@@ -36,11 +42,11 @@ export const heroPhotos = {
 
 /** The one feature photo on each interior page. */
 export const pagePhotos = {
-  about: photos.staff,
+  about: { ...photos.staff, position: "50% 25%" } as Photo,
   apex: photos.threeDPrinting,
-  earlyLearners: photos.circleTime,
+  earlyLearners: photos.smilingGirl,
   summer: { ...photos.outdoors, position: "30% 70%" } as Photo,
-  fallClasses: photos.collage,
+  fallClasses: photos.worksheets,
 };
 
 /** Photo strip and the photo-led concepts (B and D). */
@@ -56,7 +62,10 @@ export const galleryPhotos: Photo[] = [
   photos.planting,
   photos.gym,
   photos.candles,
-  photos.collage,
+  photos.playDough,
+  photos.blockPlay,
+  photos.teacherGirl,
+  photos.movement,
 ];
 
 export type HeroVideo = { mp4: string; webm?: string };
@@ -66,7 +75,7 @@ export type HeroVideo = { mp4: string; webm?: string };
 export const programPhotos: Record<string, Photo> = {
   "/services/private-tutoring": photos.readingTogether,
   "/services/homeschool-support": photos.studentsLearning,
-  "/early-learners": photos.craftProject,
+  "/early-learners": photos.playDough,
   "/apex": photos.threeDPrinting,
-  "/fall-classes": photos.collage,
+  "/fall-classes": photos.worksheets,
 };

@@ -60,7 +60,7 @@ export const conceptC: ConceptCopy = {
     "A program-finder homepage for parents who arrive already comparing options. It's organized around which program fits, with less story.",
   heroHeadline: "Which Kairos program fits your student?",
   heroSub:
-    "We offer everything from an hour of tutoring to a full school day for TK to 9th grade, all at our center in Salinas. Homeschool families can sign up month to month, with no long-term contract. Pick what your student needs below, or call and I'll help you choose.",
+    "We offer everything from an hour of tutoring to a full school day for TK to 9th grade, all at our center in Salinas. Homeschool families can sign up month to month. Pick what your student needs below, or call and I'll help you choose.",
   heroSubShort: "From an hour of tutoring to a full school day, with homeschool support month to month.",
   problem: {
     external: "Tutoring, homeschool support, classes and full-time school can sound alike, and it's hard to tell which one your student needs.",
