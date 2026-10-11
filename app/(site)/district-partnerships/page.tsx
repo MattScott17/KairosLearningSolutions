@@ -24,7 +24,7 @@ export default function DistrictPartnershipsPage() {
         title="District partnerships"
         mark="partnerships"
         photo={photos.studentsLearning}
-        intro="Kairos works with school districts to bring our teachers and small-group approach to more students. If you work for a district or school, let's talk about what your students need."
+        intro="We bring our teachers and small-group approach to more students. If you work for a district or school, call or send us a message."
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <a href={site.phoneHref} className="btn-primary">
@@ -37,14 +37,17 @@ export default function DistrictPartnershipsPage() {
         </div>
       </PageHero>
       <Section container="narrow">
-        <p className="prose-kairos text-lg">
-          Every partnership looks different, so we start with a conversation. Tell us who your students
-          are and where they need support, and we&apos;ll work out what Kairos can offer.
+        <h2 className="text-3xl font-semibold sm:text-4xl">What we do with districts</h2>
+        <p className="mt-4 text-lg leading-relaxed text-ink">
+          We run on-site after-school programs for children who stay after the school day. Every
+          partnership looks different, so we start with a conversation about who your students are
+          and where they need support.
         </p>
       </Section>
       <CTASection
         title="Let's talk"
-        intro="Give us a call or send a message and we'll set up a time to talk through what would work for your district."
+        intro="Call us or send a message and we will talk through what would work for your district."
+        primaryLabel="Send a message"
       />
     </>
   );

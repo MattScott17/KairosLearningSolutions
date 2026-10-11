@@ -59,7 +59,7 @@ test("primary navigation links work", async ({ page }) => {
 
 test("contact form validates required fields client-side", async ({ page }) => {
   await page.goto("/contact");
-  await page.getByRole("button", { name: /send message/i }).click();
+  await page.getByRole("button", { name: /send interest form/i }).click();
   // Validation error appears; no navigation happened
   await expect(page.getByText(/fix the highlighted fields/i)).toBeVisible();
   await expect(page.getByText(/please enter your name/i)).toBeVisible();
@@ -79,9 +79,9 @@ test("contact form submits and shows a response", async ({ page }) => {
   await page.getByLabel(/name/i).first().fill("Test Parent");
   await page.getByLabel(/email/i).first().fill("parent@example.com");
   await page.getByLabel(/message/i).fill("My 5th grader needs help with math this fall.");
-  await page.getByRole("button", { name: /send message/i }).click();
+  await page.getByRole("button", { name: /send interest form/i }).click();
 
-  await expect(page.getByText(/message sent/i)).toBeVisible();
+  await expect(page.getByText(/interest form sent/i)).toBeVisible();
 });
 
 test("home exposes JSON-LD organization structured data", async ({ page }) => {

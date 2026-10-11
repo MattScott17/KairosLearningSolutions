@@ -44,7 +44,7 @@ export const conceptB: ConceptCopy = {
     philosophical: "A small group and a teacher who knows your child can change how school feels.",
   },
   plan: [
-    "Call to set up a visit and meet the teachers.",
+    "Call us or fill out the interest form to visit and meet the teachers.",
     "We match your student with a tutor or program that fits their pace.",
     "Your student starts at their own level.",
   ],

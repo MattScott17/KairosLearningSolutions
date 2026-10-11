@@ -42,88 +42,53 @@ export default function EarlyLearnersPage() {
         tone="sand"
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Link href="/contact" className="btn-accent">
-            Book a tour
+          <a href={site.phoneHref} className="btn-accent">
+            <Phone className="h-4 w-4" />
+            Call {site.phone}
+          </a>
+          <Link href="/contact" className="btn-outline">
+            Interest form
             <ArrowRight className="h-4 w-4" />
           </Link>
-          <a
-            href={site.phoneHref}
-            className="btn-outline"
-          >
-            <Phone className="h-4 w-4" />
-            {site.phone}
-          </a>
         </div>
-        <p className="mt-4 text-base text-ink/80">
+        <p className="mt-4 text-lg font-semibold text-forest-900">
           {earlyLearners.pricing[0].value.replace(" / ", " a ")}, {earlyLearners.schedule[0].value}.
         </p>
       </PageHero>
 
-      {/* The three groups */}
+      {/* The three groups, then schedule and prices in one flow */}
       <Section>
-        <div className="grid items-start gap-12 lg:grid-cols-2">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
-            <Image
-              src={photos.craftProject.src}
-              alt={photos.craftProject.alt}
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover object-[50%_25%]"
-            />
-          </div>
-          <div>
-            <h2 className="text-3xl font-semibold sm:text-4xl">Three groups, by skill</h2>
-            <dl className="mt-8 border-t border-forest-200">
-              {earlyLearners.groups.map((group, i) => (
-                <Reveal key={group.name} delay={i * 0.06} className="border-b border-forest-100 py-5">
-                  <dt className="text-lg font-semibold text-forest-900">{group.name}</dt>
-                  <dd className="prose-kairos mt-1">{group.body}</dd>
-                </Reveal>
-              ))}
-            </dl>
-          </div>
-        </div>
-      </Section>
-
-      {/* Schedule & pricing */}
-      <section className="bg-sand/60 py-16 sm:py-24">
-        <div className="container-page grid gap-10 lg:grid-cols-[1fr_1.6fr]">
-          <div>
-            <h2 className="text-3xl font-semibold sm:text-4xl">Schedule and prices</h2>
-            <div className="relative mt-8 hidden aspect-[4/5] overflow-hidden rounded-lg lg:block">
-              <Image
-                src={photos.handprints.src}
-                alt={photos.handprints.alt}
-                fill
-                sizes="30vw"
-                className="object-cover"
-              />
+        <h2 className="text-3xl font-semibold sm:text-4xl">Three groups, by skill</h2>
+        <dl className="mt-8 grid gap-x-10 gap-y-6 border-t border-forest-200 pt-6 md:grid-cols-3">
+          {earlyLearners.groups.map((group) => (
+            <div key={group.name}>
+              <dt className="font-display text-xl font-semibold text-forest-900">{group.name}</dt>
+              <dd className="mt-1 text-base leading-relaxed text-ink">{group.body}</dd>
             </div>
-          </div>
-          <div>
-            <dl className="border-t border-forest-200">
-              {earlyLearners.schedule.map((s) => (
-                <div
-                  key={s.label}
-                  className="grid gap-1 border-b border-forest-100 py-4 sm:grid-cols-[1fr_auto_auto] sm:gap-6"
-                >
-                  <dt className="font-semibold text-forest-900">{s.label}</dt>
-                  <dd className="text-ink/75">{s.value}</dd>
-                  <dd className="font-medium text-forest-800 sm:text-right">
-                    {earlyLearners.pricing.find((p) => p.label === s.label)?.value.replace(" / ", " a ")}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </div>
-      </section>
+          ))}
+        </dl>
+
+        <h2 className="mt-14 text-3xl font-semibold sm:text-4xl">Schedule and prices</h2>
+        <dl className="mt-6 border-t border-forest-200">
+          {earlyLearners.schedule.map((s) => (
+            <div
+              key={s.label}
+              className="grid gap-1 border-b border-forest-100 py-4 sm:grid-cols-[1fr_auto_auto] sm:gap-8"
+            >
+              <dt className="font-semibold text-forest-900">{s.label}</dt>
+              <dd className="text-ink">{s.value}</dd>
+              <dd className="font-semibold text-forest-800 sm:text-right">
+                {earlyLearners.pricing.find((p) => p.label === s.label)?.value.replace(" / ", " a ")}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </Section>
 
       <Faq items={faqs.earlyLearners} />
       <CTASection
-        title="Come for a tour"
-        intro="Give us a call to set up a tour. You can see the space, meet the teachers, and ask which group your child would start in."
-        primaryLabel="Or send a message"
+        title="Come see the space"
+        intro="Call or fill out the interest form. You can see the space, meet the teachers, and ask which group your child would start in."
         primaryHref="/contact"
       />
     </>

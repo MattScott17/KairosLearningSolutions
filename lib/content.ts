@@ -33,18 +33,18 @@ export const services: Service[] = [
     short: "One-on-one, any age and subject",
     icon: BookOpen,
     summary:
-      "Our tutors work one-on-one with students of every age, from early reading to AP science. We start with a short consultation call so we can match your student with the right tutor.",
+      "Our tutors work one-on-one with students of every age, from early reading to AP science. Call or fill out the interest form and we will match your student with the right tutor.",
     details: [
       "Subjects include early literacy, math, writing, world languages, test prep and AP coursework.",
       "We match each student with a tutor by subject, learning style and personality.",
-      "Jackie sets the hourly rate during your consultation. For a standing weekly session, the monthly plan is $360 for one session a week.",
+      "Jackie sets the hourly rate. For a standing weekly session, the monthly plan is $360 for one session a week.",
     ],
     highlights: [
       { label: "Format", value: "In person or online" },
       { label: "Ages", value: "All ages" },
       { label: "Pricing", value: "$70 to $120 an hour" },
     ],
-    cta: "Book a consultation",
+    cta: "See private tutoring",
   },
   {
     slug: "homeschool-support",
@@ -52,7 +52,7 @@ export const services: Service[] = [
     short: "Month-to-month packages for homeschool families",
     icon: Home,
     summary:
-      "Four levels of support, from a place to work with occasional help (Level A) to a custom program planned and taught by our teachers (Level D). Memberships are month to month.",
+      "Four levels, from a place to work with occasional help to a custom program planned and taught by our teachers. Month to month.",
     details: [
       "Level A: a place to work alongside other students, with occasional instruction or tutoring.",
       "Level B: we assess your student, plan the work and teach it at Kairos, with time and space to finish assignments.",
@@ -767,7 +767,6 @@ export type ProgramRow = {
   blurb: string;
 };
 
-const firstSentence = (text: string) => text.split(/(?<=\.)\s/)[0];
 
 export function getProgramList(): ProgramRow[] {
   const [tutoring, homeschool] = services;
@@ -778,7 +777,7 @@ export function getProgramList(): ProgramRow[] {
       who: "Any age, any subject",
       when: "Weekly or as needed, in person or online",
       price: "$70 to $120 an hour",
-      blurb: firstSentence(tutoring.summary),
+      blurb: "One-on-one, from early reading to AP science. In person or online.",
     },
     {
       name: homeschool.title,
@@ -786,7 +785,7 @@ export function getProgramList(): ProgramRow[] {
       who: "Homeschool families",
       when: `Month to month, ${homeschoolPricing.hoursPerMonth[0]} to ${homeschoolPricing.hoursPerMonth[homeschoolPricing.hoursPerMonth.length - 1]} hours`,
       price: `From $${homeschoolPricing.levels.A[0]} a month`,
-      blurb: firstSentence(homeschool.summary),
+      blurb: "A place to work with help when you need it, up to a custom program. Month to month.",
     },
     {
       name: earlyLearners.name,
@@ -794,7 +793,7 @@ export function getProgramList(): ProgramRow[] {
       who: "TK to 2nd grade",
       when: "Tuesday to Thursday, 9 AM to noon",
       price: earlyLearners.pricing[0].value.replace(" / ", " a "),
-      blurb: firstSentence(earlyLearners.intro),
+      blurb: "Half-day for TK to 2nd grade, Tuesday to Thursday, 9 AM to noon.",
     },
     {
       name: "APEX",
@@ -802,7 +801,7 @@ export function getProgramList(): ProgramRow[] {
       who: "Grades 3 to 9",
       when: `Full school day, ${apex.tuition.term.toLowerCase()}`,
       price: "Call for a tour",
-      blurb: firstSentence(apex.intro),
+      blurb: "Full-time school for grades 3 to 9, in small groups.",
     },
     {
       name: "Enrichment classes",
@@ -810,7 +809,7 @@ export function getProgramList(): ProgramRow[] {
       who: "Grades K to 7",
       when: "Weekly: writing, speaking, art and reading",
       price: "From $160 a month",
-      blurb: firstSentence(enrichment.body),
+      blurb: "Weekly enrichment classes in writing, speaking, art and reading for grades K to 7.",
     },
   ];
 }
@@ -871,34 +870,26 @@ const returningFee = registrationFees[1].value.replace(" / ", " a ");
 export const faqs: Record<"apex" | "earlyLearners" | "tutoring" | "homeschool", FaqItem[]> = {
   apex: [
     {
-      question: "What is APEX?",
-      answer: `APEX is our full-time program for ${apex.gradeRange.toLowerCase()} in Salinas, run in small groups as an alternative to traditional school. Students do personalized, mastery-based academics first, then spend the rest of the day on projects and life skills.`,
+      question: "What does an APEX day look like?",
+      answer: "Academics run from 9:20 to 10:20 and 11:05 to 12:05, with a launch activity, a physical challenge, a life skills discussion, journaling, lunch and silent reading around them. Workshops start at 12:45 and dismissal is at 2:00, Monday through Thursday.",
     },
     {
       question: "How much does APEX cost?",
       answer: `The full program is ${apex.tuition.monthly} (${apex.tuition.annual}) over a ${apex.tuition.term}. Academics only is ${apex.tiers[1].price}, and workshops only is ${apex.tiers[2].price}. There is also a registration fee of ${newFee} for a new student or ${returningFee} for a returning one.`,
     },
     {
-      question: "What is the Human Programming model?",
-      answer: apex.model,
+      question: "Does AI teach my child?",
+      answer: "No. AI checks what each student already knows. The lessons are already written, and any gaps get retaught. Adults are in the room with the students.",
     },
     {
       question: "How do we get started?",
-      answer: `Call us at ${site.phone} to set up a free call and tour. We're at ${site.address.full}.`,
+      answer: `Call us at ${site.phone} or fill out the interest form at kairoslearningsolutions.com/contact, and we will set up a free tour. We're at ${site.address.full}.`,
     },
   ],
   earlyLearners: [
     {
       question: "Which children is Early Learners for?",
       answer: `Early Learners is a half-day program for ${earlyLearners.ageRange}. We group children by skill instead of grade, so a child who is ready can move ahead and a child who needs more time gets it.`,
-    },
-    {
-      question: "What are the hours?",
-      answer: `${earlyLearners.schedule[0].value}. Monday enrichment is an optional extra day.`,
-    },
-    {
-      question: "How much does it cost?",
-      answer: `The core program is ${earlyLearners.pricing[0].value.replace(" / ", " a ")}, and optional Monday enrichment is ${earlyLearners.pricing[1].value.replace(" / ", " a ")}.`,
     },
     {
       question: "How are the groups set up?",
@@ -911,17 +902,8 @@ export const faqs: Record<"apex" | "earlyLearners" | "tutoring" | "homeschool", 
       answer: `At our center at ${site.address.full}, or online.`,
     },
     {
-      question: "How much does tutoring cost?",
-      answer: `${services[0].details[3]} ${services[0].details[4]}`,
-    },
-    {
-      question: "What subjects do you tutor?",
-      answer:
-        "Early literacy, math, writing, world languages, test prep and AP coursework, for students of every age.",
-    },
-    {
       question: "How do I get started?",
-      answer: `Call ${site.phone} for a short consultation. We'll match your student with a tutor by subject, learning style and personality.`,
+      answer: `Call ${site.phone} or fill out the interest form. We'll match your student with a tutor by subject, learning style and personality.`,
     },
   ],
   homeschool: [
@@ -933,11 +915,7 @@ export const faqs: Record<"apex" | "earlyLearners" | "tutoring" | "homeschool", 
     {
       question: "Is there a contract?",
       answer:
-        "No. Memberships are month to month, with small student-to-teacher ratios and hourly packages.",
-    },
-    {
-      question: "How much does it cost?",
-      answer: `It depends on the level and the hours per month, from ${homeschoolPricing.hoursPerMonth[0]} to ${homeschoolPricing.hoursPerMonth[homeschoolPricing.hoursPerMonth.length - 1]} hours. Level A starts at $${homeschoolPricing.levels.A[0]} a month. Registration is ${newFee} for a new student or ${returningFee} for a returning one.`,
+        "Memberships are month to month, and you can stop at any time. We are putting together a simple homeschool agreement, so ask us for the current terms.",
     },
   ],
 };

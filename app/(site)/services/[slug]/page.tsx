@@ -1,25 +1,18 @@
 import type { Metadata } from "next";
-import { Reveal } from "@/components/ui/Reveal";
 import { pageMetadata, breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Faq } from "@/components/Faq";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
-import { apex, earlyLearners, faqs, homeschoolPricing, registrationFees, services } from "@/lib/content";
+import { faqs, getProgramList, homeschoolPricing, registrationFees, services } from "@/lib/content";
 import { site } from "@/lib/site";
-import { FocusCards, type FocusCard } from "@/components/aceternity/FocusCards";
-import { photos, programPhotos, type Photo } from "@/lib/photos";
+import { photos, type Photo } from "@/lib/photos";
 
 type Params = { slug: string };
-
-const bodyPhotos: Record<string, Photo> = {
-  "private-tutoring": photos.homework,
-};
 
 const servicePhotos: Record<string, Photo> = {
   "private-tutoring": photos.readingTogether,
@@ -60,27 +53,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
       return { name: d.match(levelRe)![1], body: body.charAt(0).toUpperCase() + body.slice(1) };
     });
   const steps = service.details.filter((d) => !levelRe.test(d));
-  const bodyPhoto = bodyPhotos[slug] ?? photos.homework;
-  const otherCards: FocusCard[] = [
-    ...others.map((o) => ({
-      title: o.title,
-      detail: o.short,
-      href: `/services/${o.slug}`,
-      photo: servicePhotos[o.slug] ?? photos.studentsLearning,
-    })),
-    {
-      title: earlyLearners.name,
-      detail: `Half-day program, ${earlyLearners.ageRange}`,
-      href: "/early-learners",
-      photo: programPhotos["/early-learners"],
-    },
-    {
-      title: "APEX",
-      detail: `Full-time program, ${apex.gradeRange.toLowerCase()}`,
-      href: "/apex",
-      photo: programPhotos["/apex"],
-    },
-  ];
+  const otherPrograms = getProgramList().filter((p) => p.href !== `/services/${slug}`);
 
   return (
     <>
@@ -106,31 +79,30 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
         tone="cream"
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Link href="/contact" className="btn-accent">
-            {service.cta}
+          <a href={site.phoneHref} className="btn-accent">
+            <Phone className="h-4 w-4" />
+            Call {site.phone}
+          </a>
+          <Link href="/contact" className="btn-outline">
+            Interest form
             <ArrowRight className="h-4 w-4" />
           </Link>
-          <a
-            href={site.phoneHref}
-            className="btn-outline"
-          >
-            <Phone className="h-4 w-4" />
-            {site.phone}
-          </a>
         </div>
       </PageHero>
 
-      {/* Highlights */}
-      <section className="border-b border-forest-100 bg-cream">
-        <dl className="container-page grid grid-cols-1 divide-y divide-forest-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-          {service.highlights.map((h) => (
-            <div key={h.label} className="py-7 sm:px-6 sm:first:pl-0">
-              <dt className="text-sm text-ink/75">{h.label}</dt>
-              <dd className="mt-1 font-display text-xl font-semibold text-forest-800">{h.value}</dd>
-            </div>
-          ))}
-        </dl>
-      </section>
+      {/* Highlights (tutoring only: homeschool says the same in its hero and levels) */}
+      {slug === "private-tutoring" && (
+        <section className="border-b border-forest-100 bg-cream">
+          <dl className="container-page grid grid-cols-1 divide-y divide-forest-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+            {service.highlights.map((h) => (
+              <div key={h.label} className="flex items-baseline justify-between gap-4 py-4 sm:block sm:px-6 sm:py-7 sm:first:pl-0">
+                <dt className="text-sm text-ink/80">{h.label}</dt>
+                <dd className="font-display text-xl font-semibold text-forest-800 sm:mt-1">{h.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )}
 
       {/* Details */}
       <Section>
@@ -139,43 +111,32 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
             <h2 className="text-3xl font-semibold sm:text-4xl">Four levels</h2>
             <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {levels.map((l, i) => (
-                <Reveal as="li" key={l.name} delay={i * 0.06} className="rounded-lg border border-forest-100 bg-cream p-6">
-                  <p className="mt-1 text-sm font-semibold text-forest-800">Level {l.name}</p>
-                  <p className="prose-kairos mt-3 text-sm">{l.body}</p>
-                </Reveal>
+                <li key={l.name} className="rounded-lg border border-forest-100 bg-cream p-6">
+                  <p className="font-display text-xl font-semibold text-forest-900">Level {l.name}</p>
+                  <p className="mt-2 text-base leading-relaxed text-ink">{l.body}</p>
+                </li>
               ))}
             </ol>
           </div>
         )}
 
         {steps.length >= 3 ? (
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.4fr] lg:gap-16">
-          <div>
-            <h2 className="text-3xl font-semibold sm:text-4xl">How it works</h2>
-            <div className="relative mt-8 hidden aspect-[4/5] overflow-hidden rounded-lg lg:block">
-              <Image
-                src={bodyPhoto.src}
-                alt={bodyPhoto.alt}
-                fill
-                sizes="30vw"
-                className="object-cover"
-                style={{ objectPosition: bodyPhoto.position }}
-              />
-            </div>
-          </div>
-          <ul className="border-t border-forest-200">
-            {steps.map((detail, i) => (
-              <Reveal
-                as="li"
-                key={detail}
-                delay={Math.min(i, 4) * 0.05}
-                className="flex gap-5 border-b border-forest-100 py-5"
-              >
-                <span aria-hidden className="mt-3 h-2 w-2 shrink-0 rounded-full bg-gold-500" />
-                <span className="prose-kairos text-lg">{detail}</span>
-              </Reveal>
+        <div className="max-w-3xl">
+          <h2 className="text-3xl font-semibold sm:text-4xl">How it works</h2>
+          <p className="mt-4 text-lg leading-relaxed text-ink">{steps[0]}</p>
+          <ol className="mt-6 space-y-5">
+            {[
+              `Call ${site.phone} or fill out the interest form.`,
+              ...steps.slice(1),
+            ].map((detail, i) => (
+              <li key={detail} className="grid grid-cols-[2.25rem_1fr] items-baseline gap-4">
+                <span aria-hidden className="font-display text-4xl font-semibold leading-none text-forest-700">
+                  {i + 1}
+                </span>
+                <span className="text-lg leading-relaxed text-ink">{detail}</span>
+              </li>
             ))}
-          </ul>
+          </ol>
         </div>
         ) : (
           steps.map((note) => (
@@ -189,8 +150,14 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
           <div className="mt-12 space-y-4 sm:hidden">
             <h3 className="font-display text-2xl font-semibold text-forest-900">Monthly price by level</h3>
             {(Object.keys(homeschoolPricing.levels) as (keyof typeof homeschoolPricing.levels)[]).map((level) => (
-              <div key={level} className="rounded-lg border border-forest-200 bg-cream p-5">
-                <p className="font-semibold text-forest-900">Level {level}</p>
+              <details key={level} open={level === "A"} className="group rounded-lg border border-forest-200 bg-cream p-5">
+                <summary className="flex cursor-pointer list-none items-center justify-between font-semibold text-forest-900 [&::-webkit-details-marker]:hidden">
+                  Level {level}
+                  <span aria-hidden="true" className="text-xl">
+                    <span className="group-open:hidden">+</span>
+                    <span className="hidden group-open:inline">&minus;</span>
+                  </span>
+                </summary>
                 <dl className="mt-3 divide-y divide-forest-100 text-base">
                   {homeschoolPricing.hoursPerMonth.map((hours, i) => (
                     <div key={hours} className="flex justify-between gap-4 py-2">
@@ -201,7 +168,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                     </div>
                   ))}
                 </dl>
-              </div>
+              </details>
             ))}
           </div>
         )}
@@ -266,12 +233,21 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
       </Section>
 
       {/* Other programs */}
-      <section className="bg-sand/50 py-16 sm:py-24">
+      <section className="bg-sand/50 py-12 sm:py-16">
         <div className="container-page">
-          <h2 className="text-3xl font-semibold">Other programs</h2>
-          <div className="mt-8">
-            <FocusCards cards={otherCards} />
-          </div>
+          <h2 className="text-2xl font-semibold sm:text-3xl">Other programs</h2>
+          <ul className="mt-6 grid gap-x-10 sm:grid-cols-2">
+            {otherPrograms.map((o) => (
+              <li key={o.href} className="border-t border-forest-200">
+                <Link href={o.href} className="group flex items-baseline justify-between gap-4 py-4">
+                  <span className="font-display text-xl font-semibold text-forest-900 group-hover:text-forest-700">
+                    {o.name}
+                  </span>
+                  <span className="text-base text-ink/85">{o.price}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

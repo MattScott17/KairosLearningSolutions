@@ -110,7 +110,7 @@ export function Navigation() {
             {site.phone}
           </a>
           <Link href="/contact" className="btn-primary shrink-0 whitespace-nowrap">
-            Book a call
+            Interest form
           </Link>
         </div>
 
@@ -188,7 +188,7 @@ export function Navigation() {
                 {site.phone}
               </a>
               <Link href="/contact" onClick={closeMobile} className="btn-primary w-full">
-                Book a call
+                Interest form
               </Link>
             </div>
           </div>

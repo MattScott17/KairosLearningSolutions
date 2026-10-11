@@ -47,11 +47,6 @@ export function ProgramList() {
                       <span className="text-base font-semibold text-forest-800">{row.price}</span>
                     </span>
                     <span className="mt-2 block text-base text-ink/85">{row.blurb}</span>
-                    <span className="mt-3 block text-sm text-ink/75">
-                      <span className="font-semibold text-forest-900">For:</span> {row.who}
-                      <span aria-hidden="true" className="mx-2 text-forest-300">|</span>
-                      <span className="font-semibold text-forest-900">When:</span> {row.when}
-                    </span>
                   </span>
                   <ArrowRight className="mt-2 hidden h-5 w-5 shrink-0 text-forest-700 transition-transform group-hover:translate-x-1 md:block" />
                 </Link>

@@ -13,9 +13,9 @@ type CTASectionProps = {
 
 /** Closing contact band: the phone number big, plus where we are and when we're open. */
 export function CTASection({
-  title = "Give us a call",
-  intro = "Tell us what's going on with your student. We'll suggest a tutor or a program and tell you what it costs, right on the call.",
-  primaryLabel = "Or send a message",
+  title = "Call us, or fill out the interest form",
+  intro = "Tell us about your student and we will suggest a tutor or a program and what it costs.",
+  primaryLabel = "Fill out the interest form",
   primaryHref = "/contact",
   photo,
 }: CTASectionProps) {
@@ -32,7 +32,7 @@ export function CTASection({
             {site.phone}
           </a>
           <div className="mt-6">
-            <Link href={primaryHref} className="link-underline inline-flex min-h-[44px] items-center">
+            <Link href={primaryHref} className="btn-outline w-full sm:w-auto">
               {primaryLabel}
             </Link>
           </div>
@@ -50,28 +50,11 @@ export function CTASection({
               />
             </div>
           )}
-        <dl className="grid gap-4 text-sm text-ink/80 sm:grid-cols-2 lg:grid-cols-1">
-          <div>
-            <dt className="font-semibold text-forest-900">Find us</dt>
-            <dd className="mt-1">
-              <a href={site.address.mapUrl} className="block py-2 hover:underline">
-                {site.address.street}
-                <br />
-                {site.address.city}, {site.address.state} {site.address.zip}
-              </a>
-            </dd>
+          <div className="text-sm text-ink/85">
+            <p className="font-semibold text-forest-900">Hours</p>
+            <p className="mt-1">Monday to Thursday, 9:00 AM to 6:00 PM</p>
+            <p>Friday by appointment</p>
           </div>
-          <div>
-            <dt className="font-semibold text-forest-900">Hours</dt>
-            <dd className="mt-1">
-              {site.hours.map((h) => (
-                <span key={h.day} className="block">
-                  {h.day.replace(" – ", " to ")}: {h.time.replace(" – ", " to ")}
-                </span>
-              ))}
-            </dd>
-          </div>
-        </dl>
         </div>
       </div>
     </section>

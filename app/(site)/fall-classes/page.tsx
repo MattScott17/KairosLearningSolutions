@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { ExpandableText } from "@/components/ExpandableText";
 import { FallClassFinder } from "@/components/FallClassFinder";
 import { CollapsibleOnMobile } from "@/components/CollapsibleOnMobile";
-import { Reveal } from "@/components/ui/Reveal";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import Image from "next/image";
@@ -40,49 +38,45 @@ function registerHref(c: FallClass) {
     : "/fall-classes/register";
 }
 
-function ClassCard({ c }: { c: FallClass }) {
+function ClassRow({ c }: { c: FallClass }) {
   return (
-    <article id={c.slug} className="flex h-full scroll-mt-28 flex-col rounded-lg border border-forest-100 bg-cream p-6 sm:p-7">
-      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <h3 className="text-2xl font-semibold">{c.title}</h3>
-        <p className="text-sm font-semibold text-forest-700">{c.grades}</p>
+    <article id={c.slug} className="scroll-mt-28 border-b border-forest-100 py-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-8">
+        <div className="min-w-0">
+          <h4 className="font-display text-xl font-semibold text-forest-900">
+            {c.title} <span className="text-base font-normal text-ink/80">({c.grades})</span>
+          </h4>
+          <p className="mt-1 text-base text-ink">
+            {c.day}s, {c.time}
+            {c.dates && <>, {c.dates}</>}
+          </p>
+          {c.partner && <p className="text-sm text-ink/80">Taught by {c.partner}</p>}
+        </div>
+        <div className="flex shrink-0 items-center justify-between gap-5 sm:flex-col sm:items-end sm:gap-2">
+          <p className="text-lg font-semibold text-forest-800">{c.price}</p>
+          <Link href={registerHref(c)} className="btn-primary">
+            Register
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
       </div>
-      {c.partner && <p className="mt-1 text-sm text-ink/75">Taught by {c.partner}</p>}
-
-      <dl className="mt-4 grid gap-x-6 gap-y-1 border-y border-forest-100 py-3 text-sm sm:grid-cols-[auto_1fr]">
-        <dt className="font-medium text-ink/75">When</dt>
-        <dd className="text-ink">
-          {c.day}s, {c.time}
-        </dd>
-        {c.dates && (
-          <>
-            <dt className="font-medium text-ink/75">Dates</dt>
-            <dd className="text-ink">{c.dates}</dd>
-          </>
+      <details className="group mt-3">
+        <summary className="link-underline inline-flex min-h-11 cursor-pointer list-none items-center text-sm [&::-webkit-details-marker]:hidden">
+          <span className="group-open:hidden">What the class covers</span>
+          <span className="hidden group-open:inline">Hide details</span>
+        </summary>
+        <p className="mt-1 max-w-2xl text-base leading-relaxed text-ink">{c.description}</p>
+        {c.blocks && (
+          <ul className="mt-3 max-w-md space-y-1.5 text-sm">
+            {c.blocks.map((b) => (
+              <li key={b.label} className="flex justify-between gap-4 rounded-md bg-sand px-3 py-2">
+                <span className="font-medium text-ink">{b.label}</span>
+                <span className="text-ink/80">{b.time}</span>
+              </li>
+            ))}
+          </ul>
         )}
-        <dt className="font-medium text-ink/75">Price</dt>
-        <dd className="font-semibold text-forest-800">{c.price}</dd>
-      </dl>
-
-      <ExpandableText text={c.description} lines={3} className="mt-4 text-base" />
-
-      {c.blocks && (
-        <ul className="mt-4 space-y-1.5 text-sm">
-          {c.blocks.map((b) => (
-            <li key={b.label} className="flex justify-between gap-4 rounded-md bg-sand px-3 py-2">
-              <span className="font-medium text-ink">{b.label}</span>
-              <span className="text-ink/70">{b.time}</span>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 pt-6">
-        <Link href={registerHref(c)} className="btn-primary">
-          Register
-          <ArrowRight className="h-4 w-4" />
-        </Link>
-      </div>
+      </details>
     </article>
   );
 }
@@ -94,10 +88,10 @@ export default function FallClassesPage() {
       <PageHero
         title="Fall 2026 classes for kids in K to 7th grade"
         mark="K to 7th grade"
-        intro={`Small weekly classes in writing, speaking, art and reading, running through ${endDate}. Call and we'll sign your student up on the phone.`}
+        intro={`Small weekly enrichment classes in writing, speaking, art and reading, through ${endDate}.`}
         tone="forest"
         aside={
-          <CollapsibleOnMobile label="Rather get a call? Request a call back">
+          <CollapsibleOnMobile label="Not ready to register? Send the interest form">
             <FallClassCallback classTitles={fallClasses.map((c) => c.title)} />
           </CollapsibleOnMobile>
         }
@@ -107,21 +101,21 @@ export default function FallClassesPage() {
             <Phone className="h-5 w-5" />
             Call {site.phone}
           </a>
-          <a href="#classes" className="btn-outline px-6 py-4 text-base">
-            See the classes
-          </a>
+          <Link href="/fall-classes/register" className="btn-outline px-6 py-4 text-base">
+            Register online
+          </Link>
         </div>
-        <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-cream/25 pt-6 text-sm">
+        <dl className="mt-8 grid grid-cols-1 gap-3 border-t border-cream/25 pt-5 text-base sm:grid-cols-3 sm:gap-4">
           <div>
-            <dt className="text-cream/80">Days</dt>
+            <dt className="text-cream/90">Days</dt>
             <dd className="mt-1 font-semibold text-cream">Mondays and Wednesdays</dd>
           </div>
           <div>
-            <dt className="text-cream/80">Price</dt>
+            <dt className="text-cream/90">Price</dt>
             <dd className="mt-1 font-semibold text-cream">From $160 a month</dd>
           </div>
           <div>
-            <dt className="text-cream/80">Spots</dt>
+            <dt className="text-cream/90">Spots</dt>
             <dd className="mt-1 font-semibold text-cream">First come, first served</dd>
           </div>
         </dl>
@@ -130,8 +124,8 @@ export default function FallClassesPage() {
       <Section id="classes" className="scroll-mt-20">
         <div className="max-w-2xl">
           <h2 className="text-3xl font-semibold sm:text-4xl">This fall&apos;s classes</h2>
-          <p className="prose-kairos mt-4 text-lg">
-            Each class meets once a week in a small group, plus a {classFee} registration fee.
+          <p className="mt-3 text-lg text-ink">
+            One class a week, small groups. {classFee} registration fee.
           </p>
         </div>
 
@@ -148,22 +142,19 @@ export default function FallClassesPage() {
           }))}
         />
 
+        <h3 className="mt-14 text-2xl font-semibold sm:text-3xl">All classes, with details and prices</h3>
         {groups.map((g) => (
-          <div key={g.title} className="mt-14">
-            <h3 className="rounded-md bg-forest-800 px-4 py-2 font-display text-lg font-semibold text-cream">
+          <div key={g.title} className="mt-8">
+            <h3 className="border-b-2 border-forest-700 pb-2 font-display text-xl font-semibold text-forest-900">
               {g.title}
             </h3>
-            <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {g.classes.map((c, i) => (
-                <Reveal key={c.slug} delay={(i % 2) * 0.08} className="h-full">
-                  <ClassCard c={c} />
-                </Reveal>
-              ))}
-            </div>
+            {g.classes.map((c) => (
+              <ClassRow key={c.slug} c={c} />
+            ))}
           </div>
         ))}
 
-        <p className="mt-12 text-ink/70">
+        <p className="mt-12 text-ink">
           Looking for something bigger? See{" "}
           <Link href="/early-learners" className="link-underline">
             Early Learners
@@ -208,11 +199,11 @@ export default function FallClassesPage() {
                   <a href={site.phoneHref} className="link-underline">
                     {site.phone}
                   </a>{" "}
-                  and we&apos;ll do it over the phone, or fill out the{" "}
+                  or fill out the{" "}
                   <Link href="/fall-classes/register" className="link-underline">
                     registration form
                   </Link>
-                  . The class price is listed with each class, plus a {classFee} registration fee that covers
+                  . Each class lists its price, plus a {classFee} registration fee that covers
                   materials and saves your student&apos;s place.
                 </dd>
               </div>
@@ -223,11 +214,8 @@ export default function FallClassesPage() {
                 </dd>
               </div>
               <div className="border-b border-forest-200 py-5">
-                <dt className="font-semibold text-forest-900">Will the class definitely run?</dt>
-                <dd className="prose-kairos mt-1">
-                  Each class needs a minimum number of students, and spots go first come, first
-                  served.
-                </dd>
+                <dt className="font-semibold text-forest-900">How do spots work?</dt>
+                <dd className="prose-kairos mt-1">Spots go first come, first served.</dd>
               </div>
               <div className="border-b border-forest-200 py-5">
                 <dt className="font-semibold text-forest-900">Which days are you closed?</dt>
@@ -246,8 +234,8 @@ export default function FallClassesPage() {
 
       <CTASection
         title="Call to save a spot"
-        intro="Tell us your student's age and what they're into, and we'll tell you which classes have room."
-        primaryLabel="Or register online"
+        intro="Tell us your student's grade and we'll tell you which classes have room."
+        primaryLabel="Register online"
         primaryHref="/fall-classes/register"
       />
 

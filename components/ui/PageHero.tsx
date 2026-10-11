@@ -1,7 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import Image from "next/image";
 import { HandUnderline } from "@/components/concepts/HandDrawn";
-import { NameRing } from "@/components/concepts/NameRing";
 import type { Photo } from "@/lib/photos";
 
 /**
@@ -57,7 +56,7 @@ function Title({ title, mark }: { title: string; mark?: string }) {
 function ArchPhoto({ photo }: { photo: Photo }) {
   return (
     <div className="hero-pop relative mx-auto w-full max-w-[19rem] sm:max-w-sm lg:max-w-none">
-      <NameRing>
+      <div>
         <div className="arch relative aspect-[4/5] overflow-hidden">
           <Image
             src={photo.src}
@@ -69,7 +68,7 @@ function ArchPhoto({ photo }: { photo: Photo }) {
             style={{ objectPosition: photo.position }}
           />
         </div>
-      </NameRing>
+      </div>
     </div>
   );
 }

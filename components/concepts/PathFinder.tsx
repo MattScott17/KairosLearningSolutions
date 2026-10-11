@@ -57,10 +57,6 @@ export function PathFinder({ paths }: { paths: Path[] }) {
       <p className="text-center font-display text-2xl font-semibold text-forest-900 sm:text-3xl">
         My student needs…
       </p>
-      <p className="mx-auto mt-2 max-w-xl text-center text-base text-ink/75">
-        Four ways to learn here: private tutoring, homeschool support, Early Learners (TK to 2nd grade) and APEX,
-        our full-time school.
-      </p>
       <TabBar
         tabs={paths.map((p) => ({ id: p.id, label: p.need, shortLabel: p.needShort }))}
         active={active}
@@ -85,7 +81,7 @@ export function PathFinder({ paths }: { paths: Path[] }) {
             transition={{ duration: reduce ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="grid items-center gap-6 md:grid-cols-[0.85fr_1.15fr] md:gap-12"
           >
-            <div className="arch relative aspect-[4/3] overflow-hidden border-[6px] border-cream ring-1 ring-forest-300 md:aspect-[5/6]">
+            <div className="arch relative overflow-hidden border-[6px] border-cream ring-1 ring-forest-300 aspect-[3/2] md:aspect-[5/6]">
               <Image
                 src={path.photo.src}
                 alt={path.photo.alt}
@@ -96,11 +92,11 @@ export function PathFinder({ paths }: { paths: Path[] }) {
             </div>
             <div className="md:pr-4">
               <h2 className="text-3xl font-semibold">{path.program}</h2>
-              <p className="prose-kairos mt-3">{path.summary}</p>
+              <p className="mt-3 text-lg leading-relaxed text-ink">{path.summary}</p>
               <dl className="mt-6 grid gap-3 border-t border-forest-300/70 pt-5 sm:grid-cols-3 sm:gap-4">
                 {path.facts.map((f) => (
                   <div key={f.label} className="flex items-baseline justify-between gap-4 sm:block">
-                    <dt className="text-sm text-ink/70">{f.label}</dt>
+                    <dt className="text-sm text-ink/80">{f.label}</dt>
                     <dd className="text-right font-display text-lg sm:mt-1 sm:text-left font-semibold text-forest-800">{f.value}</dd>
                   </div>
                 ))}

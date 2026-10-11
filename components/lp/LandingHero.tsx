@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Phone, Check } from "lucide-react";
-import { NameRing } from "@/components/concepts/NameRing";
 import { photos } from "@/lib/photos";
 import { Reveal } from "@/components/ui/Reveal";
 import { site } from "@/lib/site";
@@ -20,14 +19,14 @@ export function LandingHero({ copy }: { copy: LandingCopy }) {
           <h1 className="mx-auto max-w-3xl text-4xl lg:mx-0 font-semibold leading-[1.1] sm:text-5xl">
             {copy.headline}
           </h1>
-          <p className="prose-kairos mx-auto mt-6 max-w-2xl text-lg lg:mx-0">
+          <p className="prose-kairos mt-6 max-w-2xl text-left text-lg sm:text-center lg:mx-0 lg:text-left">
             {copy.program === "APEX" ? `${copy.eyebrow}. ` : ""}
             {copy.subhead}
           </p>
 
           <ul className="mx-auto mt-8 flex max-w-xl flex-col gap-2.5 text-left lg:mx-0">
             {copy.painPoints.map((point) => (
-              <li key={point} className="flex items-start gap-2.5 text-sm text-ink/80">
+              <li key={point} className="flex items-start gap-2.5 text-base text-ink">
                 <Check className="mt-0.5 h-4 w-4 shrink-0 text-forest-500" />
                 {point}
               </li>
@@ -46,7 +45,7 @@ export function LandingHero({ copy }: { copy: LandingCopy }) {
         </Reveal>
 
         <div className="relative mx-auto hidden w-full max-w-sm lg:block lg:max-w-none">
-          <NameRing>
+          <div>
             <div className="arch relative aspect-[4/5] overflow-hidden">
               <Image
                 src={photo.src}
@@ -57,7 +56,7 @@ export function LandingHero({ copy }: { copy: LandingCopy }) {
                 className="object-cover"
               />
             </div>
-          </NameRing>
+          </div>
         </div>
       </div>
     </section>

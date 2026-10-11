@@ -29,12 +29,11 @@ export default async function RegisterPage({ searchParams }: Props) {
         mark="registration"
         intro={
           <>
-            Fill this out once for each family, with up to three students. Spots are first come, first served.
-            Rather do it on the phone? Call{" "}
+            Fill this out once per family, up to three students. Rather register by phone? Call{" "}
             <a href={site.phoneHref} className="link-underline inline-block py-2 -my-2">
               {site.phone}
             </a>{" "}
-            and we&apos;ll do it together.
+            and we will do it together.
           </>
         }
       />
@@ -45,7 +44,7 @@ export default async function RegisterPage({ searchParams }: Props) {
             <RegistrationForm initialClass={initialClass} fees={registrationFees} />
           </div>
 
-          <aside>
+          <aside className="hidden lg:block">
             <div className="rounded-lg bg-sand p-6 lg:sticky lg:top-28">
               <h2 className="text-lg font-semibold">Good to know</h2>
               <dl className="mt-4 space-y-4 text-sm">

@@ -217,7 +217,7 @@ export function Proof({ offer }: { offer: ProgramOffer }) {
 
 export function FormBlock({
   offer,
-  title = "Get your free call",
+  title = "Send your interest form",
 }: {
   offer: ProgramOffer;
   title?: string;
@@ -227,7 +227,7 @@ export function FormBlock({
       <div className="mx-auto max-w-md text-center">
         <h2 className="text-[1.75rem] font-semibold leading-tight sm:text-4xl">{title}</h2>
         <p className="mt-2 text-sm text-ink/70">
-          Leave your name and number. We'll call you back, or you can call us now at{" "}
+          Leave your name and number and we will reach out, or call us now at{" "}
           <a href={site.phoneHref} className="link-underline inline-flex min-h-[44px] items-center">
             {site.phone}
           </a>

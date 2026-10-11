@@ -30,52 +30,31 @@ export default function ContactPage() {
             </span>
           </a>
         }
-        intro={`The quickest way to reach me is by phone at ${site.phone}. You can also email, use the form below, or stop by ${site.address.street} during open hours.`}
+        intro={`Calling is the fastest way to reach me. I'm at ${site.address.street}, Monday to Thursday, 9 AM to 6 PM. You can also fill out the interest form below.`}
       />
 
       <section className="py-16 sm:py-24">
         <div className="container-page grid gap-12 lg:grid-cols-5">
           {/* Contact details */}
-          <div className="min-w-0 self-start [@media(min-height:760px)_and_(min-width:1024px)]:sticky [@media(min-height:760px)_and_(min-width:1024px)]:top-28 lg:col-span-2">
-            <h2 className="text-2xl font-semibold">Phone, email and address</h2>
-
-            <div className="mt-6 space-y-4">
-              <a
-                href={site.phoneHref}
-                className="flex items-center gap-4 rounded-lg border border-forest-100 bg-cream p-5 transition-colors hover:border-forest-300"
-              >
-                <span>
-                  <span className="block text-sm text-ink/75">Phone</span>
-                  <span className="text-lg font-semibold text-forest-800">{site.phone}</span>
-                </span>
-              </a>
-
-              <a
-                href={site.emailHref}
-                className="flex items-center gap-4 rounded-lg border border-forest-100 bg-cream p-5 transition-colors hover:border-forest-300"
-              >
-                <span className="min-w-0">
-                  <span className="block text-sm text-ink/75">Email</span>
-                  <span className="block truncate text-lg font-semibold text-forest-800">
-                    {site.email}
-                  </span>
-                </span>
-              </a>
-
-              <a
-                href={site.address.mapUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 rounded-lg border border-forest-100 bg-cream p-5 transition-colors hover:border-forest-300"
-              >
-                <span>
-                  <span className="block text-sm text-ink/75">Address (opens directions)</span>
-                  <span className="text-base font-semibold text-forest-800">
-                    {site.address.street}, {site.address.city}, {site.address.state}{" "}
-                    {site.address.zip}
-                  </span>
-                </span>
-              </a>
+          <div className="order-last min-w-0 self-start lg:order-none [@media(min-height:760px)_and_(min-width:1024px)]:sticky [@media(min-height:760px)_and_(min-width:1024px)]:top-28 lg:col-span-2">
+            <h2 className="text-2xl font-semibold">Find us</h2>
+            <div className="mt-5 space-y-4 text-base">
+              <p>
+                <a
+                  href={site.address.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-underline font-semibold"
+                >
+                  {site.address.street}, {site.address.city}, {site.address.state} {site.address.zip}
+                </a>
+                <span className="block text-sm text-ink/75">Opens directions</span>
+              </p>
+              <p>
+                <a href={site.emailHref} className="link-underline break-all font-semibold">
+                  {site.email}
+                </a>
+              </p>
             </div>
 
             {/* Hours */}
@@ -95,7 +74,7 @@ export default function ContactPage() {
           {/* Form */}
           <div className="min-w-0 lg:col-span-3">
             <div className="rounded-lg border border-forest-100 bg-cream p-6 sm:p-8">
-              <h2 className="text-2xl font-semibold">Send a message</h2>
+              <h2 className="text-2xl font-semibold">Interest form</h2>
               <p className="prose-kairos mt-2 text-sm">
                 Tell me a little about your student and I&apos;ll get back to you by email or phone.
               </p>

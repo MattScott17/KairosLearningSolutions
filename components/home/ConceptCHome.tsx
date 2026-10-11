@@ -5,8 +5,8 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { CTASection } from "@/components/CTASection";
 import { ParallaxPhoto } from "@/components/home/ParallaxPhoto";
 import { StickyCallBar } from "@/components/lp/StickyCallBar";
-import { PhotosFromKairos, HowWeTeach, GetStarted } from "@/components/home/HomeSections";
-import { TutorRow } from "@/components/TutorCard";
+import { PhotosFromKairos, GetStarted } from "@/components/home/HomeSections";
+import { TeamList } from "@/components/TeamList";
 import { FallClassesBanner } from "@/components/home/FallClassesBanner";
 import { PathFinder, type Path } from "@/components/concepts/PathFinder";
 import { HandArrow, HandUnderline } from "@/components/concepts/HandDrawn";
@@ -132,10 +132,9 @@ export function ConceptCHome() {
               </span>
               {headlineTail}
             </h1>
-            <p className="prose-kairos mx-auto mt-6 max-w-sm text-lg lg:hidden">
+            <p className="prose-kairos mx-auto mt-6 max-w-sm text-lg lg:mx-0 lg:mt-8 lg:max-w-xl">
               {conceptC.heroSubShort ?? conceptC.heroSub}
             </p>
-            <p className="prose-kairos mt-8 hidden max-w-xl text-lg lg:block">{conceptC.heroSub}</p>
 
             <div className="mt-6 flex flex-col items-center gap-1 lg:hidden">
               <a href={site.phoneHref} className="btn-primary">
@@ -143,7 +142,7 @@ export function ConceptCHome() {
                 Call {site.phone}
               </a>
               <Link href="/contact" className="link-underline inline-flex min-h-11 items-center text-sm">
-                Or send a message
+                Or fill out the interest form
               </Link>
             </div>
 
@@ -152,15 +151,14 @@ export function ConceptCHome() {
                 <Phone className="h-4 w-4" />
                 Call {site.phone}
               </a>
+              <Link href="/contact" className="btn-outline">
+                Interest form
+              </Link>
               <a href="#programs" className="link-underline inline-flex min-h-11 items-center gap-1.5">
                 Find your program
                 <ArrowRight className="h-4 w-4" />
               </a>
             </div>
-
-            <p className="mt-8 hidden max-w-xl font-display text-lg text-forest-800 lg:block">
-              Tell us about your student and we will help you find where to start.
-            </p>
           </div>
 
           <div className="relative mx-auto w-full max-w-[13rem] sm:max-w-sm lg:max-w-none">
@@ -182,7 +180,7 @@ export function ConceptCHome() {
 
         {/* Quick facts, then a hand-drawn nudge down to the chooser */}
         <div className="container-page mt-8 sm:mt-12">
-          <ul className="grid grid-cols-2 justify-items-center gap-x-4 gap-y-2 border-y border-forest-100 py-4 text-center text-sm text-ink/75 lg:flex lg:flex-wrap lg:items-center lg:justify-center lg:gap-0">
+          <ul className="grid grid-cols-2 justify-items-center gap-x-4 gap-y-2 border-y border-forest-100 py-4 text-center text-base font-medium text-ink lg:flex lg:flex-wrap lg:items-center lg:justify-center lg:gap-0">
             {quickFacts.map((fact, i) => (
               <li key={fact.full} className={`items-center justify-center ${fact.wide ? "col-span-2 lg:col-span-1" : ""} ${fact.short ? "flex" : "hidden lg:flex"}`}>
                 {i > 0 && (
@@ -194,7 +192,6 @@ export function ConceptCHome() {
             ))}
           </ul>
           <div className="mt-6 flex items-center justify-center gap-4 text-forest-700 sm:mt-8">
-            <span className="font-display text-2xl font-semibold sm:text-3xl">Start here</span>
             <HandArrow className="h-14 w-11 sm:h-16 sm:w-12" />
           </div>
         </div>
@@ -204,7 +201,7 @@ export function ConceptCHome() {
       <Section id="programs" className="!pt-4 sm:!pt-6">
         <PathFinder paths={paths} />
         <figure className="mx-auto mt-12 max-w-3xl text-center">
-          <blockquote className="font-display text-2xl italic leading-relaxed text-forest-800 sm:text-3xl">
+          <blockquote className="font-display text-xl leading-relaxed text-forest-800 sm:text-2xl">
             &ldquo;{featuredReview.pull}&rdquo;
           </blockquote>
           <figcaption className="mt-4 text-sm font-semibold text-forest-800">
@@ -226,53 +223,47 @@ export function ConceptCHome() {
 
       <PhotosFromKairos exclude={[heroPhotos.main, ...paths.map((p) => p.photo)]} />
 
-      <HowWeTeach />
-
       {/* Who teaches */}
       <Section className="bg-sand/50">
         <div>
           <SectionHeading
             title="Who will be teaching your child"
-            intro="Retired classroom teachers, a Monterey County Teacher of the Year nominee, and math and science tutors from Cal Poly, UC San Diego and CSU Monterey Bay."
+            intro="Lessons are planned around each student, one-on-one or in small groups. Our teachers are retired classroom teachers, a Monterey County Teacher of the Year nominee, and math and science tutors from Cal Poly, UC San Diego and CSU Monterey Bay."
           />
           <Link href="/about" className="link-underline mt-2 inline-flex min-h-11 items-center">
             Meet the whole team
           </Link>
         </div>
         <div className="mt-10">
-          <TutorRow compact expandable members={getTeamMembers(featuredTutors.home)} />
+          <TeamList columns={4} members={getTeamMembers(featuredTutors.home)} />
         </div>
       </Section>
-
-      <div className="container-page py-10 text-center sm:py-12">
-        <p className="text-ink/80">
-          Run a school or district?{" "}
-          <Link href="/district-partnerships" className="link-underline inline-flex min-h-11 items-center">
-            See how we partner with schools
-          </Link>
-        </p>
-      </div>
 
       {/* APEX: how it works, for parents weighing a full-time option */}
       <section className="bg-forest-900 text-cream">
         <div className="container-page grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-2">
-          <ParallaxPhoto
-            photo={photos.smallGroup}
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="aspect-[4/3] rounded-lg"
-          />
+          <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+            <Image
+              src={photos.smallGroup.src}
+              alt={photos.smallGroup.alt}
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover object-[50%_30%]"
+              loading="lazy"
+            />
+          </div>
           <div>
             <h2 className="text-3xl font-semibold text-cream sm:text-4xl">How APEX works</h2>
             <p className="mt-4 text-lg text-cream/85">{apex.model}</p>
             <dl className="mt-6 divide-y divide-cream/15 border-y border-cream/15">
-              {apex.comparison.map((row) => (
+              {[apex.comparison[0], apex.comparison[3]].map((row) => (
                 <div key={row.traditional} className="grid gap-1 py-3 sm:grid-cols-2 sm:gap-6">
                   <dt className="text-cream/75 line-through decoration-cream/50">{row.traditional}</dt>
                   <dd className="font-semibold text-cream">{row.apex}</dd>
                 </div>
               ))}
             </dl>
-            <p className="mt-6 text-cream/85">{apex.outcomesNote}</p>
+            <p className="mt-6 text-cream/85">In our 2025-26 pilot year, APEX students grew 3.6 times their projected growth in reading and math.</p>
             <Link href="/apex" className="btn-accent mt-8 inline-flex">
               See how a day goes
               <ArrowRight className="h-4 w-4" />
@@ -283,7 +274,7 @@ export function ConceptCHome() {
 
       <CTASection
         title="Not sure which program fits?"
-        intro="Tell us about your student and we'll tell you where we'd start."
+        intro="Call, or fill out the interest form, and we will tell you where we would start."
       />
 
       <StickyCallBar />

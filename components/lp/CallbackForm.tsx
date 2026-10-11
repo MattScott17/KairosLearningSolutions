@@ -29,9 +29,9 @@ export function CallbackForm({ copy }: { copy: LandingCopy }) {
     return (
       <div id="callback" className="rounded-lg border border-forest-200 bg-forest-50 p-8 text-center">
         <CheckCircle2 className="mx-auto h-12 w-12 text-forest-600" />
-        <h3 className="mt-4 text-2xl font-semibold">We'll call you back!</h3>
+        <h3 className="mt-4 text-2xl font-semibold">Thanks, we got your interest form</h3>
         <p className="prose-kairos mx-auto mt-2 max-w-md">
-          Thanks. Someone from our team will call you shortly. Need something sooner? Call us at{" "}
+          Someone from our team will reach out. Need something sooner? Call us at{" "}
           <a href={site.phoneHref} className="link-underline inline-flex min-h-[44px] items-center">
             {site.phone}
           </a>
@@ -54,7 +54,7 @@ export function CallbackForm({ copy }: { copy: LandingCopy }) {
       noValidate
       className="mx-auto max-w-md space-y-5 rounded-lg border border-forest-100 bg-cream p-7"
     >
-      <h3 className="text-xl font-semibold">Request a callback</h3>
+      <h3 className="text-xl font-semibold">Interest form</h3>
 
       {/* Honeypot: hidden from users, tempting to bots */}
       <div className="hidden" aria-hidden>
@@ -114,7 +114,13 @@ export function CallbackForm({ copy }: { copy: LandingCopy }) {
         )}
       </button>
 
-      <p className="text-xs text-ink/70">We'll only use your information to call you back.</p>
+      <p className="text-sm text-ink/75">
+        We will only use your information to reach out about your student. Prefer to call?{" "}
+        <a href={site.phoneHref} className="link-underline">
+          {site.phone}
+        </a>
+        . We are at {site.address.street}, {site.address.city}.
+      </p>
     </form>
   );
 }

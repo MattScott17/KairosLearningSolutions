@@ -24,7 +24,7 @@ export default function ServicesPage() {
         title="Programs and prices"
         mark="prices"
         variant="centered"
-        intro="From one tutoring session a week to a full school day, here is who each program is for and what it costs. Not sure which fits? Give us a call."
+        intro="Who each program is for and what it costs. Not sure which fits? Call us or fill out the interest form."
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <a href={site.phoneHref} className="btn-primary">
@@ -32,7 +32,7 @@ export default function ServicesPage() {
             Call {site.phone}
           </a>
           <Link href="/contact" className="btn-outline">
-            Send a message
+            Interest form
           </Link>
         </div>
       </PageHero>
