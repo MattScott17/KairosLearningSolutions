@@ -4,28 +4,31 @@ import Link from "next/link";
 import { getTestimonials, testimonials, values } from "@/lib/content";
 import { galleryPhotos, photos, type Photo } from "@/lib/photos";
 import { conceptB } from "@/lib/storybrand";
+import { Phone } from "lucide-react";
+import { site } from "@/lib/site";
 
 /** Sections shared by both homepages (/ and /classic), liked from the other drafts. */
 
 export function PhotosFromKairos({ exclude = [] }: { exclude?: Photo[] }) {
   return (
-    <Section className="hidden overflow-hidden !py-12 sm:block sm:!py-16">
-      <SectionHeading title="Photos from Kairos" />
+    <Section className="overflow-hidden !py-12 sm:!py-16">
+      <SectionHeading title="Photos from Kairos" intro="Students at work in our Salinas center." />
       <div
-        className="mt-8 grid gap-4 sm:grid-cols-3"
-        role="group"
-        aria-label="Photos from Kairos"
+        className="-mx-5 mt-8 flex scroll-px-5 snap-x snap-proximity gap-4 overflow-x-auto px-5 pb-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-500 focus-visible:ring-offset-2 sm:mx-0 sm:scroll-px-0 sm:px-0"
+        tabIndex={0}
+        role="region"
+        aria-label="Photos from Kairos, scroll sideways"
       >
-        {galleryPhotos.filter((p) => !exclude.some((e) => e.src === p.src)).slice(0, 3).map((photo, i) => (
+        {galleryPhotos.filter((p) => !exclude.some((e) => e.src === p.src)).map((photo, i) => (
           <div
             key={photo.src + i}
-            className="relative aspect-[4/3] overflow-hidden rounded-lg"
+            className="relative aspect-[4/3] w-[75vw] max-w-sm shrink-0 snap-start overflow-hidden rounded-lg sm:w-80"
           >
             <Image
               src={photo.src}
               alt={photo.alt}
               fill
-              sizes="(max-width: 1024px) 33vw, 24rem"
+              sizes="(max-width: 640px) 75vw, 20rem"
               className="object-cover"
               loading="lazy"
             />
@@ -71,12 +74,12 @@ export function HowWeTeach() {
 
 /** Three simple steps that flow into a parent quote. */
 export function GetStarted() {
-  const spotlight = getTestimonials(["jocelyn-w", "molly-b"]);
+  const spotlight = getTestimonials(["melissa-c", "jocelyn-w", "molly-b"]);
   return (
     <section className="bg-sand/50 py-16 sm:py-24">
       <div className="container-page">
         <SectionHeading title="How to get started" />
-        <div className="mt-8 grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+        <div className="mt-10 grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
           <div>
         <ol className="max-w-2xl space-y-6">
           {conceptB.plan.map((step, i) => (
@@ -84,7 +87,7 @@ export function GetStarted() {
               <span aria-hidden="true" className="font-display text-4xl font-semibold leading-none text-forest-700">
                 {i + 1}
               </span>
-              <p className="text-lg leading-relaxed text-ink">{step}</p>
+              <p className="prose-kairos text-lg">{step}</p>
             </li>
           ))}
         </ol>
@@ -109,11 +112,11 @@ export function GetStarted() {
       </div>
 
       <div className="container-page mt-20">
-        <h3 className="mb-6 font-display text-2xl font-semibold text-forest-900 sm:text-3xl">What parents say</h3>
-        <div className="grid gap-6 md:grid-cols-2 md:gap-8">
+        <h3 className="mb-8 font-display text-2xl font-semibold text-forest-900 sm:text-3xl">What parents say</h3>
+        <div className="grid gap-10 md:grid-cols-3 md:gap-8">
           {spotlight.map((review) => (
-            <figure key={review.id} className="rounded-lg border border-forest-100 bg-cream p-5">
-              <blockquote className="text-lg leading-relaxed text-ink">
+            <figure key={review.id}>
+              <blockquote className="font-display text-xl italic leading-relaxed text-forest-800">
                 &ldquo;{review.pull}&rdquo;
               </blockquote>
               <figcaption className="mt-4 text-sm font-semibold text-forest-800">
@@ -123,6 +126,10 @@ export function GetStarted() {
           ))}
         </div>
         <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row md:justify-start">
+          <a href={site.phoneHref} className="btn-primary w-full sm:w-auto">
+            <Phone className="h-4 w-4" aria-hidden="true" />
+            Call {site.phone}
+          </a>
           <Link href="/about#reviews" className="link-underline inline-flex min-h-11 items-center text-sm">
             Read all {testimonials.length} parent reviews
           </Link>
