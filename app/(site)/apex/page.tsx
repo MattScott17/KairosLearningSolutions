@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Reveal } from "@/components/ui/Reveal";
 import { pageMetadata, breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Faq } from "@/components/Faq";
@@ -23,9 +22,14 @@ export const metadata: Metadata = pageMetadata({
 
 const facts = [
   { label: "Grades", value: apex.gradeRange.replace("Grades ", ""), note: "" },
-  { label: "Start with", value: "Free call and tour", note: "" },
   { label: "Schedule", value: "9 a.m. to 2 p.m.", note: "Monday through Thursday, Fridays off" },
+  { label: "First step", value: "Call or interest form", note: "Then a free tour" },
 ];
+
+const resultCaptions: Record<string, string> = {
+  "83%": "of reading and math results met or beat twice the expected growth",
+  "43rd to 78th": "the class's average national percentile, fall to spring",
+};
 
 const [jackie, alissa] = getTeamMembers(["Jackie Scott", "Alissa Scott"]);
 const people = [
@@ -59,22 +63,19 @@ export default function ApexPage() {
       <PageHero
         title="APEX, full‑time school for grades 3 to 9"
         mark="full‑time school"
-        intro={apex.intro}
+        intro="Small groups. Personalized, mastery-based academics first, then projects and life skills for the rest of the day."
         photo={pagePhotos.apex}
         variant="dark"
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Link href="/contact" className="btn-accent">
-            Book a tour
+          <a href={site.phoneHref} className="btn-accent">
+            <Phone className="h-4 w-4" />
+            Call {site.phone}
+          </a>
+          <Link href="/contact" className="btn-outline">
+            Interest form
             <ArrowRight className="h-4 w-4" />
           </Link>
-          <a
-            href={site.phoneHref}
-            className="btn-outline"
-          >
-            <Phone className="h-4 w-4" />
-            {site.phone}
-          </a>
         </div>
       </PageHero>
 
@@ -95,24 +96,23 @@ export default function ApexPage() {
       <section className="bg-sand py-14 sm:py-20">
         <div className="container-page">
           <h2 className="text-3xl font-semibold sm:text-4xl">Our first year of results</h2>
-          <p className="prose-kairos mt-3 max-w-2xl">{apex.results.basis}</p>
+          <p className="prose-kairos mt-3 max-w-2xl">NWEA MAP Growth, reading and math, 2025-26 pilot year.</p>
           <div className="mt-10 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-16">
             <div>
               <p className="font-display text-7xl font-semibold leading-none text-forest-800 sm:text-8xl">
                 {apex.results.stats[0].value}
               </p>
-              <p className="mt-4 max-w-md text-xl leading-snug text-forest-900">{apex.results.stats[0].label}</p>
+              <p className="mt-4 max-w-md text-xl leading-snug text-forest-900">Students achieved 3.6 times their projected growth.</p>
             </div>
             <dl className="space-y-6">
               {apex.results.stats.slice(1).map((st) => (
                 <div key={st.value} className="border-t border-forest-300 pt-4">
                   <dt className="font-display text-3xl font-semibold text-forest-800">{st.value}</dt>
-                  <dd className="prose-kairos mt-1 text-base">{st.label}</dd>
+                  <dd className="mt-1 text-base text-ink">{resultCaptions[st.value] ?? st.label}</dd>
                 </div>
               ))}
             </dl>
           </div>
-          <p className="prose-kairos mt-10 max-w-2xl">{apex.results.spectrum}</p>
         </div>
       </section>
 
@@ -130,71 +130,49 @@ export default function ApexPage() {
           </div>
           <div>
             <SectionHeading title="How the day works" intro={apex.model} />
-            <p className="prose-kairos mt-4">
-              In plain words: mastery-based means a student moves on to the next topic once they have
-              understood the current one, not when the calendar says it is time. Human Programming is the
-              name of the model, with focused academics first and projects and life skills for the rest
-              of the day.
+            <p className="mt-4 text-lg leading-relaxed text-ink">
+              Mastery-based means a student moves on when they have understood the topic, not when
+              the calendar says so. If a student has a gap, say from first grade, the program finds
+              it and fills it in before moving on.
             </p>
-            <p className="prose-kairos mt-4">
-              That leaves most of the day for projects, presentations and life skills like budgeting
-              and running a small business. Compared with a classroom that moves at one pace, each student
-              works at their own pace, and teachers know each student well.
-            </p>
-            <p className="prose-kairos mt-4">
-              During the academic blocks, AI checks what each student already knows. The lessons
-              are already written, and any gaps get retaught. The AI does not teach your child, and
+            <p className="mt-4 text-lg leading-relaxed text-ink">
+              During the academic blocks, AI checks what each student already knows. The lessons are
+              already written, and any gaps get retaught. The AI does not teach your child, and
               adults are in the room with the students.
             </p>
           </div>
         </div>
-        <div className="mt-12 border-t border-forest-200 pt-8">
-          <h3 className="text-2xl font-semibold">A typical day, 9:00 to 2:00</h3>
-          <ol className="mt-5 grid gap-x-12 sm:grid-cols-2">
+      </Section>
+
+      {/* A typical day: green band, collapsed on phones */}
+      <section className="bg-forest-800 py-12 text-cream sm:py-20">
+        <div className="container-page">
+          <h2 className="hidden text-4xl font-semibold text-cream sm:block">A typical day, 9:00 to 2:00</h2>
+          <ol className="mt-8 hidden gap-x-12 sm:grid sm:grid-cols-2">
             {apex.day.map((item) => (
-              <li
-                key={item.time}
-                className="flex gap-4 border-b border-forest-100 py-2.5 text-base"
-              >
-                <span className="w-14 shrink-0 font-semibold text-forest-800">{item.time}</span>
-                <span className="text-ink/85">{item.what}</span>
+              <li key={item.time} className="flex gap-4 border-b border-cream/20 py-3 text-base">
+                <span className="w-14 shrink-0 font-semibold text-cream">{item.time}</span>
+                <span className="text-cream/90">{item.what}</span>
               </li>
             ))}
           </ol>
-        </div>
-      </Section>
-
-      {/* How APEX is set up: a green band, photo on the right */}
-      <section className="bg-forest-800 py-12 text-cream sm:py-24">
-        <div className="container-page grid items-center gap-10 lg:grid-cols-[1.5fr_1fr] lg:gap-16">
-          <div>
-            <h2 className="text-3xl font-semibold text-cream sm:text-4xl">How APEX is set up</h2>
-            <p className="mt-3 max-w-xl text-base text-cream/85 sm:mt-4 sm:text-lg">
-              Every APEX student also gets hands-on projects, life-skills workshops and mentoring
-              from our teachers.
-            </p>
-            <dl className="mt-6 grid gap-x-10 gap-y-3 sm:mt-10 sm:gap-y-8 sm:grid-cols-2">
-              {apex.pillars.map((pillar, i) => (
-                <Reveal
-                  key={pillar.title}
-                  delay={Math.min(i, 4) * 0.05}
-                  className="border-t border-cream/25 pt-3 sm:pt-4"
-                >
-                  <dt className="font-display text-lg font-semibold text-cream sm:text-xl">{pillar.title}</dt>
-                  <dd className="mt-2 hidden text-base text-cream/85 sm:block">{pillar.body}</dd>
-                </Reveal>
+          <details className="group sm:hidden">
+            <summary className="flex cursor-pointer list-none items-center justify-between text-2xl font-semibold text-cream [&::-webkit-details-marker]:hidden">
+              <h2>A typical day, 9:00 to 2:00</h2>
+              <span aria-hidden="true" className="text-2xl">
+                <span className="group-open:hidden">+</span>
+                <span className="hidden group-open:inline">&minus;</span>
+              </span>
+            </summary>
+            <ol className="mt-6">
+              {apex.day.map((item) => (
+                <li key={item.time} className="flex gap-4 border-b border-cream/20 py-3 text-base">
+                  <span className="w-12 shrink-0 font-semibold text-cream">{item.time}</span>
+                  <span className="text-cream/90">{item.what}</span>
+                </li>
               ))}
-            </dl>
-          </div>
-          <div className="relative hidden aspect-[4/5] overflow-hidden rounded-lg lg:block">
-            <Image
-              src={photos.presenting.src}
-              alt={photos.presenting.alt}
-              fill
-              sizes="30vw"
-              className="object-cover"
-            />
-          </div>
+            </ol>
+          </details>
         </div>
       </section>
 
@@ -250,7 +228,7 @@ export default function ApexPage() {
         <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
           <SectionHeading
             title="Ways to enroll"
-            intro="Come in for a tour and we'll go over what fits your student and what it costs."
+            intro="Call or fill out the interest form, then come in for a tour and we will go over what fits your student."
           />
           <div>
             <ul className="border-t border-forest-200">
@@ -276,7 +254,7 @@ export default function ApexPage() {
                 Call {site.phone}
               </a>
               <Link href="/contact" className="btn-outline">
-                Book a tour
+                Interest form
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

@@ -25,9 +25,9 @@ export function FallClassCallback({ classTitles }: { classTitles: string[] }) {
     return (
       <div id="call-me" className="rounded-lg bg-cream p-7 text-ink">
         <CheckCircle2 className="h-10 w-10 text-forest-600" />
-        <h2 className="mt-3 text-2xl font-semibold">Thanks, we&apos;ll call you soon</h2>
+        <h2 className="mt-3 text-2xl font-semibold">Thanks, we got your interest form</h2>
         <p className="prose-kairos mt-2">
-          We call back during our hours, Monday to Thursday. Can&apos;t wait? Call{" "}
+          We will reach out during our hours, Monday to Thursday. Can&apos;t wait? Call{" "}
           <a href={site.phoneHref} className="link-underline">
             {site.phone}
           </a>
@@ -42,9 +42,9 @@ export function FallClassCallback({ classTitles }: { classTitles: string[] }) {
   return (
     <form id="call-me" onSubmit={handleSubmit} noValidate className="space-y-4 rounded-lg bg-cream p-6 text-ink sm:p-7">
       <div>
-        <h2 className="text-2xl font-semibold">Save a spot</h2>
-        <p className="mt-1 text-sm text-ink/70">
-          Leave your number and we&apos;ll call you to find the right class and sign your student up.
+        <h2 className="text-2xl font-semibold">Interest form</h2>
+        <p className="mt-1 text-sm text-ink/80">
+          Leave your name and number and we will reach out to find the right class.
         </p>
       </div>
 
@@ -107,7 +107,7 @@ export function FallClassCallback({ classTitles }: { classTitles: string[] }) {
         ) : (
           <>
             <PhoneCall className="h-4 w-4" />
-            Request a call
+            Send my interest form
           </>
         )}
       </button>

@@ -16,7 +16,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = pageMetadata({
   title: "Summer Programs",
   description:
-    "Summer 2027 at Kairos in Salinas, CA: a Back-to-School Boot Camp runs July 19 to 23 and July 26 to 30. Call or send a message for details.",
+    "Summer 2027 at Kairos in Salinas, CA: a Back-to-School Boot Camp runs July 19 to 23 and July 26 to 30. Call or fill out the interest form for details.",
   path: "/summer",
   image: pagePhotos.summer,
 });
@@ -30,7 +30,7 @@ export default function SummerPage() {
         mark="Kairos"
         photo={pagePhotos.summer}
         variant="wide"
-        intro="Our Back-to-School Boot Camp is planned in two July sessions. Times and prices will be posted here as soon as they are set."
+        intro="Back-to-School Boot Camp: July 19 to 23 and July 26 to 30."
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <a href={site.phoneHref} className="btn-primary">
@@ -38,24 +38,28 @@ export default function SummerPage() {
             Call {site.phone}
           </a>
           <Link href="/contact" className="btn-outline">
-            Send a message
+            Interest form
           </Link>
         </div>
       </PageHero>
 
       <Section container="narrow" className="!pt-14">
         <h2 className="text-3xl font-semibold sm:text-4xl">Back-to-School Boot Camp</h2>
-        <p className="prose-kairos mt-4 text-lg">
-          Two weeks to choose from: July 19 to 23, and July 26 to 30. Last summer the Boot Camp covered
-          reading, math and language arts. Times and prices are still being set, so call us or send a
-          message with your student&apos;s age and we will let you know as soon as they are ready.
+        <ul className="mt-6 space-y-3 text-xl">
+          <li className="border-t border-forest-200 pt-3"><span className="font-semibold text-forest-900">Session 1:</span> July 19 to 23</li>
+          <li className="border-t border-forest-200 pt-3"><span className="font-semibold text-forest-900">Session 2:</span> July 26 to 30</li>
+        </ul>
+        <p className="mt-6 text-lg leading-relaxed text-ink">
+          Last summer the Boot Camp covered reading, math and language arts. Times and prices are not
+          set yet. Call us or fill out the interest form with your student&apos;s age and we will tell
+          you as soon as they are.
         </p>
       </Section>
 
       <CTASection
         photo={photos.cooking}
-        title="Questions about summer?"
-        intro="Give us a call with your student's age and we'll tell you as soon as the details are set."
+        title="Want to hear when details are set?"
+        intro="Call us or fill out the interest form with your student's age."
       />
     </>
   );

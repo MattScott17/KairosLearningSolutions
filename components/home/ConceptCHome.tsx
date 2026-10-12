@@ -143,7 +143,7 @@ export function ConceptCHome() {
                 Call {site.phone}
               </a>
               <Link href="/contact" className="link-underline inline-flex min-h-11 items-center text-sm">
-                Or send a message
+                Or fill out the interest form
               </Link>
             </div>
 

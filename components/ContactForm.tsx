@@ -22,7 +22,7 @@ export function ContactForm() {
     return (
       <div className="rounded-lg border border-forest-200 bg-forest-50 p-8 text-center">
         <CheckCircle2 className="mx-auto h-12 w-12 text-forest-600" />
-        <h3 className="mt-4 text-2xl font-semibold">Message sent</h3>
+        <h3 className="mt-4 text-2xl font-semibold">Interest form sent</h3>
         <p className="prose-kairos mx-auto mt-2 max-w-md">
           Thanks. We&apos;ll get back to you as soon as we can. If it&apos;s urgent, call{" "}
           <a href={site.phoneHref} className="link-underline">
@@ -35,7 +35,7 @@ export function ContactForm() {
   }
 
   const inputBase =
-    "w-full rounded-xl border bg-cream scroll-mt-24 px-4 py-3 text-base text-ink shadow-sm sm:text-sm outline-none transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-500/30";
+    "w-full rounded-xl border bg-cream scroll-mt-24 px-4 py-3 text-base text-ink placeholder:text-ink/60 outline-none transition-colors focus:border-forest-500 focus:ring-2 focus:ring-forest-500/30";
 
   const errClass = (field: string) =>
     fieldErrors[field] ? "border-red-400" : "border-forest-200";
@@ -112,11 +112,12 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div className="rounded-xl border border-forest-100 bg-sand/30 p-4 sm:p-5">
-        <p className="text-sm font-medium text-ink/80">
-          About your student <span className="text-ink/65">(optional, helps us match you faster)</span>
-        </p>
-        <div className="mt-3 grid gap-4 sm:grid-cols-2">
+      <details className="group rounded-xl border border-forest-100 bg-sand/30 p-4 sm:p-5">
+        <summary className="cursor-pointer list-none text-base font-medium text-forest-800 [&::-webkit-details-marker]:hidden">
+          <span className="group-open:hidden">+ Add your student&apos;s details (optional)</span>
+          <span className="hidden group-open:inline">Your student&apos;s details (optional)</span>
+        </summary>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <div>
             <label htmlFor="studentFirstName" className="mb-1.5 block text-xs font-medium text-ink/70">
               Student's first name
@@ -166,7 +167,7 @@ export function ContactForm() {
             />
           </div>
         </div>
-      </div>
+      </details>
 
       <div>
         <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-ink/80">
@@ -188,15 +189,6 @@ export function ContactForm() {
         </div>
       )}
 
-      <label className="flex items-start gap-2.5 text-sm text-ink/70">
-        <input
-          type="checkbox"
-          name="updatesOptIn"
-          className="mt-0.5 h-4 w-4 rounded border-forest-300 text-forest-700 focus:ring-forest-500/30"
-        />
-        Send me updates about new classes, tutoring openings, and workshops.
-      </label>
-
       <button type="submit" disabled={status === "submitting"} className="btn-primary w-full sm:w-auto">
         {status === "submitting" ? (
           <>
@@ -206,12 +198,21 @@ export function ContactForm() {
         ) : (
           <>
             <Send className="h-4 w-4" />
-            Send message
+            Send interest form
           </>
         )}
       </button>
 
-      <p className="text-xs text-ink/70">
+      <label className="flex items-start gap-2.5 text-sm text-ink/80">
+        <input
+          type="checkbox"
+          name="updatesOptIn"
+          className="mt-0.5 h-4 w-4 rounded border-forest-300 text-forest-700 focus:ring-forest-500/30"
+        />
+        Send me updates about new classes, tutoring openings, and workshops.
+      </label>
+
+      <p className="text-sm text-ink/75">
         We'll only use your information to respond to your inquiry.
       </p>
     </form>

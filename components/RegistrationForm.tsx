@@ -633,12 +633,6 @@ export function RegistrationForm({
         </label>
       </div>
 
-      <div>
-        <p className="text-base text-ink/80">
-          Questions marked * are required.
-        </p>
-      </div>
-
       <fieldset className="border-t-2 border-forest-800 pt-6">
         <legend className="sr-only">Parent or guardian</legend>
         <h2 className="text-2xl font-semibold">Parent or guardian</h2>
@@ -949,8 +943,6 @@ export function RegistrationForm({
                 </li>
               ))}
             </ul>
-            <p className="mt-4 text-sm font-semibold text-forest-900">Charter school funds</p>
-            <p className="mt-1 text-sm">{charterNote}</p>
           </div>
           <p className="mt-4">
             Prefer to talk it through?{" "}

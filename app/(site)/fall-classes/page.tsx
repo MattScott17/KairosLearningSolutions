@@ -94,10 +94,10 @@ export default function FallClassesPage() {
       <PageHero
         title="Fall 2026 classes for kids in K to 7th grade"
         mark="K to 7th grade"
-        intro={`Small weekly classes in writing, speaking, art and reading, running through ${endDate}. Call and we'll sign your student up on the phone.`}
+        intro={`Small weekly enrichment classes in writing, speaking, art and reading, running through ${endDate}. Call and we'll sign your student up on the phone.`}
         tone="forest"
         aside={
-          <CollapsibleOnMobile label="Rather get a call? Request a call back">
+          <CollapsibleOnMobile label="Not ready to register? Send the interest form">
             <FallClassCallback classTitles={fallClasses.map((c) => c.title)} />
           </CollapsibleOnMobile>
         }

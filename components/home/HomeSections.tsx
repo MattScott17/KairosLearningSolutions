@@ -94,7 +94,7 @@ export function GetStarted() {
         <p className="mt-6 text-ink/80">
           Prefer to write first?{" "}
           <Link href="/contact" className="link-underline inline-flex min-h-11 items-center">
-            Send us a message
+            Fill out the interest form
           </Link>
         </p>
           </div>
