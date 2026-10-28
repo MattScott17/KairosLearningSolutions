@@ -23,6 +23,7 @@ const nextConfig: NextConfig = {
       { source: "/salinas-apex", destination: "/apex", permanent: true },
       { source: "/summerprogramsatkairos", destination: "/summer", permanent: true },
       { source: "/fall-26-classes", destination: "/fall-classes", permanent: true },
+      { source: "/fall-25-classes", destination: "/fall-classes", permanent: true },
       // Homework Club is discontinued.
       { source: "/homeworkclub", destination: "/services", permanent: true },
       { source: "/services/homework-club", destination: "/services", permanent: true },
